@@ -1,0 +1,1112 @@
+{
+  "schema_version": 1,
+  "generated_from": "泛函岗位来源多维表格",
+  "generated_at": "2026-08-20",
+  "records": [
+    {
+      "name": "AI 公司找工地图",
+      "url": "https://bonjour.bio/jobs-mapping",
+      "type": "岗位地图/策展",
+      "intro": "策展海内外华人 AI 团队，适合发现公司和岗位，再跳转团队页面或官网确认。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营",
+        "官方岗位聚合"
+      ],
+      "target_audience": "希望进入 AI 创业公司、具身智能、AI Agent 或早期团队的技术、产品和运营候选人",
+      "direction": "中国及海外 AI 公司、创业团队与岗位地图",
+      "risk": "平台适合发现机会，但部分岗位最终仍需到公司官网或团队页面确认有效性。"
+    },
+    {
+      "name": "FDE 中国社区机会中心",
+      "url": "https://fdechina.ai/opportunities",
+      "type": "岗位地图/策展",
+      "intro": "小而垂直的 FDE 与 AI 应用机会中心，外部岗位链接官方来源，社区机会人工审核。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI应用/FDE",
+        "技术岗位",
+        "产品/设计/运营",
+        "社区直招",
+        "高信号"
+      ],
+      "target_audience": "能把大模型落到真实企业场景的 AI 应用工程师、解决方案工程师、交付顾问和产品经理",
+      "direction": "FDE、AI 应用工程、解决方案、PoC、交付、实施与顾问机会",
+      "risk": "岗位总量不大，但垂直度高；社区撮合机会需进一步确认雇主、项目周期和合同条件。"
+    },
+    {
+      "name": "51mee 招聘中心",
+      "url": "https://offers.51mee.com/",
+      "type": "岗位聚合站",
+      "intro": "聚合高校就业、公司官网等来源并结构化招聘对象、时间和投递方式。",
+      "access": "免费公开",
+      "quality": "中",
+      "tags": [
+        "校招/实习",
+        "官方岗位聚合",
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营"
+      ],
+      "target_audience": "应届生、实习生以及需要集中查看招聘公告、截止时间和原始投递入口的候选人",
+      "direction": "校招、实习、补录、央国企、机器人、AI 与研究院岗位",
+      "risk": "数据量大但部分信息可能滞后；平台有会员专区，核心岗位列表可公开浏览，最终以原公告为准。"
+    },
+    {
+      "name": "出海聘",
+      "url": "https://www.chuhaipin.cn/",
+      "type": "岗位聚合站",
+      "intro": "面向中国人才的出海求职工具，聚合多国小众渠道并提供风险和适配度筛选。",
+      "access": "会员主导",
+      "quality": "中",
+      "tags": [
+        "海外/出海",
+        "远程",
+        "签证机会",
+        "需人工尽调"
+      ],
+      "target_audience": "明确希望赴海外工作、寻找跨境岗位或海外远程机会的中国候选人",
+      "direction": "中国人才出海、跨境公司、海外远程、蓝领与国际人才渠道",
+      "risk": "完整职位线索和高频更新为会员专享；平台自述的审核与适配度需要独立验证，用户付费门槛较高。"
+    },
+    {
+      "name": "求职喵",
+      "url": "https://qiuzhimiao.cn/",
+      "type": "岗位聚合站",
+      "intro": "把全网校招信息整理成可筛选岗位表，并提供 AI 简历匹配和机会监控。",
+      "access": "基础免费/高级付费",
+      "quality": "中",
+      "tags": [
+        "校招/实习",
+        "官方岗位聚合",
+        "技术岗位",
+        "产品/设计/运营"
+      ],
+      "target_audience": "25—29 届应届生、实习生以及需要追踪补录和截止时间的候选人",
+      "direction": "校招、实习、补录、投递截止时间与简历匹配监控",
+      "risk": "公开岗位可浏览；AI 匹配、监控或 VIP 能力可能收费。聚合信息仍需回到公告和投递链接核验。"
+    },
+    {
+      "name": "HiringCafe",
+      "url": "https://hiringcafe.com/",
+      "type": "岗位聚合站",
+      "intro": "直接抓取公司招聘官网和主流 ATS 的大规模岗位搜索引擎。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "海外/出海",
+        "官方岗位聚合",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "希望避开中介和重复职位、按薪资/经验/公司阶段精细筛选海外岗位的候选人",
+      "direction": "全球公司官网直招，覆盖技术、产品、运营、医疗、金融等多行业",
+      "risk": "岗位最终仍跳转公司官网或 ATS；需要核验地域、签证和发布时间，保存等功能可能需要账户。"
+    },
+    {
+      "name": "HN Jobs 搜索版",
+      "url": "https://hnjobs.iabdurrahman.com/",
+      "type": "岗位聚合站",
+      "intro": "把 HN 月度招聘帖结构化并提供搜索、远程和签证筛选。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "海外/出海",
+        "创业公司",
+        "技术岗位",
+        "远程",
+        "签证机会",
+        "高信号"
+      ],
+      "target_audience": "希望高效筛选海外创业公司、远程和签证岗位的技术候选人",
+      "direction": "Hacker News 招聘帖的地域、远程、签证和关键词筛选",
+      "risk": "第三方索引可能存在解析误差或更新延迟，最终以原始 HN 帖和公司官网为准。"
+    },
+    {
+      "name": "JobRadar",
+      "url": "https://jobradar.cc/zh",
+      "type": "岗位聚合站",
+      "intro": "中文化的全球远程岗位聚合站，提供赛道筛选、风险标记和原始投递链接。",
+      "access": "基础免费/高级付费",
+      "quality": "中高",
+      "tags": [
+        "远程",
+        "海外/出海",
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "需人工尽调"
+      ],
+      "target_audience": "希望寻找全球远程、海外高增长行业或出海机会的技术、产品、增长候选人",
+      "direction": "全球远程、AI、Web3、出海与灵活用工岗位",
+      "risk": "免费层只能预览基础岗位和搜索概览；完整岗位与高级筛选需要 Pro。付费不等于开放 API，投递仍常跳原始网站。"
+    },
+    {
+      "name": "阿里巴巴",
+      "url": "https://home.alibabagroup.com/zh-HK/careers",
+      "type": "公司招聘官网",
+      "intro": "阿里巴巴集团官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "系统/C++、编译器、推理优化、分布式、云原生、数据库与平台工程岗位",
+      "direction": "大厂 AI、云计算、产品与工程",
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+    },
+    {
+      "name": "爱诗科技 PixVerse",
+      "url": "https://aishiai.com/",
+      "type": "公司招聘官网",
+      "intro": "AI 视频公司官网与招聘线索入口",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI应用/FDE",
+        "AI/大模型",
+        "产品/设计/运营",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "视频生成、多模态模型与产品",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "百川智能",
+      "url": "https://www.baichuan-ai.com/",
+      "type": "公司招聘官网",
+      "intro": "大模型公司官网与招聘线索入口",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "医疗AI算法、医学影像、数据平台、临床产品、合规与商业化岗位",
+      "direction": "基础模型、医疗 AI 与应用",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "百度",
+      "url": "https://talent.baidu.com/jobs/list",
+      "type": "公司招聘官网",
+      "intro": "百度官方职位列表",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "自动驾驶",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
+      "direction": "大厂 AI、自动驾驶、搜索与工程",
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+    },
+    {
+      "name": "地平线 Horizon Robotics",
+      "url": "https://career.horizon.auto/",
+      "type": "公司招聘官网",
+      "intro": "智能驾驶芯片与计算平台官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "自动驾驶",
+        "AI基础设施",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
+      "direction": "智能驾驶芯片、算法与平台",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "傅利叶智能",
+      "url": "https://www.fftai.cn/career",
+      "type": "公司招聘官网",
+      "intro": "人形机器人与康复机器人公司官方招聘入口。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "具身智能/机器人",
+        "技术岗位",
+        "产品/设计/运营",
+        "创业公司"
+      ],
+      "target_audience": "机器人算法、运动控制、嵌入式、机械/硬件、康复产品和量产工程人才",
+      "direction": "人形机器人、运动控制、康复机器人",
+      "risk": "岗位覆盖研发和量产，需按城市、硬件经验和现场办公要求筛选。"
+    },
+    {
+      "name": "硅基流动 SiliconFlow",
+      "url": "https://www.siliconflow.cn/",
+      "type": "公司招聘官网",
+      "intro": "MaaS、模型 API 与推理服务公司招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI基础设施",
+        "AI/大模型",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "系统/C++、编译器、推理优化、分布式、云原生、数据库与平台工程岗位",
+      "direction": "MaaS、模型 API、推理引擎",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "华为",
+      "url": "https://career.huawei.com/reccampportal/portal5/social-recruitment-ai.html",
+      "type": "公司招聘官网",
+      "intro": "华为 AI 社会招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI基础设施",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "系统/C++、编译器、推理优化、分布式、云原生、数据库与平台工程岗位",
+      "direction": "AI、算力、芯片、云与工程",
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+    },
+    {
+      "name": "阶跃星辰 StepFun",
+      "url": "https://www.stepfun.com/",
+      "type": "公司招聘官网",
+      "intro": "多模态大模型公司官网与招聘线索入口",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "多模态大模型与 Agent",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "京东 JoyAI",
+      "url": "https://zhaopin.jd.com/",
+      "type": "公司招聘官网",
+      "intro": "京东 JoyAI 与探索研究院相关 AI 岗位入口。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "具身智能/机器人",
+        "技术岗位",
+        "产品/设计/运营"
+      ],
+      "target_audience": "多模态、世界模型、数字人、供应链 AI、机器人和 AI 产品人才",
+      "direction": "多模态、世界模型、数字人、具身智能、供应链 AI",
+      "risk": "研究院介绍与招聘入口分离，需在京东招聘中按团队和关键词筛选。"
+    },
+    {
+      "name": "快手",
+      "url": "https://zhaopin.kuaishou.cn/",
+      "type": "公司招聘官网",
+      "intro": "快手官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "大厂 AI、内容、推荐与产品",
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+    },
+    {
+      "name": "零次方机器人",
+      "url": "https://www.zerith.ai/join",
+      "type": "公司招聘官网",
+      "intro": "具身机器人本体和控制系统公司官方招聘入口。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "具身智能/机器人",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "机器人本体、控制、嵌入式、机械电子、感知规划和系统集成人才",
+      "direction": "具身机器人、本体和控制系统",
+      "risk": "硬件与现场调试要求较高，需核验工作地点和出差强度。"
+    },
+    {
+      "name": "零一万物 01.AI",
+      "url": "https://01ai.jobs.feishu.cn/",
+      "type": "公司招聘官网",
+      "intro": "大模型公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "基础模型、Agent 与企业服务",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "潞晨科技",
+      "url": "https://www.luchentech.com/join",
+      "type": "公司招聘官网",
+      "intro": "聚焦大模型训练和推理基础设施的 AI 公司官方招聘入口。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI基础设施",
+        "AI/大模型",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "分布式系统、训练/推理优化、编译器、AI Infra 与高性能计算工程师",
+      "direction": "Colossal-AI、分布式训练与推理",
+      "risk": "以官网最新岗位、城市和工作方式为准。"
+    },
+    {
+      "name": "蚂蚁集团",
+      "url": "https://talent.antgroup.com/home",
+      "type": "公司招聘官网",
+      "intro": "蚂蚁集团官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "大厂 AI、金融科技、平台与产品",
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+    },
+    {
+      "name": "美团 LongCat",
+      "url": "https://zhaopin.meituan.com/longcatprogram",
+      "type": "公司招聘官网",
+      "intro": "美团 LongCat 大模型专项招聘入口。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "AI基础设施",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "基础模型、强化学习、多模态、具身智能和大模型系统人才",
+      "direction": "基础模型、Agentic RL、多模态、具身、AI Infra",
+      "risk": "专项计划岗位要求高，需以页面最新批次和城市为准。"
+    },
+    {
+      "name": "面壁智能 ModelBest",
+      "url": "https://modelbest.cn/",
+      "type": "公司招聘官网",
+      "intro": "端侧大模型公司官网与招聘线索入口",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "端侧模型、模型压缩与应用",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "轻舟智航 QCraft",
+      "url": "https://www.qcraft.ai/join-us",
+      "type": "公司招聘官网",
+      "intro": "自动驾驶公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "自动驾驶",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
+      "direction": "自动驾驶算法、数据与工程",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "清程极智",
+      "url": "https://www.qc-ai.cn/",
+      "type": "公司招聘官网",
+      "intro": "国产算力软件与推理加速方向公司官网。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI基础设施",
+        "AI/大模型",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "推理优化、编译器、算力调度、系统软件、平台工程和 AI Infra 人才",
+      "direction": "国产算力软件、推理加速、MaaS",
+      "risk": "当前入口偏公司官网，需进一步确认具体在招岗位和投递方式。"
+    },
+    {
+      "name": "穹彻智能 Noematrix",
+      "url": "https://www.noematrix.ai/join-us",
+      "type": "公司招聘官网",
+      "intro": "具身智能与机器人 Agent 公司官方招聘入口。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "具身智能/机器人",
+        "AI应用/FDE",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "具身模型、机器人 Agent、数据平台、感知规划和机器人产品人才",
+      "direction": "具身智能、机器人 Agent、数据平台",
+      "risk": "需核验具体岗位的研究、工程化和现场实验要求。"
+    },
+    {
+      "name": "趋境科技 Approaching AI",
+      "url": "https://approaching-ai.com/",
+      "type": "公司招聘官网",
+      "intro": "开源推理系统与大模型基础设施团队入口",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI基础设施",
+        "AI/大模型",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "系统/C++、编译器、推理优化、分布式、云原生、数据库与平台工程岗位",
+      "direction": "KTransformers、Mooncake、推理系统",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "生数科技 ShengShu",
+      "url": "https://www.genspi.com/zh/about/",
+      "type": "公司招聘官网",
+      "intro": "多模态生成公司官网与团队入口",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "视频生成、多模态模型与应用",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "腾讯",
+      "url": "https://hr.tencent.com/zh-cn/",
+      "type": "公司招聘官网",
+      "intro": "腾讯官方社会招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "系统/C++、编译器、推理优化、分布式、云原生、数据库与平台工程岗位",
+      "direction": "大厂 AI、平台、产品与工程",
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+    },
+    {
+      "name": "万格智元 ONE TOKEN",
+      "url": "https://onetokencareers.com/",
+      "type": "公司招聘官网",
+      "intro": "端侧推理与本地智能平台的招聘站。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI基础设施",
+        "AI应用/FDE",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "端侧模型、推理优化、Agent 工程、客户端与本地智能产品人才",
+      "direction": "端侧推理、Agent、本地智能平台",
+      "risk": "以招聘站最新岗位与地点为准。"
+    },
+    {
+      "name": "网易伏羲",
+      "url": "https://fuxi.netease.com/laboratory",
+      "type": "公司招聘官网",
+      "intro": "网易伏羲实验室招聘与团队介绍入口。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "大厂AI",
+        "AI应用/FDE",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "游戏 AI、强化学习、智能体、虚拟人、工业机器人和 AI 产品人才",
+      "direction": "游戏 AI、智能体、虚拟人、工业机器人",
+      "risk": "页面可能同时承担团队介绍，需确认具体在招岗位和正式投递链路。"
+    },
+    {
+      "name": "文远知行 WeRide",
+      "url": "https://www.weride.ai/zh/careers",
+      "type": "公司招聘官网",
+      "intro": "自动驾驶公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "自动驾驶",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
+      "direction": "自动驾驶算法、机器人与工程",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "无问芯穹 Infinigence",
+      "url": "https://www.infinigence-ai.com/",
+      "type": "公司招聘官网",
+      "intro": "异构算力与大模型训练推理基础设施公司入口",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI基础设施",
+        "AI/大模型",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "系统/C++、编译器、推理优化、分布式、云原生、数据库与平台工程岗位",
+      "direction": "异构算力、训练推理、Agentic Infra",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "小红书",
+      "url": "https://job.xiaohongshu.com/jobs/5/social",
+      "type": "公司招聘官网",
+      "intro": "小红书官方社会招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "软件工程、数据、AI产品、运营与商业化岗位；需按招聘页筛选",
+      "direction": "大厂 AI、社区、推荐与产品",
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+    },
+    {
+      "name": "小马智行 Pony.ai",
+      "url": "https://careers.pony.ai/",
+      "type": "公司招聘官网",
+      "intro": "自动驾驶公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "自动驾驶",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
+      "direction": "自动驾驶算法、机器人与工程",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "小米",
+      "url": "https://hr.xiaomi.com/",
+      "type": "公司招聘官网",
+      "intro": "小米官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
+      "direction": "大厂 AI、终端、汽车与产品",
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+    },
+    {
+      "name": "演语科技 LiblibAI",
+      "url": "https://www.liblib.art/us/joinus",
+      "type": "公司招聘官网",
+      "intro": "AI 内容平台官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI应用/FDE",
+        "AI/大模型",
+        "产品/设计/运营",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "生成式 AI、内容平台与产品",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "银河通用 Galbot",
+      "url": "https://www.galbot.com/",
+      "type": "公司招聘官网",
+      "intro": "具身智能公司官网与招聘线索入口",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "具身智能/机器人",
+        "AI/大模型",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "机器人算法、感知/规划、运动控制、嵌入式、硬件、供应链与机器人产品岗位",
+      "direction": "通用机器人、具身智能",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "宇树科技 Unitree",
+      "url": "https://www.unitree.com/cn/position/",
+      "type": "公司招聘官网",
+      "intro": "机器人公司官方职位入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "具身智能/机器人",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "机器人算法、感知/规划、运动控制、嵌入式、硬件、供应链与机器人产品岗位",
+      "direction": "四足机器人、人形机器人与控制",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "元境",
+      "url": "https://www.yuanjingos.com/careers",
+      "type": "公司招聘官网",
+      "intro": "AI 原生内容与交互产品公司官方招聘入口。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI应用/FDE",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营"
+      ],
+      "target_audience": "AI 产品、内容生成、交互设计、全栈工程与增长人才",
+      "direction": "AI 原生内容与交互产品",
+      "risk": "需以招聘页当前岗位和办公要求为准。"
+    },
+    {
+      "name": "月之暗面 Kimi",
+      "url": "https://careers.kimi.com/",
+      "type": "公司招聘官网",
+      "intro": "大模型公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "基础模型、Agent 与产品",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "智平方 AI² Robotics",
+      "url": "https://ai2robotics.com/joinus/",
+      "type": "公司招聘官网",
+      "intro": "具身智能公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "具身智能/机器人",
+        "AI/大模型",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "机器人算法、感知/规划、运动控制、嵌入式、硬件、供应链与机器人产品岗位",
+      "direction": "具身智能、机器人算法与工程",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "智谱 Zhipu",
+      "url": "https://www.zhipuai.cn/zh/joinus",
+      "type": "公司招聘官网",
+      "intro": "大模型公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "基础模型、Agent 与平台",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "智元机器人 AgiBot",
+      "url": "https://www.agibot.com.cn/join_us",
+      "type": "公司招聘官网",
+      "intro": "具身智能公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "具身智能/机器人",
+        "AI/大模型",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "机器人算法、感知/规划、运动控制、嵌入式、硬件、供应链与机器人产品岗位",
+      "direction": "人形机器人、具身智能与算法",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "字节跳动 Seed",
+      "url": "https://seed.bytedance.com/career",
+      "type": "公司招聘官网",
+      "intro": "字节跳动 Seed 团队专项招聘入口。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "大厂AI",
+        "AI/大模型",
+        "AI基础设施",
+        "技术岗位",
+        "校招/实习"
+      ],
+      "target_audience": "大模型研究、训练推理、视频/图像生成、Agent、机器人及 AI 产品人才",
+      "direction": "豆包基础模型、Seedance、Seedream、Agent、AI Infra、机器人",
+      "risk": "需区分社招与 Seed 大模型人才校招项目，岗位竞争强。"
+    },
+    {
+      "name": "DeepLang 深言科技",
+      "url": "https://www.deeplang.ai/",
+      "type": "公司招聘官网",
+      "intro": "大模型和自然语言方向公司官网。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "创业公司"
+      ],
+      "target_audience": "NLP、大模型训练与应用、智能产品和工程化人才",
+      "direction": "大模型、自然语言、智能产品",
+      "risk": "当前来源偏官网，需进一步确认岗位是否仍开放及投递方式。"
+    },
+    {
+      "name": "DeepSeek 深度求索",
+      "url": "https://talent.deepseek.com/",
+      "type": "公司招聘官网",
+      "intro": "大模型公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI/大模型",
+        "AI基础设施",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "基础模型、训练推理与研究",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "Manus",
+      "url": "https://manus.im/zh-cn/blog/manus-is-hiring",
+      "type": "公司招聘官网",
+      "intro": "通用 Agent 产品 Manus 的官方招聘信息。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI应用/FDE",
+        "AI/大模型",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营",
+        "海外/出海"
+      ],
+      "target_audience": "Agent 工程、全栈、模型应用、AI 产品、设计和全球增长人才",
+      "direction": "通用 Agent、AI 应用、全球化产品",
+      "risk": "岗位全球化程度高，需核验办公地点、语言和时区要求。"
+    },
+    {
+      "name": "MiniMax 稀宇科技",
+      "url": "https://minimaxi.com/careers",
+      "type": "公司招聘官网",
+      "intro": "大模型公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
+      "direction": "多模态大模型、Agent 与产品",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "Momenta 魔门塔",
+      "url": "https://www.momenta.cn/join.html",
+      "type": "公司招聘官网",
+      "intro": "自动驾驶公司官方招聘入口",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "自动驾驶",
+        "技术岗位",
+        "高信号"
+      ],
+      "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
+      "direction": "自动驾驶算法、数据与工程",
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+    },
+    {
+      "name": "Monica",
+      "url": "https://monica.im/",
+      "type": "公司招聘官网",
+      "intro": "全球化 AI 助手与浏览器产品官网。",
+      "access": "免费公开",
+      "quality": "待核实",
+      "tags": [
+        "AI应用/FDE",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营",
+        "海外/出海"
+      ],
+      "target_audience": "AI 产品、浏览器/客户端、全栈、增长和国际化人才",
+      "direction": "AI 助手、浏览器产品、全球化 AI 应用",
+      "risk": "当前未定位到独立招聘页，需人工确认是否在招及投递入口。"
+    },
+    {
+      "name": "AIJobs.ai China",
+      "url": "https://aijobs.ai/china",
+      "type": "招聘平台",
+      "intro": "全球 AI 专项招聘站的中国地区页面，聚合 AI 初创和成熟公司的岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "技术岗位",
+        "产品/设计/运营",
+        "海外/出海"
+      ],
+      "target_audience": "英文求职、外企中国团队、AI/ML/Data 及 AI 产品方向候选人",
+      "direction": "中国地区的 AI、机器学习、数据科学、MLOps、研究和 AI 产品岗位",
+      "risk": "中国岗位数量有限，部分岗位发布时间较久；申请前应核验公司官网和岗位时效。"
+    },
+    {
+      "name": "F6S Jobs",
+      "url": "https://www.f6s.com/jobs",
+      "type": "招聘平台",
+      "intro": "全球创业社区 F6S 的岗位板块，覆盖远程和本地初创岗位。",
+      "access": "免费注册后使用",
+      "quality": "中",
+      "tags": [
+        "海外/出海",
+        "创业公司",
+        "远程",
+        "技术岗位",
+        "产品/设计/运营",
+        "需人工尽调"
+      ],
+      "target_audience": "愿意加入海外早期创业公司、接受股权或多角色职责的技术与商业人才",
+      "direction": "全球初创公司、加速器项目、技术、销售、市场和实习岗位",
+      "risk": "平台免费注册，但早期公司质量和薪资差异很大；需要核验融资、团队、合同与岗位真实性。"
+    },
+    {
+      "name": "Remote OK",
+      "url": "https://remoteok.com/",
+      "type": "招聘平台",
+      "intro": "大型远程岗位平台，覆盖技术与数字职业，支持按地点和技能筛选。",
+      "access": "免费注册后使用",
+      "quality": "中",
+      "tags": [
+        "远程",
+        "海外/出海",
+        "技术岗位",
+        "产品/设计/运营",
+        "需人工尽调"
+      ],
+      "target_audience": "英文沟通较好、可跨时区协作并寻找全球远程职位的候选人",
+      "direction": "全球远程开发、产品、设计、数据、AI 与增长岗位",
+      "risk": "岗位数量多但竞争激烈，部分岗位有隐含国家限制；申请通常要求免费注册或跳转公司网站。"
+    },
+    {
+      "name": "We Work Remotely",
+      "url": "https://weworkremotely.com/",
+      "type": "招聘平台",
+      "intro": "运营十余年的远程招聘平台，基础岗位浏览免费，并提供 Pro 与自动申请等付费服务。",
+      "access": "基础免费/高级付费",
+      "quality": "中高",
+      "tags": [
+        "远程",
+        "海外/出海",
+        "技术岗位",
+        "产品/设计/运营",
+        "高信号"
+      ],
+      "target_audience": "具备英文能力、可跨时区协作且希望寻找成熟远程公司的候选人",
+      "direction": "全球正规远程岗位，覆盖开发、AI、产品、运营、支持和合同职位",
+      "risk": "Basic 可免费浏览和使用基础功能；无限申请、多提醒和 Job Copilot 等需要付费。地域、时区仍需逐条核验。"
+    },
+    {
+      "name": "Wellfound",
+      "url": "https://wellfound.com/jobs",
+      "type": "招聘平台",
+      "intro": "面向创业公司和科技岗位的平台，候选人免费使用，支持一份档案多岗位申请。",
+      "access": "免费注册后使用",
+      "quality": "高",
+      "tags": [
+        "海外/出海",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营",
+        "远程",
+        "高信号"
+      ],
+      "target_audience": "希望加入海外创业公司并重视薪资、股权、公司阶段和创始人直联的候选人",
+      "direction": "海外创业公司、AI SaaS、Founding 岗位、薪资与股权透明职位",
+      "risk": "候选人使用免费，但需要建立平台档案；早期公司仍需尽调，地域和签证要求需仔细筛选。"
+    },
+    {
+      "name": "Y Combinator Startup Jobs",
+      "url": "https://www.ycombinator.com/jobs",
+      "type": "招聘平台",
+      "intro": "Y Combinator 官方创业公司岗位平台，可按角色、地点和远程方式筛选。",
+      "access": "免费注册后使用",
+      "quality": "高",
+      "tags": [
+        "海外/出海",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营",
+        "远程",
+        "高信号"
+      ],
+      "target_audience": "愿意加入早期或高速增长海外创业公司的工程、产品、设计、增长和运营人才",
+      "direction": "YC 创业公司、AI Agent、开发者工具、机器人与 Founding 岗位",
+      "risk": "申请通常需要账户或跳转公司流程；早期公司岗位职责变化快，需要核验融资、团队和签证条件。"
+    },
+    {
+      "name": "电鸭社区",
+      "url": "https://eleduck.com/",
+      "type": "招聘社区",
+      "intro": "国内较早的远程工作社区，招聘、讨论和人才展示结合。",
+      "access": "免费注册后使用",
+      "quality": "中",
+      "tags": [
+        "远程",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营",
+        "社区直招",
+        "需人工尽调"
+      ],
+      "target_audience": "寻找非传统坐班、远程全职、兼职外包或独立协作机会的开发、设计、产品和运营候选人",
+      "direction": "国内远程、自由职业、出海团队、独立产品与 AI 岗位",
+      "risk": "浏览公开，但联系、申请和个人主页等流程通常需要登录；社区岗位需核验雇主与付款方式。"
+    },
+    {
+      "name": "游人于野",
+      "url": "https://www.rwnomad.com/",
+      "type": "招聘社区",
+      "intro": "数字游民社区的远程岗位平台，支持岗位浏览、订阅和人才库。",
+      "access": "免费注册后使用",
+      "quality": "中",
+      "tags": [
+        "远程",
+        "海外/出海",
+        "产品/设计/运营",
+        "技术岗位",
+        "社区直招"
+      ],
+      "target_audience": "希望远程工作、旅居办公或以自由职业方式工作的开发、产品、运营与内容人才",
+      "direction": "数字游民、全球远程、自由职业、内容与社区岗位",
+      "risk": "岗位地域、时区、用工主体和合同形式需逐条确认；订阅和人才库需要注册。"
+    },
+    {
+      "name": "Hacker News – Who is hiring",
+      "url": "https://news.ycombinator.com/submitted?id=whoishiring",
+      "type": "招聘社区",
+      "intro": "Hacker News 每月招聘帖，许多岗位由创始人或招聘团队直接发布。",
+      "access": "免费公开",
+      "quality": "高",
+      "tags": [
+        "海外/出海",
+        "创业公司",
+        "技术岗位",
+        "社区直招",
+        "签证机会",
+        "高信号"
+      ],
+      "target_audience": "英文沟通较好、希望进入海外创业团队的中高级工程师、AI 研究与产品人才",
+      "direction": "海外早期创业公司、AI、基础设施、Founding Team 与远程岗位",
+      "risk": "帖子格式不统一，地域、时区和签证限制需逐条阅读；应回到公司官网交叉验证。"
+    },
+    {
+      "name": "V2EX 酷工作",
+      "url": "https://www.v2ex.com/go/jobs",
+      "type": "招聘社区",
+      "intro": "国内技术社区的招聘板块，很多岗位由创始人、技术负责人或团队成员直接发布。",
+      "access": "免费公开",
+      "quality": "波动较大",
+      "tags": [
+        "技术岗位",
+        "创业公司",
+        "社区直招",
+        "远程",
+        "需人工尽调"
+      ],
+      "target_audience": "开发者、AI 工程师、技术产品经理和希望直接联系团队成员的候选人",
+      "direction": "技术创业公司、工程师、AI、远程、内推与兼职",
+      "risk": "高信号与低质量帖子并存，缺少统一审核；申请前必须核验公司主体、发布者身份、薪资和合同。"
+    }
+  ]
+}
+

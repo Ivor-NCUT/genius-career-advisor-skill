@@ -1,0 +1,4 @@
+interface:
+  display_name: "JobRadar 旧入口"
+  short_description: "兼容旧 Prompt，并转到泛函求职 Agent"
+  default_prompt: "使用 $fanhan-job-agent 继续我的 JobRadar 岗位搜索和辅助申请。"

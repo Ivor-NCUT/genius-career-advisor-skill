@@ -1,0 +1,4 @@
+interface:
+  display_name: "外部招聘平台辅助投递"
+  short_description: "先筛选合适渠道，再安全选岗并辅助申请"
+  default_prompt: "使用 $fanhan-job-agent 根据我的真实材料搜索外部岗位，并在我明确选岗后辅助申请。"
