@@ -301,31 +301,6 @@ FH01xy
 
 </details>
 
-<details>
-<summary><strong>本地验证</strong></summary>
-
-```bash
-python3 apply-external-jobs/scripts/application_log.py self-test
-python3 apply-external-jobs/scripts/confirmation_gate.py self-test
-python3 apply-external-jobs/scripts/external_jobs.py --self-test
-python3 apply-external-jobs/scripts/watcha_jobs.py --self-test
-python3 apply-external-jobs/scripts/source_catalog.py --self-test
-python3 apply-external-jobs/scripts/source_feedback.py self-test
-python3 fanhan-job-agent/scripts/profile_status.py --self-test
-python3 fanhan-job-agent/scripts/match_guard.py --self-test
-python3 fanhan-job-agent/scripts/material_gate.py --self-test
-node fanhan-job-agent/assets/resume-editor.js --self-test
-python3 fanhan-job-agent/scripts/candidate_memory.py self-test
-python3 fanhan-job-agent/scripts/local_memory.py --self-test
-python3 fanhan-job-agent/scripts/workbench_client.py self-test
-```
-
-</details>
-
-- [外部招聘网站可行性探测](docs/external-site-feasibility-issue-08.md)
-- [第三方求职 Skill 借鉴记录](docs/third-party-feature-audit.md)
-- [工作台接入审计](docs/workbench-integration-audit.md)
-
 ---
 
 <div align="center">
