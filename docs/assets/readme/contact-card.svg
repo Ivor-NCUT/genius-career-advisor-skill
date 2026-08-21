@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">泛函招聘团队联系方式</title>
+  <desc id="desc">泛函在微信、即刻、小红书、视频号和公众号的联系入口。</desc>
+  <rect width="1200" height="430" rx="24" fill="#111111"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+    <text x="54" y="64" fill="#FFF3A6" font-size="14" font-weight="700">CONTACT FANHAN · 联系泛函</text>
+    <text x="54" y="112" fill="#ffffff" font-size="30" font-weight="740">求职、招聘与企业合作，都可以从这里找到我们。</text>
+    <text x="54" y="148" fill="#aaaaaa" font-size="15">外部平台点击链接访问；微信、视频号和公众号可在下方一键复制名称。</text>
+
+    <rect x="54" y="198" width="202" height="166" rx="18" fill="#FFF3A6"/>
+    <circle cx="92" cy="236" r="20" fill="#111111"/>
+    <text x="92" y="242" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="800">微</text>
+    <text x="82" y="288" fill="#111111" font-size="17" font-weight="700">微信</text>
+    <text x="82" y="321" fill="#444444" font-size="15">FH01xy</text>
+    <text x="82" y="344" fill="#666666" font-size="12">下方代码框一键复制</text>
+
+    <rect x="274" y="198" width="202" height="166" rx="18" fill="#1d1d1d" stroke="#555555"/>
+    <circle cx="312" cy="236" r="20" fill="#ffffff"/>
+    <text x="312" y="242" text-anchor="middle" fill="#111111" font-size="18" font-weight="800">即</text>
+    <text x="302" y="288" fill="#ffffff" font-size="17" font-weight="700">即刻</text>
+    <text x="302" y="321" fill="#bbbbbb" font-size="15">泛函技术招聘</text>
+    <text x="302" y="344" fill="#888888" font-size="12">点击下方链接访问</text>
+
+    <rect x="494" y="198" width="202" height="166" rx="18" fill="#1d1d1d" stroke="#555555"/>
+    <circle cx="532" cy="236" r="20" fill="#ffffff"/>
+    <text x="532" y="242" text-anchor="middle" fill="#111111" font-size="18" font-weight="800">红</text>
+    <text x="522" y="288" fill="#ffffff" font-size="17" font-weight="700">小红书</text>
+    <text x="522" y="321" fill="#bbbbbb" font-size="15">@泛函</text>
+    <text x="522" y="344" fill="#888888" font-size="12">点击下方链接访问</text>
+
+    <rect x="714" y="198" width="202" height="166" rx="18" fill="#1d1d1d" stroke="#555555"/>
+    <circle cx="752" cy="236" r="20" fill="#ffffff"/>
+    <text x="752" y="242" text-anchor="middle" fill="#111111" font-size="18" font-weight="800">视</text>
+    <text x="742" y="288" fill="#ffffff" font-size="17" font-weight="700">视频号</text>
+    <text x="742" y="321" fill="#bbbbbb" font-size="15">泛函</text>
+    <text x="742" y="344" fill="#888888" font-size="12">下方代码框一键复制</text>
+
+    <rect x="934" y="198" width="212" height="166" rx="18" fill="#1d1d1d" stroke="#555555"/>
+    <circle cx="972" cy="236" r="20" fill="#ffffff"/>
+    <text x="972" y="242" text-anchor="middle" fill="#111111" font-size="18" font-weight="800">公</text>
+    <text x="962" y="288" fill="#ffffff" font-size="17" font-weight="700">公众号</text>
+    <text x="962" y="321" fill="#bbbbbb" font-size="15">泛函</text>
+    <text x="962" y="344" fill="#888888" font-size="12">下方代码框一键复制</text>
+  </g>
+</svg>
