@@ -273,7 +273,7 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 
 | 平台 | 联系方式 |
 |---|---|
-| 即刻 | [打开「泛函技术招聘」](https://okjk.co/47fXxa) |
+| 即刻 | [打开「@泛函」主页](https://okjk.co/47fXxa) |
 | 小红书 | [打开「@泛函」主页](https://xhslink.cn/o/6D14yTWuPLq) |
 | 飞书 | [打开泛函招聘顾问](https://applink.feishu.cn/client/bot/open?appId=cli_aaff15aa85795bee) |
 | 邮箱 | [fanhan@aimanziyi.vip](mailto:fanhan@aimanziyi.vip) |
