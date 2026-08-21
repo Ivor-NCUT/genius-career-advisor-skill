@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">天才职业顾问脱敏使用案例</title>
+  <desc id="desc">虚构候选人林澄从一份简历开始，完成职业建档、多来源找岗、岗位追问、专用简历和辅助申请。</desc>
+  <rect width="1200" height="420" rx="22" fill="#111111"/>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif">
+    <text x="54" y="58" fill="#FFF3A6" font-size="14" font-weight="700">SANITIZED CASE · 脱敏演示</text>
+    <text x="54" y="105" fill="#ffffff" font-size="30" font-weight="720">林澄，只说了一句话。</text>
+    <text x="54" y="143" fill="#bbbbbb" font-size="16">“帮我找适合的 AI 产品岗位，这是我的简历。”</text>
+
+    <rect x="54" y="190" width="236" height="166" rx="16" fill="#1d1d1d" stroke="#555555"/>
+    <text x="78" y="226" fill="#FFF3A6" font-size="12" font-weight="700">01 · 建档</text>
+    <text x="78" y="263" fill="#ffffff" font-size="18" font-weight="650">挖出可验证成果</text>
+    <text x="78" y="294" fill="#bbbbbb" font-size="14">建立评测集与验收指标</text>
+    <text x="78" y="320" fill="#bbbbbb" font-size="14">推动跨团队上线与复盘</text>
+
+    <rect x="310" y="190" width="236" height="166" rx="16" fill="#1d1d1d" stroke="#555555"/>
+    <text x="334" y="226" fill="#FFF3A6" font-size="12" font-weight="700">02 · 找岗</text>
+    <text x="334" y="263" fill="#ffffff" font-size="18" font-weight="650">63 个岗位来源可选</text>
+    <text x="334" y="294" fill="#bbbbbb" font-size="14">官网 · 招聘社区 · 聚合平台</text>
+    <text x="334" y="320" fill="#bbbbbb" font-size="14">统一筛选、去重和排序</text>
+
+    <rect x="566" y="190" width="236" height="166" rx="16" fill="#1d1d1d" stroke="#555555"/>
+    <text x="590" y="226" fill="#FFF3A6" font-size="12" font-weight="700">03 · 定制</text>
+    <text x="590" y="263" fill="#ffffff" font-size="18" font-weight="650">围绕 JD 追问 2 次</text>
+    <text x="590" y="294" fill="#bbbbbb" font-size="14">补齐个人贡献与协作证据</text>
+    <text x="590" y="320" fill="#bbbbbb" font-size="14">生成可编辑 HTML 简历</text>
+
+    <rect x="822" y="190" width="324" height="166" rx="16" fill="#FFF3A6" stroke="#FFF3A6"/>
+    <text x="846" y="226" fill="#111111" font-size="12" font-weight="700">04 · 申请</text>
+    <text x="846" y="263" fill="#111111" font-size="18" font-weight="700">候选人检查后继续</text>
+    <text x="846" y="294" fill="#444444" font-size="14">Agent 整理完整申请字段</text>
+    <text x="846" y="320" fill="#444444" font-size="14">登录、验证码、最终提交由本人完成</text>
+  </g>
+</svg>
