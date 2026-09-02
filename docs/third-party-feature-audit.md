@@ -1,6 +1,6 @@
 # 第三方求职 Skill 借鉴记录
 
-日期：2026-08-18。对应 Issue #42。
+首次审查：2026-08-18。`ai-job-search` 深度整合更新：2026-09-02，对应 Issue #4。
 
 求职工作流部分只借鉴公开设计，未复制第三方 Skill 代码、提示词正文、品牌名称或浏览器程序。
 
@@ -8,7 +8,7 @@
 |---|---|---|---|
 | [santifer/career-ops](https://github.com/santifer/career-ops) | MIT | 投递前淘汰题预检、最终提交由用户完成 | 复用现有 `match_guard.py`、选岗门禁和侧边栏辅助流程；不接入其 Chrome/Playwright 实现 |
 | [noamseg/interview-coach-skill](https://github.com/noamseg/interview-coach-skill) | MIT | 可复用申请回答、故事库、一次一问、五维反馈和复盘 | 新增本地 `candidate-memory.json`、申请回答库与轻量面试流程 |
-| [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) | MIT | 多来源独立读取、统一状态、单来源失败不阻塞 | 现有 `external_jobs.py` 已覆盖三个外部来源，不新增通用适配器框架 |
+| [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) | MIT | 快速初筛与选岗后深评分层、公司事实核验、按需求职信、申请结果复盘 | 复用现有来源、职业档案、回答库和投递日志，新增 `job-evaluation-and-outcomes.md` 与结果事件；不复制丹麦站点爬虫、个人模板或 Claude 专用命令 |
 | [Paramchoudhary/ResumeSkills](https://github.com/Paramchoudhary/ResumeSkills) | MIT | 表单答案按问题类型生成 | 复用现有职业资产和 JD 定制流程，只补回答复用，不安装其 20 个独立 Skill |
 | [GresonKwan/JobOK](https://github.com/GresonKwan/JobOK) | MIT | 中文求职边界、用户手动确认外部动作 | 现有确认门禁已经覆盖，不复制重复流程 |
 

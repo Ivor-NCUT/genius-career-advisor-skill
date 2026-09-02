@@ -14,6 +14,8 @@ FIELDS = (
     "application_url", "status", "user_confirmed", "success_evidence", "reason",
 )
 STATUSES = {"skipped", "awaiting_confirmation", "user_declined", "success", "failed"}
+OUTCOME_FIELDS = ("timestamp", "company", "job_title", "job_url", "status", "evidence")
+OUTCOME_STATUSES = {"applied", "interview", "rejected", "offer", "withdrawn", "follow_up_sent"}
 
 
 def normalize_url(value):
@@ -82,6 +84,30 @@ def append_record(path, record):
         handle.write(json.dumps(record, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
+def append_outcome(path, outcome):
+    if set(outcome) != set(OUTCOME_FIELDS) or outcome["status"] not in OUTCOME_STATUSES:
+        raise ValueError("invalid outcome")
+    if not all(isinstance(outcome[name], str) and outcome[name].strip() for name in OUTCOME_FIELDS):
+        raise ValueError("outcome fields must be non-empty strings")
+    if any("\n" in outcome[name] or len(outcome[name]) > 500 for name in OUTCOME_FIELDS):
+        raise ValueError("outcome fields must be one line and at most 500 characters")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    existing = path.read_text(encoding="utf-8").splitlines() if path.exists() else []
+    if outcome["status"] == "follow_up_sent":
+        normalized = normalize_url(outcome["job_url"])
+        follow_ups = sum(
+            1 for line in existing
+            if (item := json.loads(line)).get("status") == "follow_up_sent"
+            and normalize_url(item.get("job_url", "")) == normalized
+        )
+        if follow_ups >= 2:
+            raise ValueError("a job can have at most two recorded follow-ups")
+    descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o600)
+    os.fchmod(descriptor, 0o600)
+    with os.fdopen(descriptor, "a", encoding="utf-8") as handle:
+        handle.write(json.dumps(outcome, ensure_ascii=False, separators=(",", ":")) + "\n")
+
+
 def is_duplicate(records, job_url, application_url):
     targets = {normalize_url(job_url), normalize_url(application_url)} - {""}
     return any(
@@ -131,12 +157,27 @@ def self_test():
             pass
         else:
             raise AssertionError("unsafe success record was accepted")
+        outcomes = Path(directory) / "application-outcomes.jsonl"
+        outcome = {
+            "timestamp": "2026-08-16T00:00:00+00:00", "company": "Example",
+            "job_title": "Engineer", "job_url": "https://example.com/jobs/1",
+            "status": "follow_up_sent", "evidence": "candidate confirmed",
+        }
+        append_outcome(outcomes, outcome)
+        append_outcome(outcomes, dict(outcome, timestamp="2026-08-17T00:00:00+00:00"))
+        try:
+            append_outcome(outcomes, dict(outcome, timestamp="2026-08-18T00:00:00+00:00"))
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("third follow-up was accepted")
     print("application_log self-test: ok")
 
 
 def build_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", type=Path, default=Path(".fanhan-job-agent/external-applications.jsonl"))
+    parser.add_argument("--outcome-path", type=Path, default=Path(".fanhan-job-agent/application-outcomes.jsonl"))
     subparsers = parser.add_subparsers(dest="command", required=True)
     append = subparsers.add_parser("append")
     append.add_argument("--source", required=True)
@@ -147,6 +188,9 @@ def build_parser():
     duplicate = subparsers.add_parser("duplicate")
     duplicate.add_argument("--job-url", default="")
     duplicate.add_argument("--application-url", default="")
+    outcome = subparsers.add_parser("outcome")
+    for flag in ("company", "job-title", "job-url", "status", "evidence"):
+        outcome.add_argument(f"--{flag}", required=True)
     subparsers.add_parser("validate")
     subparsers.add_parser("self-test")
     return parser
@@ -163,6 +207,16 @@ def main():
         duplicate = is_duplicate(read_records(args.path), args.job_url, args.application_url)
         print("duplicate" if duplicate else "new")
         raise SystemExit(10 if duplicate else 0)
+    elif args.command == "outcome":
+        append_outcome(args.outcome_path, {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "company": args.company,
+            "job_title": args.job_title,
+            "job_url": normalize_url(args.job_url),
+            "status": args.status,
+            "evidence": args.evidence,
+        })
+        print("outcome recorded")
     else:
         records = read_records(args.path)
         print(f"valid: {len(records)} record(s)")
