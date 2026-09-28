@@ -1,6 +1,6 @@
 # 岗位评估与申请复盘
 
-本流程借鉴 [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) 的分层判断思路，并按天才职业顾问现有的职业档案、来源授权和人工最终提交边界实现。
+本流程借鉴 [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) 的分层判断思路，并按天才职业顾问现有的职业档案、来源授权、选岗与材料指纹边界实现。
 
 ## 两阶段判断
 

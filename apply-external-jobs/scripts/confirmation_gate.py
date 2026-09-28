@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bind final confirmation to the selected job and approved career materials."""
+"""Bind submission authority to one selected job and approved career materials."""
 
 import argparse
 import hashlib
@@ -10,10 +10,11 @@ from pathlib import Path
 from types import SimpleNamespace
 
 
-SELECTION_SCHEMA = "fanhan-job-selection-v1"
+SELECTION_SCHEMA = "fanhan-job-selection-v2"
 PROFILE_SCHEMA = "fanhan-career-profile-v1"
 PROFILE_STATUS_SCHEMA = "fanhan-profile-status-v1"
 PROPOSAL_SCHEMA = "fanhan-tailored-material-v1"
+SUBMISSION_MODES = {"auto", "manual"}
 
 
 def file_hash(path):
@@ -56,6 +57,8 @@ def load_selection(path, expected):
         raise ValueError("job_selection_mismatch")
     if not str(value.get("selected_at") or "").strip():
         raise ValueError("job_selection_missing")
+    if value.get("submission_mode") not in SUBMISSION_MODES:
+        raise ValueError("submission_mode_invalid")
     return value
 
 
@@ -70,11 +73,14 @@ def save_selection(args):
         "job_title": args.job_title.strip(),
         "job_url": args.job_url.strip(),
         "application_url": args.application_url.strip(),
+        "submission_mode": getattr(args, "submission_mode", "auto"),
         "user_confirmed": True,
         "selected_at": datetime.now(timezone.utc).isoformat(),
     }
     if not all(value[field] for field in ("company", "job_title", "job_url", "application_url")):
         raise ValueError("job_selection_incomplete")
+    if value["submission_mode"] not in SUBMISSION_MODES:
+        raise ValueError("submission_mode_invalid")
     output.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return value
 
@@ -147,6 +153,7 @@ def payload(args):
     selection = load_selection(args.selection, current)
     current.update(validate_materials(args, selection))
     current["selected_at"] = selection["selected_at"]
+    current["submission_mode"] = selection["submission_mode"]
     return current
 
 
@@ -187,6 +194,7 @@ def self_test():
         selection_args = SimpleNamespace(
             company="Example", job_title="Engineer", job_url="https://jobradar.cc/jobs/1",
             application_url="https://example.com/apply/1", output=selection_path,
+            submission_mode="auto",
         )
         selection = save_selection(selection_args)
         args = SimpleNamespace(
@@ -211,7 +219,14 @@ def self_test():
         first = fingerprint(value)
         assert value["resume_name"] == resume.name
         assert value["html_name"] == editable_html.name
+        assert value["submission_mode"] == "auto"
         assert first == fingerprint(dict(value))
+        manual_selection = dict(selection, submission_mode="manual")
+        selection_path.write_text(json.dumps(manual_selection, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        manual = payload(args)
+        assert manual["submission_mode"] == "manual"
+        assert fingerprint(manual) != first
+        selection_path.write_text(json.dumps(selection, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         resume.write_bytes(b"%PDF-1.4 jsPDF tailored-v2")
         assert first != fingerprint(payload(args))
         resume.write_bytes(b"%PDF-1.4 HeadlessChrome Skia/PDF")
@@ -247,6 +262,7 @@ def build_parser():
     select.add_argument("--job-title", required=True)
     select.add_argument("--job-url", required=True)
     select.add_argument("--application-url", required=True)
+    select.add_argument("--submission-mode", choices=sorted(SUBMISSION_MODES), default="auto")
     select.add_argument("--output", required=True, type=Path)
     select.add_argument("--confirmed", action="store_true", required=True)
     for command in ("build", "verify"):
