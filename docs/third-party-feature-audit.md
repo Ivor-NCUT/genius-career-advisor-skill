@@ -1,6 +1,6 @@
 # 第三方求职 Skill 借鉴记录
 
-首次审查：2026-08-18。`ai-job-search` 深度整合更新：2026-09-02，对应 Issue #4。
+首次审查：2026-08-18。`ai-job-search` 深度整合更新：2026-09-02，对应 Issue #4。`job-apply-skill` 审查：2026-09-28，对应 Issue #8。
 
 求职工作流部分只借鉴公开设计，未复制第三方 Skill 代码、提示词正文、品牌名称或浏览器程序。
 
@@ -11,6 +11,7 @@
 | [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) | MIT | 快速初筛与选岗后深评分层、公司事实核验、按需求职信、申请结果复盘 | 复用现有来源、职业档案、回答库和投递日志，新增 `job-evaluation-and-outcomes.md` 与结果事件；不复制丹麦站点爬虫、个人模板或 Claude 专用命令 |
 | [Paramchoudhary/ResumeSkills](https://github.com/Paramchoudhary/ResumeSkills) | MIT | 表单答案按问题类型生成 | 复用现有职业资产和 JD 定制流程，只补回答复用，不安装其 20 个独立 Skill |
 | [GresonKwan/JobOK](https://github.com/GresonKwan/JobOK) | MIT | 中文求职边界、用户手动确认外部动作 | 现有确认门禁已经覆盖，不复制重复流程 |
+| [Romee-w07/job-apply-skill](https://github.com/Romee-w07/job-apply-skill) | MIT | 官网校招核验、个人资料模板、投递台账和表单复核 | 复用设计原则并接入现有职业档案、定制简历和确认指纹；不复制其 0.4.6 版 EgoLite 指令、静态个人偏好或仓库内容 |
 
 ## 页面内 PDF 运行依赖
 
@@ -20,7 +21,7 @@
 
 ## 明确排除
 
-- 不自动点击最终提交。
+- 不投递用户没有明确选中的岗位；自动提交只绑定当前岗位、当前材料和当前表单指纹。
 - 不启动独立 Chrome、Playwright 或 CDP 会话。
 - 不扩大到更多招聘平台或批量抓取。
 - 不把申请答案、面试记录或候选人材料写入 Git、外部投递日志或工作台。

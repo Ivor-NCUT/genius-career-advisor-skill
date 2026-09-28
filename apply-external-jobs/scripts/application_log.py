@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write and query the V1 non-sensitive external application log."""
+"""Write and query the non-sensitive external application log."""
 
 import argparse
 import json
@@ -11,9 +11,11 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 FIELDS = (
     "timestamp", "source", "company", "job_title", "job_url",
-    "application_url", "status", "user_confirmed", "success_evidence", "reason",
+    "application_url", "status", "submission_mode", "user_confirmed", "success_evidence", "reason",
 )
+LEGACY_FIELDS = tuple(field for field in FIELDS if field != "submission_mode")
 STATUSES = {"skipped", "awaiting_confirmation", "user_declined", "success", "failed"}
+SUBMISSION_MODES = {"auto", "manual"}
 OUTCOME_FIELDS = ("timestamp", "company", "job_title", "job_url", "status", "evidence")
 OUTCOME_STATUSES = {"applied", "interview", "rejected", "offer", "withdrawn", "follow_up_sent"}
 
@@ -35,7 +37,7 @@ def parse_bool(value):
 
 def validate_record(record):
     if set(record) != set(FIELDS):
-        raise ValueError("record fields do not match the V1 schema")
+        raise ValueError("record fields do not match the application log schema")
     if any(not isinstance(record[name], str) for name in FIELDS if name != "user_confirmed"):
         raise ValueError("all text fields must be strings")
     if not isinstance(record["user_confirmed"], bool):
@@ -46,14 +48,16 @@ def validate_record(record):
         raise ValueError("a job or application URL is required")
     if record["status"] not in STATUSES:
         raise ValueError("invalid status")
+    if record["submission_mode"] not in SUBMISSION_MODES:
+        raise ValueError("invalid submission mode")
     if any("\n" in record[name] or len(record[name]) > 500 for name in FIELDS if name != "user_confirmed"):
         raise ValueError("text fields must be one line and at most 500 characters")
     if record["status"] == "success" and (not record["user_confirmed"] or not record["success_evidence"]):
         raise ValueError("success requires confirmation and explicit evidence")
     if record["status"] == "user_declined" and (record["user_confirmed"] or record["success_evidence"]):
         raise ValueError("user_declined cannot be confirmed or successful")
-    if record["status"] == "awaiting_confirmation" and (record["user_confirmed"] or record["success_evidence"]):
-        raise ValueError("awaiting_confirmation cannot be confirmed or successful")
+    if record["status"] == "awaiting_confirmation" and record["success_evidence"]:
+        raise ValueError("awaiting_confirmation cannot be successful")
     if record["status"] in {"skipped", "failed"} and not record["reason"]:
         raise ValueError("skipped and failed records require a reason")
 
@@ -61,13 +65,15 @@ def validate_record(record):
 def read_records(path):
     if not path.exists():
         return []
-    # ponytail: linear scan is enough for a local V1 log; add an index only after measured slowdown.
+    # ponytail: linear scan is enough for a local log; add an index only after measured slowdown.
     records = []
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip():
             continue
         try:
             record = json.loads(line)
+            if set(record) == set(LEGACY_FIELDS):
+                record["submission_mode"] = "manual"
             validate_record(record)
         except (json.JSONDecodeError, ValueError) as error:
             raise ValueError(f"invalid log line {number}: {error}") from error
@@ -126,6 +132,7 @@ def make_record(args):
         "job_url": normalize_url(args.job_url),
         "application_url": normalize_url(args.application_url),
         "status": args.status,
+        "submission_mode": args.submission_mode,
         "user_confirmed": parse_bool(args.user_confirmed),
         "success_evidence": args.success_evidence,
         "reason": args.reason,
@@ -139,7 +146,7 @@ def self_test():
             "timestamp": "2026-08-16T00:00:00+00:00", "source": "JobRadar",
             "company": "Example", "job_title": "Engineer",
             "job_url": "https://jobradar.cc/jobs/1", "application_url": "https://example.com/apply/1",
-            "status": "success", "user_confirmed": True,
+            "status": "success", "submission_mode": "auto", "user_confirmed": True,
             "success_evidence": "Application received", "reason": "",
         }
         append_record(path, base)
@@ -151,6 +158,9 @@ def self_test():
         )
         append_record(path, declined)
         assert read_records(path)[1]["source"] == "Bonjour"
+        legacy = {field: value for field, value in declined.items() if field != "submission_mode"}
+        path.write_text(json.dumps(legacy, ensure_ascii=False) + "\n", encoding="utf-8")
+        assert read_records(path)[0]["submission_mode"] == "manual"
         try:
             validate_record(dict(base, user_confirmed=False))
         except ValueError:
@@ -185,6 +195,7 @@ def build_parser():
         append.add_argument(f"--{flag}", required=True)
     append.add_argument("--success-evidence", default="")
     append.add_argument("--reason", default="")
+    append.add_argument("--submission-mode", choices=sorted(SUBMISSION_MODES), default="auto")
     duplicate = subparsers.add_parser("duplicate")
     duplicate.add_argument("--job-url", default="")
     duplicate.add_argument("--application-url", default="")
