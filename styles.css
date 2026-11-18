@@ -333,12 +333,12 @@ img, svg { display: block; }
   font-weight: 500;
   font-variant-ligatures: none;
   text-align: left;
-  line-height: 1.45;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 .composer-typed {
-  display: block;
-  white-space: pre;
-  text-align: left;
+  display: inline;
+  white-space: nowrap;
 }
 .composer-typed::after {
   content: "";

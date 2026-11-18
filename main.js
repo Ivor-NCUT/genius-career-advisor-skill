@@ -59,7 +59,7 @@
   });
 
   /* ---------- Install command typewriter ---------- */
-  const DISPLAY_CMD = "npx skills add Ivor-NCUT/genius-career-advisor-skill\n--skill '*' -g ...";
+  const DISPLAY_CMD = "npx skills add Ivor-NCUT/genius-career-advisor-skill ...";
   const typedEl = document.querySelector(".composer-typed");
   if (typedEl) {
     const text = DISPLAY_CMD.replace("\\n", "\n");
