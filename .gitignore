@@ -1,0 +1,7 @@
+# Local candidate workspace and referral secrets.
+.fanhan-job-agent/
+**/.fanhan-job-agent/
+**/grok-bot-referral.json
+
+__pycache__/
+*.pyc
