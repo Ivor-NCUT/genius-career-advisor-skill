@@ -6,7 +6,7 @@
 {
   "schema_version": "fanhan-tailored-material-v1",
   "job": {
-    "id": "工作台岗位 ID 或外部岗位稳定链接",
+    "id": "岗位 ID 或外部岗位稳定链接",
     "company": "目标公司",
     "title": "岗位名称"
   },
@@ -55,7 +55,7 @@
 - 原简历文件名中的公司不能继承到新版本，除非它就是当前目标公司。
 - HTML 页面右上角提供“导出 PDF”；用户检查或编辑后，编辑器冻结点击时的当前页面内容并按同一 `artifact_stem` 下载 PDF。
 - HTML 生成后必须立即在 Codex 侧边栏展示。用户回传导出的 PDF 后，必须通过 `material_gate.py --accept-exported-pdf` 原字节接收到同名 outbox PDF；不得从磁盘 HTML、旧 PDF、Headless Chrome 或其他脚本重新生成替代文件，也不得在接收成功前填写 `profile.application_resume.path`。
-- 工作台和外部投递门禁必须同时检查同名 HTML，并确认 PDF 是内置编辑器的原始导出；只有 PDF、没有同名可编辑 HTML、PDF 早于 HTML，或 PDF 是后续重新生成的替代文件时必须拒绝。
+- 内推和外部投递门禁必须同时检查同名 HTML，并确认 PDF 是内置编辑器的原始导出；只有 PDF、没有同名可编辑 HTML、PDF 早于 HTML，或 PDF 是后续重新生成的替代文件时必须拒绝。
 - PDF 确认前做两遍检查：先看页面断行、分页、空白和信息层级，再读取 PDF 文本层，核对姓名与联系方式、阅读顺序、JD 关键词和本轮咨询新增内容。文本层无法读取时明确标记“ATS 解析未验证”，不得只凭页面看起来正常就宣称兼容 ATS。
 
 ## 变更类型

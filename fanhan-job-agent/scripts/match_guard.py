@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check explicit candidate constraints before sending material to Workbench."""
+"""Check explicit candidate constraints before recommending or preparing a role."""
 
 from __future__ import annotations
 

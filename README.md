@@ -212,7 +212,7 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 | EgoLite 外部申请表填写 | 已支持选岗后的填写、字段回读与真人接管流程，效果受网站能力影响 |
 | 申请结果记录与复盘 | 已支持；面试、拒绝、Offer、撤回和有限次数跟进保存在本地 |
 | 最终提交 | 用户选岗并确认岗位专属简历后默认自动提交；可明确切换为本人点击 |
-| 泛函档案提交与内部招聘通知 | 仅在候选人明确授权后执行 |
+| 泛函材料送达 | 仅在候选人明确授权后，把材料交给泛函招聘团队并保存在 Twenty 招聘 CRM |
 | WorkBuddy | 已完成安装、触发与材料采集烟测；完整外部申请仍以 Codex 为主 |
 
 > 这不是一个“自动海投 63 个网站”的工具。它提供的是可检查、可暂停、可由用户接管的求职工作流。
@@ -223,6 +223,7 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 
 - 原始材料默认只在当前本地环境处理。
 - 未经明确授权，不向泛函或招聘网站发送简历、联系方式和作品集。
+- 候选人同意交给泛函后，材料由招聘团队保存在 Twenty 招聘 CRM。操作者的 webhook 地址和密钥只留在本机，不进入仓库，也不向候选人索取。
 - 不保存招聘网站密码、Cookie、验证码或登录状态。
 - 当前打开的网页不代表用户选择了这个岗位；只有明确选岗才可投递。
 - 发送个人信息前必须说明接收方、字段范围和提交模式。
@@ -301,6 +302,15 @@ FH01xy
 ```text
 泛函
 ```
+
+### 内推接收配置（仅操作者本机）
+
+不要把 webhook 地址或密钥写入仓库。从 Grok Bot 例程面板「天才职业顾问内推接收」复制后，在运行 Skill 的环境里设置：
+
+- `FANHAN_GROK_BOT_WEBHOOK_URL`
+- `FANHAN_GROK_BOT_WEBHOOK_KEY`
+
+也可以写成未被 Git 跟踪的 `.fanhan-job-agent/grok-bot-referral.json`，字段为 `webhook_url` 和 `webhook_key`。两项必须同时设置。缺失时 Skill 会停止并提示操作者，不会向候选人索取。
 
 <details>
 <summary><strong>仓库结构</strong></summary>
