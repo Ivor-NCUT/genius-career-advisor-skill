@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>天才职业顾问 — 改完还像你，才敢投</title>
+  <meta name="description" content="天才职业顾问是面向 AI 行业求职的 skill。它会按你要投的岗位改简历，标出改了什么、哪些还没核实，避免把你的经历写成另一件事。" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="nav-bar" id="nav-bar">
+      <div class="wrap nav">
+        <a class="brand" href="#top" aria-label="genius-career-advisor-skill">
+          <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path fill="#fffdf8" d="M9 10.5h9.5a3.5 3.5 0 0 1 0 7H13v4.2H9V10.5zm4 3.2h4.2a1.3 1.3 0 1 0 0-2.6H13v2.6z"/><path fill="#7eb6ff" d="M20.2 22.2 24 14.8l.9.5-3.8 7.4z"/></svg></span>
+          <span class="brand-name">genius-career-advisor-skill</span>
+        </a>
+        <nav class="nav-links" aria-label="主导航">
+          <a href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener">Connect</a>
+          <a href="#">Events</a>
+          <a href="#">Calendar</a>
+        </nav>
+        <button type="button" class="nav-cta" data-copy>Copy</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" id="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-desktop">
+          <div class="hero-head">
+            <p class="kicker">我可以更好地帮你找到 AI 行业的工作，尝试一下</p>
+            <h1 class="hero-title" id="hero-title">
+              <span class="ln"><span>改完还像你，</span></span>
+              <span class="ln"><span>才敢投。</span></span>
+            </h1>
+            <p class="hero-def">天才职业顾问是面向 AI 行业求职的 skill。它会按你要投的岗位改简历，标出改了什么、哪些还没核实，避免把你的经历写成另一件事。</p>
+          </div>
+
+          <div class="stage hero-stage" data-channel-stage="hero">
+            <span class="stage-halo" aria-hidden="true"></span>
+            <div class="composer-slot" id="hero-slot">
+              <div class="composer" id="composer" data-position="hero" role="group" aria-label="安装指令">
+          <span class="composer-prefix">安装指令</span>
+          <div class="composer-text" title="npx skills add https://github.com/Ivor-NCUT/genius-career-advisor-skill --skill '*' -g -a grok -a cursor -a codex -a claude-code -y">npx skills add https://github.com/Ivor-NCUT/genius-career-advisor-skill --skill '*' -g -a grok -a cursor -a codex -a claude-code -y</div>
+          <button type="button" class="composer-btn" data-copy aria-label="复制安装指令">
+            <span class="composer-btn-label">Copy</span>
+            <span class="composer-ico plus" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+            <span class="composer-ico arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            </span>
+            <span class="composer-ico check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-9"/></svg>
+            </span>
+          </button>
+        </div>
+            </div>
+            <div class="hero-row channels-ready" id="hero-channels">
+              <p class="hero-note">也可以在以下 AI 工具里安装。</p>
+              <ul class="channel-list">
+            <li class="channel " style="--delay:.55s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="ChatGPT">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#10a37f" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142-.0852 4.783-2.7915a.7712.7712 0 0 0 .7806 0l5.8428 3.3685v2.3134a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7663.7663 0 0 0 .3887.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7915a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.9164a.0663.0663 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654 2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                </a>
+                <span class="channel-name">ChatGPT</span>
+              </span>
+            </li>
+            <li class="channel " style="--delay:.62s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Claude">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#d97757" d="M12.8 2.1c-.3-.8-1.3-.8-1.6 0L9.3 7.2 4.3 6.3c-.8-.2-1.4.7-.9 1.4l3.8 4-3.8 4c-.5.7.1 1.6.9 1.4l5-1 1.9 5.1c.3.8 1.3.8 1.6 0l1.9-5.1 5 1c.8.2 1.4-.7.9-1.4l-3.8-4 3.8-4c.5-.7-.1-1.6-.9-1.4l-5 .9-1.9-5.1Z"/></svg>
+                </a>
+                <span class="channel-name">Claude</span>
+              </span>
+            </li>
+            <li class="channel " style="--delay:.69s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Grok Bot">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M12 2.2 14.2 8l5.8.3-4.5 3.8 1.5 5.7L12 15.2 6.99 17.8l1.5-5.7L4 8.3 9.8 8 12 2.2Zm0 6.1-1 2.6-2.7.15 2.1 1.75-.7 2.6L12 13.7l2.1 1.7-.7-2.6 2.1-1.75-2.7-.15-1-2.6Z"/></svg>
+                </a>
+                <span class="channel-name">Grok Bot</span>
+              </span>
+            </li>
+            <li class="channel " style="--delay:.76s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Today AI">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="4.2" fill="#006ee6"/><path fill="#006ee6" d="M11.2 3.2h1.6v3.1h-1.6zM6.1 5.7l1.13-1.13 2.2 2.2-1.13 1.13zM16.57 4.57 17.7 5.7l-2.2 2.2-1.13-1.13zM3.5 12.2v-1.6h3.1v1.6zm14 0v-1.6h3.1v1.6z"/><path fill="none" stroke="#006ee6" stroke-width="1.7" stroke-linecap="round" d="M5 19h14"/></svg>
+                </a>
+                <span class="channel-name">Today AI</span>
+              </span>
+            </li>
+            <li class="channel " style="--delay:.83s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Muse">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#7c5cbf" d="M12 3c.4 2.8 1.6 5 4.2 6.2C13.6 10.4 12.4 12.6 12 15.4 11.6 12.6 10.4 10.4 7.8 9.2 10.4 8 11.6 5.8 12 3Z"/><circle cx="12" cy="16.8" r="3.2" fill="#7c5cbf"/></svg>
+                </a>
+                <span class="channel-name">Muse</span>
+              </span>
+            </li>
+            <li class="channel " style="--delay:.90s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="豆包工作">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="13" rx="7.2" ry="8" fill="#2d6cdf"/><ellipse cx="12" cy="8.2" rx="4.4" ry="3.2" fill="#5b8ef0"/><circle cx="9.6" cy="12.4" r="1.05" fill="#fff"/><circle cx="14.4" cy="12.4" r="1.05" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" d="M9.8 15.2c.7.9 3.7.9 4.4 0"/></svg>
+                </a>
+                <span class="channel-name">豆包工作</span>
+              </span>
+            </li>
+            <li class="channel " style="--delay:.97s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Work Buddy">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="2.4" fill="#172335"/><circle cx="15.2" cy="8.6" r="2.1" fill="#006ee6"/><path fill="#172335" d="M4.8 18.6c.3-3.2 2.4-5 5.2-5s4.9 1.8 5.2 5"/><path fill="#006ee6" d="M12.6 18.6c.2-2.4 1.7-3.8 3.8-3.8 2.1 0 3.6 1.4 3.8 3.8"/></svg>
+                </a>
+                <span class="channel-name">Work Buddy</span>
+              </span>
+            </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec how" id="how" aria-labelledby="how-title">
+        <div class="wrap how-grid">
+          <div class="how-copy">
+            <h2 class="h2" id="how-title"><span class="how-name">genius-career-advisor</span>是如何帮助你找工作的</h2>
+            <ol class="steps">
+              <li class="step" data-active="true">
+                <span class="step-n">01</span>
+                <h3>建立双档案</h3>
+                <p>通过询问你的经历，建立个人和 Agent 的档案</p>
+              </li>
+              <li class="step">
+                <span class="step-n">02</span>
+                <h3>查找 AI 岗位</h3>
+                <p>根据你的档案在多个渠道中找到适合的岗位，包含内推机会</p>
+              </li>
+              <li class="step">
+                <span class="step-n">03</span>
+                <h3>投递简历 准备面试</h3>
+                <p>个性化针对 JD 准备简历投递，以及面试资料</p>
+              </li>
+            </ol>
+          </div>
+          <div class="how-stage" aria-hidden="false">
+            <div class="today-slot" id="today-slot">
+              <div>
+                <b>Today AI 演示待补</b>
+                右侧浮窗内容尚未整理，先空出位置。
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="network" id="network" aria-labelledby="network-title">
+        <div class="wrap">
+          <div class="logos">
+            <p class="logos-lede">天才职业顾问包括这些公司的岗位</p>
+            <div class="logo-viewport">
+              <div class="logo-marquee" tabindex="0" aria-label="岗位相关公司名称滚动展示">
+                <div class="logo-track">
+                  <div class="logo-group"><span class="logo-word">月之暗面</span>
+            <span class="logo-word">智谱</span>
+            <span class="logo-word is-en">MiniMax</span>
+            <span class="logo-word is-en">Vast</span>
+            <span class="logo-word">百川智能</span>
+            <span class="logo-word">商汤</span>
+            <span class="logo-word">华为</span>
+            <span class="logo-word">阿里云</span>
+            <span class="logo-word">腾讯</span>
+            <span class="logo-word">字节</span>
+            <span class="logo-word is-en">Kimi</span>
+            <span class="logo-word is-en">Zhipu</span>
+            <span class="logo-word">具身智能</span>
+            <span class="logo-word">世界模型</span>
+            <span class="logo-word is-en">Person</span>
+            <span class="logo-word is-en">Agent</span></div>
+                  <div class="logo-group" aria-hidden="true"><span class="logo-word">月之暗面</span>
+            <span class="logo-word">智谱</span>
+            <span class="logo-word is-en">MiniMax</span>
+            <span class="logo-word is-en">Vast</span>
+            <span class="logo-word">百川智能</span>
+            <span class="logo-word">商汤</span>
+            <span class="logo-word">华为</span>
+            <span class="logo-word">阿里云</span>
+            <span class="logo-word">腾讯</span>
+            <span class="logo-word">字节</span>
+            <span class="logo-word is-en">Kimi</span>
+            <span class="logo-word is-en">Zhipu</span>
+            <span class="logo-word">具身智能</span>
+            <span class="logo-word">世界模型</span>
+            <span class="logo-word is-en">Person</span>
+            <span class="logo-word is-en">Agent</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="answer wrap">
+          <h2 class="answer-q" id="network-title">我们如何帮你找到适合的工作？</h2>
+          <p class="answer-text"><strong>根据你的经历建立档案</strong>，再在多个渠道里查找适合的 AI 岗位，<strong>包括内推机会</strong>。对着真实岗位改简历，<strong>改了什么都看得到</strong>，没核实的不会编进去，所以你<strong>改完还认得、面试能讲圆</strong>。</p>
+        </div>
+      </section>
+
+      <section class="quotes" id="quotes" aria-labelledby="quotes-title">
+        <div class="wrap">
+          <header class="quotes-head">
+            <h2 class="h2" id="quotes-title">看看大家怎么说</h2>
+            <p class="quotes-note">以下为版式占位，待补真实用户反馈。</p>
+          </header>
+          <div class="quotes-wall">
+              <div class="quotes-col" style="--drift:46s">
+                <div class="quotes-track">
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">阿</div>
+                      <div class="post-id">
+                        <strong>用户 A</strong>
+                        <small>类 985 应届生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位，待补真实用户反馈。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">B</div>
+                      <div class="post-id">
+                        <strong>用户 B</strong>
+                        <small>互联网行业三年从业者</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">C</div>
+                      <div class="post-id">
+                        <strong>用户 C</strong>
+                        <small>两段初创实习</small>
+                      </div>
+                    </header>
+                    <p class="post-body">试用反馈收集中，当前仅为版式占位。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">D</div>
+                      <div class="post-id">
+                        <strong>用户 D</strong>
+                        <small>转行做 AI 应用</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位，待补真实用户反馈。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">E</div>
+                      <div class="post-id">
+                        <strong>用户 E</strong>
+                        <small>在读研究生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  <div class="quotes-dupe" aria-hidden="true">
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">阿</div>
+                      <div class="post-id">
+                        <strong>用户 A</strong>
+                        <small>类 985 应届生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位，待补真实用户反馈。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">B</div>
+                      <div class="post-id">
+                        <strong>用户 B</strong>
+                        <small>互联网行业三年从业者</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">C</div>
+                      <div class="post-id">
+                        <strong>用户 C</strong>
+                        <small>两段初创实习</small>
+                      </div>
+                    </header>
+                    <p class="post-body">试用反馈收集中，当前仅为版式占位。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">D</div>
+                      <div class="post-id">
+                        <strong>用户 D</strong>
+                        <small>转行做 AI 应用</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位，待补真实用户反馈。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">E</div>
+                      <div class="post-id">
+                        <strong>用户 E</strong>
+                        <small>在读研究生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  </div>
+                </div>
+              </div>
+              <div class="quotes-col" style="--drift:50s">
+                <div class="quotes-track">
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">F</div>
+                      <div class="post-id">
+                        <strong>用户 F</strong>
+                        <small>互联网行业三年从业者</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位。卡片版式保留，内容待用户确认后替换。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">G</div>
+                      <div class="post-id">
+                        <strong>用户 G</strong>
+                        <small>类 985 应届生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">试用反馈收集中，当前仅为版式占位。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">H</div>
+                      <div class="post-id">
+                        <strong>用户 H</strong>
+                        <small>两段初创实习</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">I</div>
+                      <div class="post-id">
+                        <strong>用户 I</strong>
+                        <small>应届求职中</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位，待补真实用户反馈。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">J</div>
+                      <div class="post-id">
+                        <strong>用户 J</strong>
+                        <small>转行做 AI 应用</small>
+                      </div>
+                    </header>
+                    <p class="post-body">试用反馈收集中，当前仅为版式占位。</p>
+                  </article>
+                  <div class="quotes-dupe" aria-hidden="true">
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">F</div>
+                      <div class="post-id">
+                        <strong>用户 F</strong>
+                        <small>互联网行业三年从业者</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位。卡片版式保留，内容待用户确认后替换。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">G</div>
+                      <div class="post-id">
+                        <strong>用户 G</strong>
+                        <small>类 985 应届生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">试用反馈收集中，当前仅为版式占位。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">H</div>
+                      <div class="post-id">
+                        <strong>用户 H</strong>
+                        <small>两段初创实习</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">I</div>
+                      <div class="post-id">
+                        <strong>用户 I</strong>
+                        <small>应届求职中</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位，待补真实用户反馈。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">J</div>
+                      <div class="post-id">
+                        <strong>用户 J</strong>
+                        <small>转行做 AI 应用</small>
+                      </div>
+                    </header>
+                    <p class="post-body">试用反馈收集中，当前仅为版式占位。</p>
+                  </article>
+                  </div>
+                </div>
+              </div>
+              <div class="quotes-col" style="--drift:54s">
+                <div class="quotes-track">
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">K</div>
+                      <div class="post-id">
+                        <strong>用户 K</strong>
+                        <small>两段初创实习</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位，待补真实用户反馈。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">L</div>
+                      <div class="post-id">
+                        <strong>用户 L</strong>
+                        <small>类 985 应届生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">M</div>
+                      <div class="post-id">
+                        <strong>用户 M</strong>
+                        <small>互联网行业三年从业者</small>
+                      </div>
+                    </header>
+                    <p class="post-body">试用反馈收集中，当前仅为版式占位。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">N</div>
+                      <div class="post-id">
+                        <strong>用户 N</strong>
+                        <small>在读研究生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位。卡片版式保留，内容待用户确认后替换。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">O</div>
+                      <div class="post-id">
+                        <strong>用户 O</strong>
+                        <small>应届求职中</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  <div class="quotes-dupe" aria-hidden="true">
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">K</div>
+                      <div class="post-id">
+                        <strong>用户 K</strong>
+                        <small>两段初创实习</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位，待补真实用户反馈。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">L</div>
+                      <div class="post-id">
+                        <strong>用户 L</strong>
+                        <small>类 985 应届生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">M</div>
+                      <div class="post-id">
+                        <strong>用户 M</strong>
+                        <small>互联网行业三年从业者</small>
+                      </div>
+                    </header>
+                    <p class="post-body">试用反馈收集中，当前仅为版式占位。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">N</div>
+                      <div class="post-id">
+                        <strong>用户 N</strong>
+                        <small>在读研究生</small>
+                      </div>
+                    </header>
+                    <p class="post-body">证言占位。卡片版式保留，内容待用户确认后替换。</p>
+                  </article>
+                  <article class="post">
+                    <header class="post-hd">
+                      <div class="post-av" aria-hidden="true">O</div>
+                      <div class="post-id">
+                        <strong>用户 O</strong>
+                        <small>应届求职中</small>
+                      </div>
+                    </header>
+                    <p class="post-body">这里将替换为本人确认后的原话。</p>
+                  </article>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile" id="profile" aria-labelledby="profile-title">
+        <div class="profile-layout">
+          <div class="profile-copy">
+            <h2 class="h2" id="profile-title">让你的 Agent 更了解你</h2>
+            <p class="profile-intro">Agent 在帮你找工作的过程中越来越了解你，个人信息被沉淀在档案里，有了更多上下文背景。</p>
+          </div>
+          <ol class="profile-steps">
+            <li>
+              <span class="p-num">01</span>
+              <div>
+                <h3>询问你的经历，建立个人档案和 Agent 档案</h3>
+              </div>
+            </li>
+            <li>
+              <span class="p-num">02</span>
+              <div>
+                <h3>你确认内容。没有你点头，不会写进档案。</h3>
+              </div>
+            </li>
+            <li>
+              <span class="p-num">03</span>
+              <div>
+                <h3>之后每次找岗位、改简历，都用这份越来越完整的上下文。</h3>
+              </div>
+            </li>
+          </ol>
+          <div class="profile-preview">
+            <div class="seg">
+              <div class="seg-track" role="tablist" aria-label="档案类型">
+                <button type="button" class="seg-btn" role="tab" id="tab-personal" aria-selected="true" aria-pressed="true" aria-controls="dossier-panel">个人档案</button>
+                <button type="button" class="seg-btn" role="tab" id="tab-agent" aria-selected="false" aria-pressed="false" aria-controls="dossier-panel">Agent 档案</button>
+              </div>
+            </div>
+            <article class="dossier" id="dossier-panel">
+              <header class="dossier-hd">
+                <span id="dossier-title">个人档案 · 示例</span>
+                <span class="example">Example</span>
+              </header>
+              <div class="dossier-row">
+                <span>对象</span>
+                <span class="dossier-pill" id="dossier-who">求职者本人 <span>示例</span></span>
+              </div>
+              <div class="dossier-body" id="dossier-body">
+                <dl>
+                  <div><dt>称呼</dt><dd>示例：小陈</dd></div>
+                  <div><dt>经历摘要</dt><dd>两段实习，做过产品调研与协助落地。具体项目和职责以本人确认后的表述为准。</dd></div>
+                  <div><dt>求职方向</dt><dd>面向 AI 行业岗位，按即将投出的 JD 准备材料。</dd></div>
+                  <div><dt>使用约定</dt><dd>没有本人点头，<mark>不会写进档案</mark>，也不会拿去投递。</dd></div>
+                </dl>
+              </div>
+              <footer class="dossier-ft">
+                <span>示例预览，非真实人物档案</span>
+                <span id="dossier-foot">由对话逐步沉淀</span>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec apply" id="apply" aria-labelledby="apply-title">
+        <div class="wrap">
+          <div class="apply-head">
+            <h2 class="h2" id="apply-title">建完档后开始投递<br />与做面试准备</h2>
+          </div>
+          <div class="apply-grid">
+            <div class="apply-col">
+              <h3>帮你自动投递</h3>
+              <p class="body">选定岗位后，按你确认过的简历去填和提交，不会在你没同意时投出。</p>
+              <div class="empty-stage">待补截图</div>
+            </div>
+            <div class="apply-col">
+              <h3>帮你做面试准备</h3>
+              <p class="body">根据这个岗位和你的真实经历，整理可能被问到的点和讲法。</p>
+              <div class="empty-stage">待补截图</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec final" id="install" aria-labelledby="final-title">
+        <div class="wrap">
+          <div class="final-head">
+            <h2 class="h2" id="final-title">开始安装。</h2>
+            <p class="lede">复制下面的指令，交给你的 Agent 就能安装并开始使用。</p>
+          </div>
+          <div class="stage final-stage" data-channel-stage="final">
+            <span class="stage-halo" aria-hidden="true"></span>
+            <div class="final-anchor composer-slot" id="final-slot"></div>
+            <div class="final-arc channels-ready" id="final-arc" aria-label="也可以在以下 AI 工具里安装">
+              <svg class="arc-line" viewBox="0 0 640 148" preserveAspectRatio="none" aria-hidden="true">
+                <path id="arc-path" d="M40 40 C 140 130, 500 130, 600 40"></path>
+              </svg>
+              <ul class="channel-list" id="final-channels" style="display:contents">
+          <li class="channel " style="--delay:.55s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="ChatGPT">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#10a37f" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142-.0852 4.783-2.7915a.7712.7712 0 0 0 .7806 0l5.8428 3.3685v2.3134a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7663.7663 0 0 0 .3887.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7915a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.9164a.0663.0663 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654 2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                </a>
+                <span class="channel-name">ChatGPT</span>
+              </span>
+            </li>
+          <li class="channel " style="--delay:.62s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Claude">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#d97757" d="M12.8 2.1c-.3-.8-1.3-.8-1.6 0L9.3 7.2 4.3 6.3c-.8-.2-1.4.7-.9 1.4l3.8 4-3.8 4c-.5.7.1 1.6.9 1.4l5-1 1.9 5.1c.3.8 1.3.8 1.6 0l1.9-5.1 5 1c.8.2 1.4-.7.9-1.4l-3.8-4 3.8-4c.5-.7-.1-1.6-.9-1.4l-5 .9-1.9-5.1Z"/></svg>
+                </a>
+                <span class="channel-name">Claude</span>
+              </span>
+            </li>
+          <li class="channel " style="--delay:.69s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Grok Bot">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M12 2.2 14.2 8l5.8.3-4.5 3.8 1.5 5.7L12 15.2 6.99 17.8l1.5-5.7L4 8.3 9.8 8 12 2.2Zm0 6.1-1 2.6-2.7.15 2.1 1.75-.7 2.6L12 13.7l2.1 1.7-.7-2.6 2.1-1.75-2.7-.15-1-2.6Z"/></svg>
+                </a>
+                <span class="channel-name">Grok Bot</span>
+              </span>
+            </li>
+          <li class="channel " style="--delay:.76s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Today AI">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="4.2" fill="#006ee6"/><path fill="#006ee6" d="M11.2 3.2h1.6v3.1h-1.6zM6.1 5.7l1.13-1.13 2.2 2.2-1.13 1.13zM16.57 4.57 17.7 5.7l-2.2 2.2-1.13-1.13zM3.5 12.2v-1.6h3.1v1.6zm14 0v-1.6h3.1v1.6z"/><path fill="none" stroke="#006ee6" stroke-width="1.7" stroke-linecap="round" d="M5 19h14"/></svg>
+                </a>
+                <span class="channel-name">Today AI</span>
+              </span>
+            </li>
+          <li class="channel " style="--delay:.83s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Muse">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#7c5cbf" d="M12 3c.4 2.8 1.6 5 4.2 6.2C13.6 10.4 12.4 12.6 12 15.4 11.6 12.6 10.4 10.4 7.8 9.2 10.4 8 11.6 5.8 12 3Z"/><circle cx="12" cy="16.8" r="3.2" fill="#7c5cbf"/></svg>
+                </a>
+                <span class="channel-name">Muse</span>
+              </span>
+            </li>
+          <li class="channel " style="--delay:.90s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="豆包工作">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="13" rx="7.2" ry="8" fill="#2d6cdf"/><ellipse cx="12" cy="8.2" rx="4.4" ry="3.2" fill="#5b8ef0"/><circle cx="9.6" cy="12.4" r="1.05" fill="#fff"/><circle cx="14.4" cy="12.4" r="1.05" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" d="M9.8 15.2c.7.9 3.7.9 4.4 0"/></svg>
+                </a>
+                <span class="channel-name">豆包工作</span>
+              </span>
+            </li>
+          <li class="channel " style="--delay:.97s">
+              <span class="channel-in">
+                <a class="tile" href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener" aria-label="Work Buddy">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="2.4" fill="#172335"/><circle cx="15.2" cy="8.6" r="2.1" fill="#006ee6"/><path fill="#172335" d="M4.8 18.6c.3-3.2 2.4-5 5.2-5s4.9 1.8 5.2 5"/><path fill="#006ee6" d="M12.6 18.6c.2-2.4 1.7-3.8 3.8-3.8 2.1 0 3.6 1.4 3.8 3.8"/></svg>
+                </a>
+                <span class="channel-name">Work Buddy</span>
+              </span>
+            </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot-wrap" id="footer">
+      <div class="foot">
+        <div>
+          <div class="foot-brand">
+            <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="currentColor"/><path fill="#fffdf8" d="M9 10.5h9.5a3.5 3.5 0 0 1 0 7H13v4.2H9V10.5zm4 3.2h4.2a1.3 1.3 0 1 0 0-2.6H13v2.6z"/><path fill="#7eb6ff" d="M20.2 22.2 24 14.8l.9.5-3.8 7.4z"/></svg></span>
+            <span>genius-career-advisor</span>
+          </div>
+          <p class="foot-tag">智能找工 skill</p>
+        </div>
+        <div class="foot-col">
+          <h3>仓库</h3>
+          <a href="https://github.com/Ivor-NCUT/genius-career-advisor-skill" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="foot-col">
+          <h3>关注</h3>
+          <a href="#">小红书</a>
+          <a href="#">微信</a>
+        </div>
+        <div class="foot-col">
+          <h3>联系</h3>
+          <a href="mailto:hiring@aimanziyi.vip">hiring@aimanziyi.vip</a>
+        </div>
+        <div class="foot-legal">
+          <span>© 2026 天才职业顾问</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
