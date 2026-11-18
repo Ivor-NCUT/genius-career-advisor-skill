@@ -2,13 +2,12 @@
   const CMD = "npx skills add https://github.com/Ivor-NCUT/genius-career-advisor-skill --skill '*' -g -a grok -a cursor -a codex -a claude-code -y";
 
   /* ---------- Copy ---------- */
-  const copied = new Set();
-  async function copyCommand(btn) {
+  async function writeClipboard(text) {
     try {
-      await navigator.clipboard.writeText(CMD);
+      await navigator.clipboard.writeText(text);
     } catch {
       const ta = document.createElement("textarea");
-      ta.value = CMD;
+      ta.value = text;
       ta.setAttribute("readonly", "");
       ta.style.position = "fixed";
       ta.style.left = "-9999px";
@@ -17,14 +16,17 @@
       document.execCommand("copy");
       ta.remove();
     }
+  }
+  async function copyCommand(btn) {
+    await writeClipboard(CMD);
     const targets = [btn, ...document.querySelectorAll("[data-copy]")].filter(Boolean);
     targets.forEach((el) => {
       el.classList.add("is-copied");
       if (el.matches(".composer-btn")) {
         const label = el.querySelector(".composer-btn-label");
-        if (label) label.textContent = "已复制";
+        if (label) label.textContent = "copied";
       } else if (el.matches(".nav-cta")) {
-        el.textContent = "已复制";
+        el.textContent = "copied";
       }
     });
     clearTimeout(copyCommand._t);
@@ -46,6 +48,33 @@
       copyCommand(el);
     });
   });
+  document.querySelectorAll("[data-copy-wechat]").forEach((el) => {
+    el.addEventListener("click", async () => {
+      await writeClipboard("FH01xy");
+      const prev = el.textContent;
+      el.textContent = "copied";
+      clearTimeout(el._t);
+      el._t = setTimeout(() => { el.textContent = prev; }, 1800);
+    });
+  });
+
+  /* ---------- Install command typewriter ---------- */
+  const DISPLAY_CMD = "npx skills add Ivor-NCUT/genius-career-advisor-skill\n--skill '*' -g ...";
+  const typedEl = document.querySelector(".composer-typed");
+  if (typedEl) {
+    const text = DISPLAY_CMD.replace("\\n", "\n");
+    let i = 0;
+    const tick = () => {
+      if (i <= text.length) {
+        typedEl.textContent = text.slice(0, i);
+        i += 1;
+        const ch = text[i - 2];
+        const delay = ch === "\n" ? 280 : ch === " " ? 36 : 28;
+        setTimeout(tick, delay);
+      }
+    };
+    setTimeout(tick, 400);
+  }
 
   /* ---------- Sticky header ---------- */
   const nav = document.getElementById("nav-bar");
