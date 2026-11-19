@@ -1,6 +1,6 @@
 # 外部招聘网站可行性探测
 
-本文件对应 GitHub Issue #25，只回答首个版本应先验证哪一个外部投递站点。探测日期为 2026-08-17；未使用真实候选人材料，未登录、未上传、未提交，也未尝试绕过验证码。2026-09-28 起提交模式以 `apply-external-jobs/references/v1-contract.md` 的 V2 契约为准。
+本文件对应 GitHub Issue #25，只回答首个版本应先验证哪一个外部投递站点。探测日期为 2026-08-17；未使用真实候选人材料，未登录、未上传、未提交，也未尝试绕过验证码。2026-09-28 起提交模式以 `genius-career-advisor/references/v1-contract.md` 的 V2 契约为准。
 
 ## 结论
 
@@ -54,7 +54,7 @@ V1 因此直接读取公开接口；接口失败时把 Watcha 标记为 `unavail
 
 ## 统一读取结论（2026-08-18）
 
-`fanhan-job-agent/internal/external-jobs/scripts/external_jobs.py` 已成为三个外部来源的统一入口：
+当前统一入口是 `genius-career-advisor/scripts/external_jobs.py`（原记录中的 `fanhan-job-agent/internal/external-jobs/scripts/external_jobs.py` 已并入该文件）：
 
 - Bonjour：公开职位页数据，在线验收读到 163 个岗位；查询“AI 产品经理”命中 8 个。
 - Watcha：公开 feed，在线验收读到 47 个岗位；同一查询命中 5 个。

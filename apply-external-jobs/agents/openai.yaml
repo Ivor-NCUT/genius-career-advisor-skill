@@ -1,4 +1,0 @@
-interface:
-  display_name: "外部招聘平台投递"
-  short_description: "筛选渠道、选岗、定制简历并用 EgoLite 投递"
-  default_prompt: "使用 $fanhan-job-agent 根据我的真实材料搜索外部岗位；我选岗并确认岗位专属简历后，用 EgoLite 完成申请。"
