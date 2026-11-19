@@ -9,7 +9,7 @@ description: 整理候选人的真实求职材料，建立可长期复用的职�
 
 文件开头的 `name` 只给安装器当作包标识和目录名。对用户不要把它说成另一个产品，也不要把它说成另一种调用。
 
-如果对话里出现以前安装时留下的旧调用，仍在本技能里继续，不要把它说成另一个产品，也不要让用户再安装别的技能。JobRadar 只是外部岗位发现源，不维护另一套选岗、隐私确认、提交或日志。建立和更新长期职业档案时读取 [职业档案规则](references/career-assets.md)。
+如果对话里出现以前安装时留下的旧调用，仍在本技能里继续，不要把它说成另一个产品，也不要让用户再安装别的技能。建立和更新长期职业档案时读取 [职业档案规则](references/career-assets.md)。
 
 ## 读取时机
 
@@ -67,20 +67,20 @@ python3 <skill-root>/scripts/workspace.py resolve
 默认只搜索候选人确认过的外部来源。不要读取团体岗位或泛函开放岗位，也不要在结果里留一个空的泛函来源。
 
 0. 搜索前读取 `用户求职记忆.md` 和 `Agent平台执行记忆.md`。前者用于缩小岗位和渠道范围，后者用于避开已知失败路径。用户记忆不能覆盖 `profile.json` 的硬限制。Agent 记忆不能作为候选人事实。
-1. 运行 `python3 <skill-root>/scripts/source_catalog.py --query '<目标岗位 地点 办公方式>' --limit 5`。用来源快照选出 3–5 个来源。默认排除“会员主导”来源，不能为了凑数把低质量来源推荐给用户。来源快照不在运行时访问私有飞书表格。
-2. 浏览外部网站前，先用短表展示来源名称、类型、访问门槛、推荐原因和风险，并询问用户是否按这组来源开始搜索。用户可以增删来源。没有明确同意前不得依次打开网站。用户要求“全部搜索”时先说明 Token 和耗时会增加，再按其确认范围执行。
-3. 用户确认后，用 `scripts/application_log.py duplicate` 检查 `<workspace>/external-applications.jsonl`。命中成功记录时跳过，除非用户明确要求重投。Bonjour、Watcha 和 JobRadar 如在确认清单内，运行 `external_jobs.py` 并只采用已确认来源的结果。其他来源只打开已确认的页面，不扩张到整张清单。岗位发现不得依赖浏览器反复重试。单一来源失败不得阻塞其他来源。JobRadar 未获得合作 API 前必须如实标记免费预览或会员限制，不得绕过。不得调用系统默认浏览器。
-4. 用户明确说“只看某个网站”时才直接缩小来源。某个来源需要登录、会员或暂不可用时，继续搜索其他已确认来源。
-5. 汇总前为每个来源标记真实状态：`已搜索`、`无结果`、`需要登录`、`需要会员`、`暂不可用` 或 `未搜索`。没有实际尝试的来源不得伪装成无结果。
+1. 运行 `python3 <skill-root>/scripts/source_catalog.py --query '<目标岗位 地点 办公方式>' --limit 5`。用来源快照选出 3–5 个来源。只把脚本返回的 `recommended_sources` 展示给用户。`access` 为「会员主导」的来源不推荐、不展示，也不能当成用户可以勾选的选项。不能为了凑数把低质量来源推荐给用户。来源快照不在运行时访问私有飞书表格。
+2. 浏览外部网站前，先用短表展示来源名称、类型、访问门槛、推荐原因和风险，并询问用户是否按这组来源开始搜索。用户可以在这组来源里增删。会员主导来源不加入短表或确认清单；与来源快照里这类记录同名或同网址的，即使用户点名也不加入。不要向用户说明会员或绕过，继续使用已经能搜索的来源。没有明确同意前不得依次打开网站。用户要求“全部搜索”时先说明 Token 和耗时会增加，再按其确认范围执行，范围里仍然不包括会员主导来源。
+3. 用户确认后，用 `scripts/application_log.py duplicate` 检查 `<workspace>/external-applications.jsonl`。命中成功记录时跳过，除非用户明确要求重投。Bonjour 或 Watcha 如在确认清单内，运行 `external_jobs.py` 并只采用已确认来源的结果。脚本的用户可见结果只有这两个来源。其他来源只打开已确认的页面，不扩张到整张清单。岗位发现不得依赖浏览器反复重试。单一来源失败不得阻塞其他来源。不得调用系统默认浏览器。
+4. 用户明确说“只看某个网站”时才直接缩小来源。点名的网站若是会员主导来源，不搜索、不展示。某个已确认来源需要登录或暂不可用时，继续搜索其他已确认来源。
+5. 汇总前为每个来源标记真实状态：`已搜索`、`无结果`、`需要登录`、`暂不可用` 或 `未搜索`。没有实际尝试的来源不得伪装成无结果。会员主导来源不出现在来源状态里。
 6. 使用同一份职业档案统一评估全部岗位，按适配度和用户限制排序。同一公司、职位和链接指向同一岗位时去重，同时保留可用的来源链接。首轮只做快速初筛：先检查资格、语言、地点和工作方式等硬条件，再给出“优先看／可以看／暂不建议”及证据，不生成没有校准依据的数字分数。
 7. 首轮结果先给出来源状态摘要，再在同一张候选清单中展示来源、公司、职位、地点、链接、匹配点、缺口和风险。当前打开的网页、历史标签页和 Agent 自己打开的页面都不能代表用户选择。
 8. 平台发生真实失败、恢复或行为变化后，把日期、平台、操作、现象、原因、解决办法、验证结果和复用条件追加到 `Agent平台执行记忆.md`。原因或办法尚未确认时必须标记“未确认／未验证”。只记录平台技术事实，不记录候选人资料和登录凭据。
 
 外部来源读取规则：
 
-1. Bonjour 从公开职位页随页面返回的岗位数据读取。脚本没有识别到岗位时标记 `暂不可用`，不得写成 `无结果`。
-2. Watcha 从查岗页自己使用的公开接口读取。`/study/jobs` 的初始标题或营销文案不能作为“没有岗位”的证据。
-3. JobRadar 默认返回 `membership_required`。未获得合作 API 前不得直接读取其后台数据库。
+1. 能自动做结构化读取、并且可以展示给用户的，只有 Bonjour 的公开职位页和 Watcha 的公开接口。
+2. Bonjour 从公开职位页随页面返回的岗位数据读取。脚本没有识别到岗位时标记 `暂不可用`，不得写成 `无结果`。
+3. Watcha 从查岗页自己使用的公开接口读取。`/study/jobs` 的初始标题或营销文案不能作为“没有岗位”的证据。
 4. 右侧栏浏览器只在用户选中岗位后用于查看详情、登录和申请。
 
 ## 可选：团体岗位与泛函开放岗位
@@ -131,7 +131,7 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 
 ## 外部申请
 
-外部探测结论见 `../docs/external-site-feasibility-issue-08.md`：Bonjour 是首个直接投递候选，Watcha 为第二顺位，JobRadar 只作岗位发现源。在出现明确成功证据前，不得把 EgoLite 外部申请描述成已经稳定或对所有招聘网站可用。
+外部探测结论见 `../docs/external-site-feasibility-issue-08.md`：Bonjour 是首个直接投递候选，Watcha 为第二顺位。在出现明确成功证据前，不得把 EgoLite 外部申请描述成已经稳定或对所有招聘网站可用。
 
 1. 只能在基础职业档案可匹配、用户选岗并完成上一节之后进入申请。不得上传原始简历或仅转换格式的 PDF。
 2. 用户明确选择单个岗位后，说明目标网站、会填写的数据类别和提交模式，再运行 `confirmation_gate.py select`，写入 `<workspace>/selected-external-job.json`。默认 `--submission-mode auto`。用户明确说“我自己提交”时使用 `manual`。记录缺失或与当前岗位不一致时，禁止发送个人数据、上传材料或准备提交。
@@ -149,7 +149,7 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 - 只投用户明确选中的岗位。搜索结果、推荐结果和打开的页面都不构成投递授权。
 - 不启动独立 Chrome 或 Playwright。申请页只使用当前 `$ego-browser` TaskSpace/Page API。
 - 不因用户曾说“都投”或“继续”而跳过当前岗位确认。
-- 只有 Bonjour、Watcha 和 JobRadar 提供结构化读取。来源快照中的其他网站只做经过确认的定向探索。
+- 只有 Bonjour 的公开职位页和 Watcha 的公开接口提供可展示的结构化读取。来源快照中的其他非会员网站只做经过确认的定向探索。会员主导来源不推荐、不展示、不加入搜索。
 - 不把 WorkBuddy 烟测或已停用的工作台入库做成第二套申请流程。
 
 ## 可选：把材料交给泛函
@@ -193,7 +193,7 @@ python3 <skill-root>/scripts/external_jobs.py --query '<求职关键词>' --limi
 python3 <skill-root>/scripts/watcha_jobs.py --query '<求职关键词>' --limit 20
 python3 <skill-root>/scripts/confirmation_gate.py select --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --submission-mode auto --output <workspace>/selected-external-job.json --confirmed
 python3 <skill-root>/scripts/application_log.py duplicate --job-url '<岗位链接>' --application-url '<申请链接>'
-python3 <skill-root>/scripts/application_log.py append --source '<Bonjour|Watcha|JobRadar>' --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --status user_declined --user-confirmed false --reason user_declined
+python3 <skill-root>/scripts/application_log.py append --source '<Bonjour|Watcha>' --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --status user_declined --user-confirmed false --reason user_declined
 python3 <skill-root>/scripts/source_feedback.py prepare --name '<网站名称>' --url '<网站 URL>' --intro '<一句话简介>'
 python3 <skill-root>/scripts/source_feedback.py send --state <workspace>/source-suggestion.json --confirmed
 ```
@@ -202,7 +202,7 @@ python3 <skill-root>/scripts/source_feedback.py send --state <workspace>/source-
 
 ## 当前交付边界
 
-- 已覆盖：职业档案、外部来源找岗、用户选岗、JD 定制、可编辑简历预览、材料哈希门禁、EgoLite 自动/手动提交模式、投递查重、最小结果记录，以及候选人明确要求后的泛函材料送达。
+- 已覆盖：职业档案、外部来源找岗、用户选岗、JD 定制、可编辑简历预览、材料哈希门禁、EgoLite 自动/手动提交模式、投递查重、最小结果记录，以及候选人明确要求后的泛函材料送达。结构化读取只展示 Bonjour 和 Watcha。会员主导来源不进入推荐或搜索结果。
 - 团体岗位和泛函开放岗位只在候选人明确要求时尝试。公开契约未配置时，脚本返回 `unavailable` / `public_contract_missing`。这时不能编造清单，也不能改用有权限的 Twenty 接口。
 - EgoLite 申请和外部网站适配仍受页面能力影响。没有明确成功证据前，不得宣称已经稳定支持所有招聘网站。
 - 下一步用一名明确同意的真实候选人和一个选中岗位做端到端验收。
