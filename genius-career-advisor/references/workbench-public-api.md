@@ -1,27 +1,22 @@
-# 泛函开放岗位（只读，可选）
+# 团体岗位与泛函开放岗位（只读，可选）
 
-只有候选人明确要求把泛函纳入本轮找岗时才读取本文件。默认找岗不调用这里的接口。
+团体岗位和泛函开放岗位都在当前的 Twenty 招聘工作台上。只有候选人明确要求把它们纳入本轮找岗时才读取本文件，并运行：
 
-运行 `python3 <skill-root>/scripts/fanhan_open_jobs.py`。没有配置公开地址时，它返回 `source_status=unavailable`、`reason=public_contract_missing`，并且不访问网络。把这个结果告诉候选人：现在还不能列出泛函开放岗位。不要改口说成“没有岗位”，也不要自己补一份清单。
+```bash
+python3 <skill-root>/scripts/fanhan_open_jobs.py
+```
 
-## 当前缺口
+默认找岗不运行这条命令，也不读取本文件。
 
-当前招聘系统是 Twenty 工作台，地址为 `https://43.136.55.30`（公开 `client-config` 的 `appVersion` 为 Twenty `2.55.0`）。2026-11-19 复核：
+## 不要查询完整 Twenty
 
-- `GET /api/public/jobs` 在浏览器请求下返回 Twenty 前端 HTML，不是岗位 JSON。带 `Accept: application/json` 时返回 404。
-- `GET /rest/jobs` 返回 403，`Missing authentication token`。
-- `POST /graphql` 未认证时返回 `Authentication required`。
-- 公开站点 `https://fanhan-hire.vip/` 返回 503。
+不要登录 Twenty，也不要查询完整的 Twenty API。完整接口会碰到候选人、内部备注、招聘评语、流程状态和其他不属于岗位说明的数据。不要从本技能使用有权限的工作台 token。
 
-因此还没有一条不携带密钥就能读取当前开放岗位的契约。不要把工作台 API key、Bearer token 或服务端密钥写进仓库、技能或对话。
+## 唯一允许的列出方式
 
-旧地址 `https://fanhan-workbench.zeabur.app/api/public/jobs` 仍会返回一份过期 JSON。脚本拒绝这个主机。不要把它的公司或职位说成当前开放岗位。
+列出团体岗位的唯一方式，是已经为 `FANHAN_PUBLIC_JOBS_URL` 准备好的、不含密钥、只含岗位说明的 HTTPS JSON。操作者只在本机设置这个环境变量，不要把地址写进仓库。脚本不发送 `Authorization`，地址里也不带账号、查询参数或密钥。
 
-## 准备好的公开读取形状
-
-将来的公开接口必须是不带账号、查询参数和密钥的 HTTPS JSON。操作者只在本机设置 `FANHAN_PUBLIC_JOBS_URL`，不要把地址写进仓库。脚本不发送 `Authorization`。
-
-响应使用下面的形状。未知字段留空，不推断：
+每条岗位只使用下面这些字段，不要多读其他字段。未知字段留空，不推断：
 
 ```json
 {
@@ -41,17 +36,12 @@
 }
 ```
 
-脚本只采用同时有公司和职位的记录。公司或职位中出现已停止招聘的 Eazo 时，该条被去掉，并且不会出现在输出里。HTML、非 JSON 或 HTTP 错误都记为 `unavailable`，不能当成空清单以外的成功。
+脚本只采用同时有公司和职位的记录。响应不是这份 JSON，或请求失败时，记为 `unavailable`。不要把这种情况说成已经搜过而且没有岗位，也不要据此编一份清单。不要把已经停止招聘的公司说成当前开放岗位。
 
 岗位 ID 只用于展示和匹配。候选人要求把材料交给泛函时，没有岗位 ID 也不阻止发送。没有这个要求时，不要因为读到了岗位就进入内推。
 
-## 已停用
+## 契约没配好时
 
-下面的入库和状态契约已经停用。不要调用，不要轮询，也不要把它们的返回值说成内推成功：
+没有配置 `FANHAN_PUBLIC_JOBS_URL` 时，脚本不访问网络，并返回 `source_status=unavailable`、`reason=public_contract_missing`。告诉候选人现在还不能列出团体岗位。不要改口说成「没有岗位」，不要编一份清单，也不要用有权限的工作台 token 补查。
 
-- `POST /api/public/candidate-files`
-- `POST /api/public/candidate-applications`
-- `GET /api/public/candidate-applications/<申请 ID>`
-- 申请处理状态、匹配分，以及招聘话题群通知卡片
-
-`scripts/workbench_client.py` 只会拒绝执行。候选人明确要求把材料交给泛函时，改用 `scripts/grok_bot_referral.py` 的 `preview`、`record-consent` 和 `submit`。
+列出岗位以外的事不要从本文件延伸。不要调用 `scripts/workbench_client.py`。候选人明确要求把材料交给泛函时，改用 `scripts/grok_bot_referral.py`。

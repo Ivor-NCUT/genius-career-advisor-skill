@@ -4,7 +4,7 @@
 
 命令里的 `<workspace>` 是 `scripts/workspace.py resolve` 返回的目录。
 
-候选人要求查看泛函开放岗位时，才走只读的 `GET /api/public/jobs`，见 [泛函开放岗位](workbench-public-api.md)。岗位 ID 不是内推必填项。
+候选人要求查看团体岗位或泛函开放岗位时，才按 [团体岗位与泛函开放岗位](workbench-public-api.md) 读取本机 `FANHAN_PUBLIC_JOBS_URL` 上那份不含密钥、只含岗位说明的 JSON。不要登录 Twenty，也不要查询完整 Twenty API。岗位 ID 不是内推必填项。
 
 ## 命令
 
