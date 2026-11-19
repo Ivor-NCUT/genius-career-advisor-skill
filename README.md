@@ -1,6 +1,6 @@
 <div align="center">
 
-# 天才职业顾问 @ 泛函
+# 天才职业顾问
 
 ### 让你的 Agent 真正了解你，再帮你找工作
 
@@ -42,7 +42,7 @@
 
 ### 02　再帮你选
 
-根据求职方向推荐 3–5 个合适渠道，再统一整理泛函与确认过的外部岗位。
+根据求职方向推荐 3–5 个合适的外部渠道，你确认后再搜索。泛函开放岗位只有在你明确要求时才会加入。
 
 </td>
 <td width="33%" valign="top">
@@ -73,9 +73,9 @@ Agent 先读材料，再围绕最有潜力的一段经历逐步追问。每次�
 
 Skill 内置经过整理的岗位来源快照，会根据方向、城市和办公方式推荐 3–5 个渠道。你确认后才开始访问，不会一次打开几十个网站浪费 Token。
 
-### 4. 统一搜索和判断岗位
+### 4. 搜索和判断岗位
 
-同一轮整理泛函与已确认外部来源，展示来源状态、匹配点、缺口和风险。泛函岗位不会被静默置顶，重复岗位会被合并。
+搜索你确认过的外部来源，展示来源状态、匹配点、缺口和风险。重复岗位会被合并。泛函开放岗位不是默认来源；只有你明确要求时才并入同一张清单，并且不会被静默置顶。
 
 ### 5. 生成岗位专用简历
 
@@ -93,17 +93,17 @@ Agent 用 EgoLite 读取完整申请表、填写并回读字段。你选岗并�
 
 ### 安装
 
-只需安装本仓库一次。安装器会同时安装四个配套 Skill；普通用户日常只需要调用「天才职业顾问 @ 泛函」主入口。
+只需安装这一个技能。
 
 ```bash
 npx skills add https://github.com/Ivor-NCUT/genius-career-advisor-skill \
-  --skill '*' -g -a codex -y
+  --skill genius-career-advisor -g -a codex -y
 ```
 
 也可以直接告诉你的 Agent：
 
 ```text
-请把这个 GitHub 仓库中的全部 Skill 安装到当前 Agent：
+请把这个 GitHub 仓库中的天才职业顾问安装到当前 Agent，只安装 genius-career-advisor 这一个 Skill：
 https://github.com/Ivor-NCUT/genius-career-advisor-skill
 ```
 
@@ -115,10 +115,7 @@ git clone https://github.com/Ivor-NCUT/genius-career-advisor-skill.git
 
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 
-cp -R genius-career-advisor-skill/fanhan-job-agent \
-  genius-career-advisor-skill/career-assets \
-  genius-career-advisor-skill/apply-external-jobs \
-  genius-career-advisor-skill/apply-jobradar \
+cp -R genius-career-advisor-skill/genius-career-advisor \
   "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
@@ -129,10 +126,10 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 上传简历，然后只需要说：
 
 ```text
-使用 $fanhan-job-agent 帮我找适合的工作，这是我的简历。
+使用 $genius-career-advisor 帮我找适合的工作，这是我的简历。
 ```
 
-剩下的建档、咨询、来源推荐和岗位整理，由 Skill 自己推进。普通用户不需要记一段很长的测试 Prompt。
+`$fanhan-job-agent`、`$职业资产`、`$career-assets`、`$apply-external-jobs` 和 `$apply-jobradar` 仍会进入同一个技能。剩下的建档、咨询、来源推荐和岗位整理，由它自己推进。
 
 ---
 
@@ -169,9 +166,11 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 ### 先找岗，暂时不投递
 
 ```text
-请先建立我的职业档案，再同时搜索泛函和适合我的外部招聘渠道。
-先展示来源状态和岗位结果，暂时不要投递。
+请先建立我的职业档案，再从适合我的外部招聘渠道里推荐 3–5 个来源。
+我确认后再搜索。先展示来源状态和岗位结果，暂时不要投递。
 ```
+
+想把泛函开放岗位也放进同一轮时，直接说「也搜索泛函」。这不是默认步骤。
 
 ### 针对一个岗位完善简历
 
@@ -203,7 +202,7 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 | PDF / DOCX 材料读取与职业档案 | 已支持 |
 | 首次五维职业咨询与长期本地记忆 | 已支持 |
 | 从 63 个岗位来源中推荐 3–5 个渠道 | 已支持；来源覆盖招聘官网、招聘社区和聚合平台等类型 |
-| 多来源岗位发现与统一整理 | 已支持；岗位数量与访问门槛随来源实时变化 |
+| 多来源岗位发现与统一整理 | 已支持；默认只搜索你确认过的外部来源，泛函开放岗位需另行要求 |
 | 新增招聘来源 | 用户确认后的定向探索，不承诺所有网站均可稳定读取 |
 | 快速初筛与选岗后深度评估 | 已支持；硬条件、事实证据、未知项分开呈现，不使用无依据的数字分数 |
 | 公司事实核验 | 已支持；关键结论保留来源和核验日期 |
@@ -212,8 +211,8 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 | EgoLite 外部申请表填写 | 已支持选岗后的填写、字段回读与真人接管流程，效果受网站能力影响 |
 | 申请结果记录与复盘 | 已支持；面试、拒绝、Offer、撤回和有限次数跟进保存在本地 |
 | 最终提交 | 用户选岗并确认岗位专属简历后默认自动提交；可明确切换为本人点击 |
-| 泛函材料送达 | 仅在候选人明确授权后，把材料交给泛函招聘团队并保存在 Twenty 招聘 CRM |
-| WorkBuddy | 已完成安装、触发与材料采集烟测；完整外部申请仍以 Codex 为主 |
+| 泛函材料送达 | 可选项。只有你明确要求并同意授权文案后，才把材料交给泛函招聘团队并保存在 Twenty 招聘 CRM |
+| WorkBuddy | 已完成安装、触发与材料采集烟测；完整外部申请仍走同一套 EgoLite 流程 |
 
 > 这不是一个“自动海投 63 个网站”的工具。它提供的是可检查、可暂停、可由用户接管的求职工作流。
 
@@ -230,7 +229,7 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 - 岗位、JD、简历、字段或最终动作变化后，原投递授权立即失效。
 - 验证码、风控和结果不明确时不会绕过、重试或猜测成功。
 
-详细规则见 [隐私与本地存储](fanhan-job-agent/references/privacy-and-storage.md)。
+详细规则见 [隐私与本地存储](genius-career-advisor/references/privacy-and-storage.md)。
 
 ---
 
@@ -240,9 +239,9 @@ cp -R genius-career-advisor-skill/fanhan-job-agent \
 
 ---
 
-## Skill 之外，泛函还能继续帮你
+## 可选：把职业档案交给泛函
 
-天才职业顾问可以独立、免费地运行在你自己的 Agent 中。是否把职业档案交给泛函，是另一个需要单独确认的选择。
+天才职业顾问可以独立运行在你自己的 Agent 中。默认流程到选岗、定制简历和你确认后的申请为止。是否把职业档案交给泛函，是另一个需要单独确认的选择，不会在投递结束后自动开始。
 
 <table>
 <tr>
@@ -310,16 +309,14 @@ FH01xy
 - `FANHAN_GROK_BOT_WEBHOOK_URL`
 - `FANHAN_GROK_BOT_WEBHOOK_KEY`
 
-也可以写成未被 Git 跟踪的 `.fanhan-job-agent/grok-bot-referral.json`，字段为 `webhook_url` 和 `webhook_key`。两项必须同时设置。缺失时 Skill 会停止并提示操作者，不会向候选人索取。
+也可以写成未被 Git 跟踪的 `.genius-career-advisor/grok-bot-referral.json`。已有本地数据仍在 `.fanhan-job-agent/` 时，同名文件放在该目录也有效。字段为 `webhook_url` 和 `webhook_key`。两项必须同时设置。缺失时技能会停止并提示操作者，不会向候选人索取。只有候选人明确要求把材料交给泛函时才会用到这项配置。
 
 <details>
 <summary><strong>仓库结构</strong></summary>
 
-- `fanhan-job-agent`：面向用户的唯一产品入口，技术标识为 `$fanhan-job-agent`。
-- `career-assets`：读取材料、深挖经历并维护长期职业主档，对外显示为「职业资产」。
-- `apply-external-jobs`：来源筛选、结构化岗位发现、选岗门禁与申请辅助，由主入口按流程调用。
-- `apply-jobradar`：旧 Prompt 的兼容入口，不维护独立投递逻辑。
+- `genius-career-advisor`：唯一可安装技能。公开名称是「天才职业顾问」。建档、找岗、定制简历和 EgoLite 申请都在这里。`$fanhan-job-agent`、`$职业资产`、`$career-assets`、`$apply-external-jobs` 和 `$apply-jobradar` 是同一技能内的旧调用名。
 - `docs`：外部网站、第三方项目与工作台接入审计。
+- `third_party`：第三方许可证留档。
 
 </details>
 

@@ -1,4 +1,6 @@
 # Local candidate workspace and referral secrets.
+.genius-career-advisor/
+**/.genius-career-advisor/
 .fanhan-job-agent/
 **/.fanhan-job-agent/
 **/grok-bot-referral.json

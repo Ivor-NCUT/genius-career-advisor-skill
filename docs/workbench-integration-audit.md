@@ -2,11 +2,15 @@
 
 本文件对应 GitHub Issue #11，记录当时接入泛函招聘工作台时核对到的代码事实。
 
+## 2026-11-19 公开路径更正
+
+把材料交给泛函现在是可选步骤。默认流程只建档、搜索候选人确认过的外部来源、选岗、定制简历并在确认后申请。外部申请结束或完成泛函风格的简历定制后，不再自动进入泛函授权。`GET /api/public/jobs` 只在候选人要求查看泛函开放岗位时使用。仓库只保留 `genius-career-advisor` 这一个可安装技能，不另建工作台或 WorkBuddy 申请栈。
+
 ## 2026-11-18 内推路径更正
 
-天才职业顾问 Skill 的内推（「统一进入泛函业务」）不再使用工作台公开入库（`POST /api/public/candidate-files`、`POST /api/public/candidate-applications`），也不再把飞书招聘话题群通知卡片当作成功信号。候选人明确授权后，材料改由本机配置的 Grok Bot webhook 交给泛函招聘团队，并进入 Twenty 招聘 CRM。`GET /api/public/jobs` 若仍被使用，只用于展示和匹配真实开放岗位，岗位 ID 不再是内推必填项。
+天才职业顾问的可选内推不再使用工作台公开入库（`POST /api/public/candidate-files`、`POST /api/public/candidate-applications`），也不再把飞书招聘话题群通知卡片当作成功信号。候选人明确授权后，材料改由本机配置的 Grok Bot webhook 交给泛函招聘团队，并进入 Twenty 招聘 CRM。岗位 ID 不是内推必填项。
 
-下文保留当时的工作台能力审计，不是当前 Skill 内推的实现说明。
+下文保留当时的工作台能力审计，不是当前内推的实现说明。
 
 ## 核验范围
 
