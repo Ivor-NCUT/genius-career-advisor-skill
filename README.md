@@ -97,13 +97,15 @@ Agent 用 EgoLite 读取完整申请表、填写并回读字段。你选岗并�
 
 ```bash
 npx skills add https://github.com/Ivor-NCUT/genius-career-advisor-skill \
-  --skill 天才职业顾问 -g -a codex -y
+  --skill genius-career-advisor -g -a codex -y
 ```
+
+`--skill` 后面的标识只用于安装器选择这一个包。装好之后对用户说 `$天才职业顾问`。
 
 也可以直接告诉你的 Agent：
 
 ```text
-请把这个 GitHub 仓库中的天才职业顾问安装到当前 Agent，只安装这一个技能：
+请安装这个仓库中的天才职业顾问，安装包标识用 genius-career-advisor，只安装这一个技能：
 https://github.com/Ivor-NCUT/genius-career-advisor-skill
 ```
 
@@ -116,7 +118,7 @@ git clone https://github.com/Ivor-NCUT/genius-career-advisor-skill.git
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 
 cp -R genius-career-advisor-skill/genius-career-advisor \
-  "${CODEX_HOME:-$HOME/.codex}/skills/天才职业顾问"
+  "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
 </details>
@@ -314,7 +316,7 @@ FH01xy
 <details>
 <summary><strong>仓库结构</strong></summary>
 
-- 技能目录里只有一份 `SKILL.md`。安装和调用名都是「天才职业顾问」。建档、找岗、定制简历和 EgoLite 申请都在这里。
+- `genius-career-advisor`：唯一的技能目录，也是安装器要求的包标识。里面只有一份 `SKILL.md`。对用户的产品名和调用名是「天才职业顾问」/ `$天才职业顾问`。
 - `docs`：外部网站、第三方项目与工作台接入审计。
 - `third_party`：第三方许可证留档。
 
