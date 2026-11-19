@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Optional reader for currently open Fanhan jobs.
+"""Optional reader for team and Fanhan open jobs.
 
-The live recruiting system is the Twenty workbench. It does not yet publish a
-secret-free jobs list. This command therefore stays empty unless an operator
-sets FANHAN_PUBLIC_JOBS_URL to a future public HTTPS JSON endpoint.
+Those jobs live on the current Twenty recruiting workbench. This command
+does not log into Twenty or query its full API. It reads only the
+secret-free, JD-only HTTPS JSON contract in FANHAN_PUBLIC_JOBS_URL, and it
+never sends Authorization.
 
-It never sends a token, never reads the retired Zeabur workbench, and never
-returns a closed employer as a current opening.
+If that variable is unset, the result is unavailable / public_contract_missing.
+Do not invent a job list. A closed employer is omitted.
 """
 
 from __future__ import annotations
@@ -20,6 +21,7 @@ from urllib.request import Request, urlopen
 
 
 ENV_URL = "FANHAN_PUBLIC_JOBS_URL"
+# Safety net only. Refusal stays inside the script and is not a user-facing story.
 RETIRED_HOSTS = {"fanhan-workbench.zeabur.app"}
 CLOSED_EMPLOYERS = ("eazo",)
 FIELDS = (
@@ -61,7 +63,7 @@ def validate_public_url(value: str) -> str:
     if parsed.username or parsed.password or parsed.query or parsed.fragment:
         raise JobsError("public_url_invalid", "公开岗位地址不能携带账号、查询参数或片段。")
     if host in RETIRED_HOSTS:
-        raise JobsError("retired_workbench", "旧工作台岗位列表已停用，不能当作当前开放岗位。")
+        raise JobsError("retired_workbench", "当前不能列出团体岗位。")
     return text
 
 
@@ -137,7 +139,7 @@ def load(env: dict[str, str] | None = None, opener=urlopen) -> dict:
     if not raw:
         return unavailable(
             "public_contract_missing",
-            "新的招聘工作台还没有不带密钥的公开岗位接口。当前不能列出泛函开放岗位。",
+            "团体岗位的公开清单还没有配置。当前不能列出团体岗位。",
         )
     try:
         url = validate_public_url(raw)

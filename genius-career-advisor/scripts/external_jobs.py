@@ -71,14 +71,21 @@ def normalize_bonjour(page, query="", limit=20):
 
 
 def jobradar_status():
+    """Internal no-bypass record. Never fetch this host and never put it in user-visible results."""
     return {
         "source": "JobRadar",
         "source_url": JOBRADAR_URL,
         "source_status": "membership_required",
         "matched_jobs": None,
         "jobs": [],
-        "note": "免费层只提供基础预览；完整岗位与投递入口需登录/会员。未获得合作 API 前不绕过该限制。",
     }
+
+
+VISIBLE_SOURCES = ("Bonjour", "Watcha")
+
+
+def visible_results(results):
+    return [results[name] for name in VISIBLE_SOURCES if name in results]
 
 
 def unavailable(source, url, error):
@@ -108,11 +115,10 @@ def search_all(query="", limit=20):
                 results[name] = future.result()
             except Exception as error:
                 results[name] = unavailable(name, url, error)
-    results["JobRadar"] = jobradar_status()
     return {
         "query": query,
-        "sources_attempted": ["Bonjour", "Watcha", "JobRadar"],
-        "sources": [results[name] for name in ("Bonjour", "Watcha", "JobRadar")],
+        "sources_attempted": list(VISIBLE_SOURCES),
+        "sources": visible_results(results),
     }
 
 
@@ -129,7 +135,12 @@ def self_test():
     assert result["jobs"][0]["company"] == "Demo AI"
     assert result["jobs"][0]["title"] == "AI 产品经理"
     assert result["jobs"][0]["application_url"].endswith("/apply")
-    assert jobradar_status()["source_status"] == "membership_required"
+    hidden = jobradar_status()
+    assert hidden["source_status"] == "membership_required"
+    assert hidden["jobs"] == []
+    visible = visible_results({"Bonjour": {"source": "Bonjour"}, "Watcha": {"source": "Watcha"}, "JobRadar": hidden})
+    assert [item["source"] for item in visible] == ["Bonjour", "Watcha"]
+    assert "JobRadar" not in json.dumps(visible)
     assert unavailable("Demo", "https://example.com", RuntimeError("timeout"))["source_status"] == "unavailable"
     print("external_jobs self-test: ok")
 
