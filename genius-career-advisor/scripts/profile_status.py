@@ -276,7 +276,7 @@ def main() -> None:
     if args.output:
         output = Path(args.output).expanduser().resolve()
         if workspace.workspace_index(output.parts) is None:
-            raise ValueError("状态文件必须写入 .genius-career-advisor/ 或已有的 .fanhan-job-agent/")
+            raise ValueError("状态文件必须写入本地工作区 .天才职业顾问/")
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(rendered + "\n", encoding="utf-8")
     print(rendered)

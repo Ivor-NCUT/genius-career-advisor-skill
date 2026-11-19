@@ -194,7 +194,7 @@ def accept_exported_pdf(source_path: Path, html_path: Path) -> dict:
     if (not editable.is_file() or editable.suffix.lower() != ".html"
             or editable.parent.name != "outbox"
             or not workspace.is_workspace_name(editable.parent.parent.name)):
-        raise ValueError("缺少 .genius-career-advisor/outbox/ 或已有的 .fanhan-job-agent/outbox/ 下的同名可编辑 HTML")
+        raise ValueError("缺少本地工作区 .天才职业顾问/outbox/ 下的同名可编辑 HTML")
     page = editable.read_text(encoding="utf-8")
     if ('contenteditable="true"' not in page
             or not any(f'data-fanhan-resume-editor="v{version}"' in page for version in (2, 3))
@@ -229,7 +229,7 @@ def render(profile_path: Path, proposal_path: Path, output_path: Path) -> None:
     output = output_path.resolve()
     if (output.suffix.lower() != ".html" or output.parent.name != "outbox"
             or not workspace.is_workspace_name(output.parent.parent.name)):
-        raise ValueError("第一份候选人可见成稿必须是 .genius-career-advisor/outbox/ 或已有的 .fanhan-job-agent/outbox/ 下的新 HTML 文件")
+        raise ValueError("第一份候选人可见成稿必须是本地工作区 .天才职业顾问/outbox/ 下的新 HTML 文件")
     if output == original:
         raise ValueError("成稿不能覆盖原始简历")
     if output.stem != proposal["artifact_stem"]:
@@ -363,13 +363,13 @@ def self_test() -> None:
         except ValueError as error:
             assert "禁止重新生成" in str(error)
 
-        public_html = root / ".genius-career-advisor" / "outbox" / output.name
+        public_html = root / ".天才职业顾问" / "outbox" / output.name
         public_html.parent.mkdir(parents=True)
         public_html.write_text(output.read_text(encoding="utf-8"), encoding="utf-8")
         public_download = root / "Downloads" / "public-export.pdf"
         public_download.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\npublic workspace")
         public_accepted = accept_exported_pdf(public_download, public_html)
-        assert Path(public_accepted["pdf_path"]).parent.parent.name == ".genius-career-advisor"
+        assert Path(public_accepted["pdf_path"]).parent.parent.name == ".天才职业顾问"
         stray = root / "not-a-workspace" / "outbox" / output.name
         stray.parent.mkdir(parents=True)
         stray.write_text(output.read_text(encoding="utf-8"), encoding="utf-8")
@@ -377,7 +377,7 @@ def self_test() -> None:
             accept_exported_pdf(public_download, stray)
             raise AssertionError("工作区以外的 HTML 不得接收")
         except ValueError as error:
-            assert ".genius-career-advisor" in str(error)
+            assert ".天才职业顾问" in str(error)
     print("material_gate self-test: ok")
 
 

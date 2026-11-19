@@ -1,6 +1,6 @@
 # 隐私与本地存储
 
-`<workspace>` 是 `scripts/workspace.py resolve` 返回的目录。新档案使用 `.genius-career-advisor`；已经放在 `.fanhan-job-agent` 里的数据继续留在原目录。
+`<workspace>` 是 `scripts/workspace.py resolve` 返回的目录。新档案使用 `.天才职业顾问`。已经存在的本地档案继续留在原目录，不要另建空目录。
 
 ## 默认规则
 
@@ -9,7 +9,7 @@
 - `<workspace>/用户求职记忆.md` 只保存候选人确认的求职偏好；`<workspace>/Agent平台执行记忆.md` 只保存平台故障、解决办法和复用条件。两者不得混写，也不得放进泛函内推载荷或招聘网站。
 - DOCX 转换得到的参考 PDF 放在 `<workspace>/source/`，不得直接上传。岗位专用材料必须先生成并展示同名可编辑 HTML；页面只在当前浏览器的本地存储中保存各段文字草稿，PDF 转换也完全在本地页面完成。用户检查 HTML、亲自导出并回传后，接收脚本只复制该 PDF 的原始字节到 `<workspace>/outbox/`；不得从磁盘旧 HTML 再生成一份替代文件。
 - 不在终端输出、Git、普通日志或投递记录中保存简历正文、联系方式、Token、Cookie、表单答案、内推 webhook 密钥或本地提交标识。
-- 如果当前目录是 Git 仓库，确认 `<workspace>/` 未被跟踪。仓库已忽略 `.genius-career-advisor/`、`.fanhan-job-agent/` 和 `grok-bot-referral.json`；不要把 webhook 地址或密钥写进被跟踪的文件。
+- 如果当前目录是 Git 仓库，确认 `<workspace>/` 未被跟踪。仓库已忽略本地工作区目录和 `grok-bot-referral.json`；不要把 webhook 地址或密钥写进被跟踪的文件。
 
 ## 三种授权不能混用
 

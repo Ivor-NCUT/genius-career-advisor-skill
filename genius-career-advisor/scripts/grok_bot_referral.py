@@ -45,8 +45,7 @@ MAX_RESUME_TEXT = 100_000
 MISSING_CONFIG = (
     "缺少内推接收配置。请操作者在本机设置环境变量 "
     f"{ENV_URL} 和 {ENV_KEY}，或写入未被 Git 跟踪的 "
-    f"{workspace.PUBLIC_WORKSPACE}/{CONFIG_NAME}"
-    f"（已有数据时也可以放在 {workspace.LEGACY_WORKSPACE}/）。"
+    f"{workspace.PUBLIC_WORKSPACE}/{CONFIG_NAME}。"
     "密钥从 Grok Bot 例程面板「天才职业顾问内推接收」复制，不要向候选人索取，也不要写入仓库。"
 )
 MISSING_PARTIAL = (
@@ -268,7 +267,7 @@ def signature(packet: dict) -> str:
 
 def validate_state_path(path: Path) -> None:
     if workspace.workspace_index(path.resolve().parts) is None:
-        raise ValueError("提交状态必须保存在 .genius-career-advisor/ 或已有的 .fanhan-job-agent/ 中")
+        raise ValueError("提交状态必须保存在本地工作区 .天才职业顾问/ 中")
 
 
 def resume_path(profile: dict, profile_path: Path) -> Path:
@@ -284,7 +283,7 @@ def validate_pdf(path: Path) -> tuple[str, int, bytes]:
     if not path.is_file() or path.suffix.lower() != ".pdf":
         raise ValueError("内推只接受存在的当前岗位专用 PDF")
     if path.parent.name != "outbox" or not workspace.is_workspace_name(path.parent.parent.name):
-        raise ValueError("岗位专用 PDF 必须来自 .genius-career-advisor/outbox/ 或已有的 .fanhan-job-agent/outbox/")
+        raise ValueError("岗位专用 PDF 必须来自本地工作区 .天才职业顾问/outbox/")
     html_path = path.with_suffix(".html")
     if not html_path.is_file():
         raise ValueError("缺少同名可编辑 HTML；禁止跳过 HTML 直接上传 PDF")

@@ -4,7 +4,7 @@ WorkBuddy 当前支持导入本地 Skill 压缩包。参考：[腾讯云 WorkBud
 
 ## 安装
 
-1. 将 `genius-career-advisor/` 目录压缩为 zip，压缩包根目录必须直接包含 `SKILL.md`、`agents/` 和 `references/`。不要把仓库里的其他目录打成额外技能。
+1. 将包含 `SKILL.md`、`agents/` 和 `references/` 的技能目录压缩为 zip，压缩包根目录必须直接包含这三样。不要把仓库里的其他目录打成额外技能。安装后的名称是「天才职业顾问」。
 2. 在 WorkBuddy 左侧进入“专家·技能·连接器”，选择“上传技能”，导入该 zip。
 3. 在“我安装的”确认“天才职业顾问”已启用；如未出现，重启 WorkBuddy 后再查。
 

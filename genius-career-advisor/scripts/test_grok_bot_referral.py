@@ -592,7 +592,7 @@ class ReferralTests(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            profile_path, _, state_path, _ = write_case(root, workspace_name=".genius-career-advisor")
+            profile_path, _, state_path, _ = write_case(root, workspace_name=".天才职业顾问")
             referral.validate_state_path(state_path)
             profile = json.loads(profile_path.read_text(encoding="utf-8"))
             referral.validate_pdf(referral.resume_path(profile, profile_path))
