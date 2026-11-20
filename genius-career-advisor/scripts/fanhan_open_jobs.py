@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Optional reader for currently open Fanhan jobs.
+"""Read currently open Fanhan jobs from the public Twenty catalog.
 
-The live recruiting system is the Twenty workbench. It does not yet publish a
-secret-free jobs list. This command therefore stays empty unless an operator
-sets FANHAN_PUBLIC_JOBS_URL to a future public HTTPS JSON endpoint.
-
-It never sends a token, never reads the retired Zeabur workbench, and never
-returns a closed employer as a current opening.
+The endpoint may return only company_name, job_name, and job_jd. Any other
+field, including candidates, internal notes, and communication records, is
+dropped and never printed. This command never sends a token and never reads
+the retired Zeabur workbench.
 """
 
 from __future__ import annotations
@@ -15,24 +13,14 @@ import argparse
 import json
 import os
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlparse
+from urllib.parse import urlencode, urlparse, urlunparse
 from urllib.request import Request, urlopen
 
 
 ENV_URL = "FANHAN_PUBLIC_JOBS_URL"
 RETIRED_HOSTS = {"fanhan-workbench.zeabur.app"}
 CLOSED_EMPLOYERS = ("eazo",)
-FIELDS = (
-    "id",
-    "company",
-    "title",
-    "summary",
-    "description",
-    "city",
-    "work_type",
-    "work_mode",
-    "url",
-)
+PUBLIC_FIELDS = ("company_name", "job_name", "job_jd")
 
 
 class JobsError(ValueError):
@@ -65,9 +53,7 @@ def validate_public_url(value: str) -> str:
     return text
 
 
-def closed_employer(job: dict) -> bool:
-    company = str(job.get("company") or "")
-    title = str(job.get("title") or "")
+def closed_employer(company: str, title: str) -> bool:
     blob = f"{company}\n{title}".casefold()
     return any(name in blob for name in CLOSED_EMPLOYERS)
 
@@ -75,14 +61,21 @@ def closed_employer(job: dict) -> bool:
 def normalize_job(value: object) -> dict | None:
     if not isinstance(value, dict):
         return None
-    company = str(value.get("company") or "").strip()
-    title = str(value.get("title") or "").strip()
-    if not company or not title or closed_employer(value):
+    company = str(value.get("company_name") or "").strip()
+    title = str(value.get("job_name") or "").strip()
+    description = str(value.get("job_jd") or "").strip()
+    if not company or not title or closed_employer(company, title):
         return None
-    job = {field: str(value.get(field) or "").strip() for field in FIELDS}
-    job["company"] = company
-    job["title"] = title
+    job = {"company_name": company, "job_name": title}
+    if description:
+        job["job_jd"] = description
     return job
+
+
+def with_query(url: str, query: str) -> str:
+    parsed = urlparse(url)
+    text = query.strip()
+    return urlunparse(parsed._replace(query=urlencode({"q": text}) if text else ""))
 
 
 def parse_jobs(payload: object) -> tuple[list[dict], int]:
@@ -97,7 +90,9 @@ def parse_jobs(payload: object) -> tuple[list[dict], int]:
     jobs = []
     omitted = 0
     for item in raw_jobs:
-        if isinstance(item, dict) and closed_employer(item):
+        if isinstance(item, dict) and closed_employer(
+            str(item.get("company_name") or ""), str(item.get("job_name") or ""),
+        ):
             omitted += 1
             continue
         job = normalize_job(item)
@@ -106,8 +101,11 @@ def parse_jobs(payload: object) -> tuple[list[dict], int]:
     return jobs, omitted
 
 
-def fetch(url: str, opener=urlopen, timeout: int = 15) -> dict:
-    request = Request(url, headers={"Accept": "application/json", "User-Agent": "tiancai-career-advisor/1.0"})
+def fetch(url: str, opener=urlopen, timeout: int = 15, query: str = "") -> dict:
+    request = Request(
+        with_query(url, query),
+        headers={"Accept": "application/json", "User-Agent": "tiancai-career-advisor/1.0"},
+    )
     try:
         with opener(request, timeout=timeout) as response:
             content_type = response.headers.get("content-type", "")
@@ -131,7 +129,7 @@ def fetch(url: str, opener=urlopen, timeout: int = 15) -> dict:
     }
 
 
-def load(env: dict[str, str] | None = None, opener=urlopen) -> dict:
+def load(env: dict[str, str] | None = None, opener=urlopen, query: str = "") -> dict:
     source = os.environ if env is None else env
     raw = source.get(ENV_URL, "").strip()
     if not raw:
@@ -141,7 +139,7 @@ def load(env: dict[str, str] | None = None, opener=urlopen) -> dict:
         )
     try:
         url = validate_public_url(raw)
-        return fetch(url, opener=opener)
+        return fetch(url, opener=opener, query=query)
     except JobsError as error:
         return unavailable(error.reason, error.detail)
 
@@ -171,22 +169,41 @@ def self_test() -> None:
         def read(self):
             return json.dumps({
                 "jobs": [
-                    {"id": "keep", "company": "Example", "title": "工程师", "city": "上海"},
-                    {"id": "drop", "company": "Eazo", "title": "产品经理", "city": "北京"},
-                    {"company": "", "title": "无公司"},
-                ]
+                    {
+                        "company_name": "泛函",
+                        "job_name": "Agent工程师",
+                        "job_jd": "负责 Agent 系统",
+                        "candidates": [{"name": "秘密候选人"}],
+                        "internal_note": "内部备注不要出现",
+                        "group_chat": "沟通记录不要出现",
+                    },
+                    {"company_name": "Eazo", "job_name": "产品经理", "job_jd": "已停止"},
+                    {"company": "旧字段", "title": "不能映射", "description": "完整 CRM"},
+                ],
+                "people": [{"name": "另一个候选人"}],
             }).encode()
 
     def opener(request, timeout):
         assert request.get_header("Authorization") is None
-        assert "example.com" in request.full_url
+        assert request.full_url.endswith("?q=Agent%E5%B7%A5%E7%A8%8B%E5%B8%88")
         return Response()
 
-    found = load({ENV_URL: "https://jobs.example.com/open-jobs"}, opener=opener)
+    found = load(
+        {ENV_URL: "https://jobs.example.com/api/public/jobs"},
+        opener=opener,
+        query="Agent工程师",
+    )
+    rendered = json.dumps(found, ensure_ascii=False)
     assert found["source_status"] == "searched"
-    assert [job["company"] for job in found["jobs"]] == ["Example"]
+    assert found["jobs"] == [{
+        "company_name": "泛函",
+        "job_name": "Agent工程师",
+        "job_jd": "负责 Agent 系统",
+    }]
     assert found["omitted_closed_employers"] == 1
-    assert "Eazo" not in json.dumps(found, ensure_ascii=False)
+    for secret in ("秘密候选人", "内部备注不要出现", "沟通记录不要出现", "另一个候选人", "Eazo", "旧字段"):
+        assert secret not in rendered
+    assert set(found["jobs"][0]) <= set(PUBLIC_FIELDS)
 
     class HtmlResponse(Response):
         headers = {"content-type": "text/html"}
@@ -201,12 +218,13 @@ def self_test() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--query", default="", help="岗位搜索词，例如 Agent工程师")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
     if args.self_test:
         self_test()
         return
-    print(json.dumps(load(), ensure_ascii=False, indent=2))
+    print(json.dumps(load(query=args.query), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

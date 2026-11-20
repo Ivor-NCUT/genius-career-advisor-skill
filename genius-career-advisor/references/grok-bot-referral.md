@@ -4,7 +4,7 @@
 
 命令里的 `<workspace>` 是 `scripts/workspace.py resolve` 返回的目录。
 
-候选人要求查看泛函开放岗位时，才走只读的 `GET /api/public/jobs`，见 [泛函开放岗位](workbench-public-api.md)。岗位 ID 不是内推必填项。
+筛选岗位时只读公开岗位接口，见 [泛函开放岗位](workbench-public-api.md)。响应当中只有公司名、职位名和 JD。岗位 ID 不是内推必填项。
 
 ## 命令
 

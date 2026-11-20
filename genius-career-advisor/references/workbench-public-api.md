@@ -2,48 +2,39 @@
 
 只有候选人明确要求把泛函纳入本轮找岗时才读取本文件。默认找岗不调用这里的接口。
 
-运行 `python3 <skill-root>/scripts/fanhan_open_jobs.py`。没有配置公开地址时，它返回 `source_status=unavailable`、`reason=public_contract_missing`，并且不访问网络。把这个结果告诉候选人：现在还不能列出泛函开放岗位。不要改口说成“没有岗位”，也不要自己补一份清单。
+筛选岗位时运行：
 
-## 当前缺口
+```bash
+python3 <skill-root>/scripts/fanhan_open_jobs.py --query '<目标岗位关键词>'
+```
 
-当前招聘系统是 Twenty 工作台，地址为 `https://43.136.55.30`（公开 `client-config` 的 `appVersion` 为 Twenty `2.55.0`）。2026-11-19 复核：
+例如搜索 `Agent工程师`。没有配置公开地址时，它返回 `source_status=unavailable`、`reason=public_contract_missing`，并且不访问网络。把这个结果告诉候选人：现在还不能列出泛函开放岗位。不要改口说成“没有岗位”，也不要自己补一份清单。
 
-- `GET /api/public/jobs` 在浏览器请求下返回 Twenty 前端 HTML，不是岗位 JSON。带 `Accept: application/json` 时返回 404。
-- `GET /rest/jobs` 返回 403，`Missing authentication token`。
-- `POST /graphql` 未认证时返回 `Authentication required`。
-- 公开站点 `https://fanhan-hire.vip/` 返回 503。
+操作者把 Twenty 公开岗位服务的 HTTPS 地址设为 `FANHAN_PUBLIC_JOBS_URL`。地址本身不能带账号、查询参数或密钥。脚本只追加 `q`，并且不发送 `Authorization`。不要把地址、工作台 API key 或服务端密钥写进仓库、技能或对话。
 
-因此还没有一条不携带密钥就能读取当前开放岗位的契约。不要把工作台 API key、Bearer token 或服务端密钥写进仓库、技能或对话。
+## 只返回对外岗位
 
-旧地址 `https://fanhan-workbench.zeabur.app/api/public/jobs` 仍会返回一份过期 JSON。脚本拒绝这个主机。不要把它的公司或职位说成当前开放岗位。
-
-## 准备好的公开读取形状
-
-将来的公开接口必须是不带账号、查询参数和密钥的 HTTPS JSON。操作者只在本机设置 `FANHAN_PUBLIC_JOBS_URL`，不要把地址写进仓库。脚本不发送 `Authorization`。
-
-响应使用下面的形状。未知字段留空，不推断：
+服务端只查询正在招聘的岗位，响应只能是：
 
 ```json
 {
   "jobs": [
     {
-      "id": "稳定 ID",
-      "company": "公司",
-      "title": "职位",
-      "summary": "短摘要",
-      "description": "完整 JD",
-      "city": "城市",
-      "work_type": "全职或实习",
-      "work_mode": "到岗方式，未知则留空",
-      "url": "岗位公开链接"
+      "company_name": "公司名",
+      "job_name": "职位名",
+      "job_jd": "职位 JD"
     }
   ]
 }
 ```
 
-脚本只采用同时有公司和职位的记录。公司或职位中出现已停止招聘的 Eazo 时，该条被去掉，并且不会出现在输出里。HTML、非 JSON 或 HTTP 错误都记为 `unavailable`，不能当成空清单以外的成功。
+`job_jd` 为空时可以省略。脚本丢掉除此之外的所有字段，包括候选人、内部备注、沟通记录、招聘偏好、群聊、来源猎头和检索 JSON，并且不会把这些内容打印出来。不要改用 `/graphql`、`/rest` 或带密钥的工作台接口去补这些字段。
 
-岗位 ID 只用于展示和匹配。候选人要求把材料交给泛函时，没有岗位 ID 也不阻止发送。没有这个要求时，不要因为读到了岗位就进入内推。
+公司名或职位名缺失的记录不采用。公司或职位中出现已停止招聘的 Eazo 时，该条被去掉，并且不会出现在输出里。HTML、非 JSON 或 HTTP 错误都记为 `unavailable`，不能当成空清单以外的成功。
+
+旧地址 `https://fanhan-workbench.zeabur.app/api/public/jobs` 仍会返回一份过期 JSON。脚本拒绝这个主机。不要把它的公司或职位说成当前开放岗位。
+
+没有岗位 ID 也不阻止后续步骤。读到公开岗位不等于候选人同意把材料交给泛函。
 
 ## 已停用
 
