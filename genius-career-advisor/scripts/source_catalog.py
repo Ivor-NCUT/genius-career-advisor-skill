@@ -17,7 +17,10 @@ SKILL_ROOT = DEFAULT_CATALOG.parent.parent
 REPO_ROOT = SKILL_ROOT.parent
 QUALITY_SCORE = {"高": 40, "中高": 30, "中": 20, "波动较大": 0, "待核实": -10}
 ACCESS_SCORE = {"免费公开": 20, "免费注册后使用": 15, "基础免费/高级付费": 5, "会员主导": -100, "无法确认": -20}
-LIVE_JOB_LISTS = ["Bonjour", "Watcha"]
+OFFICIAL_TYPE = "公司招聘官网"
+# 当前快照大约几十家官网，会全部检索。快照增长到一百家以上时，按查询重合只取前 N 家，避免一次搜索被慢站点拖死。
+OFFICIAL_SITE_CAP = 80
+SEARCH_SCOPE = "public_platforms_and_official_career_sites"
 
 
 def load(path: Path) -> dict:
@@ -32,9 +35,15 @@ def tokens(query: str) -> list[str]:
 
 
 def hidden_from_search(record: dict) -> bool:
-    name = str(record.get("name", "")).casefold().replace(" ", "")
+    """Membership-led boards stay out of search even if someone passes --include-paid."""
+    name = str(record.get("name", ""))
+    folded = name.casefold().replace(" ", "")
     url = str(record.get("url", "")).casefold()
-    return "jobradar" in name or "jobradar.cc" in url
+    if "jobradar" in folded or "jobradar" in url:
+        return True
+    if "出海聘" in name or "chuhaipin" in url:
+        return True
+    return False
 
 
 def rank(record: dict, query: str, include_paid: bool) -> tuple[int, list[str]]:
@@ -51,6 +60,59 @@ def rank(record: dict, query: str, include_paid: bool) -> tuple[int, list[str]]:
     if record.get("type") != "公司招聘官网":
         score += 5
     return score, matched
+
+
+def match_score(record: dict, query: str) -> int:
+    access = record.get("access", "无法确认")
+    searchable = " ".join(str(record.get(key, "")) for key in (
+        "name", "intro", "target_audience", "direction",
+    )) + " " + " ".join(record.get("tags") or [])
+    matched = [token for token in tokens(query) if token in searchable.casefold()]
+    score = QUALITY_SCORE.get(record.get("quality"), -10) + ACCESS_SCORE.get(access, -20)
+    return score + 18 * len(matched)
+
+
+def search_plan(payload: dict, query: str = "", include_paid: bool = False, official_cap: int = OFFICIAL_SITE_CAP) -> dict:
+    """Records the default search actually fetches.
+
+    Public platforms and official career sites are both included. The small
+    `shortlist()` sample is not this set. Membership-led sources are omitted.
+    """
+    public = []
+    official = []
+    for record in payload["records"]:
+        if hidden_from_search(record):
+            continue
+        if record.get("access") == "会员主导" and not include_paid:
+            continue
+        if not str(record.get("url") or "").startswith(("http://", "https://")):
+            continue
+        if record.get("type") == OFFICIAL_TYPE:
+            official.append(record)
+        else:
+            public.append(record)
+    official.sort(key=lambda record: (-match_score(record, query), str(record.get("name", ""))))
+    selected = official[: max(0, official_cap)]
+    return {
+        "query": query,
+        "catalog_generated_at": payload.get("generated_at"),
+        "catalog_count": len(payload["records"]),
+        "internal_only": True,
+        "requires_user_confirmation": False,
+        "search_immediately": True,
+        "search_scope": SEARCH_SCOPE,
+        "official_sites_are_searched": True,
+        "official_site_cap": official_cap,
+        "official_sites_total": len(official),
+        "official_sites_selected": len(selected),
+        "public_platforms": public,
+        "official_sites": selected,
+        "also_search": ["Watcha"],
+        "cap_note": (
+            f"公司招聘官网不足 {official_cap} 家时全部检索；"
+            f"超过时按查询与名称、简介、标签的重合取前 {official_cap} 家。"
+        ),
+    }
 
 
 def shortlist(payload: dict, query: str, limit: int = 5, include_paid: bool = False) -> dict:
@@ -80,7 +142,10 @@ def shortlist(payload: dict, query: str, limit: int = 5, include_paid: bool = Fa
         "internal_only": True,
         "requires_user_confirmation": False,
         "search_immediately": True,
-        "live_job_lists": list(LIVE_JOB_LISTS),
+        "search_scope": SEARCH_SCOPE,
+        "official_sites_are_searched": True,
+        "recommended_sources_are_not_the_search_boundary": True,
+        "live_job_lists": ["public_platforms", "official_career_sites", "Watcha"],
         "recommended_sources": selected[:limit],
     }
 
@@ -110,6 +175,11 @@ def assert_default_path_copy() -> None:
     assert "直接搜索" in skill
     assert "requires_user_confirmation" in skill
     assert "false" in skill
+    assert "公司招聘官网" in skill
+    assert "并行" in skill
+    for banned in ("只把 Bonjour 和 Watcha", "只有 Bonjour 和 Watcha", "采用 Bonjour 与 Watcha 的实时岗位"):
+        assert banned not in skill, banned
+    assert "公司官网" in readme or "招聘官网" in readme
     for surface in (readme, prompt, workflow):
         assert "JobRadar" not in surface
 
@@ -119,6 +189,7 @@ def self_test() -> None:
         {"name": "免费 AI 平台", "url": "https://free.example", "type": "招聘平台", "intro": "AI 产品岗位", "access": "免费公开", "quality": "高", "tags": ["AI/大模型", "产品/设计/运营"]},
         {"name": "会员站", "url": "https://paid.example", "type": "岗位聚合站", "intro": "AI 产品岗位", "access": "会员主导", "quality": "高", "tags": ["AI/大模型"]},
         {"name": "JobRadar", "url": "https://jobradar.cc/zh", "type": "岗位聚合站", "intro": "AI 产品岗位", "access": "基础免费/高级付费", "quality": "高", "tags": ["AI/大模型", "远程"]},
+        {"name": "出海聘", "url": "https://www.chuhaipin.cn/", "type": "岗位聚合站", "intro": "AI 产品岗位", "access": "会员主导", "quality": "高", "tags": ["海外/出海"]},
         {"name": "AI 公司", "url": "https://company.example", "type": "公司招聘官网", "intro": "AI 产品团队", "access": "免费公开", "quality": "中高", "tags": ["AI应用/FDE"]},
     ]}
     with tempfile.TemporaryDirectory() as directory:
@@ -129,15 +200,50 @@ def self_test() -> None:
         assert result["requires_user_confirmation"] is False
         assert result["search_immediately"] is True
         assert result["internal_only"] is True
-        assert result["live_job_lists"] == ["Bonjour", "Watcha"]
+        assert result["live_job_lists"] == ["public_platforms", "official_career_sites", "Watcha"]
+        assert result["official_sites_are_searched"] is True
+        assert result["recommended_sources_are_not_the_search_boundary"] is True
         paid = shortlist(load(path), "AI 产品", 5, include_paid=True)
-        assert all(item["name"] != "JobRadar" for item in paid["recommended_sources"])
+        paid_names = [item["name"] for item in paid["recommended_sources"]]
+        assert "JobRadar" not in paid_names
+        assert "出海聘" not in paid_names
+        plan = search_plan(load(path), "AI 产品")
+        assert [item["name"] for item in plan["public_platforms"]] == ["免费 AI 平台"]
+        assert [item["name"] for item in plan["official_sites"]] == ["AI 公司"]
+        assert plan["also_search"] == ["Watcha"]
+        assert plan["requires_user_confirmation"] is False
+    many = {"schema_version": 1, "generated_at": "2026-08-20", "records": [
+        {"name": f"公司{index:03d}", "url": f"https://co{index}.example/jobs", "type": "公司招聘官网", "intro": "通用岗位", "access": "免费公开", "quality": "中", "tags": []}
+        for index in range(90)
+    ] + [
+        {"name": "AI 产品公司", "url": "https://ai-product.example/jobs", "type": "公司招聘官网", "intro": "AI 产品团队", "access": "免费公开", "quality": "中", "tags": ["产品/设计/运营"]},
+        {"name": "JobRadar", "url": "https://jobradar.cc/zh", "type": "岗位聚合站", "intro": "AI 产品", "access": "基础免费/高级付费", "quality": "高", "tags": []},
+    ]}
+    capped = search_plan(many, "AI 产品", official_cap=80)
+    assert capped["official_sites_total"] == 91
+    assert capped["official_sites_selected"] == 80
+    assert capped["official_sites"][0]["name"] == "AI 产品公司"
+    assert all(item["name"] != "JobRadar" for item in capped["public_platforms"])
     bundled = shortlist(load(DEFAULT_CATALOG), "AI 产品 远程", 5)
     names = [item["name"] for item in bundled["recommended_sources"]]
     assert bundled["requires_user_confirmation"] is False
     assert bundled["search_immediately"] is True
     assert "JobRadar" not in names
+    assert all("出海聘" not in item["name"] for item in bundled["recommended_sources"])
     assert all(item.get("access") != "会员主导" for item in bundled["recommended_sources"])
+    bundled_plan = search_plan(load(DEFAULT_CATALOG), "AI 产品 远程")
+    platform_names = [item["name"] for item in bundled_plan["public_platforms"]]
+    assert bundled_plan["requires_user_confirmation"] is False
+    assert bundled_plan["official_sites_are_searched"] is True
+    assert bundled_plan["official_sites_total"] == bundled_plan["official_sites_selected"]
+    assert bundled_plan["official_sites_selected"] > 5
+    assert "JobRadar" not in platform_names
+    assert all("出海聘" not in name for name in platform_names)
+    assert any("找工地图" in name for name in platform_names)
+    assert any("V2EX" in name for name in platform_names)
+    assert any("HiringCafe" in name for name in platform_names)
+    assert all(item.get("access") != "会员主导" for item in bundled_plan["public_platforms"])
+    assert all(item.get("type") == "公司招聘官网" for item in bundled_plan["official_sites"])
     assert_default_path_copy()
     print("source_catalog self-test: ok")
 
