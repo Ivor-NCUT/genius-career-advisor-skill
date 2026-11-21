@@ -66,14 +66,14 @@ python3 <skill-root>/scripts/workspace.py resolve
 
 档案状态变为可匹配后直接搜索，并给出一份短的匹配岗位清单，让用户挑选。不要先推荐招聘渠道，不要展示来源表、来源类型、访问门槛、推荐原因或风险，也不要询问用户是否增删渠道。来源只在内部使用。
 
-不要读取泛函开放岗位，也不要在结果里留一个空的泛函来源。会员主导来源，以及需要会员才能读取岗位的来源（例如 JobRadar），不得出现在给用户的岗位推荐里。
+不要读取泛函开放岗位，也不要在结果里留一个空的泛函来源。会员主导来源，以及需要会员才能读取岗位的来源（例如 JobRadar、出海聘），不得出现在给用户的岗位推荐里。
 
 0. 搜索前读取 `用户求职记忆.md` 和 `Agent平台执行记忆.md`。前者用于缩小岗位范围，后者用于避开已知失败路径。用户记忆不能覆盖 `profile.json` 的硬限制。Agent 记忆不能作为候选人事实。已经记下的渠道偏好只用于内部缩小范围；没有这项记录时直接搜索，不要停下来询问网站。
-1. 在内部运行 `python3 <skill-root>/scripts/source_catalog.py --query '<目标岗位 地点 办公方式>' --limit 5`。脚本只读取随技能打包的来源快照，不访问私有飞书表格。输出是内部搜索范围，不是给用户看的清单。默认排除“会员主导”来源，也排除 JobRadar。`requires_user_confirmation` 必须为 false，`search_immediately` 必须为 true。不得把这份输出展示给用户，也不得据此停下来征求同意。不要传入 `--include-paid`。
-2. 立刻搜索，不要等待渠道确认。先用 `scripts/application_log.py duplicate` 检查 `<workspace>/external-applications.jsonl`。命中成功记录时跳过该岗位，除非用户明确要求重投。然后运行 `external_jobs.py`，采用 Bonjour 与 Watcha 的实时岗位，并立刻整理成给用户的短清单。不要等其他页面都看完再回复。结果里如果出现 JobRadar 或 `membership_required`，丢弃，不要告诉用户。内部短名单只用来避开会员来源；若还要核验其中的公开页面，不得扩张到整张快照，也不得向用户复述短名单。新发现的具体岗位可以补进同一清单。岗位发现不得依赖浏览器反复重试。单一来源失败不得阻塞其他来源。不得调用系统默认浏览器。用户明确要求扩大搜索范围时，直接按该范围继续，仍然不要先展示渠道表。
-3. 用户明确说“只看某个网站”时，才把搜索收窄到该网站。某个来源需要登录、会员或暂不可用时，跳过它并继续其他来源；不要把会员限制或渠道风险说给用户。若因此没有可推荐岗位，只说明这次还没有找到合适职位。
+1. 档案可匹配后立刻运行 `python3 <skill-root>/scripts/external_jobs.py --query '<目标岗位 地点 办公方式>' --limit 20 --profile <workspace>/profile.json`。这一次命令会并行检索随技能打包的来源快照：不需要会员就能看的公开平台，以及类型为公司招聘官网的官方招聘页；Watcha 即使不在快照里也会一起检索。`data/career-read-cache.json` 里 24 小时内已经读到的官网职位直接按这次查询匹配，不必先重新打开这些官网。脚本只读这份快照文件，不访问私有飞书表格。`source_catalog.py` 不是搜索边界。若仍调用它，`requires_user_confirmation` 必须为 false，`search_immediately` 必须为 true，`official_sites_are_searched` 必须为 true。不要传入 `--include-paid`。不得把来源快照、`sources` 数组或来源状态展示给用户，也不得据此停下来征求同意。
+2. 档案就绪后直接使用脚本输出的 `jobs`。脚本先并行读取公开数据，再以最多两路浏览器补读相关官网，默认补读 5 家，可用 `--browser-limit` 调整。来源返回 `browser_dependency_missing` 或 `browser_runtime_missing` 时，按 [官网浏览器读取](references/official-browser-search.md) 准备运行环境。先用 `scripts/application_log.py duplicate` 检查 `<workspace>/external-applications.jsonl`。命中成功记录时跳过该岗位，除非用户明确要求重投。同一家公司、同一个职位、同一条链接只保留一条。清单里同时可以有官网岗位和公开平台岗位。结果里如果出现 JobRadar、出海聘或 `membership_required`，丢弃。单个来源失败不得阻塞其他来源。来源状态在内部记录。用户明确要求缩小到某个网站时，直接按该范围继续。
+3. 用户明确说“只看某个网站”时，才把搜索收窄到该网站。某个来源需要登录、会员或暂不可用时，跳过它并继续其他来源；不要把会员限制或渠道风险说给用户。只有整次搜索没有任何可推荐岗位时，才说明这次还没有从公开页面找到合适职位。
 4. 在内部为每个实际尝试的来源标记真实状态：`已搜索`、`无结果`、`需要登录`、`需要会员`、`暂不可用` 或 `未搜索`。没有实际尝试的来源不得记成无结果。这些状态不展示给用户。
-5. 使用同一份职业档案统一评估全部岗位，按适配度和用户限制排序。同一公司、职位和链接指向同一岗位时去重，同时保留可用的申请链接。首轮只做快速初筛：先检查资格、语言、地点和工作方式等硬条件，再给出“优先看／可以看／暂不建议”及证据，不生成没有校准依据的数字分数。
+5. 脚本已经用同一份职业档案的硬性条件给 `jobs` 排过序，并写了 `screen`（优先看／可以看／暂不建议）、`conflicts` 和 `unknowns`。再按职业档案里的真实证据补上匹配点和缺口。同一公司、职位和链接已经去重。不生成没有校准依据的数字分数，也不要另算一套只覆盖 Bonjour 或 Watcha 的清单。
 6. 直接给出一份短的岗位清单：公司、职位、地点、申请或详情链接、匹配点和缺口。岗位本身可以用一句话注明网站或给出链接。不要先给来源状态摘要，不要单独列表说明渠道类型、访问门槛或风险。当前打开的网页、历史标签页和 Agent 自己打开的页面都不能代表用户选择。请用户从这份清单里选一个岗位。
 7. 平台发生真实失败、恢复或行为变化后，把日期、平台、操作、现象、原因、解决办法、验证结果和复用条件追加到 `Agent平台执行记忆.md`。原因或办法尚未确认时必须标记“未确认／未验证”。只记录平台技术事实，不记录候选人资料和登录凭据。
 
@@ -81,8 +81,10 @@ python3 <skill-root>/scripts/workspace.py resolve
 
 1. Bonjour 从公开职位页随页面返回的岗位数据读取。脚本没有识别到岗位时在内部标记 `暂不可用`，不得写成 `无结果`，也不要为此向用户展示来源状态。
 2. Watcha 从查岗页自己使用的公开接口读取。`/study/jobs` 的初始标题或营销文案不能作为“没有岗位”的证据。
-3. JobRadar 不进入默认搜索结果。未获得合作 API 前不得直接读取其后台数据库。只有用户点名要看它时，才说明当前读不到可推荐的岗位，然后继续 Bonjour 与 Watcha；仍然不要把它放进岗位清单。
-4. 右侧栏浏览器只在用户选中岗位后用于查看详情、登录和申请。
+3. 来源快照里的其他公开平台一并检索。能读到公开列表时使用公开接口或页面上的职位；Remote OK 用公开 API，We Work Remotely 用公开 RSS，V2EX 酷工作用公开话题接口，Hacker News「Who is hiring」用公开评论。登录墙、付费墙、验证码页和没有职位列表的空壳页面直接跳过。求职喵若页面上没有可解析的公开职位，也跳过。
+4. 公司招聘官网按快照中的 URL 检索当前在招职位，而不是只抽查一两页。页面或 URL 上能识别到 Greenhouse、Ashby、Lever，以及 Workable、SmartRecruiters、Recruitee、BambooHR 这类公开职位 JSON 时，优先读这些接口。飞书招聘门户先读取它公开的职位列表接口，北森 zhiye 站点读取公开职位接口。腾讯招聘页读取公开职位接口，美团 LongCat 读取公开职位接口，网易伏羲读取官网页面里的职位列表，电鸭读取公开帖子接口，51mee 读取页面里的职位微数据。普通 HTML 只在页面里确实有职位列表时抽取。空壳、404、登录墙在 HTTP 读不到职位时，公司招聘官网可以再用无头 Chrome 打开公开页面，等列表加载后提取职位名、地点和详情链接，并跟进页面上的「加入我们／招聘」链接，处理分页和相对链接。已经读到的官网把职位和读取时间记在 `data/career-read-cache.json`，24 小时内直接复用，不占用浏览器名额。浏览器名额优先给用户点名的公司，其次给最久没有检查的官网。没轮到浏览器的来源记为尚未验证，不能写成没有公开岗位。不要打开系统默认浏览器，也不要用 EgoLite 找岗。会员平台不走这个回退。不得编造职位。单次最多检索 80 家官网；不足 80 家时全部检索。超过 80 家时按查询与名称、简介、标签的重合取前 80 家。请求超时约 8 秒，并发不超过 8 路。
+5. JobRadar 和出海聘不进入默认搜索。未获得合作 API 前不得读取会员后台。只有用户点名要看它们时，才说明当前读不到可推荐的岗位，然后继续其余公开来源；仍然不要把它们放进岗位清单。
+6. 右侧栏浏览器只在用户选中岗位后用于查看详情、登录和申请。
 
 ## 可选：泛函开放岗位
 
@@ -140,7 +142,7 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 - 只投用户明确选中的岗位。搜索结果、推荐结果和打开的页面都不构成投递授权。
 - 不启动独立 Chrome 或 Playwright。申请页只使用当前 `$ego-browser` TaskSpace/Page API。
 - 不因用户曾说“都投”或“继续”而跳过当前岗位确认。
-- 只有 Bonjour 和 Watcha 提供默认可展示的结构化岗位。JobRadar 保持会员限制，不进入用户看到的岗位清单，也不得绕过。来源快照中的其他网站只在内部短名单内查看，不向用户征询这份名单。
+- 默认可展示的岗位来自同一次并行搜索：公司招聘官网，以及来源快照里不需要会员就能读的公开平台，外加 Watcha。JobRadar、出海聘和其他会员主导来源不进入用户看到的岗位清单，也不得绕过。不要把来源快照本身展示给用户。
 - 不把 WorkBuddy 烟测、已停用的工作台入库或旧工作台文档做成第二套申请流程。
 
 ## 可选：把材料交给泛函
@@ -179,8 +181,7 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 python3 <skill-root>/scripts/workspace.py resolve
 python3 <skill-root>/scripts/local_memory.py --directory <workspace>
 python3 <skill-root>/scripts/profile_status.py <workspace>/profile.json --output <workspace>/profile-status.json
-python3 <skill-root>/scripts/source_catalog.py --query '<目标岗位 地点 办公方式>' --limit 5
-python3 <skill-root>/scripts/external_jobs.py --query '<求职关键词>' --limit 20
+python3 <skill-root>/scripts/external_jobs.py --query '<目标岗位 地点 办公方式>' --limit 20 --profile <workspace>/profile.json
 python3 <skill-root>/scripts/watcha_jobs.py --query '<求职关键词>' --limit 20
 python3 <skill-root>/scripts/confirmation_gate.py select --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --submission-mode auto --output <workspace>/selected-external-job.json --confirmed
 python3 <skill-root>/scripts/application_log.py duplicate --job-url '<岗位链接>' --application-url '<申请链接>'
@@ -189,7 +190,7 @@ python3 <skill-root>/scripts/source_feedback.py prepare --name '<网站名称>' 
 python3 <skill-root>/scripts/source_feedback.py send --state <workspace>/source-suggestion.json --confirmed
 ```
 
-`source_catalog.py` 的输出只给技能内部决定搜索范围。不要把来源清单、类型、访问门槛、推荐原因或风险发给用户。档案可匹配后立刻运行 `external_jobs.py`，只把 Bonjour 和 Watcha 的岗位整理成用户可选的短清单。
+档案可匹配后立刻运行 `external_jobs.py`。它会并行检索公开平台和公司招聘官网，再把命中的职位合成一份短清单。不要把来源清单、类型、访问门槛、推荐原因或风险发给用户。`source_catalog.py` 只在需要核对快照时使用，它的短输出不是搜索边界。
 
 `confirmation_gate.py build` 和 `verify` 必须使用同一组公司、职位、链接、档案、提案、简历、字段和最终按钮参数。简历路径指向 `<workspace>/outbox/` 里用户回传后的岗位专用 PDF。
 

@@ -1,0 +1,1589 @@
+{
+  "query": "",
+  "generated_at": "2026-11-21T11:45:41+00:00",
+  "rows": [
+    {
+      "name": "DeepLang 深言科技",
+      "kind": "official",
+      "catalog_url": "https://www.deeplang.ai/",
+      "entry_url": "https://www.deeplang.ai/",
+      "read_method": "http",
+      "collected_count": 3,
+      "matched_count": 3,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:37+00:00",
+      "examples": [
+        {
+          "title": "AI Agent工程师",
+          "location": "北京",
+          "job_url": "https://deeplang.jobs.feishu.cn/index/position/7615512298363685130/detail"
+        },
+        {
+          "title": "AI产品运营经理",
+          "location": "北京",
+          "job_url": "https://deeplang.jobs.feishu.cn/index/position/7520539841579813163/detail"
+        },
+        {
+          "title": "AI Agent产品经理",
+          "location": "北京",
+          "job_url": "https://deeplang.jobs.feishu.cn/index/position/7475566909334456617/detail"
+        }
+      ]
+    },
+    {
+      "name": "DeepSeek 深度求索",
+      "kind": "official",
+      "catalog_url": "https://talent.deepseek.com/",
+      "entry_url": "https://talent.deepseek.com/",
+      "read_method": "browser",
+      "collected_count": 12,
+      "matched_count": 12,
+      "pagination_complete": false,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:44:53+00:00",
+      "examples": [
+        {
+          "title": "服务端开发工程师",
+          "location": "北京市 杭州市",
+          "job_url": "https://app.mokahr.com/social-recruitment/high-flyer/140576#/job/2eb2e75d-29f3-47b5-bb10-39f12547d398"
+        },
+        {
+          "title": "Agent 弹性计算研发工程师",
+          "location": "北京市 杭州市",
+          "job_url": "https://app.mokahr.com/social-recruitment/high-flyer/140576#/job/bae809fb-1978-4401-b209-34067b26569d"
+        },
+        {
+          "title": "预训练数据工程师",
+          "location": "北京市 杭州市",
+          "job_url": "https://app.mokahr.com/social-recruitment/high-flyer/140576#/job/8a4c2868-599d-40db-be4d-ab58eec5d7e1"
+        }
+      ]
+    },
+    {
+      "name": "HN Jobs 搜索版",
+      "kind": "official",
+      "catalog_url": "https://hnjobs.iabdurrahman.com/",
+      "entry_url": "https://hnjobs.iabdurrahman.com/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:41:49+00:00",
+      "examples": []
+    },
+    {
+      "name": "MiniMax 稀宇科技",
+      "kind": "official",
+      "catalog_url": "https://minimaxi.com/careers",
+      "entry_url": "https://minimaxi.com/careers",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:40+00:00",
+      "examples": [
+        {
+          "title": "数仓实习生",
+          "location": "上海 / 北京",
+          "job_url": "https://vrfi1sk8a0.jobs.feishu.cn/379481/position/7710128331056007478/detail"
+        },
+        {
+          "title": "GPU 集群服务器工程师-2027届",
+          "location": "北京 / 上海",
+          "job_url": "https://vrfi1sk8a0.jobs.feishu.cn/379481/position/7709452370371365183/detail"
+        },
+        {
+          "title": "AI for 逆向实习生",
+          "location": "北京 / 上海",
+          "job_url": "https://vrfi1sk8a0.jobs.feishu.cn/379481/position/7706847270441289993/detail"
+        }
+      ]
+    },
+    {
+      "name": "Momenta 魔门塔",
+      "kind": "official",
+      "catalog_url": "https://www.momenta.cn/join.html",
+      "entry_url": "https://www.momenta.cn/join.html",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:40+00:00",
+      "examples": [
+        {
+          "title": "Data Infra Agent工程师(Mstar)",
+          "location": "北京",
+          "job_url": "https://momenta.jobs.feishu.cn/campus/position/7670832645048125738/detail"
+        },
+        {
+          "title": "数据闭环研发工程师(Mstar)",
+          "location": "北京",
+          "job_url": "https://momenta.jobs.feishu.cn/campus/position/7670832238527023370/detail"
+        },
+        {
+          "title": "训练推理优化工程师(Mstar)",
+          "location": "北京 / 上海 / 苏州",
+          "job_url": "https://momenta.jobs.feishu.cn/campus/position/7660045500175632678/detail"
+        }
+      ]
+    },
+    {
+      "name": "京东 JoyAI",
+      "kind": "official",
+      "catalog_url": "https://zhaopin.jd.com/",
+      "entry_url": "https://zhaopin.jd.com/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:42:34+00:00",
+      "examples": []
+    },
+    {
+      "name": "优必选 UBTECH",
+      "kind": "official",
+      "catalog_url": "https://ubtrobot.zhiye.com/",
+      "entry_url": "https://ubtrobot.zhiye.com/",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:43+00:00",
+      "examples": [
+        {
+          "title": "技术支持工程师(J18707)",
+          "location": "",
+          "job_url": "https://ubtrobot.zhiye.com/social/detail?jobAdId=dade310a-d4b9-4c22-8706-5f43b3cb0b4f"
+        },
+        {
+          "title": "NPI工程师(J18708)",
+          "location": "",
+          "job_url": "https://ubtrobot.zhiye.com/social/detail?jobAdId=97562e38-add7-4caa-9fc9-2b6b89bab517"
+        },
+        {
+          "title": "机械工程师(J18641)",
+          "location": "",
+          "job_url": "https://ubtrobot.zhiye.com/social/detail?jobAdId=520bdbbb-8140-49b3-a82d-c2d5779cbd4a"
+        }
+      ]
+    },
+    {
+      "name": "元境",
+      "kind": "official",
+      "catalog_url": "https://www.yuanjingos.com/careers",
+      "entry_url": "https://www.yuanjingos.com/careers",
+      "read_method": "browser",
+      "collected_count": 7,
+      "matched_count": 7,
+      "pagination_complete": false,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:44:36+00:00",
+      "examples": [
+        {
+          "title": "3D /多模态AIGC架构师/研究员",
+          "location": "北京|社招",
+          "job_url": "https://www.yuanjingos.com/careers/jobs/16"
+        },
+        {
+          "title": "AIGC高级算法工程师（3D/2D方向）",
+          "location": "北京/杭州|社招",
+          "job_url": "https://www.yuanjingos.com/careers/jobs/17"
+        },
+        {
+          "title": "数值策划",
+          "location": "上海|社招",
+          "job_url": "https://www.yuanjingos.com/careers/jobs/15"
+        }
+      ]
+    },
+    {
+      "name": "华为",
+      "kind": "official",
+      "catalog_url": "https://career.huawei.com/reccampportal/portal5/social-recruitment-ai.html",
+      "entry_url": "https://career.huawei.com/reccampportal/portal5/social-recruitment-ai.html",
+      "read_method": "http",
+      "collected_count": 11,
+      "matched_count": 11,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:26+00:00",
+      "examples": [
+        {
+          "title": "算法专家（多模态/大模型/搜广推）",
+          "location": "研发族",
+          "job_url": "https://career.huawei.com/reccampportal/portal5/social-recruitment-detail.html?jobId=28191&dataSource=1"
+        },
+        {
+          "title": "算法专家（多模态/大模型/搜广推）",
+          "location": "研发族",
+          "job_url": "https://career.huawei.com/reccampportal/portal5/social-recruitment-detail.html?jobId=27323&dataSource=1"
+        },
+        {
+          "title": "AI大模型架构师（训练/推理）",
+          "location": "研发族",
+          "job_url": "https://career.huawei.com/reccampportal/portal5/social-recruitment-detail.html?jobId=28183&dataSource=1"
+        }
+      ]
+    },
+    {
+      "name": "字节跳动 Seed",
+      "kind": "official",
+      "catalog_url": "https://seed.bytedance.com/career",
+      "entry_url": "https://seed.bytedance.com/career",
+      "read_method": "http",
+      "collected_count": 8,
+      "matched_count": 8,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:37+00:00",
+      "examples": [
+        {
+          "title": "Research Scientist (Seed Model - LLM)",
+          "location": "San Jose",
+          "job_url": "https://jobs.bytedance.com/en/position/7233349076828490043/detail"
+        },
+        {
+          "title": "Software Engineer (Seed Model - Infrastructures - SRE)",
+          "location": "",
+          "job_url": "https://jobs.bytedance.com/en/position/7696614592324290821/detail"
+        },
+        {
+          "title": "Research Engineer - (Seed Model - Infra - Pretraining Infrastructure)",
+          "location": "San Jose",
+          "job_url": "http://job.toutiao.com/en/position/detail/7699908150601992453"
+        }
+      ]
+    },
+    {
+      "name": "宇树科技 Unitree",
+      "kind": "official",
+      "catalog_url": "https://www.unitree.com/cn/position/",
+      "entry_url": "https://www.unitree.com/cn/position/",
+      "read_method": "http",
+      "collected_count": 25,
+      "matched_count": 25,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:34+00:00",
+      "examples": [
+        {
+          "title": "机器人数据运营工程师",
+          "location": "杭州市",
+          "job_url": "https://www.unitree.com/cn/position/2060189838933491712"
+        },
+        {
+          "title": "· 构建⾃动化的数据闭环系统，确保模型能在现实应⽤中持续迭代提升。",
+          "location": "杭州市",
+          "job_url": "https://www.unitree.com/cn/position/2047604504966201344"
+        },
+        {
+          "title": "数据管线⼯程师",
+          "location": "杭州市",
+          "job_url": "https://www.unitree.com/cn/position/2046858311420084224"
+        }
+      ]
+    },
+    {
+      "name": "小米",
+      "kind": "official",
+      "catalog_url": "https://hr.xiaomi.com/",
+      "entry_url": "https://hr.xiaomi.com/",
+      "read_method": "browser",
+      "collected_count": 10,
+      "matched_count": 10,
+      "pagination_complete": false,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:44:05+00:00",
+      "examples": [
+        {
+          "title": "扫地机项目经理",
+          "location": "北京",
+          "job_url": "https://xiaomi.jobs.f.mioffice.cn/index/position/7706130870567127337/detail"
+        },
+        {
+          "title": "洗衣机产品经理",
+          "location": "武汉",
+          "job_url": "https://xiaomi.jobs.f.mioffice.cn/index/position/7704516062633445682/detail"
+        },
+        {
+          "title": "小米汽车-整车与系统工程-能量管理工程师",
+          "location": "上海",
+          "job_url": "https://xiaomi.jobs.f.mioffice.cn/index/position/7704634244979263771/detail"
+        }
+      ]
+    },
+    {
+      "name": "小马智行 Pony.ai",
+      "kind": "official",
+      "catalog_url": "https://careers.pony.ai/",
+      "entry_url": "https://careers.pony.ai/",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:34+00:00",
+      "examples": [
+        {
+          "title": "软件工程师 - 端到端模型性能优化-北京",
+          "location": "北京",
+          "job_url": "https://ponyai.jobs.feishu.cn/ponyai/position/7710112989102737714/detail"
+        },
+        {
+          "title": "算法工程师 - 端到端模型-北京",
+          "location": "北京",
+          "job_url": "https://ponyai.jobs.feishu.cn/ponyai/position/7710109349965220150/detail"
+        },
+        {
+          "title": "自动驾驶产品经理",
+          "location": "北京 / 广州",
+          "job_url": "https://ponyai.jobs.feishu.cn/ponyai/position/7709862482290952457/detail"
+        }
+      ]
+    },
+    {
+      "name": "帕西尼感知 PaXini",
+      "kind": "official",
+      "catalog_url": "https://paxini.zhiye.com/",
+      "entry_url": "https://paxini.zhiye.com/",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:42+00:00",
+      "examples": [
+        {
+          "title": "Node.js 全栈工程师",
+          "location": "",
+          "job_url": "https://paxini.zhiye.com/social/detail?jobAdId=cc007f9d-57be-44aa-9bb3-c43bbb0b6a8a"
+        },
+        {
+          "title": "研发项目经理",
+          "location": "",
+          "job_url": "https://paxini.zhiye.com/social/detail?jobAdId=93da554c-12ae-4d46-a8f9-3035d005812e"
+        },
+        {
+          "title": "战略规划",
+          "location": "",
+          "job_url": "https://paxini.zhiye.com/social/detail?jobAdId=820942f5-fe2a-4762-8bff-4045ff47e57e"
+        }
+      ]
+    },
+    {
+      "name": "快手",
+      "kind": "official",
+      "catalog_url": "https://zhaopin.kuaishou.cn/",
+      "entry_url": "https://zhaopin.kuaishou.cn/",
+      "read_method": "browser",
+      "collected_count": 12,
+      "matched_count": 12,
+      "pagination_complete": false,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:42:35+00:00",
+      "examples": [
+        {
+          "title": "服务商运营专家-【电商】",
+          "location": "上海",
+          "job_url": "https://zhaopin.kuaishou.cn/#/official/social/job-info/31601"
+        },
+        {
+          "title": "中小商家新商运营负责人-【电商】",
+          "location": "北京",
+          "job_url": "https://zhaopin.kuaishou.cn/#/official/social/job-info/33250"
+        },
+        {
+          "title": "商业化产品运营（引流电商达人）-【电商】",
+          "location": "北京",
+          "job_url": "https://zhaopin.kuaishou.cn/#/official/social/job-info/33409"
+        }
+      ]
+    },
+    {
+      "name": "思必驰 AISpeech",
+      "kind": "official",
+      "catalog_url": "https://aispeech.zhiye.com/",
+      "entry_url": "https://aispeech.zhiye.com/",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:44+00:00",
+      "examples": [
+        {
+          "title": "海外销售-2027届",
+          "location": "",
+          "job_url": "https://aispeech.zhiye.com/social/detail?jobAdId=51ebc43b-e99e-40ab-9f36-91979a06efa3"
+        },
+        {
+          "title": "AI产品运营-2027届",
+          "location": "",
+          "job_url": "https://aispeech.zhiye.com/social/detail?jobAdId=7a6a5328-7fbe-405b-9b62-fd3820b5a427"
+        },
+        {
+          "title": "开源社区运营-2027届",
+          "location": "",
+          "job_url": "https://aispeech.zhiye.com/social/detail?jobAdId=8565645d-1c76-4e9a-a27a-5306734cdf72"
+        }
+      ]
+    },
+    {
+      "name": "摩尔线程",
+      "kind": "official",
+      "catalog_url": "https://mthreads.zhiye.com/social",
+      "entry_url": "https://mthreads.zhiye.com/social",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:42+00:00",
+      "examples": [
+        {
+          "title": "2.5D / 3D 先进互连电性工程师(J10774)",
+          "location": "",
+          "job_url": "https://mthreads.zhiye.com/social/detail?jobAdId=cd0b4fe8-cfcf-45e3-a7ed-3467992970cd"
+        },
+        {
+          "title": "Agent平台研发专家(J10755)",
+          "location": "",
+          "job_url": "https://mthreads.zhiye.com/social/detail?jobAdId=b82d8a33-490b-4a08-8414-600e99c33ded"
+        },
+        {
+          "title": "高级Linux桌面系统开发工程师(J10752)",
+          "location": "",
+          "job_url": "https://mthreads.zhiye.com/social/detail?jobAdId=97119683-fcc7-460d-932b-ee22909c80fd"
+        }
+      ]
+    },
+    {
+      "name": "文远知行 WeRide",
+      "kind": "official",
+      "catalog_url": "https://www.weride.ai/zh/careers",
+      "entry_url": "https://www.weride.ai/zh/careers",
+      "read_method": "http",
+      "collected_count": 12,
+      "matched_count": 12,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:32+00:00",
+      "examples": [
+        {
+          "title": "Forward Deployed Engineer",
+          "location": "One-north / onsite",
+          "job_url": "https://jobs.lever.co/weride/012c818d-4ad8-4096-80b0-386cdf79f8d5"
+        },
+        {
+          "title": "General Software Engineer",
+          "location": "San Jose, CA / onsite",
+          "job_url": "https://jobs.lever.co/weride/2f22df18-e019-450e-bcfa-9b1c7b94334f"
+        },
+        {
+          "title": "Motion Planning Engineer",
+          "location": "San Jose, CA / onsite",
+          "job_url": "https://jobs.lever.co/weride/e151540c-f52c-4797-afef-6235f3ec8edc"
+        }
+      ]
+    },
+    {
+      "name": "普渡科技 Pudu",
+      "kind": "official",
+      "catalog_url": "https://pudutech.zhiye.com/",
+      "entry_url": "https://pudutech.zhiye.com/",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:42+00:00",
+      "examples": [
+        {
+          "title": "多模态深度学习算法实习生",
+          "location": "",
+          "job_url": "https://pudutech.zhiye.com/social/detail?jobAdId=d74d638d-976c-486f-bfe1-b0061dd817cd"
+        },
+        {
+          "title": "企业文化实习生",
+          "location": "",
+          "job_url": "https://pudutech.zhiye.com/social/detail?jobAdId=48e75940-ccc5-4ad5-9408-74d9a6329d08"
+        },
+        {
+          "title": "市场运营实习生",
+          "location": "",
+          "job_url": "https://pudutech.zhiye.com/social/detail?jobAdId=843b290e-357f-4a4a-a4ff-c1c281b1ab98"
+        }
+      ]
+    },
+    {
+      "name": "智元机器人 AgiBot",
+      "kind": "official",
+      "catalog_url": "https://www.agibot.com.cn/join_us",
+      "entry_url": "https://www.agibot.com.cn/join_us",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:36+00:00",
+      "examples": [
+        {
+          "title": "具身大模型数据工程师",
+          "location": "上海 / 北京",
+          "job_url": "https://agirobot.jobs.feishu.cn/index/position/7703926695468157220/detail"
+        },
+        {
+          "title": "售前项目经理",
+          "location": "深圳",
+          "job_url": "https://agirobot.jobs.feishu.cn/index/position/7703852373164968201/detail"
+        },
+        {
+          "title": "可靠性测试工程师-Y",
+          "location": "深圳",
+          "job_url": "https://agirobot.jobs.feishu.cn/index/position/7704998228811483430/detail"
+        }
+      ]
+    },
+    {
+      "name": "曦智科技 Lightelligence",
+      "kind": "official",
+      "catalog_url": "https://xztechai.zhiye.com/",
+      "entry_url": "https://xztechai.zhiye.com/",
+      "read_method": "http",
+      "collected_count": 17,
+      "matched_count": 17,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:42+00:00",
+      "examples": [
+        {
+          "title": "算法应用工程师",
+          "location": "",
+          "job_url": "https://xztechai.zhiye.com/social/detail?jobAdId=8445ac1f-bb75-471d-af8e-e467433883b7"
+        },
+        {
+          "title": "硅光版图工程师",
+          "location": "",
+          "job_url": "https://xztechai.zhiye.com/social/detail?jobAdId=d2cbf5d0-a9e3-4037-978a-97cdbbb1b0c3"
+        },
+        {
+          "title": "硅光测试工程师",
+          "location": "",
+          "job_url": "https://xztechai.zhiye.com/social/detail?jobAdId=8fd97295-3c72-4adc-905d-9bdb676fd08a"
+        }
+      ]
+    },
+    {
+      "name": "月之暗面 Kimi",
+      "kind": "official",
+      "catalog_url": "https://careers.kimi.com/",
+      "entry_url": "https://careers.kimi.com/",
+      "read_method": "browser",
+      "collected_count": 12,
+      "matched_count": 12,
+      "pagination_complete": false,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:44:40+00:00",
+      "examples": [
+        {
+          "title": "大模型架构与系统协同设计研究员／工程师",
+          "location": "",
+          "job_url": "https://app.mokahr.com/apply/moonshot/148506#/job/640e5a5d-3f3a-4e43-aa4f-ceed1879c1ef"
+        },
+        {
+          "title": "Kernel Agent Infra 工程师",
+          "location": "",
+          "job_url": "https://app.mokahr.com/apply/moonshot/148506#/job/84fd2823-6f1d-4bb8-96ab-720692745d34"
+        },
+        {
+          "title": "Agent 研发工程师｜Kimi Build",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/apply/moonshot/148506#/job/a3df31ec-b07d-4f9d-b0b4-af72f7f625c1"
+        }
+      ]
+    },
+    {
+      "name": "梅卡曼德 Mech-Mind",
+      "kind": "official",
+      "catalog_url": "https://mechmind.zhiye.com/",
+      "entry_url": "https://mechmind.zhiye.com/",
+      "read_method": "http",
+      "collected_count": 27,
+      "matched_count": 27,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:44+00:00",
+      "examples": [
+        {
+          "title": "英文内容运营(J10569)",
+          "location": "",
+          "job_url": "https://mechmind.zhiye.com/social/detail?jobAdId=1ecae2f7-827e-49f9-b3a3-8a71878032f6"
+        },
+        {
+          "title": "财务分析经理（港股券商背景）(J10565)",
+          "location": "",
+          "job_url": "https://mechmind.zhiye.com/social/detail?jobAdId=686907c5-a2f1-4b28-a672-8db42633baac"
+        },
+        {
+          "title": "英文内容运营(J10561)",
+          "location": "",
+          "job_url": "https://mechmind.zhiye.com/social/detail?jobAdId=31d5f6ce-8d05-4b96-a5c6-cc8a401aa330"
+        }
+      ]
+    },
+    {
+      "name": "求职喵",
+      "kind": "official",
+      "catalog_url": "https://qiuzhimiao.cn/",
+      "entry_url": "https://qiuzhimiao.cn/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:41:49+00:00",
+      "examples": []
+    },
+    {
+      "name": "清程极智",
+      "kind": "official",
+      "catalog_url": "https://www.qc-ai.cn/",
+      "entry_url": "https://www.qc-ai.cn/",
+      "read_method": "http",
+      "collected_count": 18,
+      "matched_count": 18,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:30+00:00",
+      "examples": [
+        {
+          "title": "HRBP经理",
+          "location": "北京",
+          "job_url": "https://chitu-ai.jobs.feishu.cn/index/position/7708599133334243611/detail"
+        },
+        {
+          "title": "后端开发工程师-golang方向",
+          "location": "北京",
+          "job_url": "https://chitu-ai.jobs.feishu.cn/index/position/7707189710561282342/detail"
+        },
+        {
+          "title": "AI产品内容运营",
+          "location": "北京",
+          "job_url": "https://chitu-ai.jobs.feishu.cn/index/position/7704186829427542326/detail"
+        }
+      ]
+    },
+    {
+      "name": "爱诗科技 PixVerse",
+      "kind": "official",
+      "catalog_url": "https://aisphere.jobs.feishu.cn/join",
+      "entry_url": "https://aisphere.jobs.feishu.cn/join",
+      "read_method": "http",
+      "collected_count": 20,
+      "matched_count": 20,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:25+00:00",
+      "examples": [
+        {
+          "title": "资深安全工程师",
+          "location": "北京",
+          "job_url": "https://aisphere.jobs.feishu.cn/join/position/7684124677173807396/detail"
+        },
+        {
+          "title": "模型压缩工程师（AI Infra）",
+          "location": "北京",
+          "job_url": "https://aisphere.jobs.feishu.cn/join/position/7680107467699439915/detail"
+        },
+        {
+          "title": "AI 解决方案工程师（视频生成与 Agent）",
+          "location": "北京",
+          "job_url": "https://aisphere.jobs.feishu.cn/join/position/7673026438232279306/detail"
+        }
+      ]
+    },
+    {
+      "name": "生数科技 ShengShu",
+      "kind": "official",
+      "catalog_url": "https://www.genspi.com/zh/about/",
+      "entry_url": "https://www.genspi.com/zh/about/",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:31+00:00",
+      "examples": [
+        {
+          "title": "AI平台技术产品经理（产品设计与运营方向）",
+          "location": "北京",
+          "job_url": "https://shengshu.jobs.feishu.cn/index/position/7708641346990524726/detail"
+        },
+        {
+          "title": "数据策略实习生",
+          "location": "北京",
+          "job_url": "https://shengshu.jobs.feishu.cn/index/position/7706493621507950899/detail"
+        },
+        {
+          "title": "泛互联网销售负责人",
+          "location": "北京",
+          "job_url": "https://shengshu.jobs.feishu.cn/index/position/7706431920058485018/detail"
+        }
+      ]
+    },
+    {
+      "name": "百川智能",
+      "kind": "official",
+      "catalog_url": "https://careers.baichuan-inc.com/",
+      "entry_url": "https://careers.baichuan-inc.com/",
+      "read_method": "http",
+      "collected_count": 21,
+      "matched_count": 21,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:25+00:00",
+      "examples": [
+        {
+          "title": "患者服务产品负责人（院外管理方向）",
+          "location": "北京",
+          "job_url": "https://cq6qe6bvfr6.jobs.feishu.cn/baichuanzhaopin/position/7706471316388661523/detail"
+        },
+        {
+          "title": "超级医生App产品负责人(toC)",
+          "location": "北京",
+          "job_url": "https://cq6qe6bvfr6.jobs.feishu.cn/baichuanzhaopin/position/7706460157521545510/detail"
+        },
+        {
+          "title": "医学科研与学术合作负责人",
+          "location": "北京",
+          "job_url": "https://cq6qe6bvfr6.jobs.feishu.cn/baichuanzhaopin/position/7701630680732027146/detail"
+        }
+      ]
+    },
+    {
+      "name": "穹彻智能 Noematrix",
+      "kind": "official",
+      "catalog_url": "https://www.noematrix.ai/join-us",
+      "entry_url": "https://www.noematrix.ai/join-us",
+      "read_method": "http",
+      "collected_count": 26,
+      "matched_count": 26,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:30+00:00",
+      "examples": [
+        {
+          "title": "【27届校招/实习】具身智能机器人工程师",
+          "location": "上海",
+          "job_url": "https://flexivrobotics.jobs.feishu.cn/971932/position/7681184396522817802/detail"
+        },
+        {
+          "title": "【27届校招】视觉与具身智能算法工程师",
+          "location": "上海",
+          "job_url": "https://flexivrobotics.jobs.feishu.cn/971932/position/7678924846425196854/detail"
+        },
+        {
+          "title": "【27届校招】机器人运动算法工程师",
+          "location": "上海",
+          "job_url": "https://flexivrobotics.jobs.feishu.cn/971932/position/7678924677075224842/detail"
+        }
+      ]
+    },
+    {
+      "name": "网易伏羲",
+      "kind": "official",
+      "catalog_url": "https://fuxi.netease.com/laboratory",
+      "entry_url": "https://fuxi.netease.com/laboratory",
+      "read_method": "http",
+      "collected_count": 2,
+      "matched_count": 2,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:31+00:00",
+      "examples": [
+        {
+          "title": "算法测试开发实习生（游戏AI）",
+          "location": "杭州市",
+          "job_url": "https://hr.163.com/job-detail.html?id=64141"
+        },
+        {
+          "title": "算法测试开发工程师（游戏AI）",
+          "location": "杭州市",
+          "job_url": "https://hr.163.com/job-detail.html?id=77556"
+        }
+      ]
+    },
+    {
+      "name": "美团 LongCat",
+      "kind": "official",
+      "catalog_url": "https://zhaopin.meituan.com/longcatprogram",
+      "entry_url": "https://zhaopin.meituan.com/longcatprogram",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:29+00:00",
+      "examples": [
+        {
+          "title": "【LongCat实习】Longcat 大模型研究员-Interpretability",
+          "location": "北京市 / 上海市",
+          "job_url": "https://zhaopin.meituan.com/web/position/detail?jobUnionId=4600025247"
+        },
+        {
+          "title": "【LongCat实习】Longcat 大模型研究员-Agentic Model",
+          "location": "北京市 / 上海市",
+          "job_url": "https://zhaopin.meituan.com/web/position/detail?jobUnionId=4600034270"
+        },
+        {
+          "title": "【LongCat实习】LongCat 大模型研究员-Post-training",
+          "location": "北京市 / 上海市",
+          "job_url": "https://zhaopin.meituan.com/web/position/detail?jobUnionId=4600007562"
+        }
+      ]
+    },
+    {
+      "name": "腾讯",
+      "kind": "official",
+      "catalog_url": "https://hr.tencent.com/zh-cn/",
+      "entry_url": "https://hr.tencent.com/zh-cn/",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:31+00:00",
+      "examples": [
+        {
+          "title": "《三角洲行动》-AI产品运营",
+          "location": "深圳",
+          "job_url": "https://careers.tencent.com/jobdesc.html?postId=2056017578089955328"
+        },
+        {
+          "title": "次世代特效设计师",
+          "location": "深圳",
+          "job_url": "https://careers.tencent.com/jobdesc.html?postId=2033133620071395328"
+        },
+        {
+          "title": "《三角洲行动》-3D角色设计师",
+          "location": "上海",
+          "job_url": "https://careers.tencent.com/jobdesc.html?postId=2091058579741257728"
+        }
+      ]
+    },
+    {
+      "name": "零一万物 01.AI",
+      "kind": "official",
+      "catalog_url": "https://01ai.jobs.feishu.cn/",
+      "entry_url": "https://01ai.jobs.feishu.cn/",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:28+00:00",
+      "examples": [
+        {
+          "title": "IT工程师",
+          "location": "杭州",
+          "job_url": "https://01ai.jobs.feishu.cn/index/position/7710166074952501531/detail"
+        },
+        {
+          "title": "产品经理 - 校园招聘",
+          "location": "北京 / 杭州",
+          "job_url": "https://01ai.jobs.feishu.cn/index/position/7704252431693400362/detail"
+        },
+        {
+          "title": "FDE 前线部署工程师（Forward Deployed Engineer）- 校园招聘",
+          "location": "北京 / 杭州",
+          "job_url": "https://01ai.jobs.feishu.cn/index/position/7704250882510522634/detail"
+        }
+      ]
+    },
+    {
+      "name": "面壁智能 ModelBest",
+      "kind": "official",
+      "catalog_url": "https://modelbest.jobs.feishu.cn/career",
+      "entry_url": "https://modelbest.jobs.feishu.cn/career",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:29+00:00",
+      "examples": [
+        {
+          "title": "法律产品运营（法律 AI 方向）",
+          "location": "北京",
+          "job_url": "https://modelbest.jobs.feishu.cn/career/position/7710151135374231818/detail"
+        },
+        {
+          "title": "法律大客户销售",
+          "location": "北京",
+          "job_url": "https://modelbest.jobs.feishu.cn/career/position/7710140134964922675/detail"
+        },
+        {
+          "title": "智能体平台产品经理",
+          "location": "北京",
+          "job_url": "https://modelbest.jobs.feishu.cn/career/position/7708966914056390955/detail"
+        }
+      ]
+    },
+    {
+      "name": "F6S Jobs",
+      "kind": "official",
+      "catalog_url": "https://www.f6s.com/jobs",
+      "entry_url": "https://www.f6s.com/jobs",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:45:17+00:00",
+      "examples": []
+    },
+    {
+      "name": "Manus",
+      "kind": "official",
+      "catalog_url": "https://manus.im/zh-cn/blog/manus-is-hiring",
+      "entry_url": "https://manus.im/zh-cn/blog/manus-is-hiring",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:44:54+00:00",
+      "examples": []
+    },
+    {
+      "name": "Monica",
+      "kind": "official",
+      "catalog_url": "https://monica.im/",
+      "entry_url": "https://monica.im/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:45:14+00:00",
+      "examples": []
+    },
+    {
+      "name": "万格智元 ONE TOKEN",
+      "kind": "official",
+      "catalog_url": "https://onetokencareers.com/",
+      "entry_url": "https://onetokencareers.com/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:43:34+00:00",
+      "examples": []
+    },
+    {
+      "name": "傅利叶智能",
+      "kind": "official",
+      "catalog_url": "https://www.fftai.cn/career",
+      "entry_url": "https://www.fftai.cn/career",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:42:14+00:00",
+      "examples": []
+    },
+    {
+      "name": "地平线 Horizon Robotics",
+      "kind": "official",
+      "catalog_url": "https://career.horizon.auto/",
+      "entry_url": "https://career.horizon.auto/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "network_error",
+      "checked_at": "2026-11-21T11:42:09+00:00",
+      "examples": []
+    },
+    {
+      "name": "小红书",
+      "kind": "official",
+      "catalog_url": "https://job.xiaohongshu.com/jobs/5/social",
+      "entry_url": "https://job.xiaohongshu.com/jobs/5/social",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:43:52+00:00",
+      "examples": []
+    },
+    {
+      "name": "无问芯穹 Infinigence",
+      "kind": "official",
+      "catalog_url": "https://www.infinigence-ai.com/",
+      "entry_url": "https://www.infinigence-ai.com/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "network_error",
+      "checked_at": "2026-11-21T11:43:49+00:00",
+      "examples": []
+    },
+    {
+      "name": "智平方 AI² Robotics",
+      "kind": "official",
+      "catalog_url": "https://ai2robotics.com/joinus/",
+      "entry_url": "https://ai2robotics.com/joinus/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:44:41+00:00",
+      "examples": []
+    },
+    {
+      "name": "智谱 Zhipu",
+      "kind": "official",
+      "catalog_url": "https://www.zhipuai.cn/zh/joinus",
+      "entry_url": "https://www.zhipuai.cn/zh/joinus",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:44:49+00:00",
+      "examples": []
+    },
+    {
+      "name": "游人于野",
+      "kind": "official",
+      "catalog_url": "https://www.rwnomad.com/",
+      "entry_url": "https://www.rwnomad.com/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:45:26+00:00",
+      "examples": []
+    },
+    {
+      "name": "演语科技 LiblibAI",
+      "kind": "official",
+      "catalog_url": "https://www.liblib.art/us/joinus",
+      "entry_url": "https://www.liblib.art/us/joinus",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:44:11+00:00",
+      "examples": []
+    },
+    {
+      "name": "潞晨科技",
+      "kind": "official",
+      "catalog_url": "https://www.luchentech.com/join",
+      "entry_url": "https://www.luchentech.com/join",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:43:06+00:00",
+      "examples": []
+    },
+    {
+      "name": "百度",
+      "kind": "official",
+      "catalog_url": "https://talent.baidu.com/jobs/list",
+      "entry_url": "https://talent.baidu.com/jobs/list",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:41:53+00:00",
+      "examples": []
+    },
+    {
+      "name": "硅基流动 SiliconFlow",
+      "kind": "official",
+      "catalog_url": "https://www.siliconflow.cn/",
+      "entry_url": "https://www.siliconflow.cn/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:42:20+00:00",
+      "examples": []
+    },
+    {
+      "name": "蚂蚁集团",
+      "kind": "official",
+      "catalog_url": "https://talent.antgroup.com/home",
+      "entry_url": "https://talent.antgroup.com/home",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:43:11+00:00",
+      "examples": []
+    },
+    {
+      "name": "趋境科技 Approaching AI",
+      "kind": "official",
+      "catalog_url": "https://approaching-ai.com/",
+      "entry_url": "https://approaching-ai.com/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:43:33+00:00",
+      "examples": []
+    },
+    {
+      "name": "轻舟智航 QCraft",
+      "kind": "official",
+      "catalog_url": "https://www.qcraft.ai/join-us",
+      "entry_url": "https://www.qcraft.ai/join-us",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:43:11+00:00",
+      "examples": []
+    },
+    {
+      "name": "银河通用 Galbot",
+      "kind": "official",
+      "catalog_url": "https://app.mokahr.com/social-recruitment/yinhetongyong/165929",
+      "entry_url": "https://app.mokahr.com/social-recruitment/yinhetongyong/165929",
+      "read_method": "browser",
+      "collected_count": 6,
+      "matched_count": 6,
+      "pagination_complete": false,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:44:22+00:00",
+      "examples": [
+        {
+          "title": "机器人全栈工程师（初/中/高级）",
+          "location": "广东·深圳市 北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/yinhetongyong/165929#/job/09b3eeeb-cf06-44fd-be2a-0f4640c090a1"
+        }
+      ]
+    },
+    {
+      "name": "阶跃星辰 StepFun",
+      "kind": "official",
+      "catalog_url": "https://www.stepfun.com/",
+      "entry_url": "https://www.stepfun.com/",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:42:22+00:00",
+      "examples": []
+    },
+    {
+      "name": "阿里巴巴",
+      "kind": "official",
+      "catalog_url": "https://home.alibabagroup.com/zh-HK/careers",
+      "entry_url": "https://home.alibabagroup.com/zh-HK/careers",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "parser_gap",
+      "checked_at": "2026-11-21T11:41:50+00:00",
+      "examples": []
+    },
+    {
+      "name": "零次方机器人",
+      "kind": "official",
+      "catalog_url": "https://www.zerith.ai/join",
+      "entry_url": "https://www.zerith.ai/join",
+      "read_method": "browser",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": false,
+      "failure_reason": "network_error",
+      "checked_at": "2026-11-21T11:42:41+00:00",
+      "examples": []
+    },
+    {
+      "name": "51mee 招聘中心",
+      "kind": "platform",
+      "catalog_url": "https://offers.51mee.com/",
+      "entry_url": "https://offers.51mee.com/",
+      "read_method": "http",
+      "collected_count": 20,
+      "matched_count": 20,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:25+00:00",
+      "examples": [
+        {
+          "title": "总体论证, 软件设计, 算法设计, 软件开发",
+          "location": "",
+          "job_url": "https://offers.51mee.com/offer-detail/7R37GRWI.html"
+        },
+        {
+          "title": "服装设计助理, 新媒体运营",
+          "location": "",
+          "job_url": "https://offers.51mee.com/offer-detail/FOVG26MW.html"
+        },
+        {
+          "title": "控制策略工程师 ( 重庆/北京 ), 机械结构工程师（金属材料方向）( 重庆/北京 ), 发电系统工程（后备电源方向)( 重庆/北京 ), 载荷与性能仿真工程师 ( 重庆/北京 ), 发电系统工程（变流器方向）( 重庆/北京 ), 输电系统工程（电缆方向）( 重庆/北京 ), 机械结构工程师（金属材料方向）( 重庆/北京 ), 电力系统工程师 ( 北京 )",
+          "location": "",
+          "job_url": "https://offers.51mee.com/offer-detail/S8KR9CA1.html"
+        }
+      ]
+    },
+    {
+      "name": "AI 公司找工地图",
+      "kind": "platform",
+      "catalog_url": "https://bonjour.bio/jobs-mapping",
+      "entry_url": "https://bonjour.bio/jobs-mapping",
+      "read_method": "http",
+      "collected_count": 4,
+      "matched_count": 4,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:25+00:00",
+      "examples": [
+        {
+          "title": "海外广告投放经理",
+          "location": "",
+          "job_url": "https://bonjour.bio/jobs-mapping/jobs/03923202-637c-420d-9e57-179f1254654e"
+        },
+        {
+          "title": "Agent 软件工程师 （AI 智能体与安全）",
+          "location": "方寸跃迁 - 让前沿 AI 可评估、可防护、可治理",
+          "job_url": "https://bonjour.bio/jobs-mapping/jobs/064577c4-e5c0-4cae-bfb5-9e7d31013ef6"
+        },
+        {
+          "title": "AI 全栈工程师｜Agent 效果与产品落地",
+          "location": "Ambi AI",
+          "job_url": "https://bonjour.bio/jobs-mapping/jobs/0650c54f-b8a3-45c8-97de-e93aaa1e1769"
+        }
+      ]
+    },
+    {
+      "name": "AIJobs.ai China",
+      "kind": "platform",
+      "catalog_url": "https://aijobs.ai/china",
+      "entry_url": "https://aijobs.ai/china",
+      "read_method": "http",
+      "collected_count": 5,
+      "matched_count": 5,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:40+00:00",
+      "examples": [
+        {
+          "title": "Product Manager – AI & Digital Transformation | Banking",
+          "location": "Full Time",
+          "job_url": "https://aijobs.ai/job/product-manager-ai-digital-transformation-banking"
+        },
+        {
+          "title": "AI & ML Engineer | Banking",
+          "location": "Full Time",
+          "job_url": "https://aijobs.ai/job/ai-ml-engineer-banking"
+        },
+        {
+          "title": "AI Engineer | Financial Services",
+          "location": "Full Time",
+          "job_url": "https://aijobs.ai/job/ai-engineer-financial-services"
+        }
+      ]
+    },
+    {
+      "name": "FDE 中国社区机会中心",
+      "kind": "platform",
+      "catalog_url": "https://fdechina.ai/opportunities",
+      "entry_url": "https://fdechina.ai/opportunities",
+      "read_method": "http",
+      "collected_count": 9,
+      "matched_count": 9,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:25+00:00",
+      "examples": [
+        {
+          "title": "Forward Deployed Engineer - Tokyo",
+          "location": "官方招聘",
+          "job_url": "https://fdechina.ai/opportunities/openai-fde-tokyo"
+        },
+        {
+          "title": "OpenAI 正在东京、新加坡、首尔、旧金山、纽约、伦敦等地招聘 FDE 与部署负责人。",
+          "location": "岗位合集",
+          "job_url": "https://fdechina.ai/opportunities/openai-global-fde-roles"
+        },
+        {
+          "title": "面向 2027 届应届生与在校实习生，覆盖基础模型、机器学习系统、Agent、AI 搜索等方向。",
+          "location": "2027 届",
+          "job_url": "https://fdechina.ai/opportunities/bytedance-seed-2027-campus"
+        }
+      ]
+    },
+    {
+      "name": "Hacker News – Who is hiring",
+      "kind": "platform",
+      "catalog_url": "https://news.ycombinator.com/submitted?id=whoishiring",
+      "entry_url": "https://news.ycombinator.com/submitted?id=whoishiring",
+      "read_method": "http",
+      "collected_count": 33,
+      "matched_count": 33,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:41+00:00",
+      "examples": [
+        {
+          "title": "Software Engineer",
+          "location": "Lisbon, Portugal",
+          "job_url": "https://news.ycombinator.com/item?id=50518905"
+        },
+        {
+          "title": "Full Stack Engineer (mostly backend + API)",
+          "location": "Meet In The Bay Area / Work Remotely",
+          "job_url": "https://news.ycombinator.com/item?id=50508598"
+        },
+        {
+          "title": "Software Engineer & Data Analyst",
+          "location": "Full-Time",
+          "job_url": "https://news.ycombinator.com/item?id=50500910"
+        }
+      ]
+    },
+    {
+      "name": "Remote OK",
+      "kind": "platform",
+      "catalog_url": "https://remoteok.com/",
+      "entry_url": "https://remoteok.com/",
+      "read_method": "http",
+      "collected_count": 100,
+      "matched_count": 100,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:41+00:00",
+      "examples": [
+        {
+          "title": "Senior Manager, Product Analytics (Growth)",
+          "location": "Worldwide",
+          "job_url": "https://remoteOK.com/remote-jobs/remote-senior-manager-product-analytics-growth-ifit-1137912"
+        },
+        {
+          "title": "Inside Sales Specialist-Temp",
+          "location": "US Only",
+          "job_url": "https://remoteOK.com/remote-jobs/remote-inside-sales-specialist-temp-natera-1137911"
+        },
+        {
+          "title": "SEA P2P Business Development Specialist",
+          "location": "Asia",
+          "job_url": "https://remoteOK.com/remote-jobs/remote-sea-p2p-business-development-specialist-bybit-1137910"
+        }
+      ]
+    },
+    {
+      "name": "V2EX 酷工作",
+      "kind": "platform",
+      "catalog_url": "https://www.v2ex.com/go/jobs",
+      "entry_url": "https://www.v2ex.com/go/jobs",
+      "read_method": "http",
+      "collected_count": 7,
+      "matched_count": 7,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:42+00:00",
+      "examples": [
+        {
+          "title": "算法/ Java /AI Agent/安全/测试/iOS/数据/数据库， 20-90k",
+          "location": "",
+          "job_url": "https://www.v2ex.com/t/1258789"
+        },
+        {
+          "title": "远程办公（不限工作地点） 前端工程师（Android+Flutter）20-40k 高级后端开发工程师（ Java /Go 双栈）20-40k AI 研发工程师 面议 + 奖金",
+          "location": "",
+          "job_url": "https://www.v2ex.com/t/1258763"
+        },
+        {
+          "title": "26 类岗位，覆盖 AI 工作流、算法、后端、前端、运维与安全",
+          "location": "",
+          "job_url": "https://www.v2ex.com/t/1258720"
+        }
+      ]
+    },
+    {
+      "name": "We Work Remotely",
+      "kind": "platform",
+      "catalog_url": "https://weworkremotely.com/",
+      "entry_url": "https://weworkremotely.com/",
+      "read_method": "http",
+      "collected_count": 98,
+      "matched_count": 97,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:41+00:00",
+      "examples": [
+        {
+          "title": "Senior Director of Product Management (R14361)",
+          "location": "Anywhere in the World",
+          "job_url": "https://weworkremotely.com/remote-jobs/oportun-senior-director-of-product-management-r14361"
+        },
+        {
+          "title": "Software Engineer, Financial Data & Payments",
+          "location": "Anywhere in the World",
+          "job_url": "https://weworkremotely.com/remote-jobs/gusto-inc-software-engineer-financial-data-payments"
+        },
+        {
+          "title": "Head of Channel Sales & Alliances",
+          "location": "Anywhere in the World",
+          "job_url": "https://weworkremotely.com/remote-jobs/salesloft-head-of-channel-sales-alliances"
+        }
+      ]
+    },
+    {
+      "name": "Wellfound",
+      "kind": "platform",
+      "catalog_url": "https://wellfound.com/jobs",
+      "entry_url": "https://wellfound.com/jobs",
+      "read_method": "http",
+      "collected_count": 40,
+      "matched_count": 40,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:41+00:00",
+      "examples": [
+        {
+          "title": "Senior Engineer",
+          "location": "",
+          "job_url": "https://wellfound.com/jobs/4427735-senior-engineer"
+        },
+        {
+          "title": "Software Engineer, Controls (C++)",
+          "location": "",
+          "job_url": "https://wellfound.com/jobs/4481264-software-engineer-controls-c"
+        },
+        {
+          "title": "Senior AI Engineer (Backend & Solution Architecture)",
+          "location": "",
+          "job_url": "https://wellfound.com/jobs/5126517-senior-ai-engineer-backend-solution-architecture"
+        }
+      ]
+    },
+    {
+      "name": "Y Combinator Startup Jobs",
+      "kind": "platform",
+      "catalog_url": "https://www.ycombinator.com/jobs",
+      "entry_url": "https://www.ycombinator.com/jobs",
+      "read_method": "http",
+      "collected_count": 30,
+      "matched_count": 30,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:41+00:00",
+      "examples": [
+        {
+          "title": "Software Engineer (Product)",
+          "location": "",
+          "job_url": "https://www.ycombinator.com/companies/numeral/jobs/xcF2zhm-software-engineer-product"
+        },
+        {
+          "title": "Senior Software Engineer, Full Stack (80% backend)",
+          "location": "",
+          "job_url": "https://www.ycombinator.com/companies/postscript/jobs/ktOBqUe-senior-software-engineer-full-stack-80-backend"
+        },
+        {
+          "title": "Senior Mechanical Design Engineer",
+          "location": "",
+          "job_url": "https://www.ycombinator.com/companies/siphox-health/jobs/5QdtcSb-senior-mechanical-design-engineer"
+        }
+      ]
+    },
+    {
+      "name": "电鸭社区",
+      "kind": "platform",
+      "catalog_url": "https://eleduck.com/",
+      "entry_url": "https://eleduck.com/",
+      "read_method": "http",
+      "collected_count": 25,
+      "matched_count": 24,
+      "pagination_complete": null,
+      "failure_reason": "",
+      "checked_at": "2026-11-21T11:41:41+00:00",
+      "examples": [
+        {
+          "title": "【远程兼职】Claude 账号质保 推广咨询",
+          "location": "",
+          "job_url": "https://eleduck.com/posts/mbfKvg"
+        },
+        {
+          "title": "【远程兼职】IT 远程技术支持（服务器运维 / Microsoft 365 / 网络安全，按项目合作）",
+          "location": "",
+          "job_url": "https://eleduck.com/posts/pqfA2O"
+        },
+        {
+          "title": "【志愿者发布】线上兼职/宠物媒介pr",
+          "location": "",
+          "job_url": "https://eleduck.com/posts/laf59W"
+        }
+      ]
+    },
+    {
+      "name": "HiringCafe",
+      "kind": "platform",
+      "catalog_url": "https://hiringcafe.com/",
+      "entry_url": "https://hiringcafe.com/",
+      "read_method": "http",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": null,
+      "failure_reason": "login_or_restricted",
+      "checked_at": "2026-11-21T11:41:25+00:00",
+      "examples": []
+    },
+    {
+      "name": "JobRadar",
+      "kind": "platform",
+      "catalog_url": "https://jobradar.cc/zh",
+      "entry_url": "https://jobradar.cc/zh",
+      "read_method": "skipped",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": null,
+      "failure_reason": "login_or_restricted",
+      "checked_at": "2026-11-21T11:41:25+00:00",
+      "examples": []
+    },
+    {
+      "name": "出海聘",
+      "kind": "platform",
+      "catalog_url": "https://www.chuhaipin.cn/",
+      "entry_url": "https://www.chuhaipin.cn/",
+      "read_method": "skipped",
+      "collected_count": 0,
+      "matched_count": 0,
+      "pagination_complete": null,
+      "failure_reason": "login_or_restricted",
+      "checked_at": "2026-11-21T11:41:25+00:00",
+      "examples": []
+    }
+  ]
+}
