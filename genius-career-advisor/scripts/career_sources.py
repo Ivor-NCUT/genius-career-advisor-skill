@@ -211,10 +211,12 @@ def _norm_url(value: object) -> str:
     text = str(value or "").strip()
     if not text:
         return ""
-    text = text.split("#", 1)[0]
-    text = re.sub(r"([?&])(utm_[^=&]+|gh_src)=[^&]*", r"\1", text)
-    text = re.sub(r"[?&]$", "", text)
-    return text.rstrip("/").casefold()
+    base, separator, fragment = text.partition("#")
+    base = re.sub(r"([?&])(utm_[^=&]+|gh_src)=[^&]*", r"\1", base)
+    base = re.sub(r"[?&]$", "", base).rstrip("/").casefold()
+    if separator and re.search(r"/job/|jobid|job_id", fragment, re.I):
+        return base + "#" + fragment.casefold()
+    return base
 
 
 def _loads_relaxed(text: str):
@@ -1050,8 +1052,20 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
     return _finish_source(name, url, jobs, query, limit, _page_unreadable(page, jobs))
 
 
-def read_official(record: dict, query: str, limit: int, fetch=fetch_url) -> dict:
-    return read_html_source(record, query, limit, fetch, allow_board_api=True)
+def read_official(record: dict, query: str, limit: int, fetch=fetch_url, use_browser: bool = True) -> dict:
+    result = read_html_source(record, query, limit, fetch, allow_board_api=True)
+    if result.get("jobs") or not use_browser:
+        return result
+    if record.get("access") == "会员主导" or source_catalog.hidden_from_search(record):
+        return result
+    try:
+        from browser_jobs import browse_official
+        jobs = browse_official(str(record.get("url") or ""), str(record.get("name") or ""), limit)
+    except Exception:
+        return result
+    if not jobs:
+        return result
+    return _finish_source(str(record.get("name") or ""), str(record.get("url") or ""), jobs, query, limit, "no_public_job_list")
 
 
 def read_platform(record: dict, query: str, limit: int, fetch=fetch_url) -> dict:

@@ -272,6 +272,7 @@ def self_test():
         "产品经理",
         10,
         fake_fetch,
+        use_browser=False,
     )
     assert official["source_status"] == "searched"
     assert official["jobs"][0]["title"] == "AI 产品经理"
@@ -282,6 +283,7 @@ def self_test():
         "产品经理",
         10,
         fake_fetch,
+        use_browser=False,
     )
     assert unreadable["source_status"] == "unavailable"
     shell = career_sources.read_official(
@@ -289,6 +291,7 @@ def self_test():
         "产品经理",
         10,
         fake_fetch,
+        use_browser=False,
     )
     assert shell["source_status"] == "unavailable"
     assert shell["jobs"] == []
@@ -417,6 +420,38 @@ def self_test():
     )
     assert fuxi_jobs[0]["job_url"] == "https://hr.163.com/job-detail.html?id=7"
     assert fuxi_jobs[0]["location"] == "杭州市"
+    import browser_jobs
+    deepseek = browser_jobs.jobs_from_anchors(
+        [{
+            "text": "服务端开发工程师\n全栈开发/算法\n北京市 杭州市",
+            "href": "/social-recruitment/high-flyer/140576#/job/abc",
+        }],
+        "DeepSeek",
+        "https://talent.deepseek.com/",
+        5,
+    )
+    assert deepseek[0]["title"] == "服务端开发工程师"
+    assert "北京" in deepseek[0]["location"] and "杭州" in deepseek[0]["location"]
+    assert deepseek[0]["job_url"].startswith("https://talent.deepseek.com/social-recruitment/")
+    kept, total = career_sources.select_jobs([
+        {"company": "DeepSeek", "title": "服务端开发工程师", "location": "北京", "job_url": "https://app.mokahr.com/social-recruitment/high-flyer/1#/job/aaa"},
+        {"company": "DeepSeek", "title": "预训练数据工程师", "location": "杭州", "job_url": "https://app.mokahr.com/social-recruitment/high-flyer/1#/job/bbb"},
+    ], "工程师", 5)
+    assert total == 2
+    kimi_links = browser_jobs.career_links(
+        [{"text": "加入我们", "href": "/apply/moonshot/148506#/jobs?page=1"}],
+        "https://careers.kimi.com/",
+    )
+    assert kimi_links == ["https://careers.kimi.com/apply/moonshot/148506#/jobs?page=1"]
+    assert browser_jobs.next_list_url(kimi_links[0]).endswith("page=2")
+    blocked = career_sources.read_official(
+        {"name": "JobRadar", "url": "https://jobradar.cc/zh", "type": "岗位聚合站", "access": "基础免费/高级付费"},
+        "",
+        5,
+        fake_fetch,
+        use_browser=True,
+    )
+    assert blocked["jobs"] == []
     print("external_jobs self-test: ok")
 
 
