@@ -214,7 +214,7 @@ def _norm_url(value: object) -> str:
     base, separator, fragment = text.partition("#")
     base = re.sub(r"([?&])(utm_[^=&]+|gh_src)=[^&]*", r"\1", base)
     base = re.sub(r"[?&]$", "", base).rstrip("/").casefold()
-    if separator and re.search(r"/job/|job-info/|jobid|job_id", fragment, re.I):
+    if separator and (re.search(r"/job/|job-info/|jobid|job_id", fragment, re.I) or fragment.startswith("role=")):
         return base + "#" + fragment.casefold()
     return base
 
@@ -973,6 +973,11 @@ def _read_json_source(name: str, page_url: str, api_url: str, fetch, parser, que
 def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_api: bool) -> dict:
     url = str(record.get("url") or "")
     name = str(record.get("name") or url)
+    if allow_board_api:
+        from official_extra import read_known
+        known = read_known(record, query, limit)
+        if known is not None:
+            return known
     host = urlparse(url).netloc.casefold().removeprefix("www.")
     if host in {"hr.tencent.com", "careers.tencent.com", "join.qq.com"}:
         return _read_json_source(

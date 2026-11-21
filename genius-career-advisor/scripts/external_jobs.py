@@ -575,6 +575,21 @@ def self_test():
     ], "", 5)
     assert total_ks == 2
     assert kuaishou_jobs[0]["location"] == "上海"
+    import official_extra
+    jd = official_extra.parse_jd_jobs([{"positionNameOpen": "数据分析岗", "requirementId": 227248, "workCity": "北京市"}])
+    assert jd[0]["title"] == "数据分析岗" and "requirementId=227248" in jd[0]["job_url"]
+    xhs = official_extra.parse_xiaohongshu_jobs({"data": {"list": [{"positionId": 19566, "positionName": "产品经理", "workplace": "上海市"}]}})
+    assert xhs[0]["job_url"].endswith("/social/position/19566")
+    manus = official_extra.parse_manus_jobs([{"result": {"data": {"json": [{"id": "abc", "title": "Product Designer", "locations": ["Beijing"]}]}}}])
+    assert manus[0]["job_url"].endswith("/en/job/abc") and manus[0]["location"] == "Beijing"
+    horizon = official_extra.parse_horizon_jobs({"data": {"pageForm": {"pageData": [{"postName": "ISP设计工程师", "postId": "p1", "workPlaceStr": "上海市"}]}}})
+    assert "postId=p1" in horizon[0]["job_url"]
+    ali = official_extra.parse_alibaba_jobs({"content": {"datas": [{"name": "高级算法工程师", "positionUrl": "/off-campus/position-detail?positionId=9", "workLocations": ["杭州"]}]}}, "https://talent-holding.alibaba.com")
+    assert ali[0]["job_url"].endswith("positionId=9") and ali[0]["location"] == "杭州"
+    token = official_extra.parse_onetoken_jobs('id: "edge-inference-eng", title: "端侧大模型推理优化工程师", cat: "AI Infra", loc: "北京",')
+    assert token[0]["job_url"].endswith("id=edge-inference-eng")
+    luchen = official_extra.parse_luchen_jobs("<p>AI 平台研发工程师</p><p>关于我们</p>")
+    assert luchen[0]["title"] == "AI 平台研发工程师"
     assert browser_jobs.list_url_from_detail("https://www.yuanjingos.com/careers/jobs/16") == "https://www.yuanjingos.com/careers/jobs"
     assert browser_jobs.jobs_from_anchors(
         [{"text": "查看职位详情", "href": "/careers/jobs/16"}],
