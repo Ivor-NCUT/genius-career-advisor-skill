@@ -115,6 +115,59 @@ def parse_onetoken_jobs(script: str) -> list[dict]:
     return jobs
 
 
+def parse_ant_jobs(payload) -> list[dict]:
+    items = payload.get("content") if isinstance(payload, dict) else None
+    if not isinstance(items, list):
+        return []
+    jobs = []
+    for item in items:
+        if not isinstance(item, dict) or not item.get("name") or not item.get("id"):
+            continue
+        places = item.get("workLocations") or []
+        location = "、".join(str(place) for place in places if place)
+        link = f"https://talent.antgroup.com/off-campus-position?positionId={item['id']}"
+        summary = " ".join(str(item.get("description") or "").split())[:180]
+        jobs.append(career_sources.job_record("蚂蚁集团", str(item["name"]), location, link, link, summary))
+    return jobs
+
+
+def parse_ai2_jobs(page: str) -> list[dict]:
+    from urllib.parse import unquote
+    jobs = []
+    seen = set()
+    for href in re.findall(r'href="(https://ai2robotics.com/join/[^"]+)"', page):
+        if href in seen:
+            continue
+        seen.add(href)
+        slug = unquote(href.rstrip("/").split("/join/")[-1])
+        title = slug.replace("-", " ")
+        if len(title) < 2:
+            continue
+        window = page[max(0, page.find(href) - 180): page.find(href)]
+        place = re.search(r"([\u4e00-\u9fff]{2,8}(?:、[\u4e00-\u9fff]{2,8})*)｜", window)
+        jobs.append(career_sources.job_record("智平方", title, place.group(1) if place else "", href, href))
+    return jobs
+
+
+def parse_zerith_jobs(page: str) -> list[dict]:
+    from urllib.parse import quote
+    jobs = []
+    for match in re.finditer(
+        r'<div class="listTitle">([^<]+)</div>\s*<div class="city">地点:\s*([^<]+)</div>',
+        page,
+    ):
+        title, city = match.group(1), match.group(2)
+        block = page[match.end(): match.end() + 4000]
+        title = " ".join(title.split())
+        if not title or len(title) > 40:
+            continue
+        duty = re.search(r"1[、.]\s*([^<]{8,160})", block)
+        summary = duty.group(1).strip() if duty else ""
+        link = "https://zerith.com/join/society/#role=" + quote(title)
+        jobs.append(career_sources.job_record("零次方机器人", title, city.strip(), link, link, summary))
+    return jobs
+
+
 def parse_luchen_jobs(page: str) -> list[dict]:
     titles = []
     for title in re.findall(r"<p>\s*([^<]{4,40})\s*</p>", page):
@@ -206,6 +259,54 @@ def _luchen_jobs() -> list[dict]:
     return parse_luchen_jobs(body)
 
 
+def _ant_jobs() -> list[dict]:
+    body = _post(
+        "https://hrcareersweb.antgroup.com/api/social/position/search",
+        json.dumps({
+            "pageIndex": 1, "pageSize": 30, "channel": "group_official_site", "language": "zh",
+        }).encode(),
+        {"Content-Type": "application/json", "Origin": "https://talent.antgroup.com", "Referer": "https://talent.antgroup.com/"},
+    )
+    return parse_ant_jobs(json.loads(body))
+
+
+def _ai2_jobs() -> list[dict]:
+    jobs = []
+    seen = set()
+    for path in ("/joinus/", "/joinus/2/"):
+        _final, body = career_sources.fetch_url("https://ai2robotics.com" + path)
+        for job in parse_ai2_jobs(body):
+            if job["job_url"] in seen:
+                continue
+            seen.add(job["job_url"])
+            jobs.append(job)
+    return jobs
+
+
+def _zerith_jobs() -> list[dict]:
+    _final, body = career_sources.fetch_url("https://zerith.com/join/society/")
+    return parse_zerith_jobs(body)
+
+
+def _moka_jobs(record: dict) -> list[dict]:
+    import career_cache
+    from browser_jobs import browse_official
+    name = str(record.get("name") or "")
+    url = str(record.get("url") or "")
+    cache = career_cache.load()
+    entry = career_cache.entry_for(cache, name)
+    if entry and entry.get("jobs") and career_cache.fresh(entry):
+        return entry["jobs"]
+    jobs = browse_official(url, name, 20)
+    if jobs:
+        career_cache.remember(
+            cache, name, catalog_url=url, entry_url=url, read_method="browser",
+            collected_count=len(jobs), pagination_complete=False, failure_reason="", jobs=jobs,
+        )
+        career_cache.save(cache)
+    return jobs
+
+
 def read_known(record: dict, query: str, limit: int) -> dict | None:
     host = career_sources.urlparse(record.get("url") or "").netloc.casefold()
     name = str(record.get("name") or "")
@@ -218,7 +319,18 @@ def read_known(record: dict, query: str, limit: int) -> dict | None:
         "onetokencareers.com": _onetoken_jobs,
         "www.luchentech.com": _luchen_jobs,
         "luchentech.com": _luchen_jobs,
+        "talent.antgroup.com": _ant_jobs,
+        "ai2robotics.com": _ai2_jobs,
+        "www.ai2robotics.com": _ai2_jobs,
+        "zerith.com": _zerith_jobs,
+        "www.zerith.com": _zerith_jobs,
     }
+    if host == "app.mokahr.com":
+        try:
+            jobs = _moka_jobs(record)
+        except Exception as error:
+            return career_sources.unavailable(name, record.get("url") or "", error)
+        return career_sources._finish_source(name, record.get("url") or "", jobs, query, limit, "no_public_job_list")
     if "manus.im" in host and "careers.manus.im" not in host:
         reader = _manus_jobs
     elif host.removeprefix("www.") in readers:

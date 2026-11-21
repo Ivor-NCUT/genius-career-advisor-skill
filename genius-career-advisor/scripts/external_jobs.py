@@ -590,6 +590,12 @@ def self_test():
     assert token[0]["job_url"].endswith("id=edge-inference-eng")
     luchen = official_extra.parse_luchen_jobs("<p>AI 平台研发工程师</p><p>关于我们</p>")
     assert luchen[0]["title"] == "AI 平台研发工程师"
+    ant = official_extra.parse_ant_jobs({"content": [{"id": 99, "name": "蚂蚁集团-大模型算法评测", "workLocations": ["杭州"], "description": "负责大模型应用的质量评测。"}]})
+    assert ant[0]["job_url"].endswith("positionId=99") and "大模型" in ant[0]["summary"]
+    ai2 = official_extra.parse_ai2_jobs('<h1>机器人VLA算法工程师</h1> 北京、深圳｜研发岗 <a href="https://ai2robotics.com/join/vla/">查看详情</a>')
+    assert ai2[0]["title"] == "vla" or "ai2robotics.com/join/vla" in ai2[0]["job_url"]
+    zerith = official_extra.parse_zerith_jobs('<div class="listTitle">具身智能工程师</div><div class="city">地点: 深圳市</div><p><span>1、参与具身模型训练。</span></p><div class="list ')
+    assert zerith[0]["title"] == "具身智能工程师" and zerith[0]["location"] == "深圳市"
     assert browser_jobs.list_url_from_detail("https://www.yuanjingos.com/careers/jobs/16") == "https://www.yuanjingos.com/careers/jobs"
     assert browser_jobs.jobs_from_anchors(
         [{"text": "查看职位详情", "href": "/careers/jobs/16"}],
