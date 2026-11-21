@@ -1054,18 +1054,27 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
 
 def read_official(record: dict, query: str, limit: int, fetch=fetch_url, use_browser: bool = True) -> dict:
     result = read_html_source(record, query, limit, fetch, allow_board_api=True)
-    if result.get("jobs") or not use_browser:
+    if result.get("source_status") == "searched" or not use_browser:
         return result
     if record.get("access") == "会员主导" or source_catalog.hidden_from_search(record):
         return result
     try:
-        from browser_jobs import browse_official
-        jobs = browse_official(str(record.get("url") or ""), str(record.get("name") or ""), limit)
-    except Exception:
+        return read_browser_source(record, query, limit)
+    except Exception as error:
+        result["error"] = str(error)[:180]
         return result
-    if not jobs:
-        return result
-    return _finish_source(str(record.get("name") or ""), str(record.get("url") or ""), jobs, query, limit, "no_public_job_list")
+
+
+def read_browser_source(record: dict, query: str, limit: int) -> dict:
+    from browser_jobs import MAX_PAGES, browse_official
+    name = str(record.get("name") or "")
+    url = str(record.get("url") or "")
+    if record.get("access") == "会员主导" or source_catalog.hidden_from_search(record):
+        return unavailable(name, url, "membership_required")
+    jobs = browse_official(url, name, max(limit, PER_SOURCE_JOB_CAP * MAX_PAGES))
+    result = _finish_source(name, url, jobs, query, limit, "no_readable_rendered_jobs")
+    result["read_method"] = "browser"
+    return result
 
 
 def read_platform(record: dict, query: str, limit: int, fetch=fetch_url) -> dict:

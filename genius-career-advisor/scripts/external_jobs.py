@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Search external job sources without depending on browser rendering."""
+"""Search public sources, then render a bounded set of dynamic official sites."""
+
+from __future__ import annotations
 
 import argparse
 import json
@@ -153,7 +155,7 @@ def _load_profile(profile):
         return None
 
 
-def search_all(query="", limit=20, profile=None, catalog=None, fetch=None):
+def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, browser_limit=5):
     """Search public platforms and official career sites together.
 
     Bonjour and Watcha are one class of source. Catalog platforms and company
@@ -172,7 +174,7 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None):
             elif meta["kind"] == "watcha":
                 result = watcha_jobs.normalize(watcha_jobs.fetch_payload(), query, per_source)
             elif meta["kind"] == "official":
-                result = career_sources.read_official(meta["record"], query, per_source, fetch)
+                result = career_sources.read_official(meta["record"], query, per_source, fetch, use_browser=False)
             else:
                 result = career_sources.read_platform(meta["record"], query, per_source, fetch)
         except Exception as error:
@@ -187,6 +189,24 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None):
         for future in as_completed(futures):
             name, result = future.result()
             results[name] = result
+    browser_sources = [meta for meta in sources if meta["kind"] == "official"
+                       and results[meta["name"]].get("source_status") == "unavailable"
+                       and results[meta["name"]].get("error") not in {"HTTP 404", "HTTP 410", "login_or_membership_wall"}][:max(0, browser_limit)]
+
+    def render(meta):
+        try:
+            result = career_sources.read_browser_source(meta["record"], query, per_source)
+        except Exception as error:
+            result = unavailable(meta["name"], meta["url"], error)
+        result["kind"] = "official"
+        return meta["name"], result
+
+    if browser_sources:
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            futures = [executor.submit(render, meta) for meta in browser_sources]
+            for future in as_completed(futures):
+                name, result = future.result()
+                results[name] = result
     ordered = [results[meta["name"]] for meta in sources if meta["name"] in results]
     combined = career_sources.combine_results(ordered, query, limit, profile_data)
     combined["official_sites_selected"] = plan["official_sites_selected"]
@@ -194,6 +214,8 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None):
     combined["official_site_cap"] = plan["official_site_cap"]
     combined["catalog_count"] = plan["catalog_count"]
     combined["catalog_generated_at"] = plan.get("catalog_generated_at")
+    combined["source_summary"]["browser_attempted"] = len(browser_sources)
+    combined["browser_site_cap"] = browser_limit
     return combined
 
 
@@ -461,6 +483,7 @@ def main():
     parser.add_argument("--limit", type=int, default=20)
     parser.add_argument("--profile", type=Path, help="职业档案 JSON。有则按硬性条件排序，没有则只按查询重合排序。")
     parser.add_argument("--catalog", type=Path)
+    parser.add_argument("--browser-limit", type=int, default=5, help="HTTP 失败后最多补读的相关官网数")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
     if args.self_test:
@@ -468,8 +491,10 @@ def main():
         return
     if args.limit < 1:
         parser.error("--limit must be positive")
+    if args.browser_limit < 0:
+        parser.error("--browser-limit must not be negative")
     try:
-        print(json.dumps(search_all(args.query, args.limit, args.profile, args.catalog), ensure_ascii=False, indent=2))
+        print(json.dumps(search_all(args.query, args.limit, args.profile, args.catalog, browser_limit=args.browser_limit), ensure_ascii=False, indent=2))
     except Exception as error:
         print(json.dumps({"source_status": "failed", "error": str(error)}, ensure_ascii=False), file=sys.stderr)
         raise SystemExit(2)

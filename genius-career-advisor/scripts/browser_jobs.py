@@ -9,13 +9,14 @@ detail URL. It does not open the system browser and does not log in.
 from __future__ import annotations
 
 import re
+import time
 from urllib.parse import urljoin, urlparse, urlunparse, parse_qsl, urlencode
 
 from career_sources import (
-    BROAD_ROLE,
+    CTA_TEXT,
     GENERIC_TITLE,
     SPECIFIC_JOB_URL,
-    STRONG_ROLE,
+    REJECT_TEXT,
     _skipped_host,
     job_record,
 )
@@ -28,8 +29,9 @@ JOIN_LINK = re.compile(
     re.I,
 )
 PLACE = re.compile(r"市|省|区|Remote|远程|北京|上海|杭州|深圳|广州|成都|新加坡|美国")
-SKIP_LINE = re.compile(r"^(急|分享|新|热)$|发布于|^\d{4}-\d{2}-\d{2}$")
+SKIP_LINE = re.compile(r"^(急|分享|新|热|立即投递|投递|申请|apply now)$|发布于|^\d{4}-\d{2}-\d{2}$", re.I)
 MAX_PAGES = 4
+TIME_BUDGET_SECONDS = 45
 
 
 def _compact(text: str) -> str:
@@ -69,8 +71,7 @@ def jobs_from_anchors(anchors: list[dict], company: str, base_url: str, limit: i
         title = ""
         location = ""
         for line in lines:
-            role = bool(STRONG_ROLE.search(line) or BROAD_ROLE.search(line))
-            if not title and role and len(line) <= 80:
+            if not title and len(line) <= 120 and not CTA_TEXT.fullmatch(line) and not REJECT_TEXT.search(line):
                 title = line
                 continue
             if title and not location and PLACE.search(line) and len(line) <= 40:
@@ -91,13 +92,14 @@ def career_links(anchors: list[dict], base_url: str) -> list[str]:
     seen = set()
     for anchor in anchors:
         text = _compact(anchor.get("text") or "")
-        if not JOIN_LINK.search(text):
-            continue
         href = _absolute(str(anchor.get("href") or ""), base_url)
         if not href.startswith(("http://", "https://")) or href in seen or _skipped_host(href):
             continue
         host = urlparse(href).netloc.casefold()
         if "jobradar" in host or "chuhaipin" in host:
+            continue
+        moka_board = host == "app.mokahr.com" and re.match(r"/(apply|social-recruitment|campus-recruitment)/", urlparse(href).path)
+        if not JOIN_LINK.search(text) and not moka_board:
             continue
         seen.add(href)
         found.append(href)
@@ -107,15 +109,8 @@ def career_links(anchors: list[dict], base_url: str) -> list[str]:
 def next_list_url(url: str) -> str:
     """Advance a page=N query in either the hash or the main query string."""
     parsed = urlparse(url)
-    for prefix, query in (("", parsed.query), ("#", parsed.fragment)):
-        if "page=" not in query and not query.startswith("page="):
-            # fragment may be "jobs?page=1"
-            if "?" not in query or "page=" not in query.split("?", 1)[-1]:
-                continue
-        path, _, raw_query = query.partition("?")
-        if prefix == "" and "?" not in url.split("#", 1)[0]:
-            raw_query = parsed.query
-            path = ""
+    fragment_path, _, fragment_query = parsed.fragment.partition("?")
+    for prefix, raw_query in (("#", fragment_query), ("", parsed.query)):
         pairs = parse_qsl(raw_query, keep_blank_values=True)
         updated = []
         found = False
@@ -129,7 +124,7 @@ def next_list_url(url: str) -> str:
             continue
         new_query = urlencode(updated)
         if prefix == "#":
-            fragment = f"{path}?{new_query}" if path else new_query
+            fragment = f"{fragment_path}?{new_query}" if fragment_path else new_query
             return urlunparse(parsed._replace(fragment=fragment))
         return urlunparse(parsed._replace(query=new_query))
     return ""
@@ -138,40 +133,45 @@ def next_list_url(url: str) -> str:
 def _read_anchors(page) -> list[dict]:
     return page.evaluate(
         """() => [...document.querySelectorAll('a[href]')].map(anchor => ({
-            text: (anchor.innerText || '').trim(),
+            text: (anchor.getAttribute('aria-label') || anchor.innerText || '').trim(),
             href: anchor.href || ''
         }))"""
     )
 
 
-def _open(page, url: str) -> None:
-    last_error = None
-    for _attempt in range(3):
-        try:
-            page.goto(url, wait_until="commit", timeout=20000)
-            page.wait_for_load_state("domcontentloaded", timeout=20000)
-            last_error = None
-            break
-        except Exception as error:
-            last_error = error
-    if last_error:
-        raise last_error
+def _remaining_ms(deadline):
+    remaining = int((deadline - time.monotonic()) * 1000)
+    if remaining <= 0:
+        raise TimeoutError("browser_time_budget_exceeded")
+    return remaining
+
+
+def _open(page, url: str, deadline: float) -> None:
+    page.goto(url, wait_until="domcontentloaded", timeout=min(15000, _remaining_ms(deadline)))
     try:
         page.wait_for_function(
-            """() => document.querySelectorAll("a[href*='job']").length >= 5""",
-            timeout=12000,
+            """() => !document.body.innerText.includes('数据读取中') && (
+                document.querySelector('a[href*="#/job/"], a[href*="/jobs/"]') ||
+                [...document.querySelectorAll('a[href]')].some(a =>
+                    /加入我们|招聘|join us|open roles/i.test(a.getAttribute('aria-label') || a.innerText || '') ||
+                    (a.href.includes('app.mokahr.com') && /\\/(apply|social-recruitment)\\//.test(a.href))) ||
+                /暂无职位|暂无招聘|no open positions/i.test(document.body.innerText))""",
+            timeout=min(10000, _remaining_ms(deadline)),
         )
     except Exception:
-        page.wait_for_timeout(2000)
+        pass
     page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
-    page.wait_for_timeout(600)
 
 
 def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
-    from playwright.sync_api import sync_playwright
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError as error:
+        raise RuntimeError("browser_dependency_missing: python3 -m pip install playwright") from error
 
     collected = []
     seen = set()
+    deadline = time.monotonic() + TIME_BUDGET_SECONDS
 
     def take(page) -> int:
         added = 0
@@ -186,17 +186,23 @@ def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
         return added
 
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(channel="chrome", headless=True)
-        page = browser.new_page()
         try:
-            _open(page, url)
+            browser = playwright.chromium.launch(headless=True, timeout=min(15000, _remaining_ms(deadline)))
+        except Exception:
+            try:
+                browser = playwright.chromium.launch(channel="chrome", headless=True, timeout=min(15000, _remaining_ms(deadline)))
+            except Exception as error:
+                raise RuntimeError("browser_runtime_missing: python3 -m playwright install chromium") from error
+        try:
+            page = browser.new_page()
+            _open(page, url, deadline)
             added = take(page)
-            if added < 2:
+            if not added:
                 hops = career_links(_read_anchors(page), page.url)
                 for hop in hops[:2]:
                     if urlparse(hop).geturl() == page.url:
                         continue
-                    _open(page, hop)
+                    _open(page, hop, deadline)
                     if take(page):
                         break
             pages = 1
@@ -205,7 +211,12 @@ def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
                 if not nxt or nxt == page.url:
                     break
                 before = len(collected)
-                _open(page, nxt)
+                try:
+                    _open(page, nxt, deadline)
+                except Exception:
+                    if collected:
+                        break
+                    raise
                 take(page)
                 pages += 1
                 if len(collected) == before:
