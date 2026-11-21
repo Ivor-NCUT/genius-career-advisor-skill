@@ -67,7 +67,7 @@ python3 <skill-root>/scripts/workspace.py resolve
 默认只搜索候选人确认过的外部来源。不要读取泛函开放岗位，也不要在结果里留一个空的泛函来源。
 
 0. 搜索前读取 `用户求职记忆.md` 和 `Agent平台执行记忆.md`。前者用于缩小岗位和渠道范围，后者用于避开已知失败路径。用户记忆不能覆盖 `profile.json` 的硬限制。Agent 记忆不能作为候选人事实。
-1. 运行 `python3 <skill-root>/scripts/source_catalog.py --query '<目标岗位 地点 办公方式>' --limit 5`。用来源快照选出 3–5 个来源。默认排除“会员主导”来源，不能为了凑数把低质量来源推荐给用户。来源快照不在运行时访问私有飞书表格。
+1. 运行 `python3 <skill-root>/scripts/source_catalog.py --query '<目标岗位 地点 办公方式>' --limit 5`。脚本先请求已发布的最新岗位来源清单，默认地址是 `https://raw.githubusercontent.com/Ivor-NCUT/genius-career-advisor-skill/main/genius-career-advisor/data/job-source-catalog.json`。本机设置了 `FANHAN_SOURCE_CATALOG_URL` 时改用该公开地址。请求约 10 秒超时，并校验 `schema_version` 为 1、记录列表非空，且每条记录都有名称和链接。失败、超时或内容无效时，静默改用技能内置的 `data/job-source-catalog.json`，找岗继续进行。用这份清单选出 3–5 个来源。默认排除“会员主导”来源，不能为了凑数把低质量来源推荐给用户。该请求只下载公开的公司/来源清单，不读取私有飞书表格，也不上传候选人材料。不要向用户复述清单地址，也不要把清单暂时读不到说成搜索失败。输出里的 `catalog_source` 仅为 `remote`、`bundled` 或 `file`，向用户介绍来源时不必提到。已经安装过旧版本的用户，需要先更新一次到包含这次远程读取的版本；之后主分支上的清单更新会在下一次找岗时自动生效，不必再次更新技能。
 2. 浏览外部网站前，先用短表展示来源名称、类型、访问门槛、推荐原因和风险，并询问用户是否按这组来源开始搜索。用户可以增删来源。没有明确同意前不得依次打开网站。用户要求“全部搜索”时先说明 Token 和耗时会增加，再按其确认范围执行。
 3. 用户确认后，用 `scripts/application_log.py duplicate` 检查 `<workspace>/external-applications.jsonl`。命中成功记录时跳过，除非用户明确要求重投。Bonjour、Watcha 和 JobRadar 如在确认清单内，运行 `external_jobs.py` 并只采用已确认来源的结果。其他来源只打开已确认的页面，不扩张到整张清单。岗位发现不得依赖浏览器反复重试。单一来源失败不得阻塞其他来源。JobRadar 未获得合作 API 前必须如实标记免费预览或会员限制，不得绕过。不得调用系统默认浏览器。
 4. 用户明确说“只看某个网站”时才直接缩小来源。某个来源需要登录、会员或暂不可用时，继续搜索其他已确认来源。
@@ -193,6 +193,7 @@ python3 <skill-root>/scripts/source_feedback.py send --state <workspace>/source-
 ## 当前交付边界
 
 - 已覆盖：职业档案、外部来源找岗、用户选岗、JD 定制、可编辑简历预览、材料哈希门禁、EgoLite 自动/手动提交模式、投递查重、最小结果记录，以及候选人明确要求后的泛函材料送达。
+- 找岗时的岗位来源清单优先使用已发布的最新版本，读不到时使用安装包内的快照。已安装的旧版本需要先更新一次，之后的清单更新才会在下一次找岗时自动生效。
 - 泛函开放岗位只在候选人明确要求时尝试。当前公开契约缺失时，脚本返回不可用，不能改用旧工作台清单。
 - EgoLite 申请和外部网站适配仍受页面能力影响。没有明确成功证据前，不得宣称已经稳定支持所有招聘网站。
 - 下一步用一名明确同意的真实候选人和一个选中岗位做端到端验收。
