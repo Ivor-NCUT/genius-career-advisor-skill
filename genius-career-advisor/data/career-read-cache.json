@@ -502,12 +502,253 @@
     "京东 JoyAI": {
       "catalog_url": "https://zhaopin.jd.com/",
       "entry_url": "https://zhaopin.jd.com/",
-      "read_method": "browser",
-      "collected_count": 0,
+      "read_method": "http",
+      "collected_count": 30,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:42:34+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "京东",
+          "title": "数据分析岗",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227248",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227248",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "买手",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=226705",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=226705",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "买手岗",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=226883",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=226883",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "买手",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227996",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227996",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "仓储运营岗",
+          "location": "广东省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227432",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227432",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "大客户销售/解决方案销售",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=223493",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=223493",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "解决方案岗",
+          "location": "江苏省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227726",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227726",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "机电工程师",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228017",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228017",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "解决方案",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227878",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227878",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "供应链AI算法工程师",
+          "location": "广东省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228051",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228051",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "销售岗位",
+          "location": "陕西省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227608",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227608",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "销售岗",
+          "location": "四川省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228054",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228054",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "销售组负责人岗",
+          "location": "内蒙古自治区",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227482",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227482",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "站长",
+          "location": "山东省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=225891",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=225891",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "项目经理",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228045",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228045",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "销售经理",
+          "location": "新疆维吾尔自治区",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228046",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228046",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "服务流程设计岗",
+          "location": "四川省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228026",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228026",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "转运B场地负责人",
+          "location": "湖北省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227542",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227542",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "销售经理岗",
+          "location": "上海市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227584",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227584",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "服务咨询岗",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227988",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227988",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "销售岗",
+          "location": "重庆市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=225344",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=225344",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "系统方案岗",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=226757",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=226757",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "销售岗",
+          "location": "新疆维吾尔自治区",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228027",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228027",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "业务销售岗",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228036",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228036",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "业务销售岗",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228034",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228034",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "销售经理岗",
+          "location": "陕西省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=225562",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=225562",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "巡检",
+          "location": "黑龙江省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227792",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227792",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "巡检",
+          "location": "内蒙古自治区",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227790",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227790",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "巡检",
+          "location": "山东省",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227791",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=227791",
+          "summary": ""
+        },
+        {
+          "company": "京东",
+          "title": "软件开发",
+          "location": "北京市",
+          "job_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228013",
+          "application_url": "https://zhaopin.jd.com/web/job/job_info_list/detail?requirementId=228013",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "京东 JoyAI"
     },
     "优必选 UBTECH": {
@@ -4449,14 +4690,215 @@
       "name": "F6S Jobs"
     },
     "Manus": {
-      "catalog_url": "https://manus.im/zh-cn/blog/manus-is-hiring",
-      "entry_url": "https://manus.im/zh-cn/blog/manus-is-hiring",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://careers.manus.im/en/jobs",
+      "entry_url": "https://careers.manus.im/en/jobs",
+      "read_method": "http",
+      "collected_count": 25,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:44:54+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "Manus",
+          "title": "Product Designer",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/d8b60609-3e1b-419c-9f3b-182c83ec78a6",
+          "application_url": "https://careers.manus.im/en/job/d8b60609-3e1b-419c-9f3b-182c83ec78a6",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Agent Product Manager",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/3b841ff5-ef2e-4ea7-92f0-d0fc3ef0cad6",
+          "application_url": "https://careers.manus.im/en/job/3b841ff5-ef2e-4ea7-92f0-d0fc3ef0cad6",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Agent Harness Engineer",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/664b475a-ca34-46d2-9846-c52f347857e6",
+          "application_url": "https://careers.manus.im/en/job/664b475a-ca34-46d2-9846-c52f347857e6",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Business Analyst",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/e9c827ce-79d5-473f-8a7e-067b900311ca",
+          "application_url": "https://careers.manus.im/en/job/e9c827ce-79d5-473f-8a7e-067b900311ca",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "AI Agent Product Evaluation Research Intern",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/439d03b4-6328-4ce0-89c0-bf5229bd5321",
+          "application_url": "https://careers.manus.im/en/job/439d03b4-6328-4ce0-89c0-bf5229bd5321",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Agent Evaluation Engineer",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/32c91e64-c57a-413c-870b-103b4c2517a7",
+          "application_url": "https://careers.manus.im/en/job/32c91e64-c57a-413c-870b-103b4c2517a7",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "User Growth Manager",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/942a8ace-cd7e-4289-a4cc-19da2413daf8",
+          "application_url": "https://careers.manus.im/en/job/942a8ace-cd7e-4289-a4cc-19da2413daf8",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "LLM Algorithm Engineer",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/a9b31a75-63f5-474d-bbc7-deecfe76f3f8",
+          "application_url": "https://careers.manus.im/en/job/a9b31a75-63f5-474d-bbc7-deecfe76f3f8",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Customer Support Specialist",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/9a7c18d6-c87a-46c1-a9ae-5b4110d897d0",
+          "application_url": "https://careers.manus.im/en/job/9a7c18d6-c87a-46c1-a9ae-5b4110d897d0",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Full-Stack Engineer",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/974d7634-7d3a-4362-976c-277e52fa619b",
+          "application_url": "https://careers.manus.im/en/job/974d7634-7d3a-4362-976c-277e52fa619b",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Backend Engineer (Application Development)",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/bff9590f-2694-4547-b6ee-d98c76eb385b",
+          "application_url": "https://careers.manus.im/en/job/bff9590f-2694-4547-b6ee-d98c76eb385b",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Security Engineer",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/c9852838-1196-46ce-bff9-bd0715859aee",
+          "application_url": "https://careers.manus.im/en/job/c9852838-1196-46ce-bff9-bd0715859aee",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Virtualization Engineer",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/6ed6727a-fb91-4e99-9ad9-c89cb48035f6",
+          "application_url": "https://careers.manus.im/en/job/6ed6727a-fb91-4e99-9ad9-c89cb48035f6",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "DevOps Engineer",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/ae07f77e-7f6d-4f02-929c-b87015ab4307",
+          "application_url": "https://careers.manus.im/en/job/ae07f77e-7f6d-4f02-929c-b87015ab4307",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "IT Infrastructure Engineer",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/fe3a1a59-c887-4f8f-a288-305f7e7ff97f",
+          "application_url": "https://careers.manus.im/en/job/fe3a1a59-c887-4f8f-a288-305f7e7ff97f",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Community Manager",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/9b26ed4d-24b5-421d-ba93-b63554588784",
+          "application_url": "https://careers.manus.im/en/job/9b26ed4d-24b5-421d-ba93-b63554588784",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "User Growth Intern",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/6de39807-9426-4b87-8f78-d6340d992758",
+          "application_url": "https://careers.manus.im/en/job/6de39807-9426-4b87-8f78-d6340d992758",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "User Operation Specialist Intern",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/e7e35d63-9774-47f9-a36b-c537c11b82b5",
+          "application_url": "https://careers.manus.im/en/job/e7e35d63-9774-47f9-a36b-c537c11b82b5",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Brand & Visual Designer",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/9c41fba2-4e16-4b38-b61c-9fa704d6d91b",
+          "application_url": "https://careers.manus.im/en/job/9c41fba2-4e16-4b38-b61c-9fa704d6d91b",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Brand & Visual Design Intern",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/b46136a6-ba06-43d3-be7d-5cbcd9069b40",
+          "application_url": "https://careers.manus.im/en/job/b46136a6-ba06-43d3-be7d-5cbcd9069b40",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Community Intern",
+          "location": "Singapore、Beijing",
+          "job_url": "https://careers.manus.im/en/job/ca8833be-68ac-433e-9cd5-b31116353af8",
+          "application_url": "https://careers.manus.im/en/job/ca8833be-68ac-433e-9cd5-b31116353af8",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Legal & Compliance Intern",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/8d877dc7-6703-40e1-93f6-5a0180a42e29",
+          "application_url": "https://careers.manus.im/en/job/8d877dc7-6703-40e1-93f6-5a0180a42e29",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Data Scientist",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/30c52e37-dfc6-4be5-91a4-b6bd94bb1f2f",
+          "application_url": "https://careers.manus.im/en/job/30c52e37-dfc6-4be5-91a4-b6bd94bb1f2f",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Senior Office Operations Manager",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/de395977-0eaf-4fa5-acca-f85c425265ee",
+          "application_url": "https://careers.manus.im/en/job/de395977-0eaf-4fa5-acca-f85c425265ee",
+          "summary": ""
+        },
+        {
+          "company": "Manus",
+          "title": "Senior HR Operations Specialist",
+          "location": "Singapore",
+          "job_url": "https://careers.manus.im/en/job/cf242cd5-0cb1-4114-b490-0030ccf23fc0",
+          "application_url": "https://careers.manus.im/en/job/cf242cd5-0cb1-4114-b490-0030ccf23fc0",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "Manus"
     },
     "Monica": {
@@ -4471,80 +4913,1519 @@
       "name": "Monica"
     },
     "万格智元 ONE TOKEN": {
-      "catalog_url": "https://onetokencareers.com/",
-      "entry_url": "https://onetokencareers.com/",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://onetokencareers.com/jobs.html",
+      "entry_url": "https://onetokencareers.com/jobs.html",
+      "read_method": "http",
+      "collected_count": 23,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:43:34+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "万格智元",
+          "title": "端侧大模型推理优化工程师",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=edge-inference-eng",
+          "application_url": "https://onetokencareers.com/job.html?id=edge-inference-eng",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "端侧大模型推理优化实习生",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=edge-inference-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=edge-inference-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "高性能算子研发实习生",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=kernel-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=kernel-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "高性能算子研发工程师",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=kernel-engineer",
+          "application_url": "https://onetokencareers.com/job.html?id=kernel-engineer",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "AI 推理框架与算子测试工程实习生",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=inference-test-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=inference-test-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "端侧多模态 AI Infra 工程实习生",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=edge-multimodal-infra-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=edge-multimodal-infra-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "端侧多模态 AI Infra 研究实习生",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=edge-multimodal-infra-research-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=edge-multimodal-infra-research-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "测试工程师",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=qa-engineer",
+          "application_url": "https://onetokencareers.com/job.html?id=qa-engineer",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "Agent 实习生",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=agent-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=agent-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "Agent 科研实习生（端云协同方向）",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=agent-edge-cloud-research-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=agent-edge-cloud-research-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "GTM",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=gtm",
+          "application_url": "https://onetokencareers.com/job.html?id=gtm",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "销售",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=sales",
+          "application_url": "https://onetokencareers.com/job.html?id=sales",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "硬件产品运营",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=hardware-product-ops",
+          "application_url": "https://onetokencareers.com/job.html?id=hardware-product-ops",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "硬件产品工程师（AI 硬件方向）",
+          "location": "深圳",
+          "job_url": "https://onetokencareers.com/job.html?id=ai-hardware-product-engineer",
+          "application_url": "https://onetokencareers.com/job.html?id=ai-hardware-product-engineer",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "产品视觉设计师",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=product-visual-designer",
+          "application_url": "https://onetokencareers.com/job.html?id=product-visual-designer",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "产品摄影实习生",
+          "location": "北京 · 五道口",
+          "job_url": "https://onetokencareers.com/job.html?id=product-photography-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=product-photography-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "出海运营实习生",
+          "location": "北京 / 远程",
+          "job_url": "https://onetokencareers.com/job.html?id=overseas-operations-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=overseas-operations-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "出海增长实习生（KOL 方向）",
+          "location": "北京 / 远程",
+          "job_url": "https://onetokencareers.com/job.html?id=growth-kol-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=growth-kol-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "出海增长实习生（开发者运营方向）",
+          "location": "北京 / 远程",
+          "job_url": "https://onetokencareers.com/job.html?id=growth-dev-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=growth-dev-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "内容运营实习生",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=content-ops-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=content-ops-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "HR",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=hr",
+          "application_url": "https://onetokencareers.com/job.html?id=hr",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "HR 实习生",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=hr-intern",
+          "application_url": "https://onetokencareers.com/job.html?id=hr-intern",
+          "summary": ""
+        },
+        {
+          "company": "万格智元",
+          "title": "行政",
+          "location": "北京",
+          "job_url": "https://onetokencareers.com/job.html?id=admin-specialist",
+          "application_url": "https://onetokencareers.com/job.html?id=admin-specialist",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "万格智元 ONE TOKEN"
     },
     "傅利叶智能": {
-      "catalog_url": "https://www.fftai.cn/career",
-      "entry_url": "https://www.fftai.cn/career",
+      "catalog_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/jobs",
+      "entry_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/jobs",
       "read_method": "browser",
-      "collected_count": 0,
+      "collected_count": 25,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:42:14+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "傅利叶智能",
+          "title": "运动控制算法实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/8bfa40ff-618f-4a98-8490-a49c0730880a",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/8bfa40ff-618f-4a98-8490-a49c0730880a",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "嵌入式软件实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/44dfe110-0a9a-4425-8cce-0701ecdcfd68",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/44dfe110-0a9a-4425-8cce-0701ecdcfd68",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "机械结构实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/5907e018-22ae-474f-9d34-7c9eda93606c",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/5907e018-22ae-474f-9d34-7c9eda93606c",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "硬件研发实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/6bad5823-0d27-4d0e-9475-fbd47676f61a",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/6bad5823-0d27-4d0e-9475-fbd47676f61a",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "系统研发实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/fb910e13-f39a-4237-a0a1-a18d579bf574",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/fb910e13-f39a-4237-a0a1-a18d579bf574",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "VLA实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/f7b0b23d-b5ff-4b38-9b75-707a95d57062",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/f7b0b23d-b5ff-4b38-9b75-707a95d57062",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "感知导航算法实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/7670c9cb-27d5-4912-bb09-6d05ebcdc333",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/7670c9cb-27d5-4912-bb09-6d05ebcdc333",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "具身智能算法实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/f05ac9e8-d964-4b16-b9f6-0fdbb077c57c",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/f05ac9e8-d964-4b16-b9f6-0fdbb077c57c",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "Agent实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/7e5caa9a-08ca-48c1-b6b3-235feec8b678",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/7e5caa9a-08ca-48c1-b6b3-235feec8b678",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】销售工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/046ed323-4fb7-4e7c-a0d5-9f78d972d6c4",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/046ed323-4fb7-4e7c-a0d5-9f78d972d6c4",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】质量工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/7b3d8fef-2e35-44ba-a4d7-1810632aa6a9",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/7b3d8fef-2e35-44ba-a4d7-1810632aa6a9",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】系统集成工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/bdf9d35a-f370-4666-995b-630eb6c2fc82",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/bdf9d35a-f370-4666-995b-630eb6c2fc82",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】财务管培生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/5129f5fc-31c6-4b3e-9cdf-76d53a5b26ee",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/5129f5fc-31c6-4b3e-9cdf-76d53a5b26ee",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】测试工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/2509a262-955e-4c3e-81b6-b2e379a64371",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/2509a262-955e-4c3e-81b6-b2e379a64371",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】Infra算法工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/b0e26e45-ede7-45d8-b944-d96027201436",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/b0e26e45-ede7-45d8-b944-d96027201436",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】运动控制算法工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/32ddf5c0-71f3-4f3b-8025-f79210108fa4",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/32ddf5c0-71f3-4f3b-8025-f79210108fa4",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】VLA算法工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/430e23bc-6f95-4a94-8b23-ece523c825a8",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/430e23bc-6f95-4a94-8b23-ece523c825a8",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】Agent开发工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/9d39c847-2a96-4895-bab1-edc47655d2e6",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/9d39c847-2a96-4895-bab1-edc47655d2e6",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】电机研发工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/54e94b66-13d9-4b7a-b37a-21160196e7ac",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/54e94b66-13d9-4b7a-b37a-21160196e7ac",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】仿真工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/e295eee5-8fde-4edd-9883-11ef58ba8910",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/e295eee5-8fde-4edd-9883-11ef58ba8910",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】机械研发工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/5ad1c9ad-38ef-424c-80af-4f8d3f82c62c",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/5ad1c9ad-38ef-424c-80af-4f8d3f82c62c",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】嵌入式工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/d25059b6-b0f9-4951-9a5a-8314d6bada08",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/d25059b6-b0f9-4951-9a5a-8314d6bada08",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】硬件研发工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/617e8a39-ebf2-4ee6-ab70-35d67b761324",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/617e8a39-ebf2-4ee6-ab70-35d67b761324",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "【2027届校招】具身智能算法工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/675708b9-33d0-4e1e-87db-1c2eaf8b0c5a",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/675708b9-33d0-4e1e-87db-1c2eaf8b0c5a",
+          "summary": ""
+        },
+        {
+          "company": "傅利叶智能",
+          "title": "硬件测试实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/6522a560-81b0-4ae1-b5a9-07f5544f044e",
+          "application_url": "https://app.mokahr.com/campus-recruitment/fftai/147078?locale=zh-CN#/job/6522a560-81b0-4ae1-b5a9-07f5544f044e",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "傅利叶智能"
     },
     "地平线 Horizon Robotics": {
-      "catalog_url": "https://career.horizon.auto/",
-      "entry_url": "https://career.horizon.auto/",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/social.html",
+      "entry_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/social.html",
+      "read_method": "http",
+      "collected_count": 30,
       "pagination_complete": false,
-      "failure_reason": "not_browser_checked",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:42:09+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "地平线",
+          "title": "智能驾驶功能系统工程师（基础应用服务）",
+          "location": "上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69a9548910919a570b5e1047&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69a9548910919a570b5e1047&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "ISP设计工程师",
+          "location": "上海市、深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a8d7ed94315481304d4466d&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a8d7ed94315481304d4466d&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "SLT工程师",
+          "location": "上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a72a28f1ad6db7cf8e476ff&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a72a28f1ad6db7cf8e476ff&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "智能驾驶大客户销售经理",
+          "location": "北京市、重庆市、上海市、深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a69ae94ba2dc64cbb914bb4&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a69ae94ba2dc64cbb914bb4&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "交付项目经理/专家",
+          "location": "北京市、上海市-嘉定区",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69a95487be908548be2b98b9&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69a95487be908548be2b98b9&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "泊车系统工程师",
+          "location": "深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a59ee3953b4650cd323696d&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a59ee3953b4650cd323696d&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "解决方案交付技术经理",
+          "location": "北京市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69d3a32b4e30a370a4a78f63&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69d3a32b4e30a370a4a78f63&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "行车系统工程师",
+          "location": "北京市、重庆市、上海市、深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a72aaa668cc6f624f1b4669&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a72aaa668cc6f624f1b4669&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "智能驾驶系统工程师（软件）",
+          "location": "上海市、深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a59ee25e05c792b8eab4fcd&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a59ee25e05c792b8eab4fcd&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "技术项目经理（TPM）",
+          "location": "北京市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69eb01392a1bc548b5a860ae&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69eb01392a1bc548b5a860ae&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "智能驾驶系统工程师SE",
+          "location": "北京市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6ac73f20f0cfabf2b4e57ace&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6ac73f20f0cfabf2b4e57ace&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "智驾平台高级应用运维工程师",
+          "location": "北京市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a604f1ce05c792b8ecb3410&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a604f1ce05c792b8ecb3410&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "QRE Leader",
+          "location": "上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a3cc19a1d4c30777af06660&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a3cc19a1d4c30777af06660&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "PE",
+          "location": "上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69e8aae42a1bc548b5a66502&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69e8aae42a1bc548b5a66502&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "【地瓜机器人】交付项目经理",
+          "location": "北京市、南京市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69ddf632abe720345e61a2be&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69ddf632abe720345e61a2be&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "AI infra 工程师（训练方向）",
+          "location": "北京市、南京市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=68a5690f1343c325ffac2dde&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=68a5690f1343c325ffac2dde&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "Senior SYN and STA Engineer",
+          "location": "上海市、西安市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6987367d8e515379dcecbaee&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6987367d8e515379dcecbaee&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "【地瓜机器人】芯片现场技术支持工程师（FAE）",
+          "location": "北京市、南京市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69b127c210919a570b69ab70&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69b127c210919a570b69ab70&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "NPU算法分析与算子优化工程师",
+          "location": "北京市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69aa7deb10919a570b5faa7a&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69aa7deb10919a570b5faa7a&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "NPU验证工程师",
+          "location": "北京市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69aa767910919a570b5f9c34&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69aa767910919a570b5f9c34&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "芯片测试工程师",
+          "location": "上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69a6b6b410919a570b5a7f88&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69a6b6b410919a570b5a7f88&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "AI编译器专家",
+          "location": "北京市、杭州市、南京市、上海市、深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6345275dbef57c270765e54b&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6345275dbef57c270765e54b&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "AI芯片工具链架构师",
+          "location": "北京市、杭州市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a0a781a1f17c3725138a558&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=6a0a781a1f17c3725138a558&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "ADAS解决方案交付经理（日韩）",
+          "location": "北京市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69a954888e515379dc08441d&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69a954888e515379dc08441d&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "模型训练平台开发工程师",
+          "location": "北京市、南京市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=682a9e21d9c14f2a7da1538e&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=682a9e21d9c14f2a7da1538e&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "AI编译器研发工程师",
+          "location": "北京市、杭州市、南京市、上海市、深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=68592415d360b05cf82c83ff&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=68592415d360b05cf82c83ff&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "AI基础架构开发工程师",
+          "location": "北京市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69144c9fba375d797c111d4d&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69144c9fba375d797c111d4d&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "NPU架构工程师",
+          "location": "北京市、上海市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69158716ba375d797c12dc83&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=69158716ba375d797c12dc83&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "AI计算系统调度架构师",
+          "location": "北京市、上海市、深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=692fe2a7641e2630687f9efd&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=692fe2a7641e2630687f9efd&postType=society",
+          "summary": ""
+        },
+        {
+          "company": "地平线",
+          "title": "存储子系统架构师",
+          "location": "北京市、上海市、深圳市",
+          "job_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=692fe3c7641e2630687fa008&postType=society",
+          "application_url": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/posDetail.html?postId=692fe3c7641e2630687fa008&postType=society",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "地平线 Horizon Robotics"
     },
     "小红书": {
-      "catalog_url": "https://job.xiaohongshu.com/jobs/5/social",
-      "entry_url": "https://job.xiaohongshu.com/jobs/5/social",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://job.xiaohongshu.com/social/position",
+      "entry_url": "https://job.xiaohongshu.com/social/position",
+      "read_method": "http",
+      "collected_count": 30,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:43:52+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "小红书",
+          "title": "海外安全策略运营专家（Trust & Safety）/ Safety Strategy Operations Specialist (Trust & Safety)",
+          "location": "美国",
+          "job_url": "https://job.xiaohongshu.com/social/position/19566",
+          "application_url": "https://job.xiaohongshu.com/social/position/19566",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "Product Manager, Trust & Safety Platform",
+          "location": "美国",
+          "job_url": "https://job.xiaohongshu.com/social/position/19596",
+          "application_url": "https://job.xiaohongshu.com/social/position/19596",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "【US】Backend Engineer -rednote",
+          "location": "美国",
+          "job_url": "https://job.xiaohongshu.com/social/position/19841",
+          "application_url": "https://job.xiaohongshu.com/social/position/19841",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "AI全栈工程师（偏移动端）-电商",
+          "location": "上海市，杭州市",
+          "job_url": "https://job.xiaohongshu.com/social/position/20427",
+          "application_url": "https://job.xiaohongshu.com/social/position/20427",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "Product Engineer产品工程师-大种草技术-种草&品牌广告",
+          "location": "上海市，北京市",
+          "job_url": "https://job.xiaohongshu.com/social/position/9201",
+          "application_url": "https://job.xiaohongshu.com/social/position/9201",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "客户端产品工程师 Product Engineer",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/21606",
+          "application_url": "https://job.xiaohongshu.com/social/position/21606",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "Product Engineer工程师（全栈）小红书蒲公英&买手",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/20247",
+          "application_url": "https://job.xiaohongshu.com/social/position/20247",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "商业化-AI Native Engineer",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/17846",
+          "application_url": "https://job.xiaohongshu.com/social/position/17846",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "Product Engineer产品工程师-广告基础平台",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/15218",
+          "application_url": "https://job.xiaohongshu.com/social/position/15218",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "Product Engineer产品工程师-广告投放平台开发",
+          "location": "北京市，上海市，深圳市",
+          "job_url": "https://job.xiaohongshu.com/social/position/14416",
+          "application_url": "https://job.xiaohongshu.com/social/position/14416",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "交易算法工程师-流量策略方向(推荐/搜索)",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/19875",
+          "application_url": "https://job.xiaohongshu.com/social/position/19875",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "Product Engineer产品工程师 - 广告CRM",
+          "location": "北京市",
+          "job_url": "https://job.xiaohongshu.com/social/position/18106",
+          "application_url": "https://job.xiaohongshu.com/social/position/18106",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "AI搜索交易算法工程师-AIGC",
+          "location": "北京市，上海市，杭州市",
+          "job_url": "https://job.xiaohongshu.com/social/position/19797",
+          "application_url": "https://job.xiaohongshu.com/social/position/19797",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "电商风控算法工程师",
+          "location": "北京市，上海市，杭州市",
+          "job_url": "https://job.xiaohongshu.com/social/position/17378",
+          "application_url": "https://job.xiaohongshu.com/social/position/17378",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "推荐算法工程师-海外电商(redshop)方向",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/20706",
+          "application_url": "https://job.xiaohongshu.com/social/position/20706",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "多模态/NLP算法工程师-交易算法",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/13874",
+          "application_url": "https://job.xiaohongshu.com/social/position/13874",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "NLP/多模态算法工程师-交易&商业治理",
+          "location": "北京市，上海市，杭州市",
+          "job_url": "https://job.xiaohongshu.com/social/position/17323",
+          "application_url": "https://job.xiaohongshu.com/social/position/17323",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "大模型应用算法工程师-电商业务",
+          "location": "北京市，上海市，杭州市",
+          "job_url": "https://job.xiaohongshu.com/social/position/20701",
+          "application_url": "https://job.xiaohongshu.com/social/position/20701",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "搜索算法工程师-交易算法",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/5833",
+          "application_url": "https://job.xiaohongshu.com/social/position/5833",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "推荐算法工程师-交易算法",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/5819",
+          "application_url": "https://job.xiaohongshu.com/social/position/5819",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "用户增长算法工程师-交易算法",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/8073",
+          "application_url": "https://job.xiaohongshu.com/social/position/8073",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "「商业出海产品」AI 广告平台产品经理",
+          "location": "上海市，北京市，深圳市",
+          "job_url": "https://job.xiaohongshu.com/social/position/21183",
+          "application_url": "https://job.xiaohongshu.com/social/position/21183",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "【热招】生活美学行业KA销售",
+          "location": "北京市，上海市，广州市",
+          "job_url": "https://job.xiaohongshu.com/social/position/17883",
+          "application_url": "https://job.xiaohongshu.com/social/position/17883",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "大商业经营策略-经营分析",
+          "location": "上海市，北京市",
+          "job_url": "https://job.xiaohongshu.com/social/position/11660",
+          "application_url": "https://job.xiaohongshu.com/social/position/11660",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "组织产品",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/23162",
+          "application_url": "https://job.xiaohongshu.com/social/position/23162",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "「电商C端产品」增长方向-内容种草产品经理",
+          "location": "上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/17420",
+          "application_url": "https://job.xiaohongshu.com/social/position/17420",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "个性化治理推荐算法（流量治理）-TnS",
+          "location": "北京市，上海市，杭州市",
+          "job_url": "https://job.xiaohongshu.com/social/position/23023",
+          "application_url": "https://job.xiaohongshu.com/social/position/23023",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "风控算法工程师-增长方向",
+          "location": "上海市，杭州市",
+          "job_url": "https://job.xiaohongshu.com/social/position/21355",
+          "application_url": "https://job.xiaohongshu.com/social/position/21355",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "数据采集&解析工程师",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/14336",
+          "application_url": "https://job.xiaohongshu.com/social/position/14336",
+          "summary": ""
+        },
+        {
+          "company": "小红书",
+          "title": "FinOPS 技术成本与资源效能专家",
+          "location": "北京市，上海市",
+          "job_url": "https://job.xiaohongshu.com/social/position/23159",
+          "application_url": "https://job.xiaohongshu.com/social/position/23159",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "小红书"
     },
     "无问芯穹 Infinigence": {
-      "catalog_url": "https://www.infinigence-ai.com/",
-      "entry_url": "https://www.infinigence-ai.com/",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://infinigence.jobs.feishu.cn/infinigence",
+      "entry_url": "https://infinigence.jobs.feishu.cn/infinigence",
+      "read_method": "http",
+      "collected_count": 30,
       "pagination_complete": false,
-      "failure_reason": "network_error",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:43:49+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "海外BD",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7700860762462046491/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7700860762462046491/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "基础设施解决方案",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7707274411079354662/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7707274411079354662/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "资本市场总监",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7704611228223965494/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7704611228223965494/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "政企方案架构师（硬件）",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7701976627131910442/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7701976627131910442/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "测试开发工程师 --- Agentic Infra平台方向",
+          "location": "北京 / 上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7701625839952136491/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7701625839952136491/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "业务部行政助理",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7696857602043447603/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7696857602043447603/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "AI编译器软件工程师",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7694608141862603058/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7694608141862603058/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "国际化产品经理（Token Factory）",
+          "location": "北京 / 上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7690876753594861875/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7690876753594861875/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "产业政策研究专家（AI方向）",
+          "location": "北京 / 上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7688658267471776054/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7688658267471776054/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "战略发展经理",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7688616474436716827/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7688616474436716827/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "Agent Harness研究员",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7687540167201556763/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7687540167201556763/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "Finance BP",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7683485588637321523/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7683485588637321523/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "资本市场与投资者关系 Associate Capital Markets & Investor Relations Associate",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7683106878901143850/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7683106878901143850/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "政企方案架构师",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7677420311696771355/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7677420311696771355/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "品牌市场活动",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7672966007573956902/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7672966007573956902/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "高校合作经理/专员",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7669782501108517162/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7669782501108517162/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "品牌经理(展厅展会)",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7669751578823493929/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7669751578823493929/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "区域生态合作经理",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7664917451037083923/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7664917451037083923/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "大模型研发工程师（芯片设计领域）",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7662331792959260964/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7662331792959260964/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "区域事务副总经理（深圳）",
+          "location": "深圳",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7662221501592553755/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7662221501592553755/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "基础设施技术运营",
+          "location": "北京",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7660154219135551807/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7660154219135551807/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "海外生态总监｜Overseas Ecosystem Partnership Director",
+          "location": "北京 / 上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7659255506536466724/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7659255506536466724/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "AI基础设施交付运维工程师",
+          "location": "北京 / 上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7657866631687096639/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7657866631687096639/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "端侧战略专员",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7657530687982192923/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7657530687982192923/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "AI infra 推理优化研究员",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647803778384791859/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647803778384791859/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "IR总监",
+          "location": "北京 / 杭州",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647722252443617582/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647722252443617582/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "CVC 投资经理/投资总监",
+          "location": "北京 / 杭州",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647721130040838443/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647721130040838443/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "异构系统推理优化研究员",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647467938459404563/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647467938459404563/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "算法Agent研究员",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647466331130759450/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647466331130759450/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "无问芯穹 Infinigence",
+          "title": "异构计算与推理系统研究主管",
+          "location": "上海",
+          "job_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647417312005933366/detail",
+          "application_url": "https://infinigence.jobs.feishu.cn/infinigence/position/7647417312005933366/detail",
+          "summary": "社招 全职"
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "无问芯穹 Infinigence"
     },
     "智平方 AI² Robotics": {
       "catalog_url": "https://ai2robotics.com/joinus/",
       "entry_url": "https://ai2robotics.com/joinus/",
-      "read_method": "browser",
-      "collected_count": 0,
+      "read_method": "http",
+      "collected_count": 11,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:44:41+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "智平方",
+          "title": "供应商质量专家",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E4%BE%9B%E5%BA%94%E5%95%86%E8%B4%A8%E9%87%8F%E4%B8%93%E5%AE%B6/",
+          "application_url": "https://ai2robotics.com/join/%E4%BE%9B%E5%BA%94%E5%95%86%E8%B4%A8%E9%87%8F%E4%B8%93%E5%AE%B6/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "生产主管",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E7%94%9F%E4%BA%A7%E4%B8%BB%E7%AE%A1/",
+          "application_url": "https://ai2robotics.com/join/%E7%94%9F%E4%BA%A7%E4%B8%BB%E7%AE%A1/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "生产质量工程师",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E7%94%9F%E4%BA%A7%E8%B4%A8%E9%87%8F%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "application_url": "https://ai2robotics.com/join/%E7%94%9F%E4%BA%A7%E8%B4%A8%E9%87%8F%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "销售经理 销售总监",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86-%E9%94%80%E5%94%AE%E6%80%BB%E7%9B%91/",
+          "application_url": "https://ai2robotics.com/join/%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86-%E9%94%80%E5%94%AE%E6%80%BB%E7%9B%91/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "机器人vla算法工程师",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BAvla%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "application_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BAvla%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "机器人软件开发工程师",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "application_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "机器人视觉感知算法工程师",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%A7%86%E8%A7%89%E6%84%9F%E7%9F%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "application_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%A7%86%E8%A7%89%E6%84%9F%E7%9F%A5%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "机器人轨迹规划算法工程师",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%A8%E8%BF%B9%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "application_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BD%A8%E8%BF%B9%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "机器人结构工程师",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%BB%93%E6%9E%84%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "application_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%BB%93%E6%9E%84%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "机器人运动控制算法工程师",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "application_url": "https://ai2robotics.com/join/%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "summary": ""
+        },
+        {
+          "company": "智平方",
+          "title": "具身算法工程师",
+          "location": "",
+          "job_url": "https://ai2robotics.com/join/%E5%85%B7%E8%BA%AB%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "application_url": "https://ai2robotics.com/join/%E5%85%B7%E8%BA%AB%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88/",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "智平方 AI² Robotics"
     },
     "智谱 Zhipu": {
-      "catalog_url": "https://www.zhipuai.cn/zh/joinus",
-      "entry_url": "https://www.zhipuai.cn/zh/joinus",
+      "catalog_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/jobs?page=1",
+      "entry_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/jobs?page=1",
       "read_method": "browser",
-      "collected_count": 0,
+      "collected_count": 30,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:44:49+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "智谱 Zhipu",
+          "title": "Agent Infra 开发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/392db0f2-6542-4a5a-ad7d-451a4486576e",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/392db0f2-6542-4a5a-ad7d-451a4486576e",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "API销售",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/1d432461-c76c-475b-8b82-50af94aeef81",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/1d432461-c76c-475b-8b82-50af94aeef81",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "分布式存储运维工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/d142f865-1dd9-410e-9abb-7e3033a790c0",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/d142f865-1dd9-410e-9abb-7e3033a790c0",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "法务BP（知识产权与标准化方向）",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/b0afd5c2-e35b-4a86-9e23-411d0d59358a",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/b0afd5c2-e35b-4a86-9e23-411d0d59358a",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "GLM-Code Agent算法评测工程师",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/174e77d8-7bc5-4e4f-b60c-4015d8b4db3f",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/174e77d8-7bc5-4e4f-b60c-4015d8b4db3f",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "技术产品经理（采购数字化/AI Agent）",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/d69b43ec-85b2-46e7-a4da-552357bea816",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/d69b43ec-85b2-46e7-a4da-552357bea816",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "机器学习平台研发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/86d3a68f-88fd-432a-9b1a-1defb53af16f",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/86d3a68f-88fd-432a-9b1a-1defb53af16f",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "大模型算法工程师（visual coding方向）",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/eafd459d-1b40-4ae8-a62b-25587dcb763a",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/eafd459d-1b40-4ae8-a62b-25587dcb763a",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "大模型安全能力研究员（实习）",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/8d9ead26-50ab-4fda-b6c1-a3793e541226",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/8d9ead26-50ab-4fda-b6c1-a3793e541226",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "金融行业研究（兼职合作）",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/95e6dd33-9fbe-48dd-ae8c-f75ce7026efd",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/95e6dd33-9fbe-48dd-ae8c-f75ce7026efd",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "Harness 研发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/bb83a1f1-7110-4e5f-ab53-de6fb9bb883a",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/bb83a1f1-7110-4e5f-ab53-de6fb9bb883a",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "AI Native 全栈工程师（偏前端）",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/df2018cf-348b-4519-bc1e-b5b3e9e1723b",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/df2018cf-348b-4519-bc1e-b5b3e9e1723b",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "预训练数据算法工程师（基座模型）",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/a0dc5f47-1263-41da-be9a-630e7f73cbc0",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/a0dc5f47-1263-41da-be9a-630e7f73cbc0",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "大模型算法工程师（AI Coding / 游戏方向）",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/3038091e-6b13-47b4-8742-cd123cc2d3aa",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/3038091e-6b13-47b4-8742-cd123cc2d3aa",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "Android 开发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/692d8422-c2b2-459b-af1d-5ce46ec4e208",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/692d8422-c2b2-459b-af1d-5ce46ec4e208",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "ZCode PC 客户端开发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/450888e2-7284-4957-8e79-1f0e06803222",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/450888e2-7284-4957-8e79-1f0e06803222",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "投资经理（AI驱动型）",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/98920ba8-842d-49c4-8d0d-9a142dd80021",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/98920ba8-842d-49c4-8d0d-9a142dd80021",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "AI 测试开发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/516128e1-bfeb-41eb-a847-8c1147a7cc10",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/516128e1-bfeb-41eb-a847-8c1147a7cc10",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "SRE运维工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/2c13d8cb-d18b-4887-96fb-d8b2b97df373",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/2c13d8cb-d18b-4887-96fb-d8b2b97df373",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "市场商务采购经理",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/1b55eae3-f818-4467-a163-d767522d57ba",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/1b55eae3-f818-4467-a163-d767522d57ba",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "PMO项目管理",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/f5b5d07e-436b-43f0-879d-6a9673843fe5",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/f5b5d07e-436b-43f0-879d-6a9673843fe5",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "iOS 开发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/1b58598a-6df7-4828-9b88-7720214c4aa3",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/1b58598a-6df7-4828-9b88-7720214c4aa3",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "数据资源采购与运营经理",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/128ecd64-f236-43ab-8604-edf509281586",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/128ecd64-f236-43ab-8604-edf509281586",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "内控经理",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/bbcb7f09-a914-4767-bfa6-08a6dd1fecf6",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/bbcb7f09-a914-4767-bfa6-08a6dd1fecf6",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "Harness 产品经理",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/1cf4751d-16d1-4ff9-bc56-e3eb7617f2cc",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/1cf4751d-16d1-4ff9-bc56-e3eb7617f2cc",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "职位描述",
+          "location": "Business Development—北京",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/ceb5b777-61ba-4f86-bf9e-ffd7a1a57ea3",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/ceb5b777-61ba-4f86-bf9e-ffd7a1a57ea3",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "职位描述",
+          "location": "Business Development—北京",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/e4109e4b-6877-4836-bd0a-97cd34e440c3",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/e4109e4b-6877-4836-bd0a-97cd34e440c3",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "Applied AI Architect-Southeast Asia",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/5e7540b6-2f0e-4c20-b136-996f4659dee9",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/5e7540b6-2f0e-4c20-b136-996f4659dee9",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "采购经理（采购数字化方向）",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/c3a58540-0a16-42af-b75a-c60ec131447d",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/c3a58540-0a16-42af-b75a-c60ec131447d",
+          "summary": ""
+        },
+        {
+          "company": "智谱 Zhipu",
+          "title": "财务BP",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/96697dc6-07c1-49b7-9989-4985d25101fa",
+          "application_url": "https://app.mokahr.com/social-recruitment/zphz/148983?locale=zh-CN#/job/96697dc6-07c1-49b7-9989-4985d25101fa",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "智谱 Zhipu"
     },
     "游人于野": {
@@ -4561,23 +6442,161 @@
     "演语科技 LiblibAI": {
       "catalog_url": "https://www.liblib.art/us/joinus",
       "entry_url": "https://www.liblib.art/us/joinus",
-      "read_method": "browser",
-      "collected_count": 0,
+      "read_method": "http",
+      "collected_count": 13,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:44:11+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "演语科技",
+          "title": "设计专家",
+          "location": "北京/上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E8%AE%BE%E8%AE%A1%E4%B8%93%E5%AE%B6",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E8%AE%BE%E8%AE%A1%E4%B8%93%E5%AE%B6",
+          "summary": "品牌视觉革新：深度剖析 AIGC 行业特性与公司战略，搭建覆盖线上线下、从 logo 到动态视觉的全链路品牌视觉体系，通过季度品牌视觉升级，持续提升品牌在行业内的辨识度与影响力；"
+        },
+        {
+          "company": "演语科技",
+          "title": "资深产品经理",
+          "location": "北京/上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E8%B5%84%E6%B7%B1%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E8%B5%84%E6%B7%B1%E4%BA%A7%E5%93%81%E7%BB%8F%E7%90%86",
+          "summary": "负责文生图AIGC工具类产品（如AI绘画、设计辅助工具等）的规划与落地，制定产品Roadmap；"
+        },
+        {
+          "company": "演语科技",
+          "title": "资深增长专家",
+          "location": "北京/上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E8%B5%84%E6%B7%B1%E5%A2%9E%E9%95%BF%E4%B8%93%E5%AE%B6",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E8%B5%84%E6%B7%B1%E5%A2%9E%E9%95%BF%E4%B8%93%E5%AE%B6",
+          "summary": "制定各业务场景下用户增长策略，对用户新增、留存、ROI等核心指标负责；"
+        },
+        {
+          "company": "演语科技",
+          "title": "AIGC内容创意",
+          "location": "北京/上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=AIGC%E5%86%85%E5%AE%B9%E5%88%9B%E6%84%8F",
+          "application_url": "https://www.liblib.art/us/joinus#role=AIGC%E5%86%85%E5%AE%B9%E5%88%9B%E6%84%8F",
+          "summary": "Showcase 内容创作：基于公司 AIGC 文生图工具，策划并产出高质量视觉内容（如场景化插画、创意海报、趋势风格作品等），打造工具能力展示案例，吸引用户尝试和使用产品；"
+        },
+        {
+          "company": "演语科技",
+          "title": "海外流量增长",
+          "location": "北京/上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E6%B5%B7%E5%A4%96%E6%B5%81%E9%87%8F%E5%A2%9E%E9%95%BF",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E6%B5%B7%E5%A4%96%E6%B5%81%E9%87%8F%E5%A2%9E%E9%95%BF",
+          "summary": "负责海外广告投放（Google、Facebook、YouTube 等）策略与执行；"
+        },
+        {
+          "company": "演语科技",
+          "title": "运营",
+          "location": "北京",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E8%BF%90%E8%90%A5",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E8%BF%90%E8%90%A5",
+          "summary": "负责创作者运营，包括创作者的建联、引入、分层、成长，为创作者数量和质量负责；"
+        },
+        {
+          "company": "演语科技",
+          "title": "强化学习智能体研究员",
+          "location": "上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%99%BA%E8%83%BD%E4%BD%93%E7%A0%94%E7%A9%B6%E5%91%98",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%99%BA%E8%83%BD%E4%BD%93%E7%A0%94%E7%A9%B6%E5%91%98",
+          "summary": "从事强化学习与大语言模型智能体在AIGC的相关研究，包括训练和应用；"
+        },
+        {
+          "company": "演语科技",
+          "title": "Agent算法工程师",
+          "location": "上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=Agent%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://www.liblib.art/us/joinus#role=Agent%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "深入研究大语言模型（LLM）在内容创作场景中的推理与生成能力，探索LLM推理技术（如思维链、多步推理），优化复杂创作任务的流程与效果；"
+        },
+        {
+          "company": "演语科技",
+          "title": "AI Agent研发工程师",
+          "location": "上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=AI%20Agent%E7%A0%94%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://www.liblib.art/us/joinus#role=AI%20Agent%E7%A0%94%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "开发稳定、高效的多模态视觉生成Agent（支持文本/草图/参考图混合输入），应用于广告素材、电商设计、社交媒体等内容生成场景；"
+        },
+        {
+          "company": "演语科技",
+          "title": "后端工程师（增长搜索营销方向）",
+          "location": "上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E5%90%8E%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%88%E5%A2%9E%E9%95%BF%E6%90%9C%E7%B4%A2%E8%90%A5%E9%94%80%E6%96%B9%E5%90%91%EF%BC%89",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E5%90%8E%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%88%E5%A2%9E%E9%95%BF%E6%90%9C%E7%B4%A2%E8%90%A5%E9%94%80%E6%96%B9%E5%90%91%EF%BC%89",
+          "summary": "负责搜索营销相关后端系统的设计与开发，包括但不限于关键词推荐、广告检索、智能出价等核心模块，支撑用户增长与营销转化目标；"
+        },
+        {
+          "company": "演语科技",
+          "title": "iOS开发工程师",
+          "location": "北京",
+          "job_url": "https://www.liblib.art/us/joinus#role=iOS%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://www.liblib.art/us/joinus#role=iOS%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "负责Mac平台的产品设计和新技术调研；"
+        },
+        {
+          "company": "演语科技",
+          "title": "安卓开发工程师",
+          "location": "北京",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "负责公司社区产品Android端的业务研发，架构设计，保证工程高质量；"
+        },
+        {
+          "company": "演语科技",
+          "title": "前端开发工程师",
+          "location": "北京/上海",
+          "job_url": "https://www.liblib.art/us/joinus#role=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://www.liblib.art/us/joinus#role=%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "参与公司 AI 文生图产品的设计、研发与优化，推动创意内容生产体验持续提升；"
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "演语科技 LiblibAI"
     },
     "潞晨科技": {
       "catalog_url": "https://www.luchentech.com/join",
       "entry_url": "https://www.luchentech.com/join",
-      "read_method": "browser",
-      "collected_count": 0,
+      "read_method": "http",
+      "collected_count": 4,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:43:06+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "潞晨科技",
+          "title": "AI 平台研发工程师",
+          "location": "",
+          "job_url": "https://www.luchentech.com/join#role=AI 平台研发工程师",
+          "application_url": "https://www.luchentech.com/join#role=AI 平台研发工程师",
+          "summary": ""
+        },
+        {
+          "company": "潞晨科技",
+          "title": "AI 大模型训练系统工程师",
+          "location": "",
+          "job_url": "https://www.luchentech.com/join#role=AI 大模型训练系统工程师",
+          "application_url": "https://www.luchentech.com/join#role=AI 大模型训练系统工程师",
+          "summary": ""
+        },
+        {
+          "company": "潞晨科技",
+          "title": "AI 大模型推理工程师",
+          "location": "",
+          "job_url": "https://www.luchentech.com/join#role=AI 大模型推理工程师",
+          "application_url": "https://www.luchentech.com/join#role=AI 大模型推理工程师",
+          "summary": ""
+        },
+        {
+          "company": "潞晨科技",
+          "title": "AI 大模型落地工程师",
+          "location": "",
+          "job_url": "https://www.luchentech.com/join#role=AI 大模型落地工程师",
+          "application_url": "https://www.luchentech.com/join#role=AI 大模型落地工程师",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "潞晨科技"
     },
     "百度": {
@@ -4592,25 +6611,395 @@
       "name": "百度"
     },
     "硅基流动 SiliconFlow": {
-      "catalog_url": "https://www.siliconflow.cn/",
-      "entry_url": "https://www.siliconflow.cn/",
+      "catalog_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/",
+      "entry_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/",
       "read_method": "browser",
-      "collected_count": 0,
+      "collected_count": 16,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:42:20+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "AIGC Infra 研发工程师（实习）",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750?locale=zh-CN#/job/7ee2d9cf-9284-4baa-a0d2-142c5f4a033e",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750?locale=zh-CN#/job/7ee2d9cf-9284-4baa-a0d2-142c5f4a033e",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "推理引擎研发工程师",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750?locale=zh-CN#/job/f4566090-5476-4b75-b365-eb8a3eeeca6a",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750?locale=zh-CN#/job/f4566090-5476-4b75-b365-eb8a3eeeca6a",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "Devops研发工程师",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750?locale=zh-CN#/job/b73e5dda-6e04-4691-bf96-3e17bfefd878",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750?locale=zh-CN#/job/b73e5dda-6e04-4691-bf96-3e17bfefd878",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "交付部署工程师【深圳广州】",
+          "location": "广东·深圳市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/a5128b9f-54aa-426b-995b-ba757150c463",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/a5128b9f-54aa-426b-995b-ba757150c463",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "AIGC Infra 研发工程师（实习）",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/7ee2d9cf-9284-4baa-a0d2-142c5f4a033e",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/7ee2d9cf-9284-4baa-a0d2-142c5f4a033e",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "大模型推理引擎架构师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/f45bc085-175e-4de4-92f6-bd181c795bd6",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/f45bc085-175e-4de4-92f6-bd181c795bd6",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "大模型质量评测工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/f524e3a1-561f-4b2b-aed7-e5c985c79aaa",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/f524e3a1-561f-4b2b-aed7-e5c985c79aaa",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "产品运营经理",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/fc3ee3fb-9ef9-4999-bda9-cc6101ed8d45",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/fc3ee3fb-9ef9-4999-bda9-cc6101ed8d45",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "交付运维工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/4e22bc3d-e519-4034-90a4-04b5f110b908",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/4e22bc3d-e519-4034-90a4-04b5f110b908",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "渠道销售【华东】",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/3510e082-3970-4ff0-a037-e1ecf1773e7d",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/3510e082-3970-4ff0-a037-e1ecf1773e7d",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "渠道销售【华南】",
+          "location": "",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/d05d13ee-8dc6-4e4d-842e-a14691cdb610",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/d05d13ee-8dc6-4e4d-842e-a14691cdb610",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "Golang后端研发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/396993ef-a5ff-49da-85f8-b4f048736eee",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/396993ef-a5ff-49da-85f8-b4f048736eee",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "推理引擎研发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/f4566090-5476-4b75-b365-eb8a3eeeca6a",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/f4566090-5476-4b75-b365-eb8a3eeeca6a",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "研发工程师",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/b73e5dda-6e04-4691-bf96-3e17bfefd878",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/b73e5dda-6e04-4691-bf96-3e17bfefd878",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "推理引擎研发实习生",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/95f64466-6d39-483d-99eb-c160b38f3ac8",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/95f64466-6d39-483d-99eb-c160b38f3ac8",
+          "summary": ""
+        },
+        {
+          "company": "硅基流动 SiliconFlow",
+          "title": "GR经理",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/9927d40c-b3b2-4b9d-a44f-7acf5253a254",
+          "application_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/9927d40c-b3b2-4b9d-a44f-7acf5253a254",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "硅基流动 SiliconFlow"
     },
     "蚂蚁集团": {
-      "catalog_url": "https://talent.antgroup.com/home",
-      "entry_url": "https://talent.antgroup.com/home",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://talent.antgroup.com/off-campus-home?lang=zh",
+      "entry_url": "https://talent.antgroup.com/off-campus-home?lang=zh",
+      "read_method": "http",
+      "collected_count": 30,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:43:11+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "蚂蚁集团",
+          "title": "Ant International-GASD-Middle East",
+          "location": "利雅得",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=260814011461265",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=260814011461265",
+          "summary": "Job Description Based in the Kingdom of Saudi Arabia, this candidate will be part of a growing team supporting Ant International's mission to be the most innovative and trusted dig"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-编译器开发工程师（全同态编译器方向）-北京/上海",
+          "location": "北京、上海",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=26030408933336",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=26030408933336",
+          "summary": "1、全同态编译器开发：设计并实现高效的编译器框架，支持全同态加密自动编译与优化。开发编译器前端、中间表示（IR）及后端，确保编译器能够高效处理复杂的数学运算和加密逻辑。优化编译器性能，提升生成代码的执行效率和资源利用率。 2、算子DSL设计与实现：设计并实现领域特定语言（DSL），用于描述全同态加密数学表达式和计算流程。确保DSL具备良好的可扩展性，支持多种"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-具身模型销售工程师-上海",
+          "location": "上海",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=26030308938808",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=26030308938808",
+          "summary": "1. 客户开发与需求挖掘：聚焦人形机器人相关公司和解决方案形公司，开拓具身大模型的目标客户，通过行业展会、产业链资源、行业协会等多渠道搭建客户网络，精准挖掘客户在智能操控、人机协作、复杂场景作业等方面的需求痛点。 2. 解决方案定制与价值传递：结合客户业务场景与公司模型技术优势，与售前同事一起，定制化解决方案设计，向客户清晰阐述产品的核心价值，完成方案演示、"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-用增策略运营专家（用增方向）-生态与增长事业部",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=25010702971291",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=25010702971291",
+          "summary": "1、负责支付宝App的用户活跃/留存策略，以 用户规模/用户质量为核心目标； 2、洞察和理解平台用户活跃/留存卡点，整合全平台资源，围绕用户卡点设计解决方案，提升用户转化效率； 3、构建支付宝全域用户特征理解，包括意图和关键行为定义，不断刻画和完善用户关键特征； 4、与行业共建事实数据，联动精准识别用户在行业的转化倾向&转化价值，提升供给分发的全局收益；"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-具身售前解决方案专家-上海",
+          "location": "上海",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=26011208348322",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=26011208348322",
+          "summary": "1. 技术方案设计与输出： 负责具身智能行业模型（如具身vla/va模型）的技术方案设计，结合客户需求，输出可落地的实施解决方案； 深入理解具身智能模型的技术特点、优势及局限性，能够清晰地向客户的技术和决策人员讲解产品价值和技术细节； 根据客户场景需求，设计完整的解决方案，包括模型选型、数据采集、训练优化、部署实施等全链路规划。 2. 客户沟通与需求分析："
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-法务专家-数字支付",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=260803011219731",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=260803011219731",
+          "summary": "1. 为数字支付事业群的业务提供法律评审意见，评估及搭建业务开展所需的法律协议架构体系，推动法律解决方案的落地； 2. 参与设计并解决复杂交易或产品架构，能独立拟订逻辑严谨、权利义务明确的相对复杂合同及处理创新性业务的法律事务； 3. 在重大项目谈判、流程梳理、规章制度的法律审查等过程中提供法律支持； 4. 主动对日常业务问题进行总结、提炼分析，提出系统性解"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-财富AI Lab-大模型评测工程师（金融方向）",
+          "location": "北京、杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=260825011665798",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=260825011665798",
+          "summary": "1.建设金融领域深度 Benchmark：抽象投资理财领域的真实任务，把金融专家的研究框架、分析逻辑与业务规则沉淀为可泛化、可规模化的 Rubric / Checkpoint；从真实流量、典型任务、长尾与高风险 Case 构造有代表性的金融评测集，持续提升蚂小财的金融专业力与事实准确性； 2.设计金融专业评测标准与多路 Judge：联合金融专家、产品、算法团"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁健康-城市CM-山东/东北",
+          "location": "沈阳、长春、哈尔滨、济南",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012992600",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012992600",
+          "summary": "1、作为区域业务一号位，带领团队深耕区域，承接公司战略，拿到确定性的业务结果。 2、区域发展建设与布局：基于区域医疗健康政策和属地化特点，发展和经营属地业务。 3、基于公司战略方向和产品体系，整和本地资源，推动我方产品的市场渗透和商务化售卖。 4、政企生态构建与关系深化：建立并深化与当地政府部门及区域医院、行业协会和产业伙伴的战略合作关系，构建可持续运营的区"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-语言大模型语料优化算法工程师-北京/杭州【AGI专项】",
+          "location": "北京、杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=25012103118786",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=25012103118786",
+          "summary": "团队主要负责蚂蚁集团大语言模型的语料优化，涵盖数据扩源、数据质量提升、合成语料、数据利用方式优化、数学/代码/推理/对话能力提升等多个方向。我们致力于通过数据驱动的方式打造业界一流的语言基座模型。 1、负责大语言模型各阶段训练语料的优化工作，包括预训练、后训练、强化学习训练阶段，具体的工作包括体系化地扩展各类型的数据、定义并迭代优化数据质量、建设高效的合成语"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-信贷风险管理Agent工程师-杭州",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261023012557334",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261023012557334",
+          "summary": "1. 面向信贷全生命周期，搭建业务型端到端Agent，建立评测体系并完善AI Loop，持续提升风险管理效果与业务作业效率 2. 负责消费信贷智能决策与作业平台的持续建设，融合Agent、算法、数据与工程能力，推动风控策略研发Agent、风险数据挖掘Agent、催员辅助Agent、AI催收员及智能风控工作流等应用落地 3. 掌握一定统计、运筹、机器学习、数值"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁健康-区域BD-重庆",
+          "location": "重庆",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261118012961894",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261118012961894",
+          "summary": "1、区域发展建设与布局：基于区域医疗健康政策和属地化特点，发展和经营属地业务。 2、高效推进交付业务结果：基于公司战略方向和产品体系，整合本地资源，推动我方产品的市场渗透和商务化售卖。 3、政企生态构建与关系深化：建立并深化与当地政府部门及区域医院、行业协会和产业伙伴的战略合作关系，构建可持续运营的区域生态网络，通过机制化合作持续放大业务价值。 4、创新孵化"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁健康-区域BD-四川",
+          "location": "成都",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261118012960858",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261118012960858",
+          "summary": "1、区域发展建设与布局：基于区域医疗健康政策和属地化特点，发展和经营属地业务。 2、高效推进交付业务结果：基于公司战略方向和产品体系，整合本地资源，推动我方产品的市场渗透和商务化售卖。 3、政企生态构建与关系深化：建立并深化与当地政府部门及区域医院、行业协会和产业伙伴的战略合作关系，构建可持续运营的区域生态网络，通过机制化合作持续放大业务价值。 4、创新孵化"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁健康-区域BD-山东",
+          "location": "济南",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261118012957802",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261118012957802",
+          "summary": "1、区域发展建设与布局：基于区域医疗健康政策和属地化特点，发展和经营属地业务。 2、高效推进交付业务结果：基于公司战略方向和产品体系，整合本地资源，推动我方产品的市场渗透和商务化售卖。 3、政企生态构建与关系深化：建立并深化与当地政府部门及区域医院、行业协会和产业伙伴的战略合作关系，构建可持续运营的区域生态网络，通过机制化合作持续放大业务价值。 4、创新孵化"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁健康-区域BD-新疆",
+          "location": "乌鲁木齐",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261118012965037",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261118012965037",
+          "summary": "1、区域发展建设与布局：基于区域医疗健康政策和属地化特点，发展和经营属地业务。 2、高效推进交付业务结果：基于公司战略方向和产品体系，整合本地资源，推动我方产品的市场渗透和商务化售卖。 3、政企生态构建与关系深化：建立并深化与当地政府部门及区域医院、行业协会和产业伙伴的战略合作关系，构建可持续运营的区域生态网络，通过机制化合作持续放大业务价值。 4、创新孵化"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "Ant International-Marketing Head Alipay+-Singapore",
+          "location": "新加坡",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120013004528",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120013004528",
+          "summary": "Lead Alipay+ Marketing globally and turn a powerful payment network into a clear, differentiated consumer and partner brand. Build one marketing system across brand, growth, partne"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁健康-业务战略分析师-杭州",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261109012800805",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261109012800805",
+          "summary": "● 战略承接与规划支持，梳理和呈现战略内容 ● 商业分析与洞察，输出专题分析报告 ● 经营分析体系搭建，为管理层决策提供支持"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁国际-AI Native 前端工程师-全球技术",
+          "location": "深圳",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120013002651",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120013002651",
+          "summary": "1. 深度参与蚂蚁国际钱包AI产品的前端研发交付、体验改进与研发效能提升，围绕支付、账单、消费及生活服务等场景建智能交互体验。 2. 深度参与 Agent 前端架构、基础能力及配套工具建设，如结构化内容渲染、会话与任务状态管理、跨端适配等；协同客户端、服务端与 AI 团队，完善钱包能力及第三方服务接入，持续优化产品性能、稳定性、安全合规与国际化体验。 3."
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁国际-AI Native 客户端工程师-全球技术",
+          "location": "深圳",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120013001316",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120013001316",
+          "summary": "1. 深度参与蚂蚁国际独立App的研发交付、体验改进、研发效能提升等 2. 深度参与基础能力及配套工具的建设，如跨平台研发、动态化渲染和投放等；深度参与国际各个移动端产品安全、合规、高可用、体验的标准完善和优化。深度参与蚂蚁国际AI在大前端各个研发环节的提效探索；"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "Ant International-Business Development Specialist (Chinadesk)-Malaysia",
+          "location": "吉隆坡",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=260526010167484",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=260526010167484",
+          "summary": "1. Liaison & Communication Coordination - Serve as the central point of contact for all China-related clients, internal partners inquiries, requests, to enable efficient collaborat"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁健康-浙江区域医生业务拓展（BD）-浙江",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012999746",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012999746",
+          "summary": "负责浙江区域医生及专家团队的业务拓展，挖掘合作需求，设计合作方案，推动医生合作与业务落地。 1. 开发浙江区域医生、专家及科室团队，建立并维护长期合作关系。 2. 了解医生的专业方向、业务场景及合作诉求，挖掘与公司业务匹配的合作机会。 3. 独立设计医生合作方案，明确合作内容、双方价值、资源需求及实施路径，推动洽谈、签约与落地。 4. 协调内部产品、运营及服"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁国际-AI Native 开发工程师-全球技术",
+          "location": "深圳",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012999745",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012999745",
+          "summary": "聚焦电子钱包与服务AI化融合的业务场景，参与AI Native App系统的设计与研发。你将深入真实、复杂的业务链路，支付场景，推动大模型和Agent能力从技术探索走向规模化落地，让AI真正服务用户并产生业务价值。团队持续探索AI Native应用与研发新范式，深度实践AI Coding、研发自动化和工程效能建设。如果你既具备扎实的Java工程能力，又希望参"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁健康-浙江区域医疗BD-杭州",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012998671",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012998671",
+          "summary": "1. 负责浙江区域杭州市内医疗生态（医院、HIS、医疗健康生态公司等）及重点大客户的开发、商务对接与长期合作。 2. 深入理解客户业务场景及痛点，独立提出有针对性的解决方案，明确合作模式、实施路径及预期价值。 3. 整合公司产品、服务及合作伙伴资源，推动方案沟通、商务谈判、合同签署和项目落地。 4. 持续跟进合作效果，挖掘新增需求，推动复购及合作范围拓展。"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-大模型评测技术专家/高级专家-北京/杭州",
+          "location": "北京、杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261026012580227",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261026012580227",
+          "summary": "面向基座大模型与 AI 应用，建设可信、可复现、能反映真实任务表现的评测体系，为模型训练、选型和上线提供决策依据。重点是定义该测什么、判断分数是否可信、找到能力短板，并推动模型和业务团队改进，同时兼顾效果、效率与成本。 岗位职责 1. 建设自有评测方法与 Benchmark。 面向百灵、医疗、金融等重点领域，识别公开评测未覆盖的能力和场景，主导任务、评测数据"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-视觉设计专家（内容设计方向）-杭州",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=260527010215306",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=260527010215306",
+          "summary": "1、体验设计驱动：深度参与财富保险内容产品的全链路体验设计，从概念到落地，助力业务目标达成。 2、设计规范与系统建设：主导或核心参与设计规范的制定、维护与持续升级，确保跨平台、多业务线设计语言的高度一致性与高品质输出。 3、前沿探索与创新落地：主动研究并应用新兴设计趋势与技术（特别是AIGC），将创新思维转化为提升设计效率、优化用户体验的具体方案，引领设计方"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-机构风险策略专家-杭州",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=260714010894148",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=260714010894148",
+          "summary": "1. 负责蚂蚁与合作金融机构的联合信贷业务风险管理，统筹客群分配、资产分发与机构风控协同； 2. 设计并优化流量分配与支用路由机制，推动资产分发策略从分析到落地全流程闭环；平衡表内外及各资方的风险与业务规模目标； 3. 给合作金融提供机构管理建议，监控并管理机构资产质量，推动蚂蚁与合作机构对风险认知达成一致，确保双方风控策略协同落地； 4. 与机构开展深度风"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-AI产品经理 （金融财富方向）-财富AI Lab",
+          "location": "北京、杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012997478",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012997478",
+          "summary": "1. 深入理解财富管理场景中的用户需求，结合用户访谈、真实交互记录、业务数据与用户反馈，识别关键能力问题，明确模型、Agent优化目标； 2. 通过评测驱动Agent能力迭代，将用户任务与业务目标转化为评测维度、测试集和评分标准，持续校验评测结果与用户实际体验的一致性，迭代评测体系； 3. 牵引跨团队效果优化，通过benchmark和系统的trace归因，联"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-商业化产品专家-北京/杭州/上海",
+          "location": "北京、上海、杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012991600",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012991600",
+          "summary": "1. 深入市场，通过客户走访、行业调研及竞品分析，识别产品机会，明确目标客户、核心场景及商业价值。 2. 负责数据要素基础设施类产品的规划与设计，包括可信数据空间、隐私保护平台、密态计算平台、数据沙箱等，明确产品定位与核心能力。 3. 负责医疗、金融等行业数据产品的规划与设计，具备行业 Know-How ，明确AI时代行业数据产品的定位与核心能力。 4. 制"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁国际-AI 客服/营销产品经理-国际产品",
+          "location": "成都",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261112012876514",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261112012876514",
+          "summary": "1.负责国际客户服务平台 AI 产品规划与迭代，输出可落地的产品方案，满足多语言业务需求。 2.协同算法/工程/设计/客服/运营团队推进需求拆解、版本交付与上线验收；组织用户调研与竞品分析，持续挖掘优化机会点。 3.数据驱动产品效果：搭建指标体系（解决率、转人工率、满意度等），完成效果评估与 A/B 验证，持续优化并兑现业务价值。 4.输出产品路线图，跟踪全"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-交付架构师-北京/上海/杭州",
+          "location": "北京、上海、杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012973586",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261120012973586",
+          "summary": "1. 承接售前及 POC 成果，澄清客户需求、项目范围与技术约束，识别交付风险。 2. 负责交付架构与系统集成方案设计，覆盖数据接入、系统对接、部署及安全等关键环节。 3. 负责项目定制功能、系统适配及集成组件的研发，承担定制模块的编码工作。 4. 协同客户、内部研发及其他参与方，推进联调、上线工作，解决交付现场突发的疑难问题。 5. 深刻理解标准产品与定制"
+        },
+        {
+          "company": "蚂蚁集团",
+          "title": "蚂蚁集团-科技法务专家-科技法务",
+          "location": "杭州",
+          "job_url": "https://talent.antgroup.com/off-campus-position?positionId=261117012934705",
+          "application_url": "https://talent.antgroup.com/off-campus-position?positionId=261117012934705",
+          "summary": "1、负责AI应用、智能穿戴、安全风控、人工智能等前沿科技领域产品开发、运营及商业化推进的全链路法务支持，提供全面的法律风险评估与解决方案； 2、负责业务相关的产品评审、商业化合作合同及法律文件的起草、修订与审核，参与商业谈判； 3、对科技领域前沿法律问题（如科技创新、数据合规、安全合规、生物特征识别、AI治理等）开展前瞻性理论与实践研究，持续进行监管洞察与行"
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "蚂蚁集团"
     },
     "趋境科技 Approaching AI": {
@@ -4625,14 +7014,159 @@
       "name": "趋境科技 Approaching AI"
     },
     "轻舟智航 QCraft": {
-      "catalog_url": "https://www.qcraft.ai/join-us",
-      "entry_url": "https://www.qcraft.ai/join-us",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://qcraft.jobs.feishu.cn/index",
+      "entry_url": "https://qcraft.jobs.feishu.cn/index",
+      "read_method": "http",
+      "collected_count": 18,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:43:11+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "自动驾驶行为评测算法工程师",
+          "location": "北京 / 苏州",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7703902861066766630/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7703902861066766630/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "HR运营提效",
+          "location": "北京",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7697165123295643954/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7697165123295643954/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "行车产品经理",
+          "location": "苏州",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7680450908161296683/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7680450908161296683/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "SLAM建图算法工程师",
+          "location": "苏州 / 上海 / 北京",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7670446338400422170/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7670446338400422170/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "自动驾驶系统开发工程师",
+          "location": "苏州 / 上海 / 北京 / 芜湖 / 慕尼黑",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7670418328536631588/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7670418328536631588/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "主动安全感知算法工程师",
+          "location": "苏州 / 北京",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7664431840006244614/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7664431840006244614/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "智驾系统工程师（L3/L4系统架构/冗余设计）",
+          "location": "北京 / 苏州",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7657460908343822611/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7657460908343822611/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "平台与交付管理工程师（主动安全功能）",
+          "location": "北京 / 苏州 / 上海",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7643705018230917382/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7643705018230917382/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "自动驾驶云仿真平台高级工程师",
+          "location": "北京",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7618859706064816422/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7618859706064816422/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "L4交付项目助理",
+          "location": "金华 / 苏州",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7616243353751619878/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7616243353751619878/detail",
+          "summary": "社招 外包"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "一段式端到端算法工程师",
+          "location": "北京 / 上海 / 苏州",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7598429267533596982/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7598429267533596982/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "自动驾驶应用软件开发工程师",
+          "location": "北京 / 苏州",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7583939886571522310/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7583939886571522310/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "世界模型研发工程师",
+          "location": "北京 / 上海 / 苏州",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7579529163628185865/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7579529163628185865/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "『轻舟▪领航计划』AI人才专项",
+          "location": "北京 / 上海 / 苏州",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7578856229485938954/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7578856229485938954/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "仓库管理员",
+          "location": "金华",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7517924061566617865/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7517924061566617865/detail",
+          "summary": "社招 外包"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "规划算法工程师/专家",
+          "location": "苏州 / 北京",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7476001017336432907/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7476001017336432907/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "SLAM建图算法工程师",
+          "location": "苏州 / 上海 / 北京",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7436699275713448242/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7436699275713448242/detail",
+          "summary": "社招 全职"
+        },
+        {
+          "company": "轻舟智航 QCraft",
+          "title": "自动标注算法工程师",
+          "location": "北京 / 苏州 / 上海",
+          "job_url": "https://qcraft.jobs.feishu.cn/index/position/7312660369485400374/detail",
+          "application_url": "https://qcraft.jobs.feishu.cn/index/position/7312660369485400374/detail",
+          "summary": "社招 全职"
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "轻舟智航 QCraft"
     },
     "银河通用 Galbot": {
@@ -4696,36 +7230,599 @@
       "name": "银河通用 Galbot"
     },
     "阶跃星辰 StepFun": {
-      "catalog_url": "https://www.stepfun.com/",
-      "entry_url": "https://www.stepfun.com/",
+      "catalog_url": "https://app.mokahr.com/campus-recruitment/step/94905#/jobs",
+      "entry_url": "https://app.mokahr.com/campus-recruitment/step/94905#/jobs",
       "read_method": "browser",
-      "collected_count": 0,
+      "collected_count": 30,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:42:22+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "开发者运营实习生",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/ea6639c5-3565-4d48-89e7-1fce0956a14a",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/ea6639c5-3565-4d48-89e7-1fce0956a14a",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-端侧大模型量化算法工程师",
+          "location": "",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/f2372b7f-ebaa-4a7f-ac5a-6ce0940c5a66",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/f2372b7f-ebaa-4a7f-ac5a-6ce0940c5a66",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "大模型post train算法研究员",
+          "location": "北京市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/f05639bf-4555-4fb6-af7d-592f319d3e25",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/f05639bf-4555-4fb6-af7d-592f319d3e25",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "AI 安全研究员 / Research Scientist, AI Safety",
+          "location": "",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/e29f0e64-b980-4690-8fa7-a196c4f3e7d7",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/e29f0e64-b980-4690-8fa7-a196c4f3e7d7",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "Stepstar实习-大模型推理优化系统工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/ddfda00c-140a-4ada-be2b-51bd29b0bd46",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/ddfda00c-140a-4ada-be2b-51bd29b0bd46",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-大模型推理优化系统工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/4fd27b27-d29f-40a0-9ec2-9848c3f81622",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/4fd27b27-d29f-40a0-9ec2-9848c3f81622",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-高性能网络系统工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/dda341a8-2b55-472e-ac36-927acacb8ebe",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/dda341a8-2b55-472e-ac36-927acacb8ebe",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-大语言模型pre-train 算法研究员",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/e1b32746-3aff-47b6-bef5-7370840c3db0",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/e1b32746-3aff-47b6-bef5-7370840c3db0",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-大语言模型pre-train 数据算法工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/9fd48889-12c5-4613-b0f7-1f459c6340b0",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/9fd48889-12c5-4613-b0f7-1f459c6340b0",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "Stepstar实习-大模型训练框架系统工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/db20a4ab-6d66-43fc-8995-6b1a2d9e17a2",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/db20a4ab-6d66-43fc-8995-6b1a2d9e17a2",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-大模型后训练系统工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/7ca418fb-2df5-437d-9c79-514c022f094b",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/7ca418fb-2df5-437d-9c79-514c022f094b",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-大语言模型架构算法研究员",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/d8d0e0ef-09ee-4733-b643-c8606c113574",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/d8d0e0ef-09ee-4733-b643-c8606c113574",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "Stepstar实习-高性能网络系统工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/daaa61b3-7776-4fd3-9333-ad05414a3bae",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/daaa61b3-7776-4fd3-9333-ad05414a3bae",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "Stepstar实习-端侧LLM/VLM算法研究员",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/da17c2f4-4868-4866-a312-f998badcab92",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/da17c2f4-4868-4866-a312-f998badcab92",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-大语言模型mid-train 算法研究员",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/650e8b25-27be-4229-a757-cfc38d753893",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/650e8b25-27be-4229-a757-cfc38d753893",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-语音大模型算法研究员/工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/96558782-96c6-44b7-a9d6-8732a1a861e0",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/96558782-96c6-44b7-a9d6-8732a1a861e0",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "Stepstar实习-语音大模型算法研究员/工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/3a1ae63e-c80f-4b33-91db-5f71718b83b7",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/3a1ae63e-c80f-4b33-91db-5f71718b83b7",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-大模型训练框架系统工程师",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/64c156e3-a665-4ce9-9e47-613fe09218ec",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/64c156e3-a665-4ce9-9e47-613fe09218ec",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "Stepstar实习-LLM 预训练数据算法工程师",
+          "location": "",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/67e11c7c-e63e-4957-9e3b-80e7225e4799",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/67e11c7c-e63e-4957-9e3b-80e7225e4799",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-LLM post train 算法研究员",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/5e938ea8-dfab-4d05-8043-550393edb488",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/5e938ea8-dfab-4d05-8043-550393edb488",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届Stepstar-Code Agent 算法研究员",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/6c97ac79-0156-408d-be2f-f7e2a73ba34f",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/6c97ac79-0156-408d-be2f-f7e2a73ba34f",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "Stepstar实习-LLM post train算法研究员",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/67473ccb-e34c-48c7-b8dc-cd38a9290b0f",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/67473ccb-e34c-48c7-b8dc-cd38a9290b0f",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "Stepstar实习-Code Agent算法研究员",
+          "location": "北京市 上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/8cf05a7c-6a90-4fe3-a30e-f8170621dee8",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/8cf05a7c-6a90-4fe3-a30e-f8170621dee8",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "财务部实习生",
+          "location": "实习地点：上海西岸",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/9e15f8a9-f666-4148-9d6f-9fa76e9138ec",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/9e15f8a9-f666-4148-9d6f-9fa76e9138ec",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届-IoT应用软件开发工程师",
+          "location": "上海市 广东·深圳市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/54c8bf8a-3bb6-4352-ba6f-9286cab2b21d",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/54c8bf8a-3bb6-4352-ba6f-9286cab2b21d",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届-Agent 开发工程师（企业信息化方向）",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/7ba6e0f8-f2dc-47d9-9101-dd2f1c055729",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/7ba6e0f8-f2dc-47d9-9101-dd2f1c055729",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届-显示算法工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/931dbf55-7845-4123-9320-6f213da5128e",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/931dbf55-7845-4123-9320-6f213da5128e",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届-影像应用软件工程师",
+          "location": "上海市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/2648a34b-6f4e-4cf8-a086-80b3954d0184",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/2648a34b-6f4e-4cf8-a086-80b3954d0184",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届- 嵌入式软件开发工程师",
+          "location": "上海市 广东·深圳市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/f68d6160-892b-4373-ad79-1eb277cbe82c",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/f68d6160-892b-4373-ad79-1eb277cbe82c",
+          "summary": ""
+        },
+        {
+          "company": "阶跃星辰 StepFun",
+          "title": "27届-基带硬件工程师",
+          "location": "广东·深圳市",
+          "job_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/354d7840-1020-48a7-95f3-1803d134f88e",
+          "application_url": "https://app.mokahr.com/campus-recruitment/step/94905#/job/354d7840-1020-48a7-95f3-1803d134f88e",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "阶跃星辰 StepFun"
     },
     "阿里巴巴": {
-      "catalog_url": "https://home.alibabagroup.com/zh-HK/careers",
-      "entry_url": "https://home.alibabagroup.com/zh-HK/careers",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://talent-holding.alibaba.com/off-campus/position-list?lang=zh",
+      "entry_url": "https://talent-holding.alibaba.com/off-campus/position-list?lang=zh",
+      "read_method": "http",
+      "collected_count": 30,
       "pagination_complete": false,
-      "failure_reason": "parser_gap",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:41:50+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "阿里巴巴",
+          "title": "数据技术及产品部-高级算法工程师-视觉生成大模型",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100015660002",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100015660002",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "基础设施与稳定性工程-AI Infra 软硬件协同优化专家-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100008180007",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100008180007",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "阿里控股-AI Infra存储研发工程师-杭州/北京",
+          "location": "北京、杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100057920013",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100057920013",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "AI推理平台-百炼AI搜索效果开发工程师/技术专家-北京/杭州",
+          "location": "北京、杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100054780001",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100054780001",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "基础设施与稳定性工程-AI系统技术专家-底层系统与运行时方向",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100053360002",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100053360002",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "数据技术及产品部-AI 数据工程-AI策略和效能",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100053500001",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100053500001",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "达摩院-工具链专家-计算技术",
+          "location": "杭州、上海",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100021020010",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100021020010",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "基础设施与稳定性工程-Agentic算力基础设施研发工程师-杭州/北京",
+          "location": "北京、杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100035960001",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100035960001",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "阿里控股-全栈研发工程师-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100057760004",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100057760004",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "阿里控股-园区办公招商负责人-南京",
+          "location": "南京",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100058060002",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100058060002",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "AI推理平台-百炼网关研发工程师/专家-杭州/北京",
+          "location": "北京、杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100027980001",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100027980001",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "数据技术及产品部-数据算法工程师-具身智能模型",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100018600028",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100018600028",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "阿里控股-AI Agent 产品经理-研发智能化",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100057980003",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100057980003",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "ATH-AI创新事业部-Qoder服务端研发-AI 产品商业化方向",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100013583003",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100013583003",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-智能体安全运营-Harness风险治理",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100026300005",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100026300005",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-大模型安全算法-北京/杭州",
+          "location": "北京、杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100024760013",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100024760013",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-AIGC多模态大模型专家-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100039180004",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100039180004",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-AI红队-Agent攻防工程师/专家-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100022920010",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100022920010",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-大模型训练算法工程师/专家-数据安全",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100010400004",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100010400004",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-移动攻防专家-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100051140001",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100051140001",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-行为风控Agent算法专家-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100018040001",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100018040001",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-内容安全大模型算法-商品治理大模型（杭州）",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100055460002",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100055460002",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "阿里控股-内容安全大模型算法-AI被动防控（杭州）",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100052660008",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100052660008",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-内容安全算法专家-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100052660007",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100052660007",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-全模态内容安全算法专家-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100023000005",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100023000005",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "集团安全部-内容安全大模型算法专家-杭州/北京",
+          "location": "北京、杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100011220002",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100011220002",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "AI推理平台-大模型异构芯片适配与推理优化工程师-杭州/北京",
+          "location": "北京、杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100022920008",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100022920008",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "AI推理平台-百炼技术专家 / 高级开发工程师（企业 Agent 平台架构方向）-杭州/北京",
+          "location": "北京、杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100058000002",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100058000002",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "阿里控股-AI大模型采购-杭州",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=7000022511",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=7000022511",
+          "summary": ""
+        },
+        {
+          "company": "阿里巴巴",
+          "title": "乌鸫科技-运维工程师-智能引擎",
+          "location": "杭州",
+          "job_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100058000006",
+          "application_url": "https://talent-holding.alibaba.com/off-campus/position-detail?positionId=100058000006",
+          "summary": ""
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "阿里巴巴"
     },
     "零次方机器人": {
-      "catalog_url": "https://www.zerith.ai/join",
-      "entry_url": "https://www.zerith.ai/join",
-      "read_method": "browser",
-      "collected_count": 0,
+      "catalog_url": "https://zerith.com/join/society/",
+      "entry_url": "https://zerith.com/join/society/",
+      "read_method": "http",
+      "collected_count": 10,
       "pagination_complete": false,
-      "failure_reason": "network_error",
-      "jobs": [],
-      "fetched_at": "2026-11-21T11:42:41+00:00",
+      "failure_reason": "",
+      "jobs": [
+        {
+          "company": "零次方机器人",
+          "title": "大客户销售经理",
+          "location": "合肥",
+          "job_url": "https://zerith.com/join/society/#role=%E5%A4%A7%E5%AE%A2%E6%88%B7%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86",
+          "application_url": "https://zerith.com/join/society/#role=%E5%A4%A7%E5%AE%A2%E6%88%B7%E9%94%80%E5%94%AE%E7%BB%8F%E7%90%86",
+          "summary": "负责To B & ToG的KA客户及SI的开发和维系工作，行业聚焦于政府、高校、头部互联网等。"
+        },
+        {
+          "company": "零次方机器人",
+          "title": "销售总监",
+          "location": "深圳/合肥",
+          "job_url": "https://zerith.com/join/society/#role=%E9%94%80%E5%94%AE%E6%80%BB%E7%9B%91",
+          "application_url": "https://zerith.com/join/society/#role=%E9%94%80%E5%94%AE%E6%80%BB%E7%9B%91",
+          "summary": "战略规划与执行：根据公司整体战略，制定并实施销售策略与市场拓展计划，推动公司产品在目标市场的商业化落地，对整体销售业绩负责。"
+        },
+        {
+          "company": "零次方机器人",
+          "title": "软件测试工程师",
+          "location": "深圳市",
+          "job_url": "https://zerith.com/join/society/#role=%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://zerith.com/join/society/#role=%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": ""
+        },
+        {
+          "company": "零次方机器人",
+          "title": "导航算法工程师",
+          "location": "深圳市",
+          "job_url": "https://zerith.com/join/society/#role=%E5%AF%BC%E8%88%AA%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://zerith.com/join/society/#role=%E5%AF%BC%E8%88%AA%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "负责人形机器人多指灵巧手或夹爪的机构设计、仿真分析与样机研制&nbsp;"
+        },
+        {
+          "company": "零次方机器人",
+          "title": "机械工程师（灵巧手方向）",
+          "location": "深圳市",
+          "job_url": "https://zerith.com/join/society/#role=%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%88%E7%81%B5%E5%B7%A7%E6%89%8B%E6%96%B9%E5%90%91%EF%BC%89",
+          "application_url": "https://zerith.com/join/society/#role=%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%88%E7%81%B5%E5%B7%A7%E6%89%8B%E6%96%B9%E5%90%91%EF%BC%89",
+          "summary": "负责人形机器人多指灵巧手或夹爪的机构设计、仿真分析与样机研制&nbsp;"
+        },
+        {
+          "company": "零次方机器人",
+          "title": "机械工程师（机械臂）",
+          "location": "深圳市",
+          "job_url": "https://zerith.com/join/society/#role=%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%88%E6%9C%BA%E6%A2%B0%E8%87%82%EF%BC%89",
+          "application_url": "https://zerith.com/join/society/#role=%E6%9C%BA%E6%A2%B0%E5%B7%A5%E7%A8%8B%E5%B8%88%EF%BC%88%E6%9C%BA%E6%A2%B0%E8%87%82%EF%BC%89",
+          "summary": "独立完成人形机器人机械臂、协作机械臂相关的方案设计与优化，熟悉谐波、行星方案整机线束走线。"
+        },
+        {
+          "company": "零次方机器人",
+          "title": "DQE工程师",
+          "location": "深圳市",
+          "job_url": "https://zerith.com/join/society/#role=DQE%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://zerith.com/join/society/#role=DQE%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "负责产品研发阶段质量策划与质量风险管理，参与需求评审、方案评审、设计评审及设计变更评审；"
+        },
+        {
+          "company": "零次方机器人",
+          "title": "具身智能工程师",
+          "location": "深圳市",
+          "job_url": "https://zerith.com/join/society/#role=%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://zerith.com/join/society/#role=%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "负责开发面向具身智能（embodied intelligence）的大规模多模态模型，包括但不限于空间感知、世界模型 (world-modeling)、视觉-语言-动作（Vision-Language-Action, VLA）等关键技术；"
+        },
+        {
+          "company": "零次方机器人",
+          "title": "具身智能研究员",
+          "location": "深圳市",
+          "job_url": "https://zerith.com/join/society/#role=%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%A0%94%E7%A9%B6%E5%91%98",
+          "application_url": "https://zerith.com/join/society/#role=%E5%85%B7%E8%BA%AB%E6%99%BA%E8%83%BD%E7%A0%94%E7%A9%B6%E5%91%98",
+          "summary": "负责具身智能大规模多模态模型（如空间感知、世界模型、VLA）的开发与训练；&nbsp;"
+        },
+        {
+          "company": "零次方机器人",
+          "title": "推理加速与部署工程师",
+          "location": "深圳市",
+          "job_url": "https://zerith.com/join/society/#role=%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F%E4%B8%8E%E9%83%A8%E7%BD%B2%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "application_url": "https://zerith.com/join/society/#role=%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F%E4%B8%8E%E9%83%A8%E7%BD%B2%E5%B7%A5%E7%A8%8B%E5%B8%88",
+          "summary": "面向 Jetson Orin Nano / Orin NX / AGX Orin 及 RTX 30 / 40 / 50 系 NVIDIA GPU，负责具身模型的量化落地，覆盖 PTQ、QAT、INT8 / INT4 / FP16 / FP8、KV Cache 量化、Vision Encoder 量化、Action He"
+        }
+      ],
+      "fetched_at": "2026-11-21T12:57:29+00:00",
       "name": "零次方机器人"
     }
   }
