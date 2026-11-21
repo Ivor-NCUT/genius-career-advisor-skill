@@ -1,6 +1,6 @@
 # 申请回答库
 
-文件位置：当前工作区 `<workspace>/candidate-memory.json`。它只保存在本地，不进入 `external-applications.jsonl`、Git、泛函内推载荷或招聘网站。
+文件位置：当前工作区 `<workspace>/candidate-memory.json`。它只保存在本地，不进入 `external-applications.jsonl`、Git 或招聘网站。
 
 ## 使用时机
 

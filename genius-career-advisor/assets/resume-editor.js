@@ -88,9 +88,14 @@
   }
 
   function snapshot(main) {
-    // ponytail: drafts preserve the fixed resume section model; add sanitized rich HTML only if layout editing becomes a real need.
+    const fields = {};
+    Array.from(main.querySelectorAll('[data-field]')).forEach((element) => {
+      const name = element.getAttribute('data-field');
+      if (name) fields[name] = renderedText(element);
+    });
     return {
-      version: 1,
+      version: 2,
+      fields,
       sections: Array.from(main.querySelectorAll('section')).map((section) => ({
         heading: text(section.querySelector('h2')),
         content: renderedText(section.querySelector('p')),
@@ -103,7 +108,7 @@
     try {
       const draft = JSON.parse(storage.getItem(key) || 'null');
       const sections = Array.from(main.querySelectorAll('section'));
-      if (!draft || draft.version !== 1 || !Array.isArray(draft.sections)
+      if (!draft || (draft.version !== 1 && draft.version !== 2) || !Array.isArray(draft.sections)
           || draft.sections.length !== sections.length) return false;
       sections.forEach((section, index) => {
         const saved = draft.sections[index] || {};
@@ -112,6 +117,14 @@
         if (heading) heading.textContent = String(saved.heading || '');
         if (content) content.innerText = String(saved.content || '');
       });
+      if (draft.fields && typeof draft.fields === 'object') {
+        Array.from(main.querySelectorAll('[data-field]')).forEach((element) => {
+          const name = element.getAttribute('data-field');
+          if (name && Object.prototype.hasOwnProperty.call(draft.fields, name)) {
+            element.textContent = String(draft.fields[name] || '');
+          }
+        });
+      }
       return true;
     } catch (_) {
       return false;
@@ -155,7 +168,7 @@
     const paragraph = { textContent: '旧内容', innerText: '旧内容' };
     const section = { querySelector: (selector) => selector === 'h2' ? heading : paragraph };
     const main = {
-      querySelectorAll: () => [section],
+      querySelectorAll: (selector) => (selector === 'section' ? [section] : []),
       addEventListener: (name, handler) => { events[name] = handler; },
       blur: () => {},
       cloneNode: () => ({

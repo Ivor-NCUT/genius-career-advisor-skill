@@ -154,18 +154,61 @@ def validate(profile: dict, proposal: dict) -> tuple[list[dict], list[dict], dic
     return sections, changes, consultation
 
 
-def render_html(title: str, sections: list[dict], editor_version: str) -> str:
-    body = []
+def known_text(value: object) -> str:
+    text = str(value or "").strip()
+    return "" if text.casefold() in {"", "unknown", "未知"} else text
+
+
+def slot_for(heading: str) -> str:
+    key = heading.casefold()
+    if any(word in key for word in ("教育", "education", "学历")):
+        return "education"
+    if any(word in key for word in ("荣誉", "证书", "honor", "certification")):
+        return "honors"
+    if any(word in key for word in ("简介", "总结", "summary", "概述")):
+        return "summary"
+    return "experience"
+
+
+def rich_text(value: str) -> str:
+    return "<br>".join(html.escape(value.strip()).splitlines())
+
+
+def grouped_sections(sections: list[dict]) -> dict[str, str]:
+    grouped = {"summary": [], "education": [], "honors": [], "experience": []}
     for section in sections:
-        content = "<br>".join(html.escape(section["content"].strip()).splitlines())
-        body.append(f"<section><h2>{html.escape(section['heading'])}</h2><p>{content}</p></section>")
+        grouped[slot_for(section["heading"])].append(section["content"].strip())
+    return {key: "\n\n".join(item for item in items if item) for key, items in grouped.items()}
+
+
+def resume_identity(profile: dict) -> dict[str, str]:
+    identity = profile.get("identity") if isinstance(profile.get("identity"), dict) else {}
+    contact = profile.get("contact") if isinstance(profile.get("contact"), dict) else {}
+    name = known_text(identity.get("name"))
+    return {
+        "name": name,
+        "name_en": known_text(identity.get("name_en")),
+        "headline": known_text(identity.get("current_title")),
+        "email": known_text(contact.get("email")),
+        "phone": known_text(contact.get("phone_or_wechat")),
+        "website": known_text(contact.get("website")),
+        "monogram": name[:1] or "名",
+    }
+
+
+def render_html(title: str, sections: list[dict], editor_version: str, profile: dict | None = None) -> str:
+    grouped = grouped_sections(sections)
+    person = resume_identity(profile or {})
+    summary = grouped["summary"]
+    def column(key: str, label: str) -> str:
+        return f'<section data-slot="{key}"><h2>{label}</h2><p>{rich_text(grouped[key])}</p></section>'
     return f"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)}</title>
 <style>
-@page{{size:A4;margin:0}}*{{box-sizing:border-box}}body{{margin:0;background:#eee;color:#222;font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}.toolbar{{position:sticky;z-index:2;top:0;display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:10px;background:#fff;border-bottom:1px solid #ddd}}.status{{color:#666;font-size:12px}}.status[data-state="error"]{{color:#b42318}}button,.download{{padding:8px 14px;border:0;border-radius:6px;background:#1769e0;color:#fff;cursor:pointer;text-decoration:none}}button:disabled{{cursor:wait;opacity:.65}}.download[hidden]{{display:none}}main{{width:210mm;min-height:297mm;margin:16px auto;padding:14mm;background:#fff;box-shadow:0 2px 14px #bbb;outline:none}}section{{break-inside:avoid;page-break-inside:avoid}}h2{{font-size:16px;border-bottom:1px solid #ddd;padding-bottom:4px}}p{{white-space:normal}}body.exporting{{background:#fff}}body.exporting .toolbar{{display:none}}body.exporting main{{margin:0;box-shadow:none}}
-</style></head><body data-fanhan-resume-editor="v2"><div class="toolbar"><span class="status" data-editor-status role="status" aria-live="polite">修改会自动保存；先生成 PDF，再点击下载并发回当前对话</span><button type="button" data-export-pdf>生成 PDF</button><a class="download" data-download-pdf hidden target="_blank" rel="noopener">下载 PDF</a></div>
-<main contenteditable="true" spellcheck="false" data-resume-content>{''.join(body)}</main>
+@page{{size:A4;margin:0}}*{{box-sizing:border-box}}body{{margin:0;background:#e7e7e7;color:#2a2a2a;font:14px/1.65 "Songti SC","Noto Serif SC",Georgia,serif}}.toolbar{{position:sticky;z-index:2;top:0;display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:10px;background:#fff;border-bottom:1px solid #ddd;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}.status{{color:#666;font-size:12px}}.status[data-state="error"]{{color:#b42318}}button,.download{{padding:8px 14px;border:0;border-radius:6px;background:#1769e0;color:#fff;cursor:pointer;text-decoration:none}}button:disabled{{cursor:wait;opacity:.65}}.download[hidden]{{display:none}}main{{width:210mm;min-height:297mm;margin:16px auto;background:#fff;box-shadow:0 2px 14px #bbb;outline:none;display:flex;flex-direction:column}}.sheet-head{{display:flex;gap:28px;align-items:flex-start;padding:18mm 16mm 8mm}}.portrait{{flex:0 0 118px;width:118px;height:118px;border-radius:50%;background:#ece7e1;color:#3a342e;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:600}}.identity{{flex:1;min-width:0}}[data-field="name"]{{margin:0;font-size:34px;line-height:1.15;font-weight:600}}[data-field="name_en"]{{margin:4px 0 0;letter-spacing:.18em;font-size:13px}}[data-field="headline"]{{margin:8px 0 0;font-size:16px}}[data-field="summary"]{{margin:12px 0 0;font-size:13px;line-height:1.7}}.columns{{display:flex;gap:28px;padding:0 16mm 12mm;flex:1}}.side{{flex:0 0 36%}}.primary{{flex:1}}section{{break-inside:avoid;page-break-inside:avoid;margin:0 0 22px}}h2{{margin:0 0 10px;font-size:13px;letter-spacing:.16em;font-weight:650}}p{{margin:0;white-space:normal}}footer{{display:flex;gap:28px;align-items:center;padding:12px 16mm;background:#2b2b2b;color:#fff;font:13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}footer span{{display:flex;gap:8px;align-items:center;min-width:0}}footer svg{{width:16px;height:16px;fill:currentColor;flex:0 0 auto}}body.exporting{{background:#fff}}body.exporting .toolbar{{display:none}}body.exporting main{{margin:0;box-shadow:none}}
+</style></head><body data-fanhan-resume-editor="v2" data-resume-layout="sheet-v1"><div class="toolbar"><span class="status" data-editor-status role="status" aria-live="polite">修改会自动保存；先生成 PDF，再点击下载并发回当前对话</span><button type="button" data-export-pdf>生成 PDF</button><a class="download" data-download-pdf hidden target="_blank" rel="noopener">下载 PDF</a></div>
+<main contenteditable="true" spellcheck="false" data-resume-content><header class="sheet-head"><div class="portrait" data-field="monogram">{html.escape(person["monogram"])}</div><div class="identity"><h1 data-field="name">{html.escape(person["name"])}</h1><p data-field="name_en">{html.escape(person["name_en"])}</p><p data-field="headline">{html.escape(person["headline"])}</p><p data-field="summary">{rich_text(summary)}</p></div></header><div class="columns"><aside class="side">{column("education", "EDUCATION")}{column("honors", "HONORS & CERTIFICATIONS")}</aside><div class="primary">{column("experience", "EXPERIENCE")}</div></div><footer><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.6 15.6 0 00-1.2-5 8.1 8.1 0 014.4 5zM12 4c.8 1.1 1.8 3.2 2.1 7H9.9c.3-3.8 1.3-5.9 2.1-7zM4.1 13h3.2a15.6 15.6 0 001.2 5 8.1 8.1 0 01-4.4-5zm3.2-2H4.1a8.1 8.1 0 014.4-5 15.6 15.6 0 00-1.2 5zM12 20c-.8-1.1-1.8-3.2-2.1-7h4.2c-.3 3.8-1.3 5.9-2.1 7zm2.7-2a15.6 15.6 0 001.2-5h3.2a8.1 8.1 0 01-4.4 5z"/></svg><span data-field="website">{html.escape(person["website"])}</span></span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2zm0 2v.4l9 6.2 9-6.2V7H3zm18 10V9.7l-8.4 5.8a1 1 0 01-1.2 0L3 9.7V17h18z"/></svg><span data-field="email">{html.escape(person["email"])}</span></span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l1 4-2 1a12 12 0 006 6l1-2 4 1v3a2 2 0 01-2 2A15 15 0 015 5a2 2 0 012-2z"/></svg><span data-field="phone">{html.escape(person["phone"])}</span></span></footer></main>
 <script src=".fanhan-assets/html2pdf.bundle.min.js"></script><script src=".fanhan-assets/resume-editor.js?v={editor_version}"></script><script>FanhanResumeEditor.install();</script></body></html>
 """
 
@@ -237,7 +280,7 @@ def render(profile_path: Path, proposal_path: Path, output_path: Path) -> None:
 
     original_hash = sha256(original)
     editor = Path(__file__).resolve().parent.parent / "assets" / "resume-editor.js"
-    rendered = render_html(output.stem, sections, sha256(editor)[:12])
+    rendered = render_html(output.stem, sections, sha256(editor)[:12], profile)
     output.parent.mkdir(parents=True, exist_ok=True)
     install_editor_assets(output.parent)
     with output.open("x", encoding="utf-8") as stream:
@@ -327,6 +370,13 @@ def self_test() -> None:
         assert "window.print()" not in page and "html2pdf.bundle.min.js" in page
         assert all((output.parent / ".fanhan-assets" / name).is_file() for name in EDITOR_ASSETS)
         assert "<title>张三-Example-AI产品经理-20260818-v1</title>" in page
+        assert 'data-resume-layout="sheet-v1"' in page
+        assert ">EDUCATION</h2>" in page and ">EXPERIENCE</h2>" in page
+        assert ">HONORS & CERTIFICATIONS</h2>" in page
+        assert 'data-field="name">张三</h1>' in page
+        assert "负责有证据的 AI 产品交付。" in page
+        for sample in ("夏铭淳", "IRENE XIA", "reallygreatsite.com", "138-0000-0000"):
+            assert sample not in page
         markdown = output.with_suffix(".md")
         try:
             render(profile_path, proposal_path, markdown)
