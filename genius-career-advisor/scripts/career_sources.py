@@ -687,14 +687,18 @@ def _career_hop(page: str, base_url: str) -> str:
 
 def _finish_source(record_name: str, url: str, jobs: list[dict], query: str, limit: int, empty_reason: str) -> dict:
     if not jobs:
-        return unavailable(record_name, url, empty_reason or "no_public_job_list")
+        result = unavailable(record_name, url, empty_reason or "no_public_job_list")
+        result["collected_count"] = 0
+        return result
     chosen, total = select_jobs(jobs, query, limit)
     return {
         "source": record_name,
         "source_url": url,
         "source_status": "searched",
+        "collected_count": len(jobs),
         "matched_jobs": total,
         "jobs": chosen,
+        "failure_reason": "" if total else "collected_no_match",
     }
 
 
@@ -1074,6 +1078,10 @@ def read_browser_source(record: dict, query: str, limit: int) -> dict:
     jobs = browse_official(url, name, max(limit, PER_SOURCE_JOB_CAP * MAX_PAGES))
     result = _finish_source(name, url, jobs, query, limit, "no_readable_rendered_jobs")
     result["read_method"] = "browser"
+    result["_collected_jobs"] = jobs
+    result["collected_count"] = len(jobs)
+    if result.get("source_status") != "searched":
+        result["failure_reason"] = "parser_gap"
     return result
 
 
@@ -1343,6 +1351,12 @@ def combine_results(sources: list[dict], query: str = "", limit: int = 20, profi
                 "source_url": source.get("source_url"),
                 "source_status": source.get("source_status"),
                 "matched_jobs": source.get("matched_jobs", 0),
+                "collected_count": source.get("collected_count", 0),
+                **({"failure_reason": source.get("failure_reason")} if source.get("failure_reason") else {}),
+                **({"read_method": source.get("read_method")} if source.get("read_method") else {}),
+                **({"pagination_complete": source.get("pagination_complete")} if "pagination_complete" in source else {}),
+                **({"checked_at": source.get("checked_at")} if source.get("checked_at") else {}),
+                **({"entry_url": source.get("entry_url")} if source.get("entry_url") else {}),
                 **({"error": source.get("error")} if source.get("error") and source.get("source_status") != "searched" else {}),
             }
             for source in visible

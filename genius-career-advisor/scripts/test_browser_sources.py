@@ -3,9 +3,11 @@
 import sys
 import types
 import unittest
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import browser_jobs
+import career_cache
 import career_sources
 import external_jobs
 
@@ -81,8 +83,11 @@ class BrowserSourcesTest(unittest.TestCase):
         with patch.object(career_sources, "read_browser_source", side_effect=rendered) as render, \
              patch.object(external_jobs.watcha_jobs, "fetch_payload", return_value={}), \
              patch.object(external_jobs.watcha_jobs, "normalize", return_value=watcha):
+            cache_file = Path("/tmp/career-cache-unit.json")
+            cache_file.unlink(missing_ok=True)
             result = external_jobs.search_all("AI", 20, catalog={"records": records},
-                                              fetch=lambda url: (url, '<div id="root"></div>'), browser_limit=2)
+                                              fetch=lambda url: (url, '<div id="root"></div>'), browser_limit=2,
+                                              cache_file=cache_file)
         self.assertEqual(render.call_count, 2)
         self.assertEqual(result["source_summary"]["browser_attempted"], 2)
         self.assertEqual(len(result["jobs"]), 3)
@@ -101,6 +106,44 @@ class BrowserSourcesTest(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "page failed"):
                 browser_jobs.browse_official("https://example.com/", "公司")
         browser.close.assert_called_once()
+
+    def test_browser_slots_prefer_named_company_then_oldest_check(self):
+        moment = career_cache.now_utc()
+        cache = {"entries": {
+            "已查过": {"fetched_at": "2026-11-21T00:00:00+00:00", "jobs": [], "failure_reason": "parser_gap"},
+            "刚查过": {"fetched_at": moment.isoformat(), "jobs": [], "failure_reason": "parser_gap"},
+        }}
+        records = [
+            {"name": "刚查过", "url": "https://new.example"},
+            {"name": "已查过", "url": "https://old.example"},
+            {"name": "小米", "url": "https://hr.xiaomi.com/"},
+            {"name": "从未检查", "url": "https://never.example"},
+        ]
+        picked = [item["name"] for item in career_cache.pick_browser_targets(records, cache, "小米产品", 3, moment)]
+        self.assertEqual(picked, ["小米", "从未检查", "已查过"])
+
+    def test_fresh_success_does_not_spend_a_browser_slot(self):
+        moment = career_cache.now_utc()
+        cache_file = Path("/tmp/career-cache-fresh.json")
+        career_cache.save({"entries": {"DeepSeek 深度求索": {
+            "fetched_at": moment.isoformat(),
+            "jobs": [career_sources.job_record("DeepSeek", "服务端开发工程师", "北京", "https://example.com/job/1")],
+            "collected_count": 1,
+            "entry_url": "https://talent.deepseek.com/",
+        }}}, cache_file)
+        records = [{"name": "DeepSeek 深度求索", "url": "https://talent.deepseek.com/", "type": "公司招聘官网", "access": "免费公开", "quality": "高"}]
+        watcha = {"source": "Watcha", "source_url": "https://watcha.cn/study/jobs", "source_status": "searched", "matched_jobs": 0, "jobs": []}
+        with patch.object(career_sources, "read_browser_source") as render, \
+             patch.object(external_jobs.watcha_jobs, "fetch_payload", return_value={}), \
+             patch.object(external_jobs.watcha_jobs, "normalize", return_value=watcha):
+            result = external_jobs.search_all("工程师", 5, catalog={"records": records},
+                                              fetch=lambda url: (url, "<div id='root'></div>"), browser_limit=5,
+                                              cache_file=cache_file)
+        render.assert_not_called()
+        self.assertEqual(result["jobs"][0]["title"], "服务端开发工程师")
+        deepseek = next(item for item in result["sources"] if item["source"] == "DeepSeek 深度求索")
+        self.assertEqual(deepseek["read_method"], "cache")
+        self.assertGreater(deepseek["collected_count"], 0)
 
 
 if __name__ == "__main__":

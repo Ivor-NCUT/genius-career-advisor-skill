@@ -13,6 +13,14 @@ python3 -m playwright install chromium
 
 运行时优先使用 Playwright 的 Chromium，缺失时尝试本机 Chrome。依赖或浏览器缺失会在对应来源的 `error` 中返回 `browser_dependency_missing` 或 `browser_runtime_missing`。操作者据此准备环境后重试。原有公开来源继续返回岗位。
 
+## 复用与名额
+
+读到的官网职位写在 `data/career-read-cache.json`，带读取时间。24 小时内再次搜索直接复用，不占浏览器名额。名额先给用户点名的公司，再给最久没检查的官网。没轮到浏览器的来源是 `not_browser_checked`（尚未验证）。读到职位但不符合本次查询是 `collected_no_match`，不算来源失败。
+
+失败原因分开记录：`not_browser_checked`、`page_not_ready`、`parser_gap`、`dead_url`、`network_error`、`login_or_restricted`、`no_public_jobs`。
+
+完整排查用 `python3 scripts/coverage_report.py`。它会先走 HTTP，再对尚未读通的官网逐家打开浏览器。日常搜索仍受 `--browser-limit` 限制。
+
 ## 结果核对
 
 - 浏览器沿官网公开的招聘链接进入实际职位列表。Moka 的 `#/job/...` 是职位标识，去重时保留。

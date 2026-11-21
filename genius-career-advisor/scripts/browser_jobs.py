@@ -116,7 +116,9 @@ def jobs_from_anchors(anchors: list[dict], company: str, base_url: str, limit: i
                 continue
             if not title and 2 <= len(line) <= 120 and not REJECT_TEXT.search(line):
                 title = line
-        if not title:
+        if not title or re.fullmatch(r"\d+", title) or re.fullmatch(r"\d+\s*jobs?", title, re.I):
+            continue
+        if re.fullmatch(r"首\s*页|首页|home", title, re.I):
             continue
         if href in seen:
             continue
@@ -176,8 +178,7 @@ def career_links(anchors: list[dict], base_url: str) -> list[str]:
         seen.add(href)
         ranked.append((score, href))
     ranked.sort(key=lambda item: item[0], reverse=True)
-    social = [href for score, href in ranked if score >= 0]
-    return social or [href for _score, href in ranked]
+    return [href for score, href in ranked if score >= 0]
 
 
 def next_list_url(url: str) -> str:
@@ -263,7 +264,10 @@ def _remaining_ms(deadline):
 def _open(page, url: str, deadline: float) -> None:
     if page.url and page.url != "about:blank" and _same_document(page.url, url) and "#" in url:
         page.evaluate("(href) => { window.location.href = href }", url)
-        page.wait_for_timeout(min(1500, _remaining_ms(deadline)))
+        try:
+            page.wait_for_selector("a[href*='#/job/']", timeout=min(8000, _remaining_ms(deadline)))
+        except Exception:
+            page.wait_for_timeout(min(2000, _remaining_ms(deadline)))
     else:
         page.goto(url, wait_until="domcontentloaded", timeout=min(15000, _remaining_ms(deadline)))
     try:
@@ -292,6 +296,26 @@ def _click_next(page) -> bool:
           return true;
         }"""
     ))
+
+
+def _homepage_candidates(url: str) -> list[str]:
+    parsed = urlparse(url)
+    if not parsed.scheme or not parsed.netloc:
+        return []
+    found = []
+    origin = f"{parsed.scheme}://{parsed.netloc}/"
+    if parsed.path not in {"", "/"}:
+        found.append(origin)
+    labels = parsed.netloc.casefold().split(".")
+    if labels and labels[0] in {"career", "careers", "talent", "hr", "job", "jobs", "zhaopin", "join"} and len(labels) > 2:
+        parent = ".".join(labels[1:])
+        found.append(f"{parsed.scheme}://{parent}/")
+        found.append(f"{parsed.scheme}://www.{parent}/")
+    unique = []
+    for item in found:
+        if item not in unique:
+            unique.append(item)
+    return unique
 
 
 def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
@@ -340,7 +364,19 @@ def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
                     return
 
             page.on("response", on_response)
-            _open(page, url, deadline)
+            try:
+                _open(page, url, deadline)
+            except Exception as first_error:
+                opened_home = False
+                for home in _homepage_candidates(url):
+                    try:
+                        _open(page, home, deadline)
+                        opened_home = True
+                        break
+                    except Exception:
+                        continue
+                if not opened_home:
+                    raise first_error
             if "kuaishou.cn" in urlparse(page.url).netloc:
                 try:
                     page.wait_for_response(lambda response: "positions/simple" in response.url, timeout=min(8000, _remaining_ms(deadline)))
@@ -348,6 +384,10 @@ def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
                     pass
             added = take(page)
             if added < 2:
+                try:
+                    page.wait_for_selector("a[href*='#/jobs?'], a[href*='#/job/']", timeout=min(6000, _remaining_ms(deadline)))
+                except Exception:
+                    pass
                 hops = career_links(_read_anchors(page, climb=False), page.url)
                 opened = False
                 for hop in hops[:3]:
@@ -360,7 +400,29 @@ def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
                 parent = list_url_from_detail(page.url)
                 if not opened and parent:
                     _open(page, parent, deadline)
-                    take(page)
+                    if take(page):
+                        opened = True
+                if not opened:
+                    for home in _homepage_candidates(url):
+                        if home.rstrip("/") == page.url.rstrip("/"):
+                            continue
+                        try:
+                            _open(page, home, deadline)
+                        except Exception:
+                            continue
+                        if take(page):
+                            break
+                        for hop in career_links(_read_anchors(page, climb=False), page.url)[:3]:
+                            if hop.rstrip("/") == page.url.rstrip("/"):
+                                continue
+                            try:
+                                _open(page, hop, deadline)
+                            except Exception:
+                                continue
+                            if take(page):
+                                break
+                        if collected:
+                            break
             pages = 1
             while len(collected) < limit and pages < MAX_PAGES:
                 before = len(collected)

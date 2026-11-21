@@ -11,6 +11,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from urllib.parse import quote
 
+import career_cache
 import career_sources
 import source_catalog
 import watcha_jobs
@@ -155,7 +156,44 @@ def _load_profile(profile):
         return None
 
 
-def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, browser_limit=5):
+def _cached_result(record: dict, entry: dict, query: str, limit: int) -> dict:
+    result = career_sources._finish_source(
+        record.get("name") or "",
+        entry.get("entry_url") or record.get("url") or "",
+        entry.get("jobs") or [],
+        query,
+        limit,
+        entry.get("failure_reason") or "no_public_job_list",
+    )
+    result["read_method"] = "cache"
+    result["checked_at"] = entry.get("fetched_at") or ""
+    result["entry_url"] = entry.get("entry_url") or record.get("url") or ""
+    result["pagination_complete"] = entry.get("pagination_complete")
+    if entry.get("collected_count") is not None and result.get("source_status") == "searched":
+        result["collected_count"] = entry.get("collected_count")
+    return result
+
+
+def _remember_read(cache: dict, record: dict, result: dict) -> None:
+    if record.get("access") == "会员主导" or source_catalog.hidden_from_search(record):
+        return
+    reason = result.get("failure_reason") or ""
+    if result.get("source_status") == "searched" and reason == "collected_no_match":
+        reason = ""
+    career_cache.remember(
+        cache,
+        str(record.get("name") or ""),
+        catalog_url=record.get("url") or "",
+        entry_url=result.get("entry_url") or record.get("url") or "",
+        read_method=result.get("read_method") or "",
+        collected_count=result.get("collected_count") or 0,
+        pagination_complete=result.get("pagination_complete"),
+        failure_reason=reason,
+        jobs=result.get("_collected_jobs") or (result.get("jobs") if result.get("source_status") == "searched" and not reason else []),
+    )
+
+
+def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, browser_limit=5, cache_file=None):
     """Search public platforms and official career sites together.
 
     Bonjour and Watcha are one class of source. Catalog platforms and company
@@ -182,6 +220,10 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
         result["kind"] = "official" if meta["kind"] == "official" else "platform"
         return meta["name"], result
 
+    cache_path = cache_file if cache_file is not None else career_cache.cache_path(
+        catalog if isinstance(catalog, Path) else None
+    )
+    stored = career_cache.load(cache_path)
     results = {}
     workers = min(career_sources.MAX_WORKERS, max(1, len(sources)))
     with ThreadPoolExecutor(max_workers=workers) as executor:
@@ -189,9 +231,33 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
         for future in as_completed(futures):
             name, result = future.result()
             results[name] = result
-    browser_sources = [meta for meta in sources if meta["kind"] == "official"
-                       and results[meta["name"]].get("source_status") == "unavailable"
-                       and results[meta["name"]].get("error") not in {"HTTP 404", "HTTP 410", "login_or_membership_wall"}][:max(0, browser_limit)]
+    for meta in sources:
+        if meta["kind"] != "official":
+            continue
+        result = results[meta["name"]]
+        if result.get("failure_reason"):
+            continue
+        if result.get("source_status") == "searched":
+            result["failure_reason"] = "" if result.get("matched_jobs") else "collected_no_match"
+            result["read_method"] = result.get("read_method") or "http"
+            continue
+        result["failure_reason"] = career_cache.classify_failure(result.get("error"))
+        entry = career_cache.entry_for(stored, meta["name"])
+        if entry and entry.get("jobs") and career_cache.fresh(entry):
+            results[meta["name"]] = _cached_result(meta["record"], entry, query, per_source)
+            results[meta["name"]]["kind"] = "official"
+    candidates = []
+    for meta in sources:
+        if meta["kind"] != "official":
+            continue
+        named = career_cache.company_named(meta["record"], query)
+        status = results[meta["name"]].get("source_status")
+        cached_hit = results[meta["name"]].get("read_method") == "cache"
+        if status != "searched" or (named and cached_hit):
+            candidates.append(meta["record"])
+    chosen_records = career_cache.pick_browser_targets(candidates, stored, query, browser_limit)
+    chosen_names = {record.get("name") for record in chosen_records}
+    browser_sources = [meta for meta in sources if meta["name"] in chosen_names]
 
     def render(meta):
         try:
@@ -199,6 +265,12 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
         except Exception as error:
             result = unavailable(meta["name"], meta["url"], error)
         result["kind"] = "official"
+        result["read_method"] = "browser"
+        if result.get("source_status") != "searched":
+            result["failure_reason"] = career_cache.classify_failure(result.get("failure_reason") or result.get("error"))
+        elif not result.get("matched_jobs"):
+            result["failure_reason"] = "collected_no_match"
+        result["_collected_jobs"] = result.get("jobs") or []
         return meta["name"], result
 
     if browser_sources:
@@ -206,7 +278,19 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
             futures = [executor.submit(render, meta) for meta in browser_sources]
             for future in as_completed(futures):
                 name, result = future.result()
-                results[name] = result
+                previous = results.get(name) or {}
+                keep_cache = (
+                    previous.get("read_method") == "cache"
+                    and result.get("source_status") != "searched"
+                    and result.get("failure_reason") in {"network_error", "page_not_ready"}
+                )
+                if not keep_cache:
+                    results[name] = result
+                    record = next(meta["record"] for meta in browser_sources if meta["name"] == name)
+                    _remember_read(stored, record, result)
+                result.pop("_collected_jobs", None)
+    if cache_file is not None or any(meta["kind"] == "official" for meta in sources):
+        career_cache.save(stored, cache_path)
     ordered = [results[meta["name"]] for meta in sources if meta["name"] in results]
     combined = career_sources.combine_results(ordered, query, limit, profile_data)
     combined["official_sites_selected"] = plan["official_sites_selected"]
