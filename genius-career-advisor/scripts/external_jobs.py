@@ -361,6 +361,30 @@ def self_test():
         ]},
     ], "工程师", 4)
     assert any(item["source"] == "官网公司" for item in mixed["jobs"])
+    assert career_sources.feishu_portal("https://x2-robot.jobs.feishu.cn/index/position/list") == ("x2-robot.jobs.feishu.cn", "index")
+    assert career_sources.feishu_portal("https://deeplang.jobs.feishu.cn/913608/position/list") == ("deeplang.jobs.feishu.cn", "913608")
+    feishu_jobs = career_sources.parse_feishu_jobs(
+        {"data": {"job_post_list": [{
+            "id": "100",
+            "title": "算法工程师",
+            "city_list": [{"name": "深圳"}],
+            "recruit_type": {"name": "全职", "parent": {"name": "社招"}},
+        }]}},
+        "自变量",
+        "x2-robot.jobs.feishu.cn",
+        "index",
+    )
+    assert feishu_jobs[0]["title"] == "算法工程师"
+    assert feishu_jobs[0]["location"] == "深圳"
+    assert feishu_jobs[0]["job_url"] == "https://x2-robot.jobs.feishu.cn/index/position/100/detail"
+    assert "全职" in feishu_jobs[0]["summary"]
+    zhiye_jobs = career_sources.parse_zhiye_jobs(
+        {"Data": [{"Id": "abc", "JobAdName": "导航算法工程师", "LocNames": ["深圳"], "Category": "社会招聘"}]},
+        "优必选",
+        "ubtrobot.zhiye.com",
+    )
+    assert zhiye_jobs[0]["company"] == "优必选"
+    assert zhiye_jobs[0]["job_url"].endswith("jobAdId=abc")
     print("external_jobs self-test: ok")
 
 

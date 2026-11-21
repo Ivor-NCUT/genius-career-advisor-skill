@@ -17,10 +17,12 @@ import html
 import json
 import re
 import ssl
+import time
 from html.parser import HTMLParser
+from http.cookiejar import CookieJar
 from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin, urlparse
-from urllib.request import Request, urlopen
+from urllib.request import HTTPCookieProcessor, Request, build_opener, urlopen
 
 import match_guard
 import source_catalog
@@ -106,6 +108,29 @@ def fetch_url(url: str, timeout: int = FETCH_TIMEOUT_SECONDS, limit: int = MAX_R
             if status >= 400:
                 raise FetchError(f"HTTP {status}", status)
             return response.geturl(), body
+    except HTTPError as error:
+        raise FetchError(f"HTTP {error.code}", error.code) from error
+    except TimeoutError as error:
+        raise FetchError("timeout") from error
+    except URLError as error:
+        raise FetchError(str(error.reason or error)) from error
+
+
+def post_json(url: str, payload: dict, headers: dict | None = None, timeout: int = FETCH_TIMEOUT_SECONDS):
+    header_map = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=UTF-8",
+    }
+    if headers:
+        header_map.update({key: value for key, value in headers.items() if value})
+    request = Request(url, data=json.dumps(payload).encode(), headers=header_map, method="POST")
+    try:
+        with urlopen(request, timeout=timeout, context=ssl.create_default_context()) as response:
+            body = response.read(MAX_RESPONSE_BYTES).decode(response.headers.get_content_charset() or "utf-8", errors="replace")
+            if getattr(response, "status", 200) >= 400:
+                raise FetchError(f"HTTP {response.status}", response.status)
+            return json.loads(body)
     except HTTPError as error:
         raise FetchError(f"HTTP {error.code}", error.code) from error
     except TimeoutError as error:
@@ -650,7 +675,7 @@ def _career_hop(page: str, base_url: str) -> str:
         host = urlparse(link).netloc.casefold().removeprefix("www.")
         text = " ".join(segments)
         same_site = host == base_host or host.endswith("." + base_host)
-        ats_host = any(piece in host for piece in ("greenhouse.io", "ashbyhq.com", "lever.co", "workable.com", "smartrecruiters.com", "recruitee.com", "bamboohr.com", "jobs.feishu.cn"))
+        ats_host = any(piece in host for piece in ("greenhouse.io", "ashbyhq.com", "lever.co", "workable.com", "smartrecruiters.com", "recruitee.com", "bamboohr.com", "jobs.feishu.cn", "zhiye.com"))
         career_path = bool(re.search(r"/(career|careers|jobs|job|join|position|zhaopin|recruit)", urlparse(link).path, re.I))
         career_text = bool(re.search(r"招聘|职位|加入我们|在招|careers|jobs|open roles", text, re.I))
         if ats_host or (same_site and (career_path or career_text)):
@@ -671,9 +696,154 @@ def _finish_source(record_name: str, url: str, jobs: list[dict], query: str, lim
     }
 
 
+def feishu_portal(url: str) -> tuple[str, str] | None:
+    parsed = urlparse(url)
+    host = parsed.netloc.casefold().removeprefix("www.")
+    if not host.endswith(".jobs.feishu.cn"):
+        return None
+    parts = [part for part in parsed.path.split("/") if part and part not in {"position", "list", "m", "detail", "apply"}]
+    return host, (parts[0] if parts else "index")
+
+
+def parse_feishu_jobs(payload: dict, company: str, host: str, path: str) -> list[dict]:
+    data = payload.get("data") if isinstance(payload, dict) else None
+    posts = data.get("job_post_list") if isinstance(data, dict) else None
+    if not isinstance(posts, list):
+        return []
+    found = []
+    for item in posts:
+        if not isinstance(item, dict) or not item.get("title") or not item.get("id"):
+            continue
+        cities = [str(city.get("name")) for city in item.get("city_list") or [] if isinstance(city, dict) and city.get("name")]
+        recruit = item.get("recruit_type") if isinstance(item.get("recruit_type"), dict) else {}
+        kind = str(recruit.get("name") or "")
+        parent = recruit.get("parent") if isinstance(recruit.get("parent"), dict) else {}
+        if parent.get("name"):
+            kind = f"{parent['name']} {kind}".strip()
+        link = f"https://{host}/{path}/position/{item['id']}/detail"
+        found.append(job_record(company, item["title"], " / ".join(cities), link, link, kind))
+    return found
+
+
+def zhiye_host(url: str) -> str:
+    host = urlparse(url).netloc.casefold().removeprefix("www.")
+    return host if host.endswith(".zhiye.com") else ""
+
+
+def parse_zhiye_jobs(payload: dict, company: str, host: str) -> list[dict]:
+    rows = payload.get("Data") if isinstance(payload, dict) else None
+    if not isinstance(rows, list):
+        return []
+    found = []
+    for item in rows:
+        if not isinstance(item, dict) or not item.get("JobAdName") or not item.get("Id"):
+            continue
+        places = item.get("LocNames") or []
+        location = " / ".join(str(place) for place in places if place) if isinstance(places, list) else str(places or "")
+        link = f"https://{host}/social/detail?jobAdId={item['Id']}"
+        found.append(job_record(company, item["JobAdName"], location, link, link, str(item.get("Category") or "")))
+    return found
+
+
+def _opener_post(opener, url: str, payload: dict, headers: dict | None = None, timeout: int = FETCH_TIMEOUT_SECONDS):
+    header_map = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=UTF-8",
+    }
+    if headers:
+        header_map.update({key: value for key, value in headers.items() if value})
+    request = Request(url, data=json.dumps(payload).encode(), headers=header_map, method="POST")
+    try:
+        with opener.open(request, timeout=timeout) as response:
+            body = response.read(MAX_RESPONSE_BYTES).decode("utf-8", errors="replace")
+            if getattr(response, "status", 200) >= 400:
+                raise FetchError(f"HTTP {response.status}", response.status)
+            return json.loads(body)
+    except HTTPError as error:
+        raise FetchError(f"HTTP {error.code}", error.code) from error
+    except TimeoutError as error:
+        raise FetchError("timeout") from error
+    except URLError as error:
+        raise FetchError(str(error.reason or error)) from error
+
+
+def _post_retry(post, url: str, payload: dict, headers: dict):
+    try:
+        return post(url, payload, headers)
+    except FetchError as error:
+        if getattr(error, "status", None) not in {405, 429}:
+            raise
+        time.sleep(1.2)
+        return post(url, payload, headers)
+
+
+def _portal_jobs(url: str, company: str, post=post_json) -> list[dict] | None:
+    """Return jobs for a known portal, or None when the URL is not one."""
+    portal = feishu_portal(url)
+    if portal:
+        host, path = portal
+        origin = f"https://{host}"
+        headers = {"website-path": path, "Origin": origin, "Referer": f"{origin}/"}
+        opener = build_opener(HTTPCookieProcessor(CookieJar()))
+        post = lambda target, payload, header_map: _opener_post(opener, target, payload, header_map)
+        token_payload = _post_retry(post, f"{origin}/api/v1/csrf/token", {}, headers)
+        token = ((token_payload or {}).get("data") or {}).get("token")
+        if not token:
+            raise FetchError("feishu csrf missing")
+        search_headers = dict(headers)
+        search_headers["x-csrf-token"] = token
+        search_headers["Portal-Platform"] = "pc"
+        body = {
+            "keyword": "",
+            "limit": PER_SOURCE_JOB_CAP,
+            "offset": 0,
+            "job_category_id_list": [],
+            "tag_id_list": [],
+            "location_code_list": [],
+            "subject_id_list": [],
+            "recruitment_id_list": [],
+            "portal_type": 6,
+            "job_function_id_list": [],
+            "storefront_id_list": [],
+            "portal_entrance": 1,
+        }
+        payload = _post_retry(post, f"{origin}/api/v1/search/job/posts", body, search_headers)
+        jobs = parse_feishu_jobs(payload, company, host, path)
+        if jobs:
+            return jobs
+        body["portal_type"] = 2
+        payload = _post_retry(post, f"{origin}/api/v1/search/job/posts", body, search_headers)
+        return parse_feishu_jobs(payload, company, host, path)
+    host = zhiye_host(url)
+    if host:
+        payload = post(
+            f"https://{host}/api/Jobad/GetJobAdPageList",
+            {"PageIndex": 1, "PageSize": PER_SOURCE_JOB_CAP},
+            {"Origin": f"https://{host}", "Referer": f"https://{host}/"},
+        )
+        return parse_zhiye_jobs(payload, company, host)
+    return None
+
+
+def _embedded_portal(page: str) -> str:
+    for match in re.finditer(r"https://[a-z0-9.-]+\.(?:jobs\.feishu\.cn|zhiye\.com)[^\"'\s<>]*", page or "", re.I):
+        link = html.unescape(match.group(0)).split("\\")[0]
+        if "/share/base/form" in link:
+            continue
+        return link
+    return ""
+
+
 def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_api: bool) -> dict:
     url = str(record.get("url") or "")
     name = str(record.get("name") or url)
+    if feishu_portal(url) or zhiye_host(url):
+        try:
+            jobs = _portal_jobs(url, name) or []
+        except Exception as error:
+            return unavailable(name, url, error)
+        return _finish_source(name, url, jobs, query, limit, "no_public_job_list")
     try:
         final, page = fetch(url)
     except Exception as error:
@@ -682,11 +852,22 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
     if not jobs:
         jobs = html_jobs(page, final, name)
     if not jobs:
-        hop = _career_hop(page, final)
-        if hop:
+        hop = _career_hop(page, final) or (_embedded_portal(page) if allow_board_api else "")
+        if hop and (feishu_portal(hop) or zhiye_host(hop)):
+            try:
+                jobs = _portal_jobs(hop, name) or []
+            except Exception:
+                jobs = []
+        elif hop:
             try:
                 final_hop, hop_page = fetch(hop)
                 jobs = jobs_from_boards(final_hop, hop_page, name, fetch) if allow_board_api else []
+                if not jobs and allow_board_api and (feishu_portal(final_hop) or zhiye_host(final_hop) or _embedded_portal(hop_page)):
+                    portal_url = final_hop if feishu_portal(final_hop) or zhiye_host(final_hop) else _embedded_portal(hop_page)
+                    try:
+                        jobs = _portal_jobs(portal_url, name) or []
+                    except Exception:
+                        jobs = []
                 if not jobs:
                     jobs = html_jobs(hop_page, final_hop, name)
                 page = hop_page
