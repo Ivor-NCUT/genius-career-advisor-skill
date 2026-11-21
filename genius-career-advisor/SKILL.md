@@ -98,7 +98,7 @@ python3 <skill-root>/scripts/workspace.py resolve
 2. 按 [岗位评估与申请复盘](references/job-evaluation-and-outcomes.md) 做选岗后的深度评估，再展示匹配点、明显缺口、申请风险、建议重点修改的经历或表达。申请页或 JD 出现学历、经验年限、语言、工作许可、到岗时间或薪资淘汰题时，用已确认事实预检。明确冲突就提醒可能被系统淘汰，未知就询问候选人，最终是否继续由候选人决定。影响申请判断的公司事实必须附来源和核验日期。
 3. 结合当前 JD 和候选人真实经历追问 1–2 个最可能提高面试机会的问题，一次只问一个。问题必须指向 JD 的具体要求和主档中的具体经历。候选人确认后，把答案同步更新到 `职业经历.md`、`profile.json` 和 `profile-status.json`。
 4. 生成 `<workspace>/tailored-proposal.json`，并记录已完成的 `consultation.questions`。每个问题必须通过 `used_in_change_ids` 进入至少一项简历变更。`sections` 必须组成一份完整简历，每项调整都关联 JD 依据和候选人事实证据。新增或改变事实必须逐项确认。
-5. 文件名必须是 `姓名-目标公司-目标岗位-YYYYMMDD-vN`，不得继承原简历中的旧目标公司。运行 `material_gate.py`，第一份候选人可见成稿只能生成到 `<workspace>/outbox/<文件名>.html`。不得另写 PDF 构建脚本，也不得先生成 Markdown 或 PDF。
+5. 文件名必须是 `姓名-目标公司-目标岗位-YYYYMMDD-vN`，不得继承原简历中的旧目标公司。运行 `material_gate.py`，第一份候选人可见成稿只能生成到 `<workspace>/outbox/<文件名>.html`。所有岗位专用简历都用同一版式：上方是姓名首字圆标、姓名、英文名、当前头衔和摘要，左栏是教育与荣誉，右栏是经历，底部是深色联系栏。没有照片时不要生成肖像，也不要套用示例人物。不得另写 PDF 构建脚本，也不得先生成 Markdown 或 PDF。
 6. HTML 生成后立即把它作为本轮唯一成稿附件展示，并提供可点击链接。此时只推进一个动作，明确告诉候选人：“请检查或修改简历，点击右上角生成 PDF，再点击下载 PDF，并把文件重新发回当前对话。”页面必须冻结生成时的当前内容。候选人继续修改后，旧下载链接必须失效。收到回传前必须暂停。用户重新发回该 PDF 后，运行 `python3 <skill-root>/scripts/material_gate.py --accept-exported-pdf '<附件路径>' '<workspace>/outbox/<同一文件名>.html'`，并只使用脚本返回的路径和哈希。禁止从磁盘 HTML、旧 PDF、Headless Chrome 或其他脚本重新生成替代 PDF。用户尚未完成编辑、生成、下载和回传时，禁止填写 `profile.application_resume.path`。
 7. 用户确认岗位专用 PDF 后，按 [JD 定制材料契约](references/tailored-material-schema.md) 检查视觉版式和 PDF 文本层。无法验证文本层时如实标记，不能宣称已通过 ATS。随后才把接收脚本返回的原文件记录为 `profile.application_resume.path`。没有当前岗位的建议、提案、可编辑 HTML 和用户导出的已检查 PDF 时，禁止进入外部申请。
 
