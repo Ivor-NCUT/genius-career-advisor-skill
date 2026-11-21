@@ -909,6 +909,52 @@ def parse_microdata_jobs(page: str, base_url: str) -> list[dict]:
     return found
 
 
+def parse_meituan_jobs(payload: dict) -> list[dict]:
+    data = payload.get("data") if isinstance(payload, dict) else None
+    rows = data.get("list") if isinstance(data, dict) else None
+    if not isinstance(rows, list):
+        return []
+    found = []
+    for item in rows:
+        if not isinstance(item, dict) or not item.get("name") or not item.get("jobUnionId"):
+            continue
+        cities = [str(city.get("name")) for city in item.get("cityList") or [] if isinstance(city, dict) and city.get("name")]
+        link = f"https://zhaopin.meituan.com/web/position/detail?jobUnionId={item['jobUnionId']}"
+        found.append(job_record("美团", item["name"], " / ".join(cities[:4]), link, link))
+    return found
+
+
+def parse_next_positions(page: str, base_url: str, company: str) -> list[dict]:
+    match = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', page or "", re.S)
+    if not match:
+        return []
+    try:
+        data = json.loads(match.group(1))
+    except json.JSONDecodeError:
+        return []
+    positions = ((data.get("props") or {}).get("pageProps") or {}).get("positionList")
+    if not isinstance(positions, list):
+        return []
+    found = []
+    for item in positions:
+        if not isinstance(item, dict):
+            continue
+        title = item.get("name") or item.get("title")
+        if not title:
+            continue
+        places = item.get("workPlaceNameList") or []
+        location = " / ".join(str(place) for place in places if place) if isinstance(places, list) else ""
+        link = ""
+        if item.get("id") and "netease.com" in base_url:
+            link = f"https://hr.163.com/job-detail.html?id={item['id']}"
+        elif item.get("url"):
+            link = urljoin(base_url, str(item["url"]))
+        if not link:
+            continue
+        found.append(job_record(company, str(title), location, link, link))
+    return found
+
+
 def _read_json_source(name: str, page_url: str, api_url: str, fetch, parser, query: str, limit: int) -> dict:
     try:
         _final, body = fetch(api_url)
@@ -933,6 +979,27 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
             name, url, "https://svc.eleduck.com/api/v1/posts?category=5&page=1",
             fetch, parse_eleduck_jobs, query, limit,
         )
+    if host == "zhaopin.meituan.com":
+        keywords = "LongCat" if "longcat" in url.casefold() else ""
+        try:
+            payload = post_json(
+                "https://zhaopin.meituan.com/api/official/job/getJobList",
+                {
+                    "page": {"pageNo": 1, "pageSize": PER_SOURCE_JOB_CAP},
+                    "keywords": keywords,
+                    "cityCodeList": [],
+                    "departmentIdList": [],
+                    "jobCategoryIdList": [],
+                    "jobTypeCodeList": ["1", "2", "3"],
+                },
+                {"Origin": "https://zhaopin.meituan.com", "Referer": url},
+            )
+            jobs = parse_meituan_jobs(payload)
+            if keywords:
+                jobs = [job for job in jobs if "longcat" in job["title"].casefold()]
+        except Exception as error:
+            return unavailable(name, url, error)
+        return _finish_source(name, url, jobs, query, limit, "no_public_job_list")
     if feishu_portal(url) or zhiye_host(url):
         try:
             jobs = _portal_jobs(url, name) or []
@@ -952,6 +1019,8 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
                 jobs = read_feishu_board(origin, portal_path, name)
             except Exception:
                 jobs = []
+    if not jobs:
+        jobs = parse_next_positions(page, final, name)
     if not jobs:
         jobs = parse_microdata_jobs(page, final)
     if not jobs:

@@ -404,6 +404,19 @@ def self_test():
     )
     assert mee_jobs[0]["company"] == "示例公司"
     assert mee_jobs[0]["job_url"] == "https://offers.51mee.com/offer-detail/1.html"
+    meituan_jobs = career_sources.parse_meituan_jobs({"data": {"list": [{
+        "name": "LongCat 算法工程师", "jobUnionId": "9",
+        "cityList": [{"name": "北京市"}],
+    }]}})
+    assert meituan_jobs[0]["job_url"].endswith("jobUnionId=9")
+    assert meituan_jobs[0]["location"] == "北京市"
+    fuxi_jobs = career_sources.parse_next_positions(
+        '<script id="__NEXT_DATA__">{"props":{"pageProps":{"positionList":[{"id":7,"name":"算法工程师","workPlaceNameList":["杭州市"]}]}}}</script>',
+        "https://fuxi.netease.com/laboratory",
+        "网易伏羲",
+    )
+    assert fuxi_jobs[0]["job_url"] == "https://hr.163.com/job-detail.html?id=7"
+    assert fuxi_jobs[0]["location"] == "杭州市"
     print("external_jobs self-test: ok")
 
 
