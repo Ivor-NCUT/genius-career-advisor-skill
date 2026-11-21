@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""Retired. This command no longer uploads candidates or reads application status.
-
-Referral delivery now goes through grok_bot_referral.py. Do not call the old
-workbench ingest routes from this skill.
-"""
+"""Refuse workbench ingest. This skill no longer submits candidates or reads its jobs."""
 
 from __future__ import annotations
 
@@ -11,8 +7,8 @@ import sys
 
 
 MESSAGE = (
-    "workbench_client.py 已停用，不再提交候选人材料，也不查询申请或通知状态。"
-    "请改用 grok_bot_referral.py 的 preview、record-consent 和 submit。"
+    "天才职业顾问不再读取或投递工作台岗位，也不再把材料交给 Grok Bot。"
+    "请继续使用已确认的外部招聘渠道。"
 )
 
 
