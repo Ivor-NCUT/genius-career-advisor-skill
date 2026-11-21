@@ -168,6 +168,27 @@ def parse_zerith_jobs(page: str) -> list[dict]:
     return jobs
 
 
+def parse_liblib_jobs(page: str) -> list[dict]:
+    from urllib.parse import quote
+    jobs = []
+    for match in re.finditer(r'joinus_jobItemTitle__[^"]*">([^<]+)', page):
+        raw = " ".join(match.group(1).split())
+        raw = re.sub(r"^\d+\.\s*", "", raw)
+        title, _, inline_location = raw.partition("｜")
+        title = title.strip()
+        nearby = page[match.end(): match.end() + 80]
+        located = re.search(r"｜\s*([^<]+)", nearby)
+        location = (located.group(1) if located else inline_location).strip()
+        if not title:
+            continue
+        block = page[match.end(): match.end() + 700]
+        duty = re.search(r"<li[^>]*>\s*([^<]{12,180})", block)
+        summary = " ".join(duty.group(1).split()) if duty else ""
+        link = "https://www.liblib.art/us/joinus#role=" + quote(title)
+        jobs.append(career_sources.job_record("演语科技", title, location, link, link, summary))
+    return jobs
+
+
 def parse_luchen_jobs(page: str) -> list[dict]:
     titles = []
     for title in re.findall(r"<p>\s*([^<]{4,40})\s*</p>", page):
@@ -254,6 +275,11 @@ def _onetoken_jobs() -> list[dict]:
     return parse_onetoken_jobs(body)
 
 
+def _liblib_jobs() -> list[dict]:
+    _final, body = career_sources.fetch_url("https://www.liblib.art/us/joinus")
+    return parse_liblib_jobs(body)
+
+
 def _luchen_jobs() -> list[dict]:
     _final, body = career_sources.fetch_url("https://www.luchentech.com/join")
     return parse_luchen_jobs(body)
@@ -324,6 +350,8 @@ def read_known(record: dict, query: str, limit: int) -> dict | None:
         "www.ai2robotics.com": _ai2_jobs,
         "zerith.com": _zerith_jobs,
         "www.zerith.com": _zerith_jobs,
+        "liblib.art": _liblib_jobs,
+        "www.liblib.art": _liblib_jobs,
     }
     if host == "app.mokahr.com":
         try:

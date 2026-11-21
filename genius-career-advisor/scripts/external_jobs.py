@@ -596,6 +596,8 @@ def self_test():
     assert ai2[0]["title"] == "vla" or "ai2robotics.com/join/vla" in ai2[0]["job_url"]
     zerith = official_extra.parse_zerith_jobs('<div class="listTitle">具身智能工程师</div><div class="city">地点: 深圳市</div><p><span>1、参与具身模型训练。</span></p><div class="list ')
     assert zerith[0]["title"] == "具身智能工程师" and zerith[0]["location"] == "深圳市"
+    lib = official_extra.parse_liblib_jobs('joinus_jobItemTitle__ePDXt">1. 强化学习智能体研究员<span>｜上海</span><li>从事强化学习与大语言模型智能体研究。</li>')
+    assert lib[0]["title"] == "强化学习智能体研究员" and "大语言模型" in lib[0]["summary"]
     assert browser_jobs.list_url_from_detail("https://www.yuanjingos.com/careers/jobs/16") == "https://www.yuanjingos.com/careers/jobs"
     assert browser_jobs.jobs_from_anchors(
         [{"text": "查看职位详情", "href": "/careers/jobs/16"}],

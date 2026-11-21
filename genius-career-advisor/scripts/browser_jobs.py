@@ -383,6 +383,14 @@ def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
                 except Exception:
                     pass
             added = take(page)
+            if added < 8 and ("mokahr.com" in page.url or "#/jobs" in page.url or "#/job" in url):
+                try:
+                    page.wait_for_selector("a[href*='#/job/']", timeout=min(8000, _remaining_ms(deadline)))
+                except Exception:
+                    pass
+                page.wait_for_timeout(min(1500, _remaining_ms(deadline)))
+                page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+                added = take(page)
             if added < 2:
                 try:
                     page.wait_for_selector("a[href*='#/jobs?'], a[href*='#/job/']", timeout=min(6000, _remaining_ms(deadline)))
