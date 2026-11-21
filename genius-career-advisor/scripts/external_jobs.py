@@ -466,6 +466,38 @@ def self_test():
     )
     assert kimi_links == ["https://careers.kimi.com/apply/moonshot/148506#/jobs?page=1"]
     assert browser_jobs.next_list_url(kimi_links[0]).endswith("page=2")
+    planner = browser_jobs.jobs_from_anchors(
+        [{"text": "数值策划\n上海|社招", "href": "/careers/jobs/15"}],
+        "元境",
+        "https://www.yuanjingos.com/careers/jobs",
+        5,
+    )
+    assert planner[0]["title"] == "数值策划"
+    assert "上海" in planner[0]["location"]
+    ordered = browser_jobs.career_links([
+        {"text": "校园招聘", "href": "https://hr.xiaomi.com/website/campus.html"},
+        {"text": "浏览全部职位", "href": "https://hr.xiaomi.com/website/opportunities.html"},
+    ], "https://hr.xiaomi.com/")
+    assert ordered[0].endswith("/opportunities.html")
+    kuaishou_jobs = browser_jobs.jobs_from_kuaishou(
+        {"result": {"list": [{"id": 31601, "name": "服务商运营专家", "workLocationCode": "Shanghai", "positionNatureCode": "C001"}]}},
+        "快手",
+        5,
+    )
+    assert kuaishou_jobs[0]["job_url"].endswith("/job-info/31601")
+    kept_ks, total_ks = career_sources.select_jobs([
+        {"company": "快手", "title": "服务商运营专家", "location": "上海", "job_url": "https://zhaopin.kuaishou.cn/#/official/social/job-info/1"},
+        {"company": "快手", "title": "行业运营专家", "location": "北京", "job_url": "https://zhaopin.kuaishou.cn/#/official/social/job-info/2"},
+    ], "", 5)
+    assert total_ks == 2
+    assert kuaishou_jobs[0]["location"] == "上海"
+    assert browser_jobs.list_url_from_detail("https://www.yuanjingos.com/careers/jobs/16") == "https://www.yuanjingos.com/careers/jobs"
+    assert browser_jobs.jobs_from_anchors(
+        [{"text": "查看职位详情", "href": "/careers/jobs/16"}],
+        "元境",
+        "https://www.yuanjingos.com/careers",
+        5,
+    ) == []
     blocked = career_sources.read_official(
         {"name": "JobRadar", "url": "https://jobradar.cc/zh", "type": "岗位聚合站", "access": "基础免费/高级付费"},
         "",

@@ -214,7 +214,7 @@ def _norm_url(value: object) -> str:
     base, separator, fragment = text.partition("#")
     base = re.sub(r"([?&])(utm_[^=&]+|gh_src)=[^&]*", r"\1", base)
     base = re.sub(r"[?&]$", "", base).rstrip("/").casefold()
-    if separator and re.search(r"/job/|jobid|job_id", fragment, re.I):
+    if separator and re.search(r"/job/|job-info/|jobid|job_id", fragment, re.I):
         return base + "#" + fragment.casefold()
     return base
 

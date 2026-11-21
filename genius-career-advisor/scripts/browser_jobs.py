@@ -3,35 +3,62 @@
 
 This is only a fallback for company career sites. It follows a public
 加入我们 / 招聘 link, waits for the list, and reads title, location, and
-detail URL. It does not open the system browser and does not log in.
+detail URL for every visible opening. It does not open the system browser
+and does not log in.
 """
 
 from __future__ import annotations
 
 import re
 import time
-from urllib.parse import urljoin, urlparse, urlunparse, parse_qsl, urlencode
+from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
 
 from career_sources import (
     CTA_TEXT,
     GENERIC_TITLE,
-    SPECIFIC_JOB_URL,
     REJECT_TEXT,
+    SPECIFIC_JOB_URL,
     _skipped_host,
     job_record,
 )
 
 
-JOBISH = re.compile(r"/job/|jobid=|job_id=|jobdesc|position/detail", re.I)
-JOIN_LINK = re.compile(
-    r"加入我们|社会招聘|校园招聘|在招职位|查看职位|开放职位|工作机会|"
-    r"join us|we.?re hiring|view (?:open )?jobs|open roles|see jobs",
+JOBISH = re.compile(
+    r"/job/|jobid=|job_id=|jobdesc|position/detail|/position/\d|"
+    r"/careers/jobs/\d|#/official/(?:social|trainee)/job-info/\d",
     re.I,
 )
-PLACE = re.compile(r"市|省|区|Remote|远程|北京|上海|杭州|深圳|广州|成都|新加坡|美国")
-SKIP_LINE = re.compile(r"^(急|分享|新|热|立即投递|投递|申请|apply now)$|发布于|^\d{4}-\d{2}-\d{2}$", re.I)
+JOIN_LINK = re.compile(
+    r"加入我们|社会招聘|社招职位|校园招聘|热招职位|在招职位|查看职位|开放职位|工作机会|"
+    r"浏览全部职位|全部职位|更多岗位|岗位机会|查看全部|招聘官网|招聘官網|"
+    r"join us|we.?re hiring|view (?:all|open )?jobs|open roles|see jobs|opportunities",
+    re.I,
+)
+CAMPUS_LINK = re.compile(r"校园招聘|校招|实习生招聘|campus", re.I)
+LIST_HINT = re.compile(r"#/jobs\?|共\d+个职位")
+PLACE = re.compile(r"市|省|区|Remote|远程|北京|上海|杭州|深圳|广州|成都|南京|武汉|新加坡|美国")
+SKIP_LINE = re.compile(
+    r"^(急|分享|新|热|社招|校招|查看职位详情|查看详情|职位详情|立即投递|投递简历|投递|申请|apply now)$|"
+    r"发布于|^\d{4}-\d{2}-\d{2}$",
+    re.I,
+)
+DETAIL_PATH = re.compile(r"/jobs/\d+(?:$|[/?#])|/careers/jobs/\d+(?:$|[/?#])", re.I)
 MAX_PAGES = 4
 TIME_BUDGET_SECONDS = 45
+CITY_CODE = {
+    "beijing": "北京",
+    "shanghai": "上海",
+    "guangzhou": "广州",
+    "shenzhen": "深圳",
+    "hangzhou": "杭州",
+    "chengdu": "成都",
+    "wuhan": "武汉",
+    "nanjing": "南京",
+    "tianjin": "天津",
+    "xian": "西安",
+    "suzhou": "苏州",
+    "chongqing": "重庆",
+}
 
 
 def _compact(text: str) -> str:
@@ -43,7 +70,7 @@ def _lines(text: str) -> list[str]:
     lines = []
     for raw in str(text or "").splitlines():
         line = " ".join(raw.split())
-        if not line or SKIP_LINE.search(line) or GENERIC_TITLE.match(line):
+        if not line or SKIP_LINE.search(line) or GENERIC_TITLE.match(line) or CTA_TEXT.fullmatch(line):
             continue
         if line in {"全职", "兼职", "实习", "其他"}:
             continue
@@ -57,26 +84,39 @@ def _absolute(href: str, base_url: str) -> str:
     return urljoin(base_url or "", href.strip())
 
 
+def _is_job_href(href: str) -> bool:
+    return bool(JOBISH.search(href) or SPECIFIC_JOB_URL.search(href))
+
+
+def _blocked_host(href: str) -> bool:
+    if not href.startswith(("http://", "https://")) or _skipped_host(href):
+        return True
+    host = urlparse(href).netloc.casefold()
+    return "jobradar" in host or "chuhaipin" in host
+
+
+def _place_line(line: str) -> bool:
+    if PLACE.fullmatch(line):
+        return True
+    return bool(PLACE.search(line) and len(line) <= 24 and not REJECT_TEXT.search(line) and not re.search(r"工程师|经理|设计师|研究员|运营|策划", line))
+
+
 def jobs_from_anchors(anchors: list[dict], company: str, base_url: str, limit: int) -> list[dict]:
     found = []
     seen = set()
     for anchor in anchors:
         href = _absolute(str(anchor.get("href") or ""), base_url)
-        if not href.startswith(("http://", "https://")) or _skipped_host(href):
+        if _blocked_host(href) or not _is_job_href(href):
             continue
-        host = urlparse(href).netloc.casefold()
-        if "jobradar" in host or "chuhaipin" in host:
-            continue
-        lines = _lines(str(anchor.get("text") or ""))
         title = ""
         location = ""
-        for line in lines:
-            if not title and len(line) <= 120 and not CTA_TEXT.fullmatch(line) and not REJECT_TEXT.search(line):
-                title = line
+        for line in _lines(str(anchor.get("text") or "")):
+            if _place_line(line):
+                location = location or line
                 continue
-            if title and not location and PLACE.search(line) and len(line) <= 40:
-                location = line
-        if not title or not (JOBISH.search(href) or SPECIFIC_JOB_URL.search(href)):
+            if not title and 2 <= len(line) <= 120 and not REJECT_TEXT.search(line):
+                title = line
+        if not title:
             continue
         if href in seen:
             continue
@@ -87,23 +127,57 @@ def jobs_from_anchors(anchors: list[dict], company: str, base_url: str, limit: i
     return found
 
 
-def career_links(anchors: list[dict], base_url: str) -> list[str]:
+def jobs_from_kuaishou(payload: dict, company: str, limit: int) -> list[dict]:
+    result = payload.get("result") if isinstance(payload, dict) else None
+    items = result.get("list") if isinstance(result, dict) else None
+    if not isinstance(items, list):
+        return []
     found = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        title = str(item.get("name") or "").strip()
+        job_id = item.get("id")
+        if not title or not job_id:
+            continue
+        location = CITY_CODE.get(str(item.get("workLocationCode") or "").casefold(), "")
+        section = "trainee" if str(item.get("positionNatureCode") or "").upper() == "C002" else "social"
+        href = f"https://zhaopin.kuaishou.cn/#/official/{section}/job-info/{job_id}"
+        found.append(job_record(company, title, location, href, href))
+        if len(found) >= limit:
+            break
+    return found
+
+
+def career_links(anchors: list[dict], base_url: str) -> list[str]:
+    ranked = []
     seen = set()
     for anchor in anchors:
         text = _compact(anchor.get("text") or "")
         href = _absolute(str(anchor.get("href") or ""), base_url)
-        if not href.startswith(("http://", "https://")) or href in seen or _skipped_host(href):
+        if _blocked_host(href) or href in seen:
             continue
         host = urlparse(href).netloc.casefold()
-        if "jobradar" in host or "chuhaipin" in host:
+        moka_board = host == "app.mokahr.com" and re.match(
+            r"/(apply|social-recruitment|campus-recruitment)/", urlparse(href).path
+        )
+        listed = bool(LIST_HINT.search(text) or LIST_HINT.search(href))
+        if not JOIN_LINK.search(text) and not moka_board and not listed:
             continue
-        moka_board = host == "app.mokahr.com" and re.match(r"/(apply|social-recruitment|campus-recruitment)/", urlparse(href).path)
-        if not JOIN_LINK.search(text) and not moka_board:
+        if DETAIL_PATH.search(urlparse(href).path):
             continue
+        score = 1 if moka_board else 0
+        if re.search(r"社会招聘|社招职位|浏览全部职位|热招职位|加入我们", text):
+            score += 3
+        if listed:
+            score += 2
+        if CAMPUS_LINK.search(text) or CAMPUS_LINK.search(href):
+            score -= 2
         seen.add(href)
-        found.append(href)
-    return found
+        ranked.append((score, href))
+    ranked.sort(key=lambda item: item[0], reverse=True)
+    social = [href for score, href in ranked if score >= 0]
+    return social or [href for _score, href in ranked]
 
 
 def next_list_url(url: str) -> str:
@@ -130,13 +204,53 @@ def next_list_url(url: str) -> str:
     return ""
 
 
-def _read_anchors(page) -> list[dict]:
+def list_url_from_detail(url: str) -> str:
+    parsed = urlparse(url)
+    path = re.sub(r"/jobs/\d+$", "/jobs", parsed.path)
+    if path == parsed.path:
+        return ""
+    return urlunparse(parsed._replace(path=path, query="", fragment=""))
+
+
+def _kuaishou_jobs(payloads: list[dict], company: str, limit: int) -> list[dict]:
+    found = []
+    seen = set()
+    for payload in payloads:
+        for job in jobs_from_kuaishou(payload, company, limit):
+            if job["job_url"] in seen:
+                continue
+            seen.add(job["job_url"])
+            found.append(job)
+            if len(found) >= limit:
+                return found
+    return found
+
+
+def _read_anchors(page, climb: bool = True) -> list[dict]:
     return page.evaluate(
-        """() => [...document.querySelectorAll('a[href]')].map(anchor => ({
-            text: (anchor.getAttribute('aria-label') || anchor.innerText || '').trim(),
-            href: anchor.href || ''
-        }))"""
+        """(climb) => [...document.querySelectorAll('a[href]')].map(anchor => {
+          let text = (anchor.getAttribute('aria-label') || anchor.innerText || '').trim();
+          if (!climb) return {text, href: anchor.href || ''};
+          const jobHref = /\\/jobs\\/\\d+|\\/job\\/|\\/position\\/\\d+|job-info\\/\\d+/i;
+          let node = anchor;
+          for (let step = 0; step < 5 && node.parentElement; step += 1) {
+            const parent = node.parentElement;
+            const jobLinks = [...parent.querySelectorAll('a[href]')].filter(link => jobHref.test(link.href)).length;
+            if (jobLinks > 1) break;
+            const parentText = (parent.innerText || '').trim();
+            if (parentText.length > text.length) text = parentText;
+            node = parent;
+          }
+          return {text, href: anchor.href || ''};
+        })""",
+        climb,
     )
+
+
+def _same_document(current: str, target: str) -> bool:
+    left = urlparse(current)
+    right = urlparse(target)
+    return left.scheme == right.scheme and left.netloc == right.netloc and left.path.rstrip("/") == right.path.rstrip("/")
 
 
 def _remaining_ms(deadline):
@@ -147,13 +261,17 @@ def _remaining_ms(deadline):
 
 
 def _open(page, url: str, deadline: float) -> None:
-    page.goto(url, wait_until="domcontentloaded", timeout=min(15000, _remaining_ms(deadline)))
+    if page.url and page.url != "about:blank" and _same_document(page.url, url) and "#" in url:
+        page.evaluate("(href) => { window.location.href = href }", url)
+        page.wait_for_timeout(min(1500, _remaining_ms(deadline)))
+    else:
+        page.goto(url, wait_until="domcontentloaded", timeout=min(15000, _remaining_ms(deadline)))
     try:
         page.wait_for_function(
             """() => !document.body.innerText.includes('数据读取中') && (
-                document.querySelector('a[href*="#/job/"], a[href*="/jobs/"]') ||
+                document.querySelector('a[href*="#/job/"], a[href*="/jobs/"], a.job-title, tr') ||
                 [...document.querySelectorAll('a[href]')].some(a =>
-                    /加入我们|招聘|join us|open roles/i.test(a.getAttribute('aria-label') || a.innerText || '') ||
+                    /加入我们|招聘|join us|open roles|浏览全部职位/i.test(a.getAttribute('aria-label') || a.innerText || '') ||
                     (a.href.includes('app.mokahr.com') && /\\/(apply|social-recruitment)\\//.test(a.href))) ||
                 /暂无职位|暂无招聘|no open positions/i.test(document.body.innerText))""",
             timeout=min(10000, _remaining_ms(deadline)),
@@ -161,6 +279,19 @@ def _open(page, url: str, deadline: float) -> None:
     except Exception:
         pass
     page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+
+
+def _click_next(page) -> bool:
+    return bool(page.evaluate(
+        """() => {
+          const next = document.querySelector('.ant-pagination-next:not(.ant-pagination-disabled)');
+          if (next) { next.click(); return true; }
+          const element = [...document.querySelectorAll('a,button,li')].find(node => /^(下一页|下页|next)$/i.test((node.innerText || '').trim()));
+          if (!element || element.getAttribute('aria-disabled') === 'true' || /disabled/.test(element.className || '')) return false;
+          element.click();
+          return true;
+        }"""
+    ))
 
 
 def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
@@ -171,11 +302,15 @@ def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
 
     collected = []
     seen = set()
+    captured = []
     deadline = time.monotonic() + TIME_BUDGET_SECONDS
 
     def take(page) -> int:
         added = 0
-        for job in jobs_from_anchors(_read_anchors(page), company, page.url, limit):
+        batch = jobs_from_anchors(_read_anchors(page), company, page.url, limit)
+        if "kuaishou.cn" in urlparse(page.url).netloc and captured:
+            batch = _kuaishou_jobs(captured, company, limit)
+        for job in batch:
             if job["job_url"] in seen:
                 continue
             seen.add(job["job_url"])
@@ -195,24 +330,48 @@ def browse_official(url: str, company: str, limit: int = 30) -> list[dict]:
                 raise RuntimeError("browser_runtime_missing: python3 -m playwright install chromium") from error
         try:
             page = browser.new_page()
+
+            def on_response(response) -> None:
+                if "positions/simple" not in response.url or "pageNum=" not in response.url:
+                    return
+                try:
+                    captured.append(response.json())
+                except Exception:
+                    return
+
+            page.on("response", on_response)
             _open(page, url, deadline)
+            if "kuaishou.cn" in urlparse(page.url).netloc:
+                try:
+                    page.wait_for_response(lambda response: "positions/simple" in response.url, timeout=min(8000, _remaining_ms(deadline)))
+                except Exception:
+                    pass
             added = take(page)
-            if not added:
-                hops = career_links(_read_anchors(page), page.url)
-                for hop in hops[:2]:
-                    if urlparse(hop).geturl() == page.url:
+            if added < 2:
+                hops = career_links(_read_anchors(page, climb=False), page.url)
+                opened = False
+                for hop in hops[:3]:
+                    if hop.rstrip("/") == page.url.rstrip("/"):
                         continue
                     _open(page, hop, deadline)
                     if take(page):
+                        opened = True
                         break
+                parent = list_url_from_detail(page.url)
+                if not opened and parent:
+                    _open(page, parent, deadline)
+                    take(page)
             pages = 1
             while len(collected) < limit and pages < MAX_PAGES:
-                nxt = next_list_url(page.url)
-                if not nxt or nxt == page.url:
-                    break
                 before = len(collected)
+                nxt = next_list_url(page.url)
                 try:
-                    _open(page, nxt, deadline)
+                    if nxt and nxt != page.url:
+                        _open(page, nxt, deadline)
+                    elif not _click_next(page):
+                        break
+                    else:
+                        page.wait_for_timeout(min(1500, _remaining_ms(deadline)))
                 except Exception:
                     if collected:
                         break
