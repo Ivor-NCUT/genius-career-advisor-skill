@@ -4,7 +4,7 @@
 
 ## 2026-11-21 两条路径移除
 
-天才职业顾问不再读取或投递工作台岗位，也不再把材料从技能交给 Grok Bot。`fanhan_open_jobs.py`、`grok_bot_referral.py` 和 `workbench_client.py` 只会拒绝执行。外部找岗、EgoLite 申请和面试辅导保留。
+天才职业顾问不再包含工作台投递或 Grok Bot 内推代码。相关脚本和说明已删除。外部找岗、EgoLite 申请和面试辅导保留。
 
 ## 2026-11-19 开放岗位来源更正
 

@@ -54,13 +54,7 @@
     "learning_and_growth": {}
   },
   "optional_links": [],
-  "evidence": {},
-  "consent": {
-    "confirmed": false,
-    "confirmed_at": "unknown",
-    "material_version": "unknown",
-    "idempotency_key": "unknown"
-  }
+  "evidence": {}
 }
 ```
 
@@ -103,6 +97,5 @@
 ## 两种状态彼此独立
 
 - `profile_status=待补充/可匹配`：表示基础材料和首次五维职业咨询是否都足以进入岗位推荐。
-- `ingest_ready` 不再作为投递或内推开关。找岗只看 `profile_status` 是否为可匹配。
 
-可匹配的候选人可以继续本地找岗、定制简历和外部申请。本技能不把材料交给工作台或 Grok Bot。
+可匹配之后才能找岗、定制简历和申请外部岗位。

@@ -151,25 +151,10 @@ def evaluate(profile: dict, base_dir: Path) -> dict:
         if not completed_consultation_dimension(consultation.get(dimension)):
             missing.append(f"career_consultation.{dimension}")
 
-    consent = profile.get("consent", {})
-    ingest_missing = []
-    if "resume.path" in missing:
-        ingest_missing.append("resume.path")
-    if "contact" in missing or "contact.evidence" in missing:
-        ingest_missing.append("contact")
-    if consent.get("confirmed") is not True:
-        ingest_missing.append("consent.confirmed")
-    else:
-        for field in ["confirmed_at", "material_version", "idempotency_key"]:
-            if not known(consent.get(field)):
-                ingest_missing.append(f"consent.{field}")
-
     return {
         "profile_status": "可匹配" if not missing else "待补充",
         "missing_for_matching": missing,
         "next_questions": [QUESTIONS[missing[0]]] if missing else [],
-        "ingest_ready": not ingest_missing,
-        "missing_for_ingest": ingest_missing,
     }
 
 
@@ -215,16 +200,10 @@ def self_test() -> None:
                 "education": ["简历教育经历"],
                 "core_experiences": ["简历项目经历"],
             },
-            "consent": {
-                "confirmed": True,
-                "confirmed_at": "2026-08-17T00:00:00Z",
-                "material_version": "sha256:test",
-                "idempotency_key": "test-application",
-            },
         }
         result = evaluate(complete, Path(directory))
         assert result["profile_status"] == "可匹配"
-        assert result["ingest_ready"] is True
+        assert "ingest_ready" not in result
 
         minimum = json.loads(json.dumps(complete, ensure_ascii=False))
         minimum["intent"] = {
@@ -236,15 +215,12 @@ def self_test() -> None:
         minimum["core_experiences"] = {"status": "unknown", "items": []}
         result = evaluate(minimum, Path(directory))
         assert result["profile_status"] == "待补充"
-        assert result["ingest_ready"] is True
 
         incomplete = json.loads(json.dumps(complete, ensure_ascii=False))
         incomplete["intent"]["preferred_locations"] = []
-        incomplete["consent"] = {"confirmed": False}
         result = evaluate(incomplete, Path(directory))
         assert result["profile_status"] == "待补充"
         assert "intent.preferred_locations" in result["missing_for_matching"]
-        assert result["missing_for_ingest"] == ["consent.confirmed"]
 
         no_consultation = json.loads(json.dumps(complete, ensure_ascii=False))
         no_consultation.pop("career_consultation")

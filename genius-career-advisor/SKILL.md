@@ -58,7 +58,7 @@ python3 <skill-root>/scripts/workspace.py resolve
 7. 运行 `python3 <skill-root>/scripts/profile_status.py <workspace>/profile.json --output <workspace>/profile-status.json`。状态不是 `可匹配` 时，每轮只询问返回的一个 `next_questions`，得到回答后更新职业主档并重新检查。状态变为可匹配前禁止搜索岗位。
 8. 未提供的信息写为“未知”，不得用当前城市推断期望地点、远程意愿或搬迁意愿。未知字段必须使用 `unknown` 或空数组，非未知字段必须记录材料位置或候选人明确回答作为证据。不编造数据、角色、结果或项目贡献。
 
-`profile_status.py` 只输出状态和字段代码，不输出简历正文或联系方式。状态文件必须与当前 `profile.json` 哈希一致。“待补充／可匹配”只表示资料完整度，不表示可以投工作台岗位或内推。
+`profile_status.py` 只输出状态和字段代码，不输出简历正文或联系方式。状态文件必须与当前 `profile.json` 哈希一致。“待补充／可匹配”只表示资料完整度。
 
 ## 默认找岗
 
