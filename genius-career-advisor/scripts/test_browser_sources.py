@@ -145,6 +145,48 @@ class BrowserSourcesTest(unittest.TestCase):
         self.assertEqual(deepseek["read_method"], "cache")
         self.assertGreater(deepseek["collected_count"], 0)
 
+    def test_fresh_official_jobs_match_without_rereading_the_site(self):
+        moment = career_cache.now_utc()
+        cache_file = Path("/tmp/career-cache-match.json")
+        career_cache.save({"entries": {
+            "蚂蚁集团": {
+                "fetched_at": moment.isoformat(),
+                "entry_url": "https://talent.antgroup.com/off-campus-home",
+                "jobs": [
+                    career_sources.job_record("蚂蚁集团", "语言大模型语料优化", "杭州", "https://talent.antgroup.com/job/1"),
+                    career_sources.job_record("蚂蚁集团", "客户经理", "杭州", "https://talent.antgroup.com/job/2"),
+                ],
+                "collected_count": 2,
+            },
+            "硅基流动 SiliconFlow": {
+                "fetched_at": moment.isoformat(),
+                "entry_url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/",
+                "jobs": [career_sources.job_record(
+                    "硅基流动 SiliconFlow", "大模型推理引擎架构师", "北京",
+                    "https://app.mokahr.com/social-recruitment/siliconflow/151750#/job/architect",
+                )],
+                "collected_count": 1,
+            },
+        }}, cache_file)
+        records = [
+            {"name": "蚂蚁集团", "url": "https://talent.antgroup.com/off-campus-home", "type": "公司招聘官网", "access": "免费公开", "quality": "高"},
+            {"name": "硅基流动 SiliconFlow", "url": "https://app.mokahr.com/social-recruitment/siliconflow/151750#/", "type": "公司招聘官网", "access": "免费公开", "quality": "高"},
+        ]
+        watcha = {"source": "Watcha", "source_url": "https://watcha.cn/study/jobs", "source_status": "searched", "matched_jobs": 0, "jobs": []}
+        def fail_fetch(url):
+            raise AssertionError(url)
+        with patch.object(career_sources, "read_official", side_effect=AssertionError("should use cache")), \
+             patch.object(career_sources, "read_browser_source", side_effect=AssertionError("should use cache")), \
+             patch.object(external_jobs.watcha_jobs, "fetch_payload", return_value={}), \
+             patch.object(external_jobs.watcha_jobs, "normalize", return_value=watcha):
+            result = external_jobs.search_all("大模型", 20, catalog={"records": records},
+                                              fetch=fail_fetch, browser_limit=0, cache_file=cache_file)
+        titles = {job["title"] for job in result["jobs"]}
+        self.assertIn("语言大模型语料优化", titles)
+        self.assertIn("大模型推理引擎架构师", titles)
+        self.assertNotIn("客户经理", titles)
+        self.assertTrue(all(item["read_method"] == "cache" for item in result["sources"] if item["source"] in {"蚂蚁集团", "硅基流动 SiliconFlow"}))
+
 
 if __name__ == "__main__":
     unittest.main()

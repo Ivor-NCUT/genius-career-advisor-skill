@@ -206,6 +206,12 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
     per_source = career_sources.PER_SOURCE_JOB_CAP
 
     def run(meta):
+        if meta["kind"] == "official":
+            entry = career_cache.entry_for(stored, meta["name"])
+            if entry and entry.get("jobs") and career_cache.fresh(entry):
+                result = _cached_result(meta["record"], entry, query, per_source)
+                result["kind"] = "official"
+                return meta["name"], result
         try:
             if meta["kind"] == "bonjour":
                 result = normalize_bonjour(fetch(meta["url"])[1], query, per_source)

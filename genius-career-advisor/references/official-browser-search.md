@@ -15,7 +15,7 @@ python3 -m playwright install chromium
 
 ## 复用与名额
 
-读到的官网职位写在 `data/career-read-cache.json`，带读取时间。24 小时内再次搜索直接复用，不占浏览器名额。名额先给用户点名的公司，再给最久没检查的官网。没轮到浏览器的来源是 `not_browser_checked`（尚未验证）。读到职位但不符合本次查询是 `collected_no_match`，不算来源失败。
+读到的官网职位写在 `data/career-read-cache.json`，带读取时间。开始找岗时，24 小时内已经读到的官网职位直接按本次查询匹配，不再重新打开这些官网，也不占浏览器名额。名额先给用户点名的公司，再给最久没检查的官网。没轮到浏览器的来源是 `not_browser_checked`（尚未验证）。读到职位但不符合本次查询是 `collected_no_match`，不算来源失败。
 
 失败原因分开记录：`not_browser_checked`、`page_not_ready`、`parser_gap`、`dead_url`、`network_error`、`login_or_restricted`、`no_public_jobs`。
 
