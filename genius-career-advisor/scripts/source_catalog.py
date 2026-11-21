@@ -244,6 +244,14 @@ def self_test() -> None:
     assert any("HiringCafe" in name for name in platform_names)
     assert all(item.get("access") != "会员主导" for item in bundled_plan["public_platforms"])
     assert all(item.get("type") == "公司招聘官网" for item in bundled_plan["official_sites"])
+    official_by_name = {item["name"]: item["url"] for item in bundled_plan["official_sites"]}
+    for name in ("优必选 UBTECH", "帕西尼感知 PaXini", "思必驰 AISpeech", "摩尔线程", "普渡科技 Pudu", "曦智科技 Lightelligence", "梅卡曼德 Mech-Mind"):
+        assert name in official_by_name, name
+        assert "zhiye.com" in official_by_name[name]
+    assert official_by_name["爱诗科技 PixVerse"] == "https://aisphere.jobs.feishu.cn/join"
+    assert official_by_name["面壁智能 ModelBest"] == "https://modelbest.jobs.feishu.cn/career"
+    assert official_by_name["百川智能"] == "https://careers.baichuan-inc.com/"
+    assert "mokahr.com" in official_by_name["银河通用 Galbot"]
     assert_default_path_copy()
     print("source_catalog self-test: ok")
 
