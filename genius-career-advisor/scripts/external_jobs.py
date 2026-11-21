@@ -92,6 +92,16 @@ def unavailable(source, url, error):
     }
 
 
+def visible_sources(sources):
+    visible = []
+    for item in sources:
+        name = str(item.get("source", "")).casefold().replace(" ", "")
+        if item.get("source_status") == "membership_required" or "jobradar" in name:
+            continue
+        visible.append(item)
+    return visible
+
+
 def search_all(query="", limit=20):
     def bonjour():
         return normalize_bonjour(fetch_text(BONJOUR_URL), query, limit)
@@ -108,11 +118,11 @@ def search_all(query="", limit=20):
                 results[name] = future.result()
             except Exception as error:
                 results[name] = unavailable(name, url, error)
-    results["JobRadar"] = jobradar_status()
+    visible = visible_sources([results[name] for name in ("Bonjour", "Watcha")])
     return {
         "query": query,
-        "sources_attempted": ["Bonjour", "Watcha", "JobRadar"],
-        "sources": [results[name] for name in ("Bonjour", "Watcha", "JobRadar")],
+        "sources_attempted": [item["source"] for item in visible],
+        "sources": visible,
     }
 
 
@@ -130,6 +140,16 @@ def self_test():
     assert result["jobs"][0]["title"] == "AI 产品经理"
     assert result["jobs"][0]["application_url"].endswith("/apply")
     assert jobradar_status()["source_status"] == "membership_required"
+    assert jobradar_status()["jobs"] == []
+    visible = visible_sources([
+        {"source": "Bonjour", "source_status": "searched", "jobs": [{"title": "AI 产品经理"}]},
+        {"source": "Watcha", "source_status": "unavailable", "jobs": []},
+        jobradar_status(),
+    ])
+    assert [item["source"] for item in visible] == ["Bonjour", "Watcha"]
+    encoded = json.dumps(visible, ensure_ascii=False)
+    assert "JobRadar" not in encoded
+    assert "membership_required" not in encoded
     assert unavailable("Demo", "https://example.com", RuntimeError("timeout"))["source_status"] == "unavailable"
     print("external_jobs self-test: ok")
 

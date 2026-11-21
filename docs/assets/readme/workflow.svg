@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="250" viewBox="0 0 1200 250" role="img" aria-labelledby="title desc">
   <title id="title">天才职业顾问六步工作流</title>
-  <desc id="desc">上传简历、职业咨询、选择来源、多来源找岗、定制简历、辅助申请。</desc>
+  <desc id="desc">上传简历、职业咨询、推荐岗位、挑选岗位、定制简历、辅助申请。</desc>
   <rect width="1200" height="250" fill="#ffffff"/>
   <path d="M112 111H1088" stroke="#111111" stroke-width="2"/>
 
@@ -20,14 +20,14 @@
     <g transform="translate(502 111)">
       <circle r="24" fill="#ffffff" stroke="#111111" stroke-width="2"/>
       <text y="6" text-anchor="middle" fill="#111111" font-size="15" font-weight="700">03</text>
-      <text y="64" text-anchor="middle" fill="#111111" font-size="16" font-weight="650">选择来源</text>
-      <text y="88" text-anchor="middle" fill="#777777" font-size="12">推荐 3–5 个渠道</text>
+      <text y="64" text-anchor="middle" fill="#111111" font-size="16" font-weight="650">推荐岗位</text>
+      <text y="88" text-anchor="middle" fill="#777777" font-size="12">档案就绪后直接匹配</text>
     </g>
     <g transform="translate(697 111)">
       <circle r="24" fill="#ffffff" stroke="#111111" stroke-width="2"/>
       <text y="6" text-anchor="middle" fill="#111111" font-size="15" font-weight="700">04</text>
-      <text y="64" text-anchor="middle" fill="#111111" font-size="16" font-weight="650">多来源找岗</text>
-      <text y="88" text-anchor="middle" fill="#777777" font-size="12">统一筛选与去重</text>
+      <text y="64" text-anchor="middle" fill="#111111" font-size="16" font-weight="650">挑选岗位</text>
+      <text y="88" text-anchor="middle" fill="#777777" font-size="12">看匹配点与缺口</text>
     </g>
     <g transform="translate(892 111)">
       <circle r="24" fill="#ffffff" stroke="#111111" stroke-width="2"/>
