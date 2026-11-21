@@ -385,6 +385,25 @@ def self_test():
     )
     assert zhiye_jobs[0]["company"] == "优必选"
     assert zhiye_jobs[0]["job_url"].endswith("jobAdId=abc")
+    tencent_jobs = career_sources.parse_tencent_jobs({"Data": {"Posts": [{
+        "RecruitPostName": "后端工程师", "LocationName": "深圳",
+        "PostURL": "http://careers.tencent.com/jobdesc.html?postId=1", "ComName": "腾讯",
+    }]}})
+    assert tencent_jobs[0]["job_url"].startswith("https://")
+    assert tencent_jobs[0]["location"] == "深圳"
+    duck_jobs = career_sources.parse_eleduck_jobs({"posts": [
+        {"id": "rule", "title": "社区规则新人必读"},
+        {"id": "abc", "title": "远程后端工程师"},
+    ]})
+    assert len(duck_jobs) == 1
+    assert duck_jobs[0]["job_url"] == "https://eleduck.com/posts/abc"
+    mee_jobs = career_sources.parse_microdata_jobs(
+        '<tr itemType="https://schema.org/JobPosting"><span itemProp="name">示例公司</span>'
+        '<meta itemProp="title" content="算法工程师"><a href="/offer-detail/1.html">投递</a></tr>',
+        "https://offers.51mee.com/",
+    )
+    assert mee_jobs[0]["company"] == "示例公司"
+    assert mee_jobs[0]["job_url"] == "https://offers.51mee.com/offer-detail/1.html"
     print("external_jobs self-test: ok")
 
 

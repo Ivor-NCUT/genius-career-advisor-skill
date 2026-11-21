@@ -778,43 +778,47 @@ def _post_retry(post, url: str, payload: dict, headers: dict):
         return post(url, payload, headers)
 
 
+def read_feishu_board(origin: str, path: str, company: str) -> list[dict]:
+    host = urlparse(origin).netloc.casefold()
+    headers = {"website-path": path or "index", "Origin": origin, "Referer": f"{origin}/"}
+    opener = build_opener(HTTPCookieProcessor(CookieJar()))
+    post = lambda target, payload, header_map: _opener_post(opener, target, payload, header_map)
+    token_payload = _post_retry(post, f"{origin}/api/v1/csrf/token", {}, headers)
+    token = ((token_payload or {}).get("data") or {}).get("token")
+    if not token:
+        raise FetchError("feishu csrf missing")
+    search_headers = dict(headers)
+    search_headers["x-csrf-token"] = token
+    search_headers["Portal-Platform"] = "pc"
+    body = {
+        "keyword": "",
+        "limit": PER_SOURCE_JOB_CAP,
+        "offset": 0,
+        "job_category_id_list": [],
+        "tag_id_list": [],
+        "location_code_list": [],
+        "subject_id_list": [],
+        "recruitment_id_list": [],
+        "portal_type": 6,
+        "job_function_id_list": [],
+        "storefront_id_list": [],
+        "portal_entrance": 1,
+    }
+    payload = _post_retry(post, f"{origin}/api/v1/search/job/posts", body, search_headers)
+    jobs = parse_feishu_jobs(payload, company, host, path or "index")
+    if jobs:
+        return jobs
+    body["portal_type"] = 2
+    payload = _post_retry(post, f"{origin}/api/v1/search/job/posts", body, search_headers)
+    return parse_feishu_jobs(payload, company, host, path or "index")
+
+
 def _portal_jobs(url: str, company: str, post=post_json) -> list[dict] | None:
     """Return jobs for a known portal, or None when the URL is not one."""
     portal = feishu_portal(url)
     if portal:
         host, path = portal
-        origin = f"https://{host}"
-        headers = {"website-path": path, "Origin": origin, "Referer": f"{origin}/"}
-        opener = build_opener(HTTPCookieProcessor(CookieJar()))
-        post = lambda target, payload, header_map: _opener_post(opener, target, payload, header_map)
-        token_payload = _post_retry(post, f"{origin}/api/v1/csrf/token", {}, headers)
-        token = ((token_payload or {}).get("data") or {}).get("token")
-        if not token:
-            raise FetchError("feishu csrf missing")
-        search_headers = dict(headers)
-        search_headers["x-csrf-token"] = token
-        search_headers["Portal-Platform"] = "pc"
-        body = {
-            "keyword": "",
-            "limit": PER_SOURCE_JOB_CAP,
-            "offset": 0,
-            "job_category_id_list": [],
-            "tag_id_list": [],
-            "location_code_list": [],
-            "subject_id_list": [],
-            "recruitment_id_list": [],
-            "portal_type": 6,
-            "job_function_id_list": [],
-            "storefront_id_list": [],
-            "portal_entrance": 1,
-        }
-        payload = _post_retry(post, f"{origin}/api/v1/search/job/posts", body, search_headers)
-        jobs = parse_feishu_jobs(payload, company, host, path)
-        if jobs:
-            return jobs
-        body["portal_type"] = 2
-        payload = _post_retry(post, f"{origin}/api/v1/search/job/posts", body, search_headers)
-        return parse_feishu_jobs(payload, company, host, path)
+        return read_feishu_board(f"https://{host}", path, company)
     host = zhiye_host(url)
     if host:
         payload = post(
@@ -835,9 +839,100 @@ def _embedded_portal(page: str) -> str:
     return ""
 
 
+def website_path_from_html(page: str) -> str:
+    match = re.search(r'<script id="js-websiteInfo"[^>]*>(.*?)</script>', page or "", re.S)
+    if not match:
+        return ""
+    try:
+        data = json.loads(match.group(1))
+    except json.JSONDecodeError:
+        return ""
+    path = (data.get("website_info") or {}).get("path") if isinstance(data, dict) else ""
+    return str(path or "index")
+
+
+def parse_tencent_jobs(payload: dict) -> list[dict]:
+    posts = ((payload.get("Data") or {}) if isinstance(payload, dict) else {}).get("Posts")
+    if not isinstance(posts, list):
+        return []
+    found = []
+    for item in posts:
+        if not isinstance(item, dict) or not item.get("RecruitPostName"):
+            continue
+        link = str(item.get("PostURL") or "")
+        if link.startswith("http://"):
+            link = "https://" + link[len("http://"):]
+        if not link:
+            continue
+        found.append(job_record(
+            item.get("ComName") or "腾讯",
+            item["RecruitPostName"],
+            item.get("LocationName") or "",
+            link,
+            link,
+            item.get("CategoryName") or "",
+        ))
+    return found
+
+
+def parse_eleduck_jobs(payload: dict) -> list[dict]:
+    posts = payload.get("posts") if isinstance(payload, dict) else None
+    if not isinstance(posts, list):
+        return []
+    found = []
+    for item in posts:
+        if not isinstance(item, dict) or not item.get("id") or not item.get("title"):
+            continue
+        title = str(item.get("title"))
+        if "社区规则" in title or "新人必读" in title:
+            continue
+        link = f"https://eleduck.com/posts/{item['id']}"
+        found.append(job_record("", title, "", link, link, str(item.get("summary") or "")[:180]))
+    return found
+
+
+def parse_microdata_jobs(page: str, base_url: str) -> list[dict]:
+    parts = re.split(r'itemType="https://schema.org/JobPosting"', page or "")
+    found = []
+    for part in parts[1:41]:
+        title_match = re.search(r'itemProp="title" content="([^"]+)"', part)
+        href_match = re.search(r'href="([^"]+)"', part)
+        if not title_match or not href_match:
+            continue
+        org_match = re.search(r'itemProp="name">([^<]+)', part)
+        company = html.unescape(org_match.group(1)).strip() if org_match else ""
+        title = html.unescape(title_match.group(1)).strip()
+        link = urljoin(base_url, html.unescape(href_match.group(1)))
+        if not title or not link.startswith(("http://", "https://")):
+            continue
+        found.append(job_record(company, title, "", link, link))
+    return found
+
+
+def _read_json_source(name: str, page_url: str, api_url: str, fetch, parser, query: str, limit: int) -> dict:
+    try:
+        _final, body = fetch(api_url)
+        jobs = parser(_loads_relaxed(body))
+    except Exception as error:
+        return unavailable(name, page_url, error)
+    return _finish_source(name, page_url, jobs, query, limit, "no_public_job_list")
+
+
 def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_api: bool) -> dict:
     url = str(record.get("url") or "")
     name = str(record.get("name") or url)
+    host = urlparse(url).netloc.casefold().removeprefix("www.")
+    if host in {"hr.tencent.com", "careers.tencent.com", "join.qq.com"}:
+        return _read_json_source(
+            name, url,
+            "https://careers.tencent.com/tencentcareer/api/post/Query?pageIndex=1&pageSize=30&language=zh-cn&area=cn",
+            fetch, parse_tencent_jobs, query, limit,
+        )
+    if host == "eleduck.com":
+        return _read_json_source(
+            name, url, "https://svc.eleduck.com/api/v1/posts?category=5&page=1",
+            fetch, parse_eleduck_jobs, query, limit,
+        )
     if feishu_portal(url) or zhiye_host(url):
         try:
             jobs = _portal_jobs(url, name) or []
@@ -849,6 +944,16 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
     except Exception as error:
         return unavailable(name, url, error)
     jobs = jobs_from_boards(final, page, name, fetch) if allow_board_api else []
+    if not jobs and allow_board_api:
+        portal_path = website_path_from_html(page)
+        if portal_path:
+            origin = f"{urlparse(final).scheme}://{urlparse(final).netloc}"
+            try:
+                jobs = read_feishu_board(origin, portal_path, name)
+            except Exception:
+                jobs = []
+    if not jobs:
+        jobs = parse_microdata_jobs(page, final)
     if not jobs:
         jobs = html_jobs(page, final, name)
     if not jobs:
