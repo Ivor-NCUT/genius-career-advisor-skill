@@ -1270,7 +1270,8 @@ AI_DUTY = (
     "模型训练", "模型推理", "模型部署", "模型评测", "推理引擎", "推理部署", "推理加速",
 )
 AI_ROLE = ("产品", "运营", "设计", "增长")
-NON_AI_FUNCTION = ("销售", "财务", "商务", "市场", "质量", "采购", "法务", "人事", "行政", "客服", "招聘")
+NON_AI_FUNCTION = ("销售", "财务", "商务", "市场", "采购", "法务", "人事", "行政", "客服", "招聘")
+MANUFACTURING_QUALITY = ("供应商质量", "生产质量", "制造质量", "来料质量", "制程质量", "过程质量", "出货质量", "进料质量")
 
 
 def ai_relevance(job: dict) -> str:
@@ -1278,6 +1279,8 @@ def ai_relevance(job: dict) -> str:
     title = str(job.get("title") or "")
     summary = str(job.get("summary") or "")
     blob = f"{title} {summary}".casefold()
+    if any(phrase in title for phrase in MANUFACTURING_QUALITY):
+        return "unverified"
     if any(word in title for word in NON_AI_FUNCTION):
         return "unverified"
     if any(term in blob for term in AI_DUTY):

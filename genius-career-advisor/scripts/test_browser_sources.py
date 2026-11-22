@@ -241,6 +241,7 @@ class BrowserSourcesTest(unittest.TestCase):
             career_sources.job_record("蚂蚁集团", "具身模型销售工程师", "杭州", "https://example.com/sales"),
             career_sources.job_record("示例财务", "财务模型分析师", "上海", "https://example.com/finance"),
             career_sources.job_record("示例", "大模型算法工程师", "北京", "https://example.com/llm"),
+            career_sources.job_record("硅基流动", "大模型质量评测工程师", "北京", "https://example.com/eval"),
         ]}], "模型", 10)
         judged = {job["title"]: job for job in broader["jobs"]}
         self.assertEqual(judged["具身模型销售工程师"]["ai_relevance"], "unverified")
@@ -248,6 +249,12 @@ class BrowserSourcesTest(unittest.TestCase):
         self.assertEqual(judged["财务模型分析师"]["ai_relevance"], "unverified")
         self.assertNotEqual(judged["财务模型分析师"]["screen"], "优先看")
         self.assertEqual(judged["大模型算法工程师"]["ai_relevance"], "verified")
+        self.assertEqual(judged["大模型质量评测工程师"]["ai_relevance"], "verified")
+        self.assertEqual(judged["大模型质量评测工程师"]["screen"], "优先看")
+        self.assertEqual(career_sources.ai_relevance(
+            career_sources.job_record("智平方", "供应商质量专家", "深圳", "https://example.com/sqe")), "unverified")
+        self.assertEqual(career_sources.ai_relevance(
+            career_sources.job_record("智平方", "生产质量工程师", "深圳", "https://example.com/pqe")), "unverified")
 
     def test_incomplete_cache_miss_searches_the_site_again(self):
         import official_extra
