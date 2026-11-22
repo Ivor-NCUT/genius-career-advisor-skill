@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import html
 import json
+import os
 import re
 import shutil
 import tempfile
@@ -228,6 +229,50 @@ def render_html(title: str, sections: list[dict], editor_version: str, profile: 
     return page + editor_bootstrap(editor_version) + "</body></html>\n"
 
 
+def _page_markers(page: str, attr: str) -> set[str]:
+    return set(re.findall(rf'{attr}="([^"]+)"', page))
+
+
+def _editor_page(page: str) -> None:
+    if ('contenteditable="true"' not in page
+            or not any(f'data-fanhan-resume-editor="v{version}"' in page for version in (2, 3))
+            or "html2pdf.bundle.min.js" not in page
+            or "resume-editor.js" not in page
+            or 'data-resume-layout="sheet-v1"' not in page
+            or "window.print()" in page):
+        raise ValueError("只能保存仍带版式和导出脚本的整页 HTML，不能用纯文字重新生成")
+
+
+def save_resume_page(html_path: Path, document_html: str) -> dict:
+    """Write the current full page back and drop any PDF exported from an older page."""
+    editable = html_path.expanduser().resolve()
+    if (editable.suffix.lower() != ".html" or editable.parent.name != "outbox"
+            or not workspace.is_workspace_name(editable.parent.parent.name)
+            or not editable.is_file()):
+        raise ValueError("只能覆盖本地工作区 .天才职业顾问/outbox/ 里已有的简历 HTML")
+    current = editable.read_text(encoding="utf-8")
+    _editor_page(current)
+    _editor_page(document_html)
+    if not _page_markers(current, "data-slot") <= _page_markers(document_html, "data-slot"):
+        raise ValueError("保存后的页面少了原有栏目，已拒绝覆盖")
+    if not _page_markers(current, "data-field") <= _page_markers(document_html, "data-field"):
+        raise ValueError("保存后的页面少了原有字段，已拒绝覆盖")
+    temporary = editable.with_suffix(".html.tmp")
+    temporary.write_text(document_html, encoding="utf-8")
+    temporary.replace(editable)
+    pdf = editable.with_suffix(".pdf")
+    retired = pdf.is_file()
+    if retired:
+        pdf.unlink()
+    return {
+        "status": "html_saved",
+        "html_path": str(editable),
+        "html_sha256": sha256(editable),
+        "pdf_retired": retired,
+        "handoff_status": "方案可实施，人工下载交接待验收",
+    }
+
+
 def install_editor_assets(outbox: Path) -> None:
     source = Path(__file__).resolve().parent.parent / "assets"
     target = outbox / ".fanhan-assets"
@@ -259,6 +304,8 @@ def accept_exported_pdf(source_path: Path, html_path: Path) -> dict:
             or "html2pdf.bundle.min.js" not in page
             or "resume-editor.js" not in page):
         raise ValueError("HTML 不是内置简历编辑器生成的文件")
+    if source.stat().st_mtime_ns < editable.stat().st_mtime_ns:
+        raise ValueError("PDF 早于当前 HTML，保存后的修改已使旧导出失效")
 
     output = editable.with_suffix(".pdf")
     replaced = output.exists() and output != source
@@ -456,6 +503,29 @@ def self_test() -> None:
             raise AssertionError("工作区以外的 HTML 不得接收")
         except ValueError as error:
             assert ".天才职业顾问" in str(error)
+
+        current_page = output.read_text(encoding="utf-8")
+        revised = current_page.replace("负责有证据的 AI 产品交付。", "保存后的新经历。")
+        saved = save_resume_page(output, revised)
+        assert saved["pdf_retired"] is True
+        assert not output.with_suffix(".pdf").exists()
+        assert "保存后的新经历。" in output.read_text(encoding="utf-8")
+        assert 'data-slot="experience"' in output.read_text(encoding="utf-8")
+        try:
+            save_resume_page(output, "只要纯文字")
+            raise AssertionError("纯文字不得覆盖整页")
+        except ValueError as error:
+            assert "整页" in str(error)
+        assert "保存后的新经历。" in output.read_text(encoding="utf-8")
+        stale = root / "Downloads" / "stale-export.pdf"
+        stale.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nold export")
+        older = output.stat().st_mtime_ns - 1_000_000
+        os.utime(stale, ns=(older, older))
+        try:
+            accept_exported_pdf(stale, output)
+            raise AssertionError("再次保存后的旧 PDF 必须失效")
+        except ValueError as error:
+            assert "旧导出失效" in str(error)
     print("material_gate self-test: ok")
 
 
@@ -465,6 +535,7 @@ def main() -> None:
     parser.add_argument("proposal", nargs="?", help="定制提案 JSON 路径")
     parser.add_argument("output", nargs="?", help="工作区 outbox/ 下的 HTML 输出路径")
     parser.add_argument("--accept-exported-pdf", nargs=2, metavar=("EXPORTED_PDF", "HTML"))
+    parser.add_argument("--save-page", nargs=2, metavar=("HTML", "DOCUMENT"))
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
     if args.self_test:
@@ -474,6 +545,10 @@ def main() -> None:
         print(json.dumps(accept_exported_pdf(
             Path(args.accept_exported_pdf[0]), Path(args.accept_exported_pdf[1]),
         ), ensure_ascii=False, indent=2))
+        return
+    if args.save_page:
+        document = Path(args.save_page[1]).expanduser().read_text(encoding="utf-8")
+        print(json.dumps(save_resume_page(Path(args.save_page[0]), document), ensure_ascii=False, indent=2))
         return
     if not args.profile or not args.proposal or not args.output:
         parser.error("请提供职业档案、定制提案和输出路径")
@@ -486,7 +561,7 @@ def main() -> None:
     print(json.dumps({
         "status": "html_ready",
         "html_path": str(output.resolve()),
-        "next_action": "立即展示这个 HTML，并只提示用户：检查或修改后点击生成 PDF，再点击下载 PDF，并把文件重新发回当前对话；收到回传前不得继续。",
+        "next_action": "用 EgoLite 在同一台机器打开这个 HTML。请用户检查或修改，并在改好后说明。用户说明前不得写回，也不得代点生成或下载。当前状态：方案可实施，人工下载交接待验收。",
         "pdf_ready": False,
     }, ensure_ascii=False, indent=2))
 

@@ -2,9 +2,19 @@
 
 使用已安装的 `$ego-browser`。本仓库只定义求职业务门禁，不复制浏览器运行时，也不使用旧版 `useOrCreateTaskSpace`、`snapshotText`、`gotoUrl` 或 Playwright API。
 
+## 简历页、保存和下载
+
+岗位专用 HTML 写在技能所在机器的工作区里。用同一个 TaskSpace 打开这个本地文件，不要把它送到另一台电脑，也不要靠对话侧边或回环地址生成 PDF。
+
+候选人在页面里修改。候选人说改好了之后，读取整页 HTML 并交给 `material_gate.py --save-page`。页面少了原有栏目或字段时，保存会拒绝覆盖。保存会删掉同名旧 PDF。说改好了之后如果页面又改了，再保存一次，此前的 PDF 不能再上传。
+
+生成和下载由候选人本人点击。交还控制权后，只取这次下载的原始字节交给 `--accept-exported-pdf`。拿不到这次下载时停止，状态记为「方案可实施，人工下载交接待验收」。不要代点，也不要从 HTML 重新生成 PDF。
+
+通过接收之后，仍用这个 TaskSpace 打开申请页，并上传刚接收的那份 PDF。
+
 ## 一个岗位一个任务空间
 
-为当前用户明确选中的岗位创建一个 TaskSpace，并在登录、填写、接管和结果核验之间持续复用同一 `spaceId` 与 Page：
+为当前用户明确选中的岗位创建一个 TaskSpace。简历页、下载交接、登录、填写和结果核验持续复用同一 `spaceId` 与 Page：
 
 ```js
 const task = await taskSpace("apply <company> <job>");
