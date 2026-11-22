@@ -244,10 +244,18 @@ def _editor_page(page: str) -> None:
         raise ValueError("只能保存仍带版式和导出脚本的整页 HTML，不能用纯文字重新生成")
 
 
-def visible_snapshot(page: str) -> tuple:
-    fields = tuple(sorted(re.findall(r'data-field="([^"]+)"[^>]*>([^<]*)', page)))
-    slots = tuple(sorted(re.findall(r'data-slot="([^"]+)"[\s\S]*?<p>([^<]*)', page)))
-    return fields, slots
+def visible_snapshot(page: str) -> str:
+    """All resume text, including later lines and text inside nested tags."""
+    main = re.search(r'<main\b[^>]*\bdata-resume-content\b[^>]*>([\s\S]*?)</main>', page, re.I)
+    body = main.group(1) if main else page
+    body = re.sub(r'<script\b[\s\S]*?</script>', ' ', body, flags=re.I)
+    body = re.sub(r'<style\b[\s\S]*?</style>', ' ', body, flags=re.I)
+    body = re.sub(r'<br\s*/?>', '\n', body, flags=re.I)
+    body = re.sub(r'</(?:p|div|h1|h2|li|section|header|footer|tr|span)>', '\n', body, flags=re.I)
+    body = re.sub(r'<[^>]+>', '', body)
+    body = html.unescape(body)
+    lines = [' '.join(line.split()) for line in body.splitlines()]
+    return '\n'.join(line for line in lines if line)
 
 
 def void_marker(html_path: Path) -> Path:
@@ -583,6 +591,24 @@ def self_test() -> None:
         newest_accepted = accept_exported_pdf(newest, output)
         assert Path(newest_accepted["pdf_path"]).read_bytes() == newest.read_bytes()
         assert noted["handoff_status"] == "人工交接待验收"
+        line_html = render_html("两行", [
+            {"heading": "相关经历", "content": "第一行经历\n第二条经历"},
+        ], "abc", {"identity": {"name": "张三"}})
+        line_path = output.parent / "两行经历.html"
+        line_path.write_text(line_html, encoding="utf-8")
+        line_pdf = line_path.with_suffix(".pdf")
+        line_pdf.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nlines")
+        unchanged = note_live_edit(line_path, line_html)
+        assert unchanged["changed"] is False and line_pdf.is_file()
+        second_line = line_html.replace("第二条经历", "第二条经历已改", 1)
+        changed_line = note_live_edit(line_path, second_line)
+        assert changed_line["changed"] is True and changed_line["pdf_retired"] is True
+        assert not line_pdf.exists()
+        line_pdf.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nlines")
+        nested = line_html.replace("第二条经历", "<span>第二条经历已改</span>", 1)
+        changed_nested = note_live_edit(line_path, nested)
+        assert changed_nested["changed"] is True and changed_nested["pdf_retired"] is True
+        assert not line_pdf.exists()
     print("material_gate self-test: ok")
 
 
