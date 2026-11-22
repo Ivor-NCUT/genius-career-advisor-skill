@@ -17,18 +17,9 @@
 
 ```text
 <workspace>/interview/<job-key>/prep.md
-<workspace>/interview/<job-key>/prep.html
 ```
 
-`job-key` 优先用规范化后的岗位详情链接。只有岗位编号时，必须带上公司或来源，避免不同招聘系统里相同编号写到同一份材料。`prep.md` 是正文。运行下面的命令把它转成阅读页，不要再让模型写第二份正文：
-
-```bash
-python3 <skill-root>/scripts/render_interview.py \
-  --input '<workspace>/interview/<job-key>/prep.md' \
-  --output '<workspace>/interview/<job-key>/prep.html'
-```
-
-HTML 有目录和可折叠的五个模块。后续给模型的上下文只使用 Markdown，不把 HTML 的样式脚本整段放进提示。
+`job-key` 优先用规范化后的岗位详情链接。只有岗位编号时，必须带上公司或来源，避免不同招聘系统里相同编号写到同一份材料。`prep.md` 是唯一交付文件。在对话里先说明准备重点，再给出这份完整 Markdown。不要生成 HTML，也不要运行渲染脚本。
 
 ## 五个模块
 
@@ -48,7 +39,7 @@ HTML 有目录和可折叠的五个模块。后续给模型的上下文只使用
 2. 反馈必须引用这次回答中的原话或具体问题，只给一个优先改进动作。
 3. 参考表达只能重排已经确认的事实。回答里没有的数字，标成缺口，不补造。
 4. 用 `candidate_memory.py record-practice` 记录。需要区分岗位时加可选的 `--job-key` 和 `--round`。旧命令不带这两项仍然有效。
-5. 只替换 `prep.md` 里“练习与反馈”模块，然后重新渲染 HTML。公司简报、对应表、问题和反问清单保持不动。
+5. 只替换 `prep.md` 里“练习与反馈”模块。公司简报、对应表、问题和反问清单保持不动。然后把更新后的完整 Markdown 交给候选人。
 6. 练习中新说出的经历可以记成待核实素材。未经候选人确认，不能写进已确认事实或故事库。
 
 分数仍可按原有 1–5 分写入记忆文件，只观察表达变化，不解释为录取概率。

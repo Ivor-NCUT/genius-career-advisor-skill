@@ -172,9 +172,9 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 1. 只有候选人主动要求准备面试、开始练习，或明确确认已经进入真实面试阶段时，才读取 [岗位面试准备](references/interview-coaching.md)。“继续”“已投递”、投递结束或材料已经送达都不算启动。这一节不改变搜岗、简历 PDF 和投递确认。
 2. 先复用目标 JD、已投递简历、`职业经历.md`、已确认故事库和面试邀请。只询问其中仍然缺失的信息。轮次未知就写“待确认”，不编造一面、二面。
 3. 每个岗位只写一份 `<workspace>/interview/<job-key>/prep.md`，包含公司与岗位简报、JD 与经历对应表、重点问题及追问、练习与反馈、反问清单。对应表必须写本人的真实经历、个人贡献和证据缺口。问题必须关联当前 JD 或具体经历。公司事实和面经保留来源、日期和未确认项。
-4. 生成准备材料时，练习模块只能写“尚未开始练习”，不得写模拟反馈、分数或进步记录。然后运行 `python3 <skill-root>/scripts/render_interview.py --input '<prep.md>' --output '<同一目录>/prep.html'`。HTML 只是阅读视图，不要再让模型写一份正文。
+4. 生成准备材料时，练习模块只能写“尚未开始练习”，不得写模拟反馈、分数或进步记录。在对话里先给出准备重点：对应表里最需要补的缺口、最值得先练的一题，以及一个反问。同时把完整的 `prep.md` 交给候选人。不要生成 HTML，也不要运行渲染脚本。
 5. 候选人明确说开始练习后，一次只问一题并等待回答，必要时最多追问两次。反馈必须引用这次回答里的具体问题，只给一个优先改进动作。缺数字就指出缺口，不补造指标。
-6. 练习后用 `candidate_memory.py record-practice` 记下本条记录，可选 `--job-key` 和 `--round`。只改 prep.md 的练习与反馈模块，再重新渲染 HTML。不要重写另外四个模块。新提到但未确认的经历只记为待核实，不写进已确认事实或故事库。
+6. 练习后用 `candidate_memory.py record-practice` 记下本条记录，可选 `--job-key` 和 `--round`。只改 prep.md 的练习与反馈模块，不要重写另外四个模块。新提到但未确认的经历只记为待核实，不写进已确认事实或故事库。再把更新后的完整 Markdown 交给候选人。
 7. 真实面试后的复盘、故事库和单题评分仍按原流程。分数不解释为录取概率。不做录音处理、薪资谈判或 Offer 对比。
 
 ## 常用命令
@@ -188,7 +188,6 @@ python3 <skill-root>/scripts/watcha_jobs.py --query '<求职关键词>' --limit 
 python3 <skill-root>/scripts/confirmation_gate.py select --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --submission-mode auto --output <workspace>/selected-external-job.json --confirmed
 python3 <skill-root>/scripts/application_log.py duplicate --job-url '<岗位链接>' --application-url '<申请链接>'
 python3 <skill-root>/scripts/application_log.py append --source '<Bonjour|Watcha>' --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --status user_declined --user-confirmed false --reason user_declined
-python3 <skill-root>/scripts/render_interview.py --input '<workspace>/interview/<job-key>/prep.md' --output '<workspace>/interview/<job-key>/prep.html'
 python3 <skill-root>/scripts/candidate_memory.py record-practice --company '<公司>' --job-title '<岗位>' --question '<问题>' --answer-summary '<回答摘要>' --substance 1 --structure 1 --relevance 1 --credibility 1 --differentiation 1 --what-worked '<最有效的一点>' --priority-move '<下一次只改这一点>' --job-key '<job-key>'
 python3 <skill-root>/scripts/source_feedback.py prepare --name '<网站名称>' --url '<网站 URL>' --intro '<一句话简介>'
 python3 <skill-root>/scripts/source_feedback.py send --state <workspace>/source-suggestion.json --confirmed

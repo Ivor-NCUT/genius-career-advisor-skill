@@ -13,7 +13,6 @@ import json
 import re
 from pathlib import Path
 
-import render_interview
 import workspace
 
 
@@ -212,16 +211,14 @@ def update_feedback(markdown: str, practice: dict, allowed_text: str) -> str:
     return updated
 
 
-def write_pair(workspace_dir: Path, spec: dict) -> dict:
+def write_prep(workspace_dir: Path, spec: dict) -> dict:
     key = job_key(spec.get("job_id", ""), spec.get("job_url", ""), spec.get("company", ""), spec.get("title", ""))
     directory = prep_dir(workspace_dir, key)
     directory.mkdir(parents=True, exist_ok=True)
     markdown = render_markdown(spec)
     md_path = directory / "prep.md"
-    html_path = directory / "prep.html"
     md_path.write_text(markdown, encoding="utf-8")
-    render_interview.render_file(md_path, html_path)
-    return {"job_key": key, "markdown": str(md_path), "html": str(html_path)}
+    return {"job_key": key, "markdown": str(md_path)}
 
 
 def self_test() -> None:
@@ -254,9 +251,9 @@ def self_test() -> None:
         second = spec("乙", "乙做过商家客服质检", "乙亲自重写了质检标准", "https://example.com/jobs/a")
         other = spec("甲", "甲做过社区反馈周报", "甲亲自把三条反馈改成需求", "https://example.com/jobs/b")
         other["title"] = "算法工程师"
-        written_a = write_pair(root_a, first)
-        written_b = write_pair(root_b, second)
-        written_c = write_pair(root_a, other)
+        written_a = write_prep(root_a, first)
+        written_b = write_prep(root_b, second)
+        written_c = write_prep(root_a, other)
         assert written_a["job_key"] == written_b["job_key"]
         assert written_a["job_key"] != written_c["job_key"]
         md_a = Path(written_a["markdown"]).read_text(encoding="utf-8")
@@ -293,13 +290,6 @@ def self_test() -> None:
             raise AssertionError("不能补造回答里没有的数字")
         except ValueError as error:
             assert "invent_numbers" in str(error)
-        html = Path(written_a["html"]).read_text(encoding="utf-8")
-        assert render_interview.visible_text(html) == render_interview.visible_text_from_markdown(md_a)
-        assert 'href="#module-1"' in html and "<details" in html
-        assert '<a href="https://example.com/product">' in html
-        linked = render_interview.render_html("占位\n\n## 1. 公司与岗位简报\n\n见[产品页](https://example.com/note)\n\n## 2. JD 与经历对应表\n\n表\n\n## 3. 重点问题及追问\n\n题\n\n## 4. 练习与反馈\n\n尚未开始练习\n\n## 5. 反问清单\n\n问")
-        assert '<a href="https://example.com/note">产品页</a>' in linked
-        assert "<style>" not in md_a
         company_a = job_key("123", "https://jobs.a.example/positions/1", "甲公司", "运营")
         company_b = job_key("123", "https://jobs.b.example/positions/9", "乙公司", "算法")
         assert company_a != company_b
@@ -312,6 +302,15 @@ def self_test() -> None:
             "reference": r"我用正则 \d+ 提取编号。",
         }, "甲做过社区反馈周报")
         assert r"我用正则 \d+ 提取编号" in module_bodies(escaped)["4. 练习与反馈"]
+        same_id_a = dict(first, company="甲公司", job_id="123", job_url="https://jobs.a.example/positions/1")
+        same_id_b = dict(first, company="乙公司", title="算法工程师", job_id="123", job_url="https://jobs.b.example/positions/9",
+                         brief="乙公司的算法岗简报")
+        saved_a = write_prep(root_a, same_id_a)
+        saved_b = write_prep(root_a, same_id_b)
+        assert saved_a["job_key"] != saved_b["job_key"]
+        assert "甲公司" in Path(saved_a["markdown"]).read_text(encoding="utf-8")
+        assert "乙公司的算法岗简报" in Path(saved_b["markdown"]).read_text(encoding="utf-8")
+        assert not Path(saved_a["markdown"]).with_suffix(".html").exists()
     print("interview_prep self-test: ok")
 
 
@@ -327,7 +326,7 @@ def main() -> None:
     if not args.workspace or not args.spec:
         parser.error("请提供 --workspace 和 --spec")
     spec = json.loads(args.spec.read_text(encoding="utf-8"))
-    print(json.dumps(write_pair(args.workspace, spec), ensure_ascii=False, indent=2))
+    print(json.dumps(write_prep(args.workspace, spec), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
