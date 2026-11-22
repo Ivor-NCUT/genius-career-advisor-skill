@@ -186,6 +186,12 @@ def record_practice(memory: dict, args: argparse.Namespace) -> dict:
         "priority_move": required(args.priority_move, "priority_move"),
         "created_at": now(),
     }
+    job_key = str(getattr(args, "job_key", "") or "").strip()
+    interview_round = str(getattr(args, "round", "") or "").strip()
+    if job_key:
+        record["job_key"] = job_key
+    if interview_round:
+        record["round"] = interview_round
     memory["practice_sessions"].append(record)
     return record
 
@@ -225,6 +231,8 @@ def parser() -> argparse.ArgumentParser:
         practice.add_argument(f"--{field.replace('_', '-')}", type=int, required=True)
     practice.add_argument("--what-worked", required=True)
     practice.add_argument("--priority-move", required=True)
+    practice.add_argument("--job-key", default="")
+    practice.add_argument("--round", default="")
 
     commands.add_parser("show")
     commands.add_parser("self-test")
@@ -260,9 +268,14 @@ def self_test() -> None:
             credibility=4, differentiation=3, what_worked="证据具体", priority_move="补充量化结果",
         )
         record_practice(memory, practice_args)
+        practice_args.job_key = "abc123"
+        practice_args.round = "待确认"
+        tagged = record_practice(memory, practice_args)
         save(path, memory)
         stored = load(path)
-        assert len(stored["stories"]) == 1 and len(stored["practice_sessions"]) == 1
+        assert len(stored["stories"]) == 1 and len(stored["practice_sessions"]) == 2
+        assert "job_key" not in stored["practice_sessions"][0]
+        assert tagged["job_key"] == "abc123" and tagged["round"] == "待确认"
         assert stat.S_IMODE(path.stat().st_mode) == 0o600
     print("candidate_memory self-test: ok")
 

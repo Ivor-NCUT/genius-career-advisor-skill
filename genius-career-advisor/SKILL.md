@@ -19,7 +19,7 @@ description: 整理候选人的真实求职材料，建立可长期复用的职�
 - 生成岗位定制稿时读取 [JD 定制材料契约](references/tailored-material-schema.md)。
 - 进入外部申请页时读取 [执行契约](references/v1-contract.md) 和 [EgoLite 网申执行](references/egolite-application.md)。执行验收时再读取 [验收记录模板](references/test-record-template.md)。
 - 申请表出现自由文本问题时读取 [申请回答库](references/application-answer-library.md)。
-- 候选人要求面试辅导，或明确确认已经进入真实面试阶段时，读取 [轻量面试辅导](references/interview-coaching.md)。
+- 候选人要求面试准备或练习，或明确确认已经进入真实面试阶段时，读取 [岗位面试准备](references/interview-coaching.md)。
 - 只有用户明确要求纳入泛函开放岗位时，才读取 [泛函开放岗位](references/workbench-public-api.md)。
 - 只有用户明确要求把材料交给泛函时，才读取 [Grok Bot 内推](references/grok-bot-referral.md)。
 - WorkBuddy 安装验收时读取 [WorkBuddy 烟测](references/workbuddy-smoke-test.md)。该烟测只证明技能能安装并进入材料采集，不另建申请或内推流程。
@@ -167,13 +167,15 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 3. 新答案只使用 `职业经历.md`、当前 JD 和候选人明确回答中的事实。新增事实先写回长期主档，再由候选人确认最终答案。
 4. 只有候选人明确确认的答案才运行 `candidate_memory.py add-answer --confirmed` 写入 `<workspace>/candidate-memory.json`。该文件不得进入外部投递日志、Git 或泛函内推载荷。
 
-## 轻量面试辅导
+## 岗位面试准备与交互练习
 
-1. 面试辅导不依赖泛函材料是否送达，也不阻塞找岗和投递。只有候选人主动要求面试辅导，或明确确认已经进入真实面试阶段时才读取 [轻量面试辅导](references/interview-coaching.md)。“继续”“测试后续”“已投递”或材料已经送达都不算启动授权。
-2. 从长期职业主档建立经候选人确认的 STAR 故事库。团队成果与个人贡献必须分开，缺失结果不补造。
-3. 模拟时根据当前 JD 一次只问一个问题，必要时最多追问两次。按内容证据、表达结构、岗位相关性、可信度和个人差异性评分，只给一个最优先改进动作。
-4. 真实面试后可以记录问题、实际回答、面试官追问和候选人自评。练习分数只用于观察表达变化，不解释为录取概率。
-5. 当前版本不做录音处理、复杂评分校准、薪资谈判或 Offer 对比。
+1. 只有候选人主动要求准备面试、开始练习，或明确确认已经进入真实面试阶段时，才读取 [岗位面试准备](references/interview-coaching.md)。“继续”“已投递”、投递结束或材料已经送达都不算启动。这一节不改变搜岗、简历 PDF 和投递确认。
+2. 先复用目标 JD、已投递简历、`职业经历.md`、已确认故事库和面试邀请。只询问其中仍然缺失的信息。轮次未知就写“待确认”，不编造一面、二面。
+3. 每个岗位只写一份 `<workspace>/interview/<job-key>/prep.md`，包含公司与岗位简报、JD 与经历对应表、重点问题及追问、练习与反馈、反问清单。对应表必须写本人的真实经历、个人贡献和证据缺口。问题必须关联当前 JD 或具体经历。公司事实和面经保留来源、日期和未确认项。
+4. 生成准备材料时，练习模块只能写“尚未开始练习”，不得写模拟反馈、分数或进步记录。然后运行 `python3 <skill-root>/scripts/render_interview.py --input '<prep.md>' --output '<同一目录>/prep.html'`。HTML 只是阅读视图，不要再让模型写一份正文。
+5. 候选人明确说开始练习后，一次只问一题并等待回答，必要时最多追问两次。反馈必须引用这次回答里的具体问题，只给一个优先改进动作。缺数字就指出缺口，不补造指标。
+6. 练习后用 `candidate_memory.py record-practice` 记下本条记录，可选 `--job-key` 和 `--round`。只改 prep.md 的练习与反馈模块，再重新渲染 HTML。不要重写另外四个模块。新提到但未确认的经历只记为待核实，不写进已确认事实或故事库。
+7. 真实面试后的复盘、故事库和单题评分仍按原流程。分数不解释为录取概率。不做录音处理、薪资谈判或 Offer 对比。
 
 ## 常用命令
 
@@ -186,6 +188,8 @@ python3 <skill-root>/scripts/watcha_jobs.py --query '<求职关键词>' --limit 
 python3 <skill-root>/scripts/confirmation_gate.py select --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --submission-mode auto --output <workspace>/selected-external-job.json --confirmed
 python3 <skill-root>/scripts/application_log.py duplicate --job-url '<岗位链接>' --application-url '<申请链接>'
 python3 <skill-root>/scripts/application_log.py append --source '<Bonjour|Watcha>' --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --status user_declined --user-confirmed false --reason user_declined
+python3 <skill-root>/scripts/render_interview.py --input '<workspace>/interview/<job-key>/prep.md' --output '<workspace>/interview/<job-key>/prep.html'
+python3 <skill-root>/scripts/candidate_memory.py record-practice --company '<公司>' --job-title '<岗位>' --question '<问题>' --answer-summary '<回答摘要>' --substance 1 --structure 1 --relevance 1 --credibility 1 --differentiation 1 --what-worked '<最有效的一点>' --priority-move '<下一次只改这一点>' --job-key '<job-key>'
 python3 <skill-root>/scripts/source_feedback.py prepare --name '<网站名称>' --url '<网站 URL>' --intro '<一句话简介>'
 python3 <skill-root>/scripts/source_feedback.py send --state <workspace>/source-suggestion.json --confirmed
 ```
@@ -196,7 +200,7 @@ python3 <skill-root>/scripts/source_feedback.py send --state <workspace>/source-
 
 ## 当前交付边界
 
-- 已覆盖：职业档案、档案可匹配后直接搜索并推荐岗位、用户选岗、JD 定制、可编辑简历预览、材料哈希门禁、EgoLite 自动/手动提交模式、投递查重、最小结果记录，以及候选人明确要求后的泛函材料送达。招聘渠道仍在内部使用，但不是用户要确认的步骤。
+- 已覆盖：职业档案、档案可匹配后直接搜索并推荐岗位、用户选岗、JD 定制、可编辑简历预览、材料哈希门禁、EgoLite 自动/手动提交模式、投递查重、最小结果记录、候选人明确要求后的泛函材料送达，以及候选人明确要求后的岗位面试准备和逐题练习。招聘渠道仍在内部使用，但不是用户要确认的步骤。
 - 泛函开放岗位只在候选人明确要求时尝试。当前公开契约缺失时，脚本返回不可用，不能改用旧工作台清单。
 - EgoLite 申请和外部网站适配仍受页面能力影响。没有明确成功证据前，不得宣称已经稳定支持所有招聘网站。
 - 下一步用一名明确同意的真实候选人和一个选中岗位做端到端验收。
