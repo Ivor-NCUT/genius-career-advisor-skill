@@ -60,7 +60,7 @@
           image: { type: 'jpeg', quality: 0.98 },
           html2canvas: { scale: 2, backgroundColor: '#ffffff', logging: false },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-          pagebreak: { mode: ['css', 'legacy'] },
+          pagebreak: { mode: 'avoid-all' },
         }).from(exportSource).outputPdf('bloburl');
         download.href = String(pdfUrl);
         download.download = `${safeFilename(doc.title)}.pdf`;

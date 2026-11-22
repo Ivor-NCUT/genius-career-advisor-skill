@@ -244,7 +244,12 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
         if result.get("failure_reason"):
             continue
         if result.get("source_status") == "searched":
-            result["failure_reason"] = "" if result.get("matched_jobs") else "collected_no_match"
+            if result.get("matched_jobs"):
+                result["failure_reason"] = ""
+            elif result.get("pagination_complete") is False:
+                result["failure_reason"] = "collection_incomplete"
+            else:
+                result["failure_reason"] = result.get("failure_reason") or "collected_no_match"
             result["read_method"] = result.get("read_method") or "http"
             continue
         result["failure_reason"] = career_cache.classify_failure(result.get("error"))
@@ -274,9 +279,10 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
         result["read_method"] = "browser"
         if result.get("source_status") != "searched":
             result["failure_reason"] = career_cache.classify_failure(result.get("failure_reason") or result.get("error"))
+        elif result.get("pagination_complete") is False:
+            result["failure_reason"] = "collection_incomplete"
         elif not result.get("matched_jobs"):
             result["failure_reason"] = "collected_no_match"
-        result["_collected_jobs"] = result.get("jobs") or []
         return meta["name"], result
 
     if browser_sources:

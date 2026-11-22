@@ -685,21 +685,32 @@ def _career_hop(page: str, base_url: str) -> str:
     return ""
 
 
-def _finish_source(record_name: str, url: str, jobs: list[dict], query: str, limit: int, empty_reason: str) -> dict:
+def _finish_source(record_name: str, url: str, jobs: list[dict], query: str, limit: int, empty_reason: str, pagination_complete=None) -> dict:
     if not jobs:
         result = unavailable(record_name, url, empty_reason or "no_public_job_list")
         result["collected_count"] = 0
+        if pagination_complete is not None:
+            result["pagination_complete"] = pagination_complete
         return result
     chosen, total = select_jobs(jobs, query, limit)
-    return {
+    if total:
+        reason = ""
+    elif pagination_complete is False:
+        reason = "collection_incomplete"
+    else:
+        reason = "collected_no_match"
+    result = {
         "source": record_name,
         "source_url": url,
         "source_status": "searched",
         "collected_count": len(jobs),
         "matched_jobs": total,
         "jobs": chosen,
-        "failure_reason": "" if total else "collected_no_match",
+        "failure_reason": reason,
     }
+    if pagination_complete is not None:
+        result["pagination_complete"] = pagination_complete
+    return result
 
 
 def feishu_portal(url: str) -> tuple[str, str] | None:
@@ -784,7 +795,7 @@ def _post_retry(post, url: str, payload: dict, headers: dict):
         return post(url, payload, headers)
 
 
-def read_feishu_board(origin: str, path: str, company: str) -> list[dict]:
+def read_feishu_board(origin: str, path: str, company: str, keyword: str = "") -> list[dict]:
     host = urlparse(origin).netloc.casefold()
     headers = {"website-path": path or "index", "Origin": origin, "Referer": f"{origin}/"}
     opener = build_opener(HTTPCookieProcessor(CookieJar()))
@@ -797,7 +808,7 @@ def read_feishu_board(origin: str, path: str, company: str) -> list[dict]:
     search_headers["x-csrf-token"] = token
     search_headers["Portal-Platform"] = "pc"
     body = {
-        "keyword": "",
+        "keyword": keyword or "",
         "limit": PER_SOURCE_JOB_CAP,
         "offset": 0,
         "job_category_id_list": [],
@@ -819,12 +830,12 @@ def read_feishu_board(origin: str, path: str, company: str) -> list[dict]:
     return parse_feishu_jobs(payload, company, host, path or "index")
 
 
-def _portal_jobs(url: str, company: str, post=post_json) -> list[dict] | None:
+def _portal_jobs(url: str, company: str, post=post_json, keyword: str = "") -> list[dict] | None:
     """Return jobs for a known portal, or None when the URL is not one."""
     portal = feishu_portal(url)
     if portal:
         host, path = portal
-        return read_feishu_board(f"https://{host}", path, company)
+        return read_feishu_board(f"https://{host}", path, company, keyword)
     host = zhiye_host(url)
     if host:
         payload = post(
@@ -1010,13 +1021,13 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
                 jobs = [job for job in jobs if "longcat" in job["title"].casefold()]
         except Exception as error:
             return unavailable(name, url, error)
-        return _finish_source(name, url, jobs, query, limit, "no_public_job_list")
+        return _finish_source(name, url, jobs, query, limit, "no_public_job_list", pagination_complete=len(jobs) < PER_SOURCE_JOB_CAP)
     if feishu_portal(url) or zhiye_host(url):
         try:
-            jobs = _portal_jobs(url, name) or []
+            jobs = _portal_jobs(url, name, keyword=query) or []
         except Exception as error:
             return unavailable(name, url, error)
-        return _finish_source(name, url, jobs, query, limit, "no_public_job_list")
+        return _finish_source(name, url, jobs, query, limit, "no_public_job_list", pagination_complete=len(jobs) < PER_SOURCE_JOB_CAP)
     try:
         final, page = fetch(url)
     except Exception as error:
@@ -1027,7 +1038,7 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
         if portal_path:
             origin = f"{urlparse(final).scheme}://{urlparse(final).netloc}"
             try:
-                jobs = read_feishu_board(origin, portal_path, name)
+                jobs = read_feishu_board(origin, portal_path, name, query)
             except Exception:
                 jobs = []
     if not jobs:
@@ -1040,7 +1051,7 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
         hop = _career_hop(page, final) or (_embedded_portal(page) if allow_board_api else "")
         if hop and (feishu_portal(hop) or zhiye_host(hop)):
             try:
-                jobs = _portal_jobs(hop, name) or []
+                jobs = _portal_jobs(hop, name, keyword=query) or []
             except Exception:
                 jobs = []
         elif hop:
@@ -1050,7 +1061,7 @@ def read_html_source(record: dict, query: str, limit: int, fetch, allow_board_ap
                 if not jobs and allow_board_api and (feishu_portal(final_hop) or zhiye_host(final_hop) or _embedded_portal(hop_page)):
                     portal_url = final_hop if feishu_portal(final_hop) or zhiye_host(final_hop) else _embedded_portal(hop_page)
                     try:
-                        jobs = _portal_jobs(portal_url, name) or []
+                        jobs = _portal_jobs(portal_url, name, keyword=query) or []
                     except Exception:
                         jobs = []
                 if not jobs:
@@ -1252,6 +1263,23 @@ def to_guard_job(job: dict) -> dict:
     return payload
 
 
+AI_DUTY = (
+    "大模型", "模型", "agent", "智能体", "机器学习", "深度学习", "多模态", "推理",
+    "具身", "aigc", "文生图", "vla", "算法", "nlp", "llm", "人工智能", "生成式",
+)
+AI_ROLE = ("产品", "运营", "设计", "增长")
+
+
+def ai_relevance(job: dict) -> str:
+    """verified only when the title or summary shows an AI duty, not merely a keyword hit."""
+    blob = " ".join(str(job.get(key) or "") for key in ("title", "summary")).casefold()
+    if any(term in blob for term in AI_DUTY):
+        return "verified"
+    if any(role in blob for role in AI_ROLE) and any(term in blob for term in ("ai", "人工智能", "大模型", "aigc", "智能体")):
+        return "verified"
+    return "unverified"
+
+
 def _screen(decision: str | None, score: float, query_tokens: list[str]) -> str:
     if decision == "not_recommended":
         return "暂不建议"
@@ -1332,7 +1360,10 @@ def combine_results(sources: list[dict], query: str = "", limit: int = 20, profi
                     unknowns = judged.get("unknowns") or []
                 except Exception:
                     decision = None
+            prepared["ai_relevance"] = ai_relevance(prepared)
             prepared["screen"] = _screen(decision, score, query_tokens)
+            if prepared["ai_relevance"] != "verified" and prepared["screen"] == "优先看":
+                prepared["screen"] = "可以看"
             prepared["decision"] = decision or ""
             prepared["conflicts"] = conflicts
             prepared["unknowns"] = unknowns

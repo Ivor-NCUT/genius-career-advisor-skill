@@ -187,6 +187,72 @@ class BrowserSourcesTest(unittest.TestCase):
         self.assertNotIn("客户经理", titles)
         self.assertTrue(all(item["read_method"] == "cache" for item in result["sources"] if item["source"] in {"蚂蚁集团", "硅基流动 SiliconFlow"}))
 
+    def test_browser_cache_keeps_jobs_that_miss_the_first_query(self):
+        cache_file = Path("/tmp/career-cache-cross-query.json")
+        cache_file.unlink(missing_ok=True)
+        collected = [
+            career_sources.job_record("示例公司", "AI 产品经理", "北京", "https://example.com/jobs/pm"),
+            career_sources.job_record("示例公司", "大模型工程师", "北京", "https://example.com/jobs/eng"),
+        ]
+        records = [{"name": "示例公司", "url": "https://example.com/careers", "type": "公司招聘官网", "access": "免费公开", "quality": "高"}]
+        watcha = {"source": "Watcha", "source_url": "https://watcha.cn/study/jobs", "source_status": "searched", "matched_jobs": 0, "jobs": []}
+        with patch.object(browser_jobs, "browse_official", return_value=collected) as browse, \
+             patch.object(external_jobs.watcha_jobs, "fetch_payload", return_value={}), \
+             patch.object(external_jobs.watcha_jobs, "normalize", return_value=watcha):
+            first = external_jobs.search_all("产品", 5, catalog={"records": records},
+                                             fetch=lambda url: (url, "<div id='root'></div>"), browser_limit=1,
+                                             cache_file=cache_file)
+            second = external_jobs.search_all("工程师", 5, catalog={"records": records},
+                                              fetch=lambda url: (url, "<div id='root'></div>"), browser_limit=0,
+                                              cache_file=cache_file)
+        self.assertEqual(browse.call_count, 1)
+        self.assertEqual([job["title"] for job in first["jobs"]], ["AI 产品经理"])
+        self.assertEqual([job["title"] for job in second["jobs"]], ["大模型工程师"])
+        stored = career_cache.load(cache_file)
+        self.assertEqual(stored["entries"]["示例公司"]["collected_count"], 2)
+
+    def test_moka_respects_zero_browser_budget(self):
+        cache_file = Path("/tmp/career-cache-moka-zero.json")
+        cache_file.unlink(missing_ok=True)
+        records = [{"name": "智谱 Zhipu", "url": "https://app.mokahr.com/social-recruitment/zphz/1",
+                    "type": "公司招聘官网", "access": "免费公开", "quality": "高"}]
+        watcha = {"source": "Watcha", "source_url": "https://watcha.cn/study/jobs", "source_status": "searched", "matched_jobs": 0, "jobs": []}
+        with patch.object(browser_jobs, "browse_official") as browse, \
+             patch.object(external_jobs.watcha_jobs, "fetch_payload", return_value={}), \
+             patch.object(external_jobs.watcha_jobs, "normalize", return_value=watcha):
+            result = external_jobs.search_all("工程师", 5, catalog={"records": records},
+                                              fetch=lambda url: (url, "<div id='root'></div>"), browser_limit=0,
+                                              cache_file=cache_file)
+        browse.assert_not_called()
+        self.assertEqual(result["source_summary"]["browser_attempted"], 0)
+
+    def test_unverified_product_role_is_not_a_priority_ai_recommendation(self):
+        source = {"source": "小米", "source_status": "searched", "kind": "official", "jobs": [
+            career_sources.job_record("小米", "洗衣机产品经理", "武汉", "https://example.com/washer"),
+            career_sources.job_record("小米", "AI 产品经理", "北京", "https://example.com/ai-pm", summary="负责大模型产品"),
+        ]}
+        result = career_sources.combine_results([source], "产品", 10)
+        by_title = {job["title"]: job for job in result["jobs"]}
+        self.assertEqual(by_title["洗衣机产品经理"]["ai_relevance"], "unverified")
+        self.assertNotEqual(by_title["洗衣机产品经理"]["screen"], "优先看")
+        self.assertEqual(by_title["AI 产品经理"]["ai_relevance"], "verified")
+        self.assertEqual(by_title["AI 产品经理"]["screen"], "优先看")
+
+    def test_capped_keyword_search_is_marked_incomplete(self):
+        import official_extra
+        def reader(query=""):
+            if "大模型" in query:
+                return [career_sources.job_record("京东", "大模型工程师", "北京", "https://zhaopin.jd.com/job/model")]
+            return [career_sources.job_record("京东", f"普通岗{n}", "北京", f"https://zhaopin.jd.com/job/{n}") for n in range(30)]
+        with patch.object(official_extra, "_jd_jobs", side_effect=reader):
+            missed = official_extra.read_known({"name": "京东 JoyAI", "url": "https://zhaopin.jd.com/"}, "零售", 20)
+            found = official_extra.read_known({"name": "京东 JoyAI", "url": "https://zhaopin.jd.com/"}, "大模型", 20)
+        self.assertEqual(missed["failure_reason"], "collection_incomplete")
+        self.assertFalse(missed["pagination_complete"])
+        self.assertEqual(missed["matched_jobs"], 0)
+        self.assertEqual(found["jobs"][0]["title"], "大模型工程师")
+        self.assertTrue(found["pagination_complete"])
+
 
 if __name__ == "__main__":
     unittest.main()
