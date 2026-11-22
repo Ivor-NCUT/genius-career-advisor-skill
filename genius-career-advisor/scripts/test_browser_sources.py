@@ -237,6 +237,71 @@ class BrowserSourcesTest(unittest.TestCase):
         self.assertNotEqual(by_title["洗衣机产品经理"]["screen"], "优先看")
         self.assertEqual(by_title["AI 产品经理"]["ai_relevance"], "verified")
         self.assertEqual(by_title["AI 产品经理"]["screen"], "优先看")
+        broader = career_sources.combine_results([{"source": "示例", "source_status": "searched", "kind": "official", "jobs": [
+            career_sources.job_record("蚂蚁集团", "具身模型销售工程师", "杭州", "https://example.com/sales"),
+            career_sources.job_record("示例财务", "财务模型分析师", "上海", "https://example.com/finance"),
+            career_sources.job_record("示例", "大模型算法工程师", "北京", "https://example.com/llm"),
+        ]}], "模型", 10)
+        judged = {job["title"]: job for job in broader["jobs"]}
+        self.assertEqual(judged["具身模型销售工程师"]["ai_relevance"], "unverified")
+        self.assertNotEqual(judged["具身模型销售工程师"]["screen"], "优先看")
+        self.assertEqual(judged["财务模型分析师"]["ai_relevance"], "unverified")
+        self.assertNotEqual(judged["财务模型分析师"]["screen"], "优先看")
+        self.assertEqual(judged["大模型算法工程师"]["ai_relevance"], "verified")
+
+    def test_incomplete_cache_miss_searches_the_site_again(self):
+        import official_extra
+        cache_file = Path("/tmp/career-cache-incomplete-jd.json")
+        moment = career_cache.now_utc()
+        ordinary = [career_sources.job_record("京东", f"普通岗{n}", "北京", f"https://zhaopin.jd.com/job/{n}") for n in range(30)]
+        career_cache.save({"entries": {"京东 JoyAI": {
+            "fetched_at": moment.isoformat(),
+            "jobs": ordinary,
+            "collected_count": 30,
+            "entry_url": "https://zhaopin.jd.com/",
+        }}}, cache_file)
+        records = [{"name": "京东 JoyAI", "url": "https://zhaopin.jd.com/", "type": "公司招聘官网", "access": "免费公开", "quality": "高"}]
+        watcha = {"source": "Watcha", "source_url": "https://watcha.cn/study/jobs", "source_status": "searched", "matched_jobs": 0, "jobs": []}
+        calls = []
+        def reader(query=""):
+            calls.append(query)
+            return [career_sources.job_record("京东", "大模型工程师", "北京", "https://zhaopin.jd.com/job/model")]
+        with patch.object(official_extra, "_jd_jobs", side_effect=reader), \
+             patch.object(browser_jobs, "browse_official") as browse, \
+             patch.object(external_jobs.watcha_jobs, "fetch_payload", return_value={}), \
+             patch.object(external_jobs.watcha_jobs, "normalize", return_value=watcha):
+            found = external_jobs.search_all("大模型", 5, catalog={"records": records},
+                                             fetch=lambda url: (url, "<div id='root'></div>"), browser_limit=0,
+                                             cache_file=cache_file)
+        self.assertEqual(calls, ["大模型"])
+        browse.assert_not_called()
+        self.assertEqual([job["title"] for job in found["jobs"]], ["大模型工程师"])
+        jd = next(item for item in found["sources"] if item["source"] == "京东 JoyAI")
+        self.assertFalse(jd["pagination_complete"])
+        self.assertNotEqual(jd.get("failure_reason"), "collected_no_match")
+        career_cache.save({"entries": {"京东 JoyAI": {
+            "fetched_at": moment.isoformat(),
+            "jobs": ordinary,
+            "collected_count": 30,
+            "entry_url": "https://zhaopin.jd.com/",
+        }}}, cache_file)
+        calls.clear()
+        def still_ordinary(query=""):
+            calls.append(query)
+            return ordinary
+        with patch.object(official_extra, "_jd_jobs", side_effect=still_ordinary), \
+             patch.object(browser_jobs, "browse_official") as browse, \
+             patch.object(external_jobs.watcha_jobs, "fetch_payload", return_value={}), \
+             patch.object(external_jobs.watcha_jobs, "normalize", return_value=watcha):
+            missed = external_jobs.search_all("大模型", 5, catalog={"records": records},
+                                              fetch=lambda url: (url, "<div id='root'></div>"), browser_limit=0,
+                                              cache_file=Path("/tmp/career-cache-incomplete-jd.json"))
+        self.assertEqual(calls, ["大模型"])
+        browse.assert_not_called()
+        self.assertEqual(missed["jobs"], [])
+        jd = next(item for item in missed["sources"] if item["source"] == "京东 JoyAI")
+        self.assertEqual(jd["failure_reason"], "collection_incomplete")
+        self.assertFalse(jd["pagination_complete"])
 
     def test_capped_keyword_search_is_marked_incomplete(self):
         import official_extra

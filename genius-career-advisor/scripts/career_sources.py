@@ -706,6 +706,7 @@ def _finish_source(record_name: str, url: str, jobs: list[dict], query: str, lim
         "collected_count": len(jobs),
         "matched_jobs": total,
         "jobs": chosen,
+        "_collected_jobs": jobs,
         "failure_reason": reason,
     }
     if pagination_complete is not None:
@@ -1264,15 +1265,21 @@ def to_guard_job(job: dict) -> dict:
 
 
 AI_DUTY = (
-    "大模型", "模型", "agent", "智能体", "机器学习", "深度学习", "多模态", "推理",
-    "具身", "aigc", "文生图", "vla", "算法", "nlp", "llm", "人工智能", "生成式",
+    "大模型", "语言模型", "机器学习", "深度学习", "多模态", "智能体", "agent",
+    "aigc", "文生图", "vla", "nlp", "llm", "人工智能", "生成式", "具身智能",
+    "模型训练", "模型推理", "模型部署", "模型评测", "推理引擎", "推理部署", "推理加速",
 )
 AI_ROLE = ("产品", "运营", "设计", "增长")
+NON_AI_FUNCTION = ("销售", "财务", "商务", "市场", "质量", "采购", "法务", "人事", "行政", "客服", "招聘")
 
 
 def ai_relevance(job: dict) -> str:
-    """verified only when the title or summary shows an AI duty, not merely a keyword hit."""
-    blob = " ".join(str(job.get(key) or "") for key in ("title", "summary")).casefold()
+    """Verified only from a specific AI duty. A lone 模型 or 算法 is not enough."""
+    title = str(job.get("title") or "")
+    summary = str(job.get("summary") or "")
+    blob = f"{title} {summary}".casefold()
+    if any(word in title for word in NON_AI_FUNCTION):
+        return "unverified"
     if any(term in blob for term in AI_DUTY):
         return "verified"
     if any(role in blob for role in AI_ROLE) and any(term in blob for term in ("ai", "人工智能", "大模型", "aigc", "智能体")):

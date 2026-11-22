@@ -156,7 +156,24 @@ def _load_profile(profile):
         return None
 
 
+def _cache_incomplete(entry: dict | None) -> bool:
+    if not entry:
+        return False
+    flag = entry.get("pagination_complete")
+    if flag is False:
+        return True
+    if flag is True:
+        return False
+    count = entry.get("collected_count")
+    if not isinstance(count, int):
+        count = len(entry.get("jobs") or [])
+    return count >= career_sources.PER_SOURCE_JOB_CAP
+
+
 def _cached_result(record: dict, entry: dict, query: str, limit: int) -> dict:
+    complete = entry.get("pagination_complete")
+    if complete is None and _cache_incomplete(entry):
+        complete = False
     result = career_sources._finish_source(
         record.get("name") or "",
         entry.get("entry_url") or record.get("url") or "",
@@ -164,6 +181,7 @@ def _cached_result(record: dict, entry: dict, query: str, limit: int) -> dict:
         query,
         limit,
         entry.get("failure_reason") or "no_public_job_list",
+        pagination_complete=complete,
     )
     result["read_method"] = "cache"
     result["checked_at"] = entry.get("fetched_at") or ""
@@ -209,9 +227,10 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
         if meta["kind"] == "official":
             entry = career_cache.entry_for(stored, meta["name"])
             if entry and entry.get("jobs") and career_cache.fresh(entry):
-                result = _cached_result(meta["record"], entry, query, per_source)
-                result["kind"] = "official"
-                return meta["name"], result
+                cached = _cached_result(meta["record"], entry, query, per_source)
+                cached["kind"] = "official"
+                if cached.get("matched_jobs") or not _cache_incomplete(entry):
+                    return meta["name"], cached
         try:
             if meta["kind"] == "bonjour":
                 result = normalize_bonjour(fetch(meta["url"])[1], query, per_source)
@@ -241,6 +260,25 @@ def search_all(query="", limit=20, profile=None, catalog=None, fetch=None, brows
         if meta["kind"] != "official":
             continue
         result = results[meta["name"]]
+        entry = career_cache.entry_for(stored, meta["name"])
+        if _cache_incomplete(entry) and result.get("read_method") != "cache":
+            previous = entry.get("jobs") or []
+            fresh_jobs = result.get("_collected_jobs") or []
+            merged = []
+            seen = set()
+            for job in previous + fresh_jobs:
+                key = job.get("job_url") or job.get("title")
+                if key in seen:
+                    continue
+                seen.add(key)
+                merged.append(job)
+            result["_collected_jobs"] = merged
+            result["collected_count"] = len(merged)
+            result["pagination_complete"] = False
+            if result.get("source_status") == "searched" and not result.get("matched_jobs"):
+                result["failure_reason"] = "collection_incomplete"
+            result["read_method"] = result.get("read_method") or "http"
+            _remember_read(stored, meta["record"], result)
         if result.get("failure_reason"):
             continue
         if result.get("source_status") == "searched":
