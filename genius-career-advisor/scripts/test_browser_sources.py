@@ -255,6 +255,35 @@ class BrowserSourcesTest(unittest.TestCase):
             career_sources.job_record("智平方", "供应商质量专家", "深圳", "https://example.com/sqe")), "unverified")
         self.assertEqual(career_sources.ai_relevance(
             career_sources.job_record("智平方", "生产质量工程师", "深圳", "https://example.com/pqe")), "unverified")
+        service = career_sources.job_record("示例", "AI客服产品经理", "北京", "https://example.com/cs", summary="负责大模型客服产品")
+        hiring = career_sources.job_record("示例", "AI招聘产品经理", "北京", "https://example.com/hire", summary="负责大模型招聘产品")
+        travel = career_sources.job_record("示例", "Travel Agent", "远程", "https://example.com/travel", summary="Help travelers book trips")
+        retail = career_sources.job_record("示例", "Retail 产品经理", "上海", "https://example.com/retail", summary="负责门店商品和促销")
+        self.assertEqual(career_sources.ai_relevance(service), "verified")
+        self.assertEqual(career_sources.ai_relevance(hiring), "verified")
+        self.assertEqual(career_sources.ai_relevance(travel), "unverified")
+        self.assertEqual(career_sources.ai_relevance(retail), "unverified")
+        product = career_sources.combine_results([{
+            "source": "示例", "source_status": "searched", "kind": "official", "jobs": [service, hiring, retail],
+        }], "产品", 10)
+        judged_roles = {job["title"]: job for job in product["jobs"]}
+        self.assertEqual(judged_roles["AI客服产品经理"]["screen"], "优先看")
+        self.assertEqual(judged_roles["AI招聘产品经理"]["screen"], "优先看")
+        self.assertNotEqual(judged_roles["Retail 产品经理"]["screen"], "优先看")
+        travel_list = career_sources.combine_results([{
+            "source": "示例", "source_status": "searched", "kind": "official", "jobs": [travel],
+        }], "travel", 10)
+        self.assertNotEqual(travel_list["jobs"][0]["screen"], "优先看")
+        upper = career_sources.job_record("示例", "路径大写", "北京", "https://example.com/jobs/AbC")
+        lower = career_sources.job_record("示例", "路径小写", "北京", "https://example.com/jobs/abc")
+        both = career_sources.combine_results([{
+            "source": "示例", "source_status": "searched", "kind": "official", "jobs": [upper, lower],
+        }], "路径", 10)
+        self.assertEqual(sorted(job["title"] for job in both["jobs"]), ["路径大写", "路径小写"])
+        self.assertNotEqual(career_sources.normalize_job_url("https://example.com/jobs/AbC"),
+                            career_sources.normalize_job_url("https://example.com/jobs/abc"))
+        self.assertEqual(career_sources.normalize_job_url("HTTPS://Example.com/jobs/AbC"),
+                         "https://example.com/jobs/AbC")
 
     def test_incomplete_cache_miss_searches_the_site_again(self):
         import official_extra

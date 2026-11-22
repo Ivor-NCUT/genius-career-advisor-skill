@@ -13,6 +13,7 @@ import json
 import re
 from pathlib import Path
 
+import career_sources
 import workspace
 
 
@@ -28,7 +29,7 @@ HEADING = re.compile(r"^##\s+(\d+\.\s+.+)$", re.M)
 
 
 def job_key(job_id: str = "", job_url: str = "", company: str = "", title: str = "") -> str:
-    url = str(job_url or "").strip().rstrip("/").casefold()
+    url = career_sources.normalize_job_url(job_url)
     if url:
         basis = "url:" + url
     elif str(job_id or "").strip():
@@ -217,8 +218,10 @@ def write_prep(workspace_dir: Path, spec: dict) -> dict:
     directory.mkdir(parents=True, exist_ok=True)
     markdown = render_markdown(spec)
     md_path = directory / "prep.md"
+    if md_path.is_file():
+        return {"job_key": key, "markdown": str(md_path), "kept_existing": True}
     md_path.write_text(markdown, encoding="utf-8")
-    return {"job_key": key, "markdown": str(md_path)}
+    return {"job_key": key, "markdown": str(md_path), "kept_existing": False}
 
 
 def self_test() -> None:
@@ -311,6 +314,24 @@ def self_test() -> None:
         assert "甲公司" in Path(saved_a["markdown"]).read_text(encoding="utf-8")
         assert "乙公司的算法岗简报" in Path(saved_b["markdown"]).read_text(encoding="utf-8")
         assert not Path(saved_a["markdown"]).with_suffix(".html").exists()
+        upper = write_prep(root_a, dict(first, job_url="https://example.com/jobs/AbC"))
+        lower = write_prep(root_a, dict(first, job_url="https://example.com/jobs/abc", brief="小写路径的另一岗位"))
+        assert upper["job_key"] != lower["job_key"]
+        practiced = update_feedback(Path(upper["markdown"]).read_text(encoding="utf-8"), {
+            "question": "讲一次经历",
+            "answer_summary": "我亲自拆了三条反馈",
+            "cited_problem": "我亲自拆了三条反馈",
+            "priority_move": "补上当时的取舍",
+            "reference": "我亲自拆了三条反馈。",
+        }, "甲做过社区反馈周报")
+        manual = practiced.replace("甲准备的岗位简报", "人工改过的简报", 1)
+        Path(upper["markdown"]).write_text(manual, encoding="utf-8")
+        again = write_prep(root_a, dict(first, job_url="https://example.com/jobs/AbC", brief="重新生成的初稿"))
+        kept = Path(again["markdown"]).read_text(encoding="utf-8")
+        assert again["kept_existing"] is True
+        assert "我亲自拆了三条反馈" in kept
+        assert "人工改过的简报" in kept
+        assert "重新生成的初稿" not in kept
     print("interview_prep self-test: ok")
 
 

@@ -179,7 +179,11 @@ def rich_text(value: str) -> str:
 def grouped_sections(sections: list[dict]) -> dict[str, str]:
     grouped = {"summary": [], "education": [], "honors": [], "experience": []}
     for section in sections:
-        grouped[slot_for(section["heading"])].append(section["content"].strip())
+        heading = str(section.get("heading") or "").strip()
+        content = section["content"].strip()
+        if heading and not content.startswith(heading):
+            content = f"{heading}\n{content}" if content else heading
+        grouped[slot_for(heading)].append(content)
     return {key: "\n\n".join(item for item in items if item) for key, items in grouped.items()}
 
 
@@ -225,9 +229,9 @@ def render_html(title: str, sections: list[dict], editor_version: str, profile: 
 <style>
 @page{{size:A4;margin:0}}*{{box-sizing:border-box}}body{{margin:0;background:#e7e7e7;color:#2a2a2a;font:14px/1.65 "Songti SC","Noto Serif SC",Georgia,serif}}.toolbar{{position:sticky;z-index:2;top:0;display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:10px;background:#fff;border-bottom:1px solid #ddd;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}.status{{color:#666;font-size:12px}}.status[data-state="error"]{{color:#b42318}}button,.download{{padding:8px 14px;border:0;border-radius:6px;background:#1769e0;color:#fff;cursor:pointer;text-decoration:none}}button:disabled{{cursor:wait;opacity:.65}}.download[hidden]{{display:none}}main{{width:210mm;min-height:270mm;margin:16px auto;background:#fff;box-shadow:0 2px 14px #bbb;outline:none;display:flex;flex-direction:column}}.sheet-head{{display:flex;gap:28px;align-items:flex-start;padding:18mm 16mm 8mm}}.portrait{{flex:0 0 118px;width:118px;height:118px;border-radius:50%;background:#ece7e1;color:#3a342e;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:600}}.identity{{flex:1;min-width:0}}[data-field="name"]{{margin:0;font-size:34px;line-height:1.15;font-weight:600}}[data-field="name_en"]{{margin:4px 0 0;letter-spacing:.18em;font-size:13px}}[data-field="headline"]{{margin:8px 0 0;font-size:16px}}[data-field="summary"]{{margin:12px 0 0;font-size:13px;line-height:1.7}}.columns{{display:flex;gap:28px;padding:0 16mm 12mm;flex:1}}.side{{flex:0 0 36%}}.primary{{flex:1}}section{{break-inside:avoid;page-break-inside:avoid;margin:0 0 22px}}h2{{margin:0 0 10px;font-size:13px;letter-spacing:.16em;font-weight:650}}p{{margin:0;white-space:normal}}footer{{display:flex;gap:28px;align-items:center;padding:12px 16mm;background:#2b2b2b;color:#fff;font:13px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}footer span{{display:flex;gap:8px;align-items:center;min-width:0}}footer svg{{width:16px;height:16px;fill:currentColor;flex:0 0 auto}}body.exporting{{background:#fff}}body.exporting .toolbar{{display:none}}body.exporting main{{margin:0;box-shadow:none}}
 </style></head><body data-fanhan-resume-editor="v2" data-resume-layout="sheet-v1"><div class="toolbar"><span class="status" data-editor-status role="status" aria-live="polite">修改会自动保存；先生成 PDF，再点击下载并发回当前对话</span><button type="button" data-export-pdf>生成 PDF</button><a class="download" data-download-pdf hidden target="_blank" rel="noopener">下载 PDF</a></div>
-<main contenteditable="true" spellcheck="false" data-resume-content><header class="sheet-head"><div class="portrait" data-field="monogram">{html.escape(person["monogram"])}</div><div class="identity"><h1 data-field="name">{html.escape(person["name"])}</h1><p data-field="name_en">{html.escape(person["name_en"])}</p><p data-field="headline">{html.escape(person["headline"])}</p><p data-field="summary">{rich_text(grouped["summary"])}</p></div></header><div class="columns"><aside class="side">{column("education", "EDUCATION")}{column("honors", "HONORS & CERTIFICATIONS")}</aside><div class="primary">{column("experience", "EXPERIENCE")}</div></div><footer><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.6 15.6 0 00-1.2-5 8.1 8.1 0 014.4 5zM12 4c.8 1.1 1.8 3.2 2.1 7H9.9c.3-3.8 1.3-5.9 2.1-7zM4.1 13h3.2a15.6 15.6 0 001.2 5 8.1 8.1 0 01-4.4-5zm3.2-2H4.1a8.1 8.1 0 014.4-5 15.6 15.6 0 00-1.2 5zM12 20c-.8-1.1-1.8-3.2-2.1-7h4.2c-.3 3.8-1.3 5.9-2.1 7zm2.7-2a15.6 15.6 0 001.2-5h3.2a8.1 8.1 0 01-4.4 5z"/></svg><span data-field="website">{html.escape(person["website"])}</span></span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2zm0 2v.4l9 6.2 9-6.2V7H3zm18 10V9.7l-8.4 5.8a1 1 0 01-1.2 0L3 9.7V17h18z"/></svg><span data-field="email">{html.escape(person["email"])}</span></span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l1 4-2 1a12 12 0 006 6l1-2 4 1v3a2 2 0 01-2 2A15 15 0 015 5a2 2 0 012-2z"/></svg><span data-field="phone">{html.escape(person["phone"])}</span></span></footer></main>
+<main data-resume-revision="pending" contenteditable="true" spellcheck="false" data-resume-content><header class="sheet-head"><div class="portrait" data-field="monogram">{html.escape(person["monogram"])}</div><div class="identity"><h1 data-field="name">{html.escape(person["name"])}</h1><p data-field="name_en">{html.escape(person["name_en"])}</p><p data-field="headline">{html.escape(person["headline"])}</p><p data-field="summary">{rich_text(grouped["summary"])}</p></div></header><div class="columns"><aside class="side">{column("education", "EDUCATION")}{column("honors", "HONORS & CERTIFICATIONS")}</aside><div class="primary">{column("experience", "EXPERIENCE")}</div></div><footer><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15.6 15.6 0 00-1.2-5 8.1 8.1 0 014.4 5zM12 4c.8 1.1 1.8 3.2 2.1 7H9.9c.3-3.8 1.3-5.9 2.1-7zM4.1 13h3.2a15.6 15.6 0 001.2 5 8.1 8.1 0 01-4.4-5zm3.2-2H4.1a8.1 8.1 0 014.4-5 15.6 15.6 0 00-1.2 5zM12 20c-.8-1.1-1.8-3.2-2.1-7h4.2c-.3 3.8-1.3 5.9-2.1 7zm2.7-2a15.6 15.6 0 001.2-5h3.2a8.1 8.1 0 01-4.4 5z"/></svg><span data-field="website">{html.escape(person["website"])}</span></span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2zm0 2v.4l9 6.2 9-6.2V7H3zm18 10V9.7l-8.4 5.8a1 1 0 01-1.2 0L3 9.7V17h18z"/></svg><span data-field="email">{html.escape(person["email"])}</span></span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l1 4-2 1a12 12 0 006 6l1-2 4 1v3a2 2 0 01-2 2A15 15 0 015 5a2 2 0 012-2z"/></svg><span data-field="phone">{html.escape(person["phone"])}</span></span></footer></main>
 """
-    return page + editor_bootstrap(editor_version) + "</body></html>\n"
+    return bind_revision(page + editor_bootstrap(editor_version) + "</body></html>\n")
 
 
 def _page_markers(page: str, attr: str) -> set[str]:
@@ -256,6 +260,39 @@ def visible_snapshot(page: str) -> str:
     body = html.unescape(body)
     lines = [' '.join(line.split()) for line in body.splitlines()]
     return '\n'.join(line for line in lines if line)
+
+
+REVISION_RE = re.compile(r'data-resume-revision="([0-9a-f]{64})"')
+PDF_REVISION_RE = re.compile(br"FANHAN-RESUME-REVISION ([0-9a-f]{64})")
+
+
+def html_revision(page: str) -> str:
+    match = REVISION_RE.search(page or "")
+    return match.group(1) if match else ""
+
+
+def pdf_revision(data: bytes) -> str:
+    match = PDF_REVISION_RE.search(data or b"")
+    return match.group(1).decode() if match else ""
+
+
+def bind_revision(page: str) -> str:
+    token = hashlib.sha256(visible_snapshot(page).encode("utf-8")).hexdigest()
+    if "data-resume-revision=" in page:
+        return re.sub(r'data-resume-revision="[^"]*"', f'data-resume-revision="{token}"', page, count=1)
+    return page.replace("<main ", f'<main data-resume-revision="{token}" ', 1)
+
+
+def assert_current_export(data: bytes, html_path: Path) -> None:
+    """Reject a PDF that is not the export of this HTML, including a newer copy of an old file."""
+    editable = html_path.expanduser().resolve()
+    if void_marker(editable).is_file():
+        raise ValueError("当前 HTML 已标记失效，不能接收重新放回的旧 PDF")
+    page = editable.read_text(encoding="utf-8")
+    expected = html_revision(page)
+    found = pdf_revision(data)
+    if not expected or found != expected:
+        raise ValueError("PDF 不是当前 HTML 的导出，不能用其他岗位或旧版本顶替")
 
 
 def void_marker(html_path: Path) -> Path:
@@ -299,6 +336,10 @@ def save_resume_page(html_path: Path, document_html: str) -> dict:
         raise ValueError("保存后的页面少了原有栏目，已拒绝覆盖")
     if not _page_markers(current, "data-field") <= _page_markers(document_html, "data-field"):
         raise ValueError("保存后的页面少了原有字段，已拒绝覆盖")
+    incoming_rev = html_revision(document_html)
+    previous_rev = html_revision(current)
+    if visible_snapshot(current) != visible_snapshot(document_html) and (not incoming_rev or incoming_rev == previous_rev):
+        document_html = bind_revision(document_html)
     temporary = editable.with_suffix(".html.tmp")
     temporary.write_text(document_html, encoding="utf-8")
     temporary.replace(editable)
@@ -343,8 +384,7 @@ def accept_exported_pdf(source_path: Path, html_path: Path) -> dict:
             or "html2pdf.bundle.min.js" not in page
             or "resume-editor.js" not in page):
         raise ValueError("HTML 不是内置简历编辑器生成的文件")
-    if void_marker(editable).is_file() or source.stat().st_mtime_ns < editable.stat().st_mtime_ns:
-        raise ValueError("PDF 早于当前 HTML，保存后的修改已使旧导出失效")
+    assert_current_export(data, editable)
 
     output = editable.with_suffix(".pdf")
     replaced = output.exists() and output != source
@@ -490,6 +530,11 @@ def self_test() -> None:
         ], "abc", {"identity": {"name": "李四", "name_en": "LI SI"}, "contact": {"email": "li@example.com"}})
         assert 'data-slot="education"' in placed and "某大学" in placed
         assert "奖学金" in placed and "做产品" in placed and "实习经历" in placed
+        titled = render_html("占位", [
+            {"heading": "引力边缘｜AI 产品实习生｜2026.06 – 至今", "content": "· 参与梳理人工确认边界"},
+        ], "abc", {"identity": {"name": "张三"}})
+        assert "引力边缘｜AI 产品实习生｜2026.06 – 至今" in titled
+        assert "参与梳理人工确认边界" in titled
         assert "夏铭淳" not in placed
         markdown = output.with_suffix(".md")
         try:
@@ -510,13 +555,18 @@ def self_test() -> None:
             pass
 
         output.write_text(page.replace('data-fanhan-resume-editor="v2"', 'data-fanhan-resume-editor="v3"'), encoding="utf-8")
+
+        def editor_pdf(html_file: Path, body: bytes) -> bytes:
+            token = html_revision(html_file.read_text(encoding="utf-8")).encode()
+            return b"%PDF-1.4\n% jsPDF 4.0.0\n" + body + b"\n%FANHAN-RESUME-REVISION " + token + b"\n"
+
         downloaded = root / "Downloads" / output.with_suffix(".pdf").name
         downloaded.parent.mkdir()
-        downloaded.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nfirst edit")
+        downloaded.write_bytes(editor_pdf(output, b"first edit"))
         accepted = accept_exported_pdf(downloaded, output)
         accepted_path = Path(accepted["pdf_path"])
         assert accepted_path.read_bytes() == downloaded.read_bytes()
-        downloaded.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nsecond edit")
+        downloaded.write_bytes(editor_pdf(output, b"second edit"))
         accepted = accept_exported_pdf(downloaded, output)
         assert accepted["replaced_existing"] is True
         assert accepted_path.read_bytes() == downloaded.read_bytes()
@@ -531,7 +581,7 @@ def self_test() -> None:
         public_html.parent.mkdir(parents=True)
         public_html.write_text(output.read_text(encoding="utf-8"), encoding="utf-8")
         public_download = root / "Downloads" / "public-export.pdf"
-        public_download.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\npublic workspace")
+        public_download.write_bytes(editor_pdf(public_html, b"public workspace"))
         public_accepted = accept_exported_pdf(public_download, public_html)
         assert Path(public_accepted["pdf_path"]).parent.parent.name == ".天才职业顾问"
         stray = root / "not-a-workspace" / "outbox" / output.name
@@ -544,6 +594,7 @@ def self_test() -> None:
             assert ".天才职业顾问" in str(error)
 
         current_page = output.read_text(encoding="utf-8")
+        previous_export = editor_pdf(output, b"before content change")
         revised = current_page.replace("负责有证据的 AI 产品交付。", "保存后的新经历。")
         saved = save_resume_page(output, revised)
         assert saved["pdf_retired"] is True
@@ -557,16 +608,14 @@ def self_test() -> None:
             assert "整页" in str(error)
         assert "保存后的新经历。" in output.read_text(encoding="utf-8")
         stale = root / "Downloads" / "stale-export.pdf"
-        stale.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nold export")
-        older = output.stat().st_mtime_ns - 1_000_000
-        os.utime(stale, ns=(older, older))
+        stale.write_bytes(previous_export)
         try:
             accept_exported_pdf(stale, output)
-            raise AssertionError("再次保存后的旧 PDF 必须失效")
+            raise AssertionError("内容已变的旧 PDF 不能因为文件时间够新就被接受")
         except ValueError as error:
-            assert "旧导出失效" in str(error)
+            assert "不是当前 HTML" in str(error)
         fresh = root / "Downloads" / "fresh-export.pdf"
-        fresh.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nfresh export")
+        fresh.write_bytes(editor_pdf(output, b"fresh export"))
         accepted = accept_exported_pdf(fresh, output)
         assert Path(accepted["pdf_path"]).read_bytes() == fresh.read_bytes()
         edited_again = output.read_text(encoding="utf-8").replace("保存后的新经历。", "生成后又改了字。")
@@ -577,7 +626,7 @@ def self_test() -> None:
             accept_exported_pdf(fresh, output)
             raise AssertionError("生成 PDF 后再改字，旧文件不能上传")
         except ValueError as error:
-            assert "旧导出失效" in str(error)
+            assert "失效" in str(error)
         resaved = save_resume_page(output, edited_again)
         assert resaved["status"] == "html_saved"
         assert not void_marker(output).exists()
@@ -585,9 +634,9 @@ def self_test() -> None:
             accept_exported_pdf(fresh, output)
             raise AssertionError("重新保存后，生成前的旧 PDF 仍不能上传")
         except ValueError as error:
-            assert "旧导出失效" in str(error)
+            assert "不是当前 HTML" in str(error)
         newest = root / "Downloads" / "newest-export.pdf"
-        newest.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nnewest export")
+        newest.write_bytes(editor_pdf(output, b"newest export"))
         newest_accepted = accept_exported_pdf(newest, output)
         assert Path(newest_accepted["pdf_path"]).read_bytes() == newest.read_bytes()
         assert noted["handoff_status"] == "人工交接待验收"
