@@ -8,6 +8,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+import material_gate
 import workspace
 from types import SimpleNamespace
 
@@ -128,8 +129,13 @@ def validate_materials(args, selection):
         raise ValueError("tailored_resume_must_be_pdf")
     if b"jsPDF" not in pdf:
         raise ValueError("tailored_resume_must_be_editor_export")
-    if resume_path.stat().st_mtime_ns < html_path.stat().st_mtime_ns:
-        raise ValueError("pdf_must_be_exported_after_html")
+    try:
+        material_gate.assert_current_export(pdf, html_path)
+    except ValueError as error:
+        message = str(error)
+        if "失效" in message:
+            raise ValueError("resume_export_void") from error
+        raise ValueError("resume_export_mismatch") from error
     return {
         "profile_sha256": file_hash(profile_path),
         "profile_status_sha256": file_hash(status_path),
@@ -211,12 +217,15 @@ def self_test():
         except ValueError as error:
             assert str(error) == "editable_html_missing"
         editable_html = resume.with_suffix(".html")
+        revision = "a" * 64
         editable_html.write_text(
-            '<body data-fanhan-resume-editor="v2"><main contenteditable="true"></main>'
+            f'<body data-fanhan-resume-editor="v2"><main data-resume-revision="{revision}" contenteditable="true"></main>'
             '<script src="html2pdf.bundle.min.js"></script><script src="resume-editor.js"></script></body>',
             encoding="utf-8",
         )
-        resume.write_bytes(b"%PDF-1.4 jsPDF tailored")
+        def marked(body: bytes) -> bytes:
+            return b"%PDF-1.4 jsPDF " + body + b"\n%FANHAN-RESUME-REVISION " + revision.encode() + b"\n"
+        resume.write_bytes(marked(b"tailored"))
         value = payload(args)
         first = fingerprint(value)
         assert value["resume_name"] == resume.name
@@ -229,15 +238,30 @@ def self_test():
         assert manual["submission_mode"] == "manual"
         assert fingerprint(manual) != first
         selection_path.write_text(json.dumps(selection, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        resume.write_bytes(b"%PDF-1.4 jsPDF tailored-v2")
+        resume.write_bytes(marked(b"tailored-v2"))
         assert first != fingerprint(payload(args))
+        resume.write_bytes(b"%PDF-1.4 jsPDF other-job\n%FANHAN-RESUME-REVISION " + b"b" * 64 + b"\n")
+        try:
+            payload(args)
+            raise AssertionError("其他岗位的 PDF 不能因为文件时间较新就通过提交门禁")
+        except ValueError as error:
+            assert str(error) == "resume_export_mismatch"
+        resume.write_bytes(marked(b"tailored-v2"))
+        void = editable_html.with_name(editable_html.name + ".void")
+        void.write_text(revision, encoding="utf-8")
+        try:
+            payload(args)
+            raise AssertionError("HTML 已失效时不能接受重新放回的旧 PDF")
+        except ValueError as error:
+            assert str(error) == "resume_export_void"
+        void.unlink()
         resume.write_bytes(b"%PDF-1.4 HeadlessChrome Skia/PDF")
         try:
             payload(args)
             raise AssertionError("regenerated PDF must fail")
         except ValueError as error:
             assert str(error) == "tailored_resume_must_be_editor_export"
-        resume.write_bytes(b"%PDF-1.4 jsPDF tailored-v2")
+        resume.write_bytes(marked(b"tailored-v2"))
         expected = {field: value[field] for field in ("company", "job_title", "job_url", "application_url")}
         assert load_selection(selection_path, expected)["user_confirmed"] is True
         try:

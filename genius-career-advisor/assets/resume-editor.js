@@ -22,8 +22,10 @@
     restore(main, storage, storageKey);
 
     let timer;
+    let exportGeneration = 0;
     const schedule = options.schedule || ((callback) => setTimeout(callback, 250));
     const cancel = options.cancel || clearTimeout;
+    const createObjectURL = options.createObjectURL || ((blob) => root.URL.createObjectURL(blob));
     const save = () => {
       if (!storage) return setStatus(status, '自动保存不可用；仍可导出 PDF', true);
       try {
@@ -34,6 +36,8 @@
       }
     };
     main.addEventListener('input', () => {
+      exportGeneration += 1;
+      bumpRevision(main);
       download.hidden = true;
       download.removeAttribute('href');
       if (timer !== undefined) cancel(timer);
@@ -46,6 +50,8 @@
         setStatus(status, 'PDF 组件未加载，请重新打开页面', true);
         return false;
       }
+      const started = exportGeneration;
+      const revision = main.getAttribute ? (main.getAttribute('data-resume-revision') || '') : '';
       button.disabled = true;
       main.blur && main.blur();
       await Promise.resolve();
@@ -54,15 +60,28 @@
       doc.body.classList.add('exporting');
       setStatus(status, '正在生成 PDF…');
       try {
-        const pdfUrl = await pdfFactory().set({
+        const raw = await pdfFactory().set({
           margin: 0,
           filename: `${safeFilename(doc.title)}.pdf`,
           image: { type: 'jpeg', quality: 0.98 },
           html2canvas: { scale: 2, backgroundColor: '#ffffff', logging: false },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
           pagebreak: { mode: 'avoid-all' },
-        }).from(exportSource).outputPdf('bloburl');
-        download.href = String(pdfUrl);
+        }).from(exportSource).outputPdf('arraybuffer');
+        if (started !== exportGeneration) {
+          download.hidden = true;
+          download.removeAttribute('href');
+          setStatus(status, '导出期间内容已修改，请重新生成 PDF', true);
+          return false;
+        }
+        const marker = `\n%FANHAN-RESUME-REVISION ${revision}\n`;
+        const sourceBytes = raw instanceof ArrayBuffer ? new Uint8Array(raw) : new TextEncoder().encode(String(raw));
+        const markerBytes = new TextEncoder().encode(marker);
+        const payload = new Uint8Array(sourceBytes.length + markerBytes.length);
+        payload.set(sourceBytes, 0);
+        payload.set(markerBytes, sourceBytes.length);
+        const blob = new Blob([payload], { type: 'application/pdf' });
+        download.href = String(createObjectURL(blob));
         download.download = `${safeFilename(doc.title)}.pdf`;
         download.hidden = false;
         setStatus(status, 'PDF 已生成，请点击“下载 PDF”，再把文件发回当前对话');
@@ -143,6 +162,13 @@
     }
   }
 
+  function bumpRevision(main) {
+    if (!main.getAttribute || !main.setAttribute) return;
+    const current = main.getAttribute('data-resume-revision') || '0';
+    const next = (parseInt(current.slice(0, 8), 16) + 1).toString(16).padStart(8, '0');
+    main.setAttribute('data-resume-revision', (next + current.slice(8)).padEnd(64, '0').slice(0, 64));
+  }
+
   function text(element) {
     return element ? String(element.textContent || '') : '';
   }
@@ -167,8 +193,11 @@
     const heading = { textContent: '旧标题' };
     const paragraph = { textContent: '旧内容', innerText: '旧内容' };
     const section = { querySelector: (selector) => selector === 'h2' ? heading : paragraph };
+    const attrs = { 'data-resume-revision': 'a'.repeat(64) };
     const main = {
       querySelectorAll: (selector) => (selector === 'section' ? [section] : []),
+      getAttribute: (name) => attrs[name] || '',
+      setAttribute: (name, value) => { attrs[name] = value; },
       addEventListener: (name, handler) => { events[name] = handler; },
       blur: () => {},
       cloneNode: () => ({
@@ -205,28 +234,46 @@
       setItem: (key, value) => values.set(key, value),
     };
     let pdfSource;
+    let releaseExport;
     const worker = {
       set: () => worker,
       from: (source) => { pdfSource = source; return worker; },
-      outputPdf: async (type) => {
-        assert.equal(type, 'bloburl');
-        return 'blob:resume-pdf';
+      outputPdf: (type) => {
+        assert.equal(type, 'arraybuffer');
+        return new Promise((resolve) => {
+          releaseExport = () => resolve(new TextEncoder().encode('%PDF-1.4 jsPDF\n').buffer);
+        });
       },
     };
+    let created;
     const editor = install({
       document, storage, pdfFactory: () => worker,
+      createObjectURL: (blob) => { created = blob; return 'blob:resume-pdf'; },
       schedule: (callback) => { callback(); return 1; }, cancel: () => {},
     });
     paragraph.innerText = '修改后的内容';
     events.input();
     assert.equal(JSON.parse(values.get(editor.storageKey)).sections[0].content, '修改后的内容');
-    assert.equal(await events.click(), true);
+    const pending = events.click();
+    await Promise.resolve();
+    releaseExport();
+    assert.equal(await pending, true);
     assert.notEqual(pdfSource, main);
     assert.equal(pdfSource.textContent, '修改后的内容');
     assert.equal(download.href, 'blob:resume-pdf');
     assert.equal(download.download, '测试简历.pdf');
     assert.equal(download.hidden, false);
-    assert.equal(status.textContent, 'PDF 已生成，请点击“下载 PDF”，再把文件发回当前对话');
+    const exported = new TextDecoder().decode(new Uint8Array(await created.arrayBuffer()));
+    assert.match(exported, /FANHAN-RESUME-REVISION [0-9a-f]{64}/);
+
+    const interrupted = events.click();
+    await Promise.resolve();
+    events.input();
+    releaseExport();
+    assert.equal(await interrupted, false);
+    assert.equal(download.hidden, true);
+    assert.equal(download.href, '');
+    assert.equal(status.textContent, '导出期间内容已修改，请重新生成 PDF');
     assert.equal(button.disabled, false);
     assert.equal(classes.size, 0);
 

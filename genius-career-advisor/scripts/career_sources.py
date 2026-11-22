@@ -21,7 +21,7 @@ import time
 from html.parser import HTMLParser
 from http.cookiejar import CookieJar
 from urllib.error import HTTPError, URLError
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlsplit, urlunsplit
 from urllib.request import HTTPCookieProcessor, Request, build_opener, urlopen
 
 import match_guard
@@ -207,16 +207,30 @@ def _norm_text(value: object) -> str:
     return " ".join(str(value or "").casefold().split())
 
 
-def _norm_url(value: object) -> str:
+def normalize_job_url(value: object) -> str:
+    """Lowercase only the scheme and host. Path, query and job ids keep their case."""
     text = str(value or "").strip()
     if not text:
         return ""
-    base, separator, fragment = text.partition("#")
-    base = re.sub(r"([?&])(utm_[^=&]+|gh_src)=[^&]*", r"\1", base)
-    base = re.sub(r"[?&]$", "", base).rstrip("/").casefold()
-    if separator and (re.search(r"/job/|job-info/|jobid|job_id", fragment, re.I) or fragment.startswith("role=")):
-        return base + "#" + fragment.casefold()
-    return base
+    text = re.sub(r"([?&])(utm_[^=&]+|gh_src)=[^&]*", r"\1", text)
+    text = re.sub(r"[?&]+$", "", text)
+    parts = urlsplit(text)
+    if not parts.scheme or not parts.netloc:
+        return text.rstrip("/")
+    fragment = parts.fragment
+    if fragment and not (re.search(r"/job/|job-info/|jobid|job_id", fragment, re.I) or fragment.startswith("role=")):
+        fragment = ""
+    return urlunsplit((
+        parts.scheme.casefold(),
+        parts.netloc.casefold(),
+        parts.path.rstrip("/"),
+        parts.query,
+        fragment,
+    ))
+
+
+def _norm_url(value: object) -> str:
+    return normalize_job_url(value)
 
 
 def _loads_relaxed(text: str):
@@ -1264,30 +1278,43 @@ def to_guard_job(job: dict) -> dict:
     return payload
 
 
-AI_DUTY = (
-    "大模型", "语言模型", "机器学习", "深度学习", "多模态", "智能体", "agent",
-    "aigc", "文生图", "vla", "nlp", "llm", "人工智能", "生成式", "具身智能",
+CN_AI_DUTY = (
+    "大模型", "语言模型", "机器学习", "深度学习", "多模态", "智能体",
+    "文生图", "人工智能", "生成式", "具身智能",
     "模型训练", "模型推理", "模型部署", "模型评测", "推理引擎", "推理部署", "推理加速",
 )
-AI_ROLE = ("产品", "运营", "设计", "增长")
-NON_AI_FUNCTION = ("销售", "财务", "商务", "市场", "采购", "法务", "人事", "行政", "客服", "招聘")
+LATIN_AI_DUTY = re.compile(r"(?i)(?<![a-z])(?:ai|aigc|nlp|llm|vla)(?![a-z])")
+PRODUCT_ROLE = ("产品经理", "产品运营", "产品设计")
+NON_AI_FUNCTION = ("销售", "财务", "商务", "市场", "采购", "法务", "人事", "行政")
+DOMAIN_FUNCTION = ("客服", "招聘")
 MANUFACTURING_QUALITY = ("供应商质量", "生产质量", "制造质量", "来料质量", "制程质量", "过程质量", "出货质量", "进料质量")
 
 
+def _explicit_ai_duty(text: str) -> bool:
+    if any(term in text for term in CN_AI_DUTY):
+        return True
+    return LATIN_AI_DUTY.search(text) is not None
+
+
 def ai_relevance(job: dict) -> str:
-    """Verified only from a specific AI duty. A lone 模型 or 算法 is not enough."""
+    """Verified from an AI duty plus the job's actual function.
+
+    English fragments such as the letters inside Retail, or the word Agent in
+    Travel Agent, are not an AI duty. 客服 and 招聘 can be the domain of an AI
+    product role. 销售、财务 and manufacturing quality stay unverified.
+    """
     title = str(job.get("title") or "")
     summary = str(job.get("summary") or "")
-    blob = f"{title} {summary}".casefold()
+    blob = f"{title}\n{summary}"
     if any(phrase in title for phrase in MANUFACTURING_QUALITY):
         return "unverified"
     if any(word in title for word in NON_AI_FUNCTION):
         return "unverified"
-    if any(term in blob for term in AI_DUTY):
-        return "verified"
-    if any(role in blob for role in AI_ROLE) and any(term in blob for term in ("ai", "人工智能", "大模型", "aigc", "智能体")):
-        return "verified"
-    return "unverified"
+    if not _explicit_ai_duty(blob):
+        return "unverified"
+    if any(word in title for word in DOMAIN_FUNCTION) and not any(role in title for role in PRODUCT_ROLE):
+        return "unverified"
+    return "verified"
 
 
 def _screen(decision: str | None, score: float, query_tokens: list[str]) -> str:
