@@ -203,7 +203,7 @@ def parse_luchen_jobs(page: str) -> list[dict]:
     ]
 
 
-def _jd_jobs() -> list[dict]:
+def _jd_jobs(query: str = "") -> list[dict]:
     body = _post(
         "https://zhaopin.jd.com/web/job/job_list",
         urlencode({
@@ -211,7 +211,7 @@ def _jd_jobs() -> list[dict]:
             "pageSize": "30",
             "workCityJson": "[]",
             "jobTypeJson": "[]",
-            "jobSearch": "",
+            "jobSearch": query or "",
             "depTypeJson": "[]",
         }).encode(),
         {"Content-Type": "application/x-www-form-urlencoded", "Referer": "https://zhaopin.jd.com/"},
@@ -219,10 +219,10 @@ def _jd_jobs() -> list[dict]:
     return parse_jd_jobs(json.loads(body))
 
 
-def _xiaohongshu_jobs() -> list[dict]:
+def _xiaohongshu_jobs(query: str = "") -> list[dict]:
     body = _post(
         "https://job.xiaohongshu.com/websiterecruit/position/pageQueryPosition",
-        json.dumps({"positionName": "", "pageNum": 1, "pageSize": 30, "recruitType": "social"}).encode(),
+        json.dumps({"positionName": query or "", "pageNum": 1, "pageSize": 30, "recruitType": "social"}).encode(),
         {"Content-Type": "application/json", "Origin": "https://job.xiaohongshu.com", "Referer": "https://job.xiaohongshu.com/social/position"},
     )
     return parse_xiaohongshu_jobs(json.loads(body))
@@ -235,16 +235,16 @@ def _manus_jobs() -> list[dict]:
     return parse_manus_jobs(json.loads(body))
 
 
-def _horizon_jobs() -> list[dict]:
+def _horizon_jobs(query: str = "") -> list[dict]:
     body = _post(
         "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU64819a4f2f9d2433ba8b043a?iSaJAx=isAjax&request_locale=zh_CN",
-        urlencode({"isFrompb": "true", "recruitType": "2", "pageSize": "30", "currentPage": "1"}).encode(),
+        urlencode({"isFrompb": "true", "recruitType": "2", "pageSize": "30", "currentPage": "1", "keyword": query or ""}).encode(),
         {"Content-Type": "application/x-www-form-urlencoded", "Referer": "https://wecruit.hotjob.cn/SU64819a4f2f9d2433ba8b043a/pb/social.html"},
     )
     return parse_horizon_jobs(json.loads(body))
 
 
-def _alibaba_jobs() -> list[dict]:
+def _alibaba_jobs(query: str = "") -> list[dict]:
     origin = "https://talent-holding.alibaba.com"
     jar = CookieJar()
     opener = build_opener(HTTPCookieProcessor(jar))
@@ -253,7 +253,7 @@ def _alibaba_jobs() -> list[dict]:
     token = next(cookie.value for cookie in jar if cookie.name == "XSRF-TOKEN")
     payload = json.dumps({
         "channel": "group_official_site", "language": "zh", "batchId": "", "categories": "",
-        "deptCodes": [], "key": "", "pageIndex": 1, "pageSize": 30, "regions": "",
+        "deptCodes": [], "key": query or "", "pageIndex": 1, "pageSize": 30, "regions": "",
         "subCategories": "", "shareType": "", "shareId": "", "myReferralShareCode": "",
     }).encode()
     request = Request(
@@ -285,11 +285,12 @@ def _luchen_jobs() -> list[dict]:
     return parse_luchen_jobs(body)
 
 
-def _ant_jobs() -> list[dict]:
+def _ant_jobs(query: str = "") -> list[dict]:
     body = _post(
         "https://hrcareersweb.antgroup.com/api/social/position/search",
         json.dumps({
-            "pageIndex": 1, "pageSize": 30, "channel": "group_official_site", "language": "zh",
+            "pageIndex": 1, "pageSize": 30, "key": query or "",
+            "channel": "group_official_site", "language": "zh",
         }).encode(),
         {"Content-Type": "application/json", "Origin": "https://talent.antgroup.com", "Referer": "https://talent.antgroup.com/"},
     )
@@ -314,23 +315,11 @@ def _zerith_jobs() -> list[dict]:
     return parse_zerith_jobs(body)
 
 
-def _moka_jobs(record: dict) -> list[dict]:
-    import career_cache
-    from browser_jobs import browse_official
-    name = str(record.get("name") or "")
-    url = str(record.get("url") or "")
-    cache = career_cache.load()
-    entry = career_cache.entry_for(cache, name)
-    if entry and entry.get("jobs") and career_cache.fresh(entry):
-        return entry["jobs"]
-    jobs = browse_official(url, name, 20)
-    if jobs:
-        career_cache.remember(
-            cache, name, catalog_url=url, entry_url=url, read_method="browser",
-            collected_count=len(jobs), pagination_complete=False, failure_reason="", jobs=jobs,
-        )
-        career_cache.save(cache)
-    return jobs
+PAGE_SIZE = 30
+
+
+def _page_capped(jobs: list[dict]) -> bool:
+    return len(jobs) >= PAGE_SIZE
 
 
 def read_known(record: dict, query: str, limit: int) -> dict | None:
@@ -354,11 +343,7 @@ def read_known(record: dict, query: str, limit: int) -> dict | None:
         "www.liblib.art": _liblib_jobs,
     }
     if host == "app.mokahr.com":
-        try:
-            jobs = _moka_jobs(record)
-        except Exception as error:
-            return career_sources.unavailable(name, record.get("url") or "", error)
-        return career_sources._finish_source(name, record.get("url") or "", jobs, query, limit, "no_public_job_list")
+        return career_sources.unavailable(name, record.get("url") or "", "not_browser_checked")
     if "manus.im" in host and "careers.manus.im" not in host:
         reader = _manus_jobs
     elif host.removeprefix("www.") in readers:
@@ -369,8 +354,13 @@ def read_known(record: dict, query: str, limit: int) -> dict | None:
         reader = _jd_jobs
     else:
         return None
+    queried = {_jd_jobs, _xiaohongshu_jobs, _horizon_jobs, _alibaba_jobs, _ant_jobs}
     try:
-        jobs = reader()
+        jobs = reader(query) if reader in queried else reader()
     except Exception as error:
         return career_sources.unavailable(name, record.get("url") or "", error)
-    return career_sources._finish_source(name, record.get("url") or "", jobs, query, limit, "no_public_job_list")
+    capped = _page_capped(jobs) if reader in queried else False
+    return career_sources._finish_source(
+        name, record.get("url") or "", jobs, query, limit, "no_public_job_list",
+        pagination_complete=not capped,
+    )

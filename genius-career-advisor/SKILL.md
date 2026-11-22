@@ -19,7 +19,7 @@ description: 整理候选人的真实求职材料，建立可长期复用的职�
 - 生成岗位定制稿时读取 [JD 定制材料契约](references/tailored-material-schema.md)。
 - 进入外部申请页时读取 [执行契约](references/v1-contract.md) 和 [EgoLite 网申执行](references/egolite-application.md)。执行验收时再读取 [验收记录模板](references/test-record-template.md)。
 - 申请表出现自由文本问题时读取 [申请回答库](references/application-answer-library.md)。
-- 候选人要求面试辅导，或明确确认已经进入真实面试阶段时，读取 [轻量面试辅导](references/interview-coaching.md)。
+- 候选人要求面试准备或练习，或明确确认已经进入真实面试阶段时，读取 [岗位面试准备](references/interview-coaching.md)。
 - 只有用户明确要求纳入泛函开放岗位时，才读取 [泛函开放岗位](references/workbench-public-api.md)。
 - 只有用户明确要求把材料交给泛函时，才读取 [Grok Bot 内推](references/grok-bot-referral.md)。
 - WorkBuddy 安装验收时读取 [WorkBuddy 烟测](references/workbuddy-smoke-test.md)。该烟测只证明技能能安装并进入材料采集，不另建申请或内推流程。
@@ -55,7 +55,7 @@ python3 <skill-root>/scripts/workspace.py resolve
 2. 请用户提供原始简历路径。作品集、GitHub、个人网站和其他职业证据均为可选，不因缺少这些链接阻止建档。
 3. 核验文件真实存在且可读。接受 PDF 或 DOCX：DOCX 可先转换为本地参考 PDF，但必须写入 `<workspace>/source/`，不得放入待投递的 `outbox/`。原文件保持不变。
 4. 按 [职业档案规则](references/career-assets.md) 读现有材料，生成或更新 `<workspace>/职业经历.md`，再把机器可读索引写入 `<workspace>/profile.json`。`职业经历.md` 是长期主档，`profile.json` 只是索引，不能代替主档。
-5. 围绕材料中最有潜力的一段经历，依次补齐代表性成果、个人贡献、困难与判断、结果证据、学习与成长五个维度。一次只问一个。材料已有答案时先给出提取摘要，让候选人确认或纠正，不能直接跳过或代替确认。确认内容写回长期主档和 `career_consultation`。
+5. 围绕材料中最有潜力的一段经历，依次补齐代表性成果、个人贡献、困难与判断、结果证据、学习与成长五个维度。一次只问一个。材料已有答案时先给出提取摘要，让候选人确认或纠正，不能直接跳过或代替确认。对方说不清时按 [说不清时换问法](references/career-assets.md#说不清时换问法) 换问，不删这段经历，确定不了的标「未核实」。确认内容写回长期主档和 `career_consultation`。
 6. 让候选人自己决定目标岗位、地点、行业、企业类型、届别、办公方式、工作类型、到岗时间和排除项，并同步写入 `用户求职记忆.md`。用户主动提到某个网站时，可以把该网站记入渠道偏好；不要主动询问要使用哪些招聘网站。不得硬编码维护者或示例候选人的方向。未知信息保持未知。硬限制仍以 `profile.json` 为机器可读依据，两处冲突时先确认再同步修正。
 7. 运行 `python3 <skill-root>/scripts/profile_status.py <workspace>/profile.json --output <workspace>/profile-status.json`。状态不是 `可匹配` 时，每轮只询问返回的一个 `next_questions`，得到回答后更新职业主档并重新检查。状态变为可匹配前禁止搜索岗位。
 8. 未提供的信息写为“未知”，不得用当前城市推断期望地点、远程意愿或搬迁意愿。未知字段必须使用 `unknown` 或空数组，非未知字段必须记录材料位置或候选人明确回答作为证据。不编造数据、角色、结果或项目贡献。
@@ -73,7 +73,7 @@ python3 <skill-root>/scripts/workspace.py resolve
 2. 档案就绪后直接使用脚本输出的 `jobs`。脚本先并行读取公开数据，再以最多两路浏览器补读相关官网，默认补读 5 家，可用 `--browser-limit` 调整。来源返回 `browser_dependency_missing` 或 `browser_runtime_missing` 时，按 [官网浏览器读取](references/official-browser-search.md) 准备运行环境。先用 `scripts/application_log.py duplicate` 检查 `<workspace>/external-applications.jsonl`。命中成功记录时跳过该岗位，除非用户明确要求重投。同一家公司、同一个职位、同一条链接只保留一条。清单里同时可以有官网岗位和公开平台岗位。结果里如果出现 JobRadar、出海聘或 `membership_required`，丢弃。单个来源失败不得阻塞其他来源。来源状态在内部记录。用户明确要求缩小到某个网站时，直接按该范围继续。
 3. 用户明确说“只看某个网站”时，才把搜索收窄到该网站。某个来源需要登录、会员或暂不可用时，跳过它并继续其他来源；不要把会员限制或渠道风险说给用户。只有整次搜索没有任何可推荐岗位时，才说明这次还没有从公开页面找到合适职位。
 4. 在内部为每个实际尝试的来源标记真实状态：`已搜索`、`无结果`、`需要登录`、`需要会员`、`暂不可用` 或 `未搜索`。没有实际尝试的来源不得记成无结果。这些状态不展示给用户。
-5. 脚本已经用同一份职业档案的硬性条件给 `jobs` 排过序，并写了 `screen`（优先看／可以看／暂不建议）、`conflicts` 和 `unknowns`。再按职业档案里的真实证据补上匹配点和缺口。同一公司、职位和链接已经去重。不生成没有校准依据的数字分数，也不要另算一套只覆盖 Bonjour 或 Watcha 的清单。
+5. 脚本已经用同一份职业档案的硬性条件给 `jobs` 排过序，并写了 `screen`（优先看／可以看／暂不建议）、`ai_relevance`、`conflicts` 和 `unknowns`。`ai_relevance` 不是 `verified` 的岗位不能说成已确认的 AI 岗位，也不放进优先看。单独出现「模型」或「算法」不算已核实；销售、财务，以及供应商质量、生产质量、制造质量，即使标题里有这些词也不算。大模型质量评测、AI 产品质量这类职责仍然算。产品、运营、设计和增长岗位只有标题或职责写明在做 AI 时才算 verified。来源标记 `collection_incomplete` 时，只能说这次采集不完整，不能说没有合适岗位。再按职业档案里的真实证据补上匹配点和缺口。同一公司、职位和链接已经去重。不生成没有校准依据的数字分数，也不要另算一套只覆盖 Bonjour 或 Watcha 的清单。
 6. 直接给出一份短的岗位清单：公司、职位、地点、申请或详情链接、匹配点和缺口。岗位本身可以用一句话注明网站或给出链接。不要先给来源状态摘要，不要单独列表说明渠道类型、访问门槛或风险。当前打开的网页、历史标签页和 Agent 自己打开的页面都不能代表用户选择。请用户从这份清单里选一个岗位。
 7. 平台发生真实失败、恢复或行为变化后，把日期、平台、操作、现象、原因、解决办法、验证结果和复用条件追加到 `Agent平台执行记忆.md`。原因或办法尚未确认时必须标记“未确认／未验证”。只记录平台技术事实，不记录候选人资料和登录凭据。
 
@@ -116,9 +116,11 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 2. 按 [岗位评估与申请复盘](references/job-evaluation-and-outcomes.md) 做选岗后的深度评估，再展示匹配点、明显缺口、申请风险、建议重点修改的经历或表达。申请页或 JD 出现学历、经验年限、语言、工作许可、到岗时间或薪资淘汰题时，用已确认事实预检。明确冲突就提醒可能被系统淘汰，未知就询问候选人，最终是否继续由候选人决定。影响申请判断的公司事实必须附来源和核验日期。
 3. 结合当前 JD 和候选人真实经历追问 1–2 个最可能提高面试机会的问题，一次只问一个。问题必须指向 JD 的具体要求和主档中的具体经历。候选人确认后，把答案同步更新到 `职业经历.md`、`profile.json` 和 `profile-status.json`。
 4. 生成 `<workspace>/tailored-proposal.json`，并记录已完成的 `consultation.questions`。每个问题必须通过 `used_in_change_ids` 进入至少一项简历变更。`sections` 必须组成一份完整简历，每项调整都关联 JD 依据和候选人事实证据。新增或改变事实必须逐项确认。
-5. 文件名必须是 `姓名-目标公司-目标岗位-YYYYMMDD-vN`，不得继承原简历中的旧目标公司。运行 `material_gate.py`，第一份候选人可见成稿只能生成到 `<workspace>/outbox/<文件名>.html`。不得另写 PDF 构建脚本，也不得先生成 Markdown 或 PDF。
-6. HTML 生成后立即把它作为本轮唯一成稿附件展示，并提供可点击链接。此时只推进一个动作，明确告诉候选人：“请检查或修改简历，点击右上角生成 PDF，再点击下载 PDF，并把文件重新发回当前对话。”页面必须冻结生成时的当前内容。候选人继续修改后，旧下载链接必须失效。收到回传前必须暂停。用户重新发回该 PDF 后，运行 `python3 <skill-root>/scripts/material_gate.py --accept-exported-pdf '<附件路径>' '<workspace>/outbox/<同一文件名>.html'`，并只使用脚本返回的路径和哈希。禁止从磁盘 HTML、旧 PDF、Headless Chrome 或其他脚本重新生成替代 PDF。用户尚未完成编辑、生成、下载和回传时，禁止填写 `profile.application_resume.path`。
-7. 用户确认岗位专用 PDF 后，按 [JD 定制材料契约](references/tailored-material-schema.md) 检查视觉版式和 PDF 文本层。无法验证文本层时如实标记，不能宣称已通过 ATS。随后才把接收脚本返回的原文件记录为 `profile.application_resume.path`。没有当前岗位的建议、提案、可编辑 HTML 和用户导出的已检查 PDF 时，禁止进入外部申请，也禁止把材料交给泛函。
+5. 文件名必须是 `姓名-目标公司-目标岗位-YYYYMMDD-vN`，不得继承原简历中的旧目标公司。运行 `material_gate.py`，第一份候选人可见成稿只能生成到 `<workspace>/outbox/<文件名>.html`。所有岗位专用简历都用脚本写出的同一版式：上方是姓名首字圆标、姓名、英文名、当前头衔和摘要，左栏是教育与荣誉，右栏是经历，底部是深色联系栏。没有照片时不要生成肖像，也不要套用示例人物。不得手写另一份单栏 HTML，不得另写 PDF 构建脚本，也不得先生成 Markdown 或 PDF。
+6. HTML 生成后，在技能所在的同一台机器上用 EgoLite 打开 `<workspace>/outbox/<文件名>.html`。不要把这份文件交给另一台电脑，不要在对话侧边或 `127.0.0.1` 上生成 PDF。搜岗仍使用原来的公开接口和无头浏览器补读，不要改用 EgoLite 找岗。此时只推进一个动作，告诉候选人：“请在这个页面里检查或修改。改好了跟我说。”
+7. 候选人说改好了之后，用当前 Page API 读取整页 HTML，再运行 `python3 <skill-root>/scripts/material_gate.py --save-page '<workspace>/outbox/<文件名>.html' '<刚读到的整页文件>'`。保存的是带版式和脚本的整页，不是抽出来的纯文字，也不能因此重新生成一页。保存会删除已经存在的同名 PDF，并清空 `profile.application_resume.path`。读不到整页、或保存被拒绝时停下来，不要覆盖原文件。然后只告诉候选人：“请点右上角生成 PDF，再点下载 PDF。”生成和下载由候选人本人点击。代理代点不能当作人工流程已经验收。
+8. 候选人点完并交还控制权后，只接收这次 EgoLite 下载的原始字节，运行 `python3 <skill-root>/scripts/material_gate.py --accept-exported-pdf '<下载文件>' '<workspace>/outbox/<同一文件名>.html'`。交还后如果拿不到这次下载的原始文件，停止并记为「人工交接待验收」，不要用脚本点击代替，也不要从 HTML 另做一份 PDF。上传前再读一次整页，运行 `python3 <skill-root>/scripts/material_gate.py --note-live-edit '<workspace>/outbox/<文件名>.html' '<刚读到的整页文件>'`。比较的是整页简历文字，包括换行后的下一行和嵌套标签里的文字。返回 `changed=true` 时旧 PDF 已失效，必须再听一次「改好了」、重新保存并重新导出后才能上传。最终投递仍要走原来的 `confirmation_gate.py` 提交确认。
+9. 用户确认岗位专用 PDF 后，按 [JD 定制材料契约](references/tailored-material-schema.md) 检查视觉版式和 PDF 文本层。无法验证文本层时如实标记，不能宣称已通过 ATS。随后才把接收脚本返回的原文件记录为 `profile.application_resume.path`。没有当前岗位的建议、提案、可编辑 HTML 和用户导出的已检查 PDF 时，禁止进入外部申请，也禁止把材料交给泛函。
 
 定制完成不等于泛函授权。外部岗位在 PDF 确认后进入下一节的申请。泛函开放岗位没有外部申请页；PDF 确认后只问一次候选人是否要把材料交给泛函。候选人拒绝、沉默或含糊答复时，停在本地简历，不运行内推脚本。
 
@@ -128,7 +130,7 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 
 1. 只能在基础职业档案可匹配、用户选岗并完成上一节之后进入申请。不得上传原始简历或仅转换格式的 PDF。
 2. 用户明确选择单个岗位后，说明目标网站、会填写的数据类别和提交模式，再运行 `confirmation_gate.py select`，写入 `<workspace>/selected-external-job.json`。默认 `--submission-mode auto`。用户明确说“我自己提交”时使用 `manual`。记录缺失或与当前岗位不一致时，禁止发送个人数据、上传材料或准备提交。
-3. 使用 EgoLite 复用当前岗位的同一 TaskSpace。登录、扫码、验证码、浏览器权限提示和风控由用户接管。必须先从顶部到底部读取完整表单。先找学历、经验年限、工作许可、到岗时间和薪资等淘汰题，用当前职业档案预检。明确冲突、敏感字段或未知项都先让候选人决定。输入个人信息或上传文件前运行 `confirmation_gate.py build`，并用 `--field-name` 逐项传入全部字段。失败时不得绕过。
+3. 继续使用打开简历的同一个 EgoLite TaskSpace，转到申请页并上传刚刚接收的那份 PDF。不要新建任务空间，也不要换另一份文件。登录、扫码、验证码、浏览器权限提示和风控由用户接管。必须先从顶部到底部读取完整表单。先找学历、经验年限、工作许可、到岗时间和薪资等淘汰题，用当前职业档案预检。明确冲突、敏感字段或未知项都先让候选人决定。输入个人信息或上传文件前运行 `confirmation_gate.py build`，并用 `--field-name` 逐项传入全部字段。失败时不得绕过。
 4. 开放题先查本地申请回答库。可用已确认职业事实针对当前 JD 自动改写。需要新增事实、涉及敏感选择或与档案冲突时暂停询问。能可靠填写的字段尽量填写，每次填写后重新读取页面实际值。被清空、无法读取或无法验证的字段都按未完成处理。只要仍有人工步骤，就一次性给出覆盖全部字段的清单，必填项在前。
 5. 展示即将提交的公司、岗位、网站、简历文件、字段清单和最终按钮，用与 `build` 完全相同的参数运行 `confirmation_gate.py verify --expected '<fingerprint>'`。选岗、页面、材料、字段或最终动作变化时停止。模式为 `auto` 时验证通过后只点击一次最终按钮。模式为 `manual` 时把同一 EgoLite TaskSpace 交给用户本人点击。
 6. 最终提交动作发生后，只凭明确成功文案、申请编号或平台状态记录 `success`。明确失败记为 `failed`。结果含糊或超时记为 `failed: submission_outcome_unknown`，不得自动重试。用户决定不提交时记录 `user_declined`。
@@ -138,7 +140,9 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 
 - 不绕过验证码，不保存密码、Cookie、Token 或登录态。
 - 日志不保存简历正文、作品集正文、表单答案、证件信息或联系方式。
-- 只有 PDF、没有同名可编辑 HTML，或 PDF 生成时间早于 HTML 时不得进入申请页。
+- 只有 PDF、没有同名可编辑 HTML，或 PDF 生成时间早于 HTML 时不得进入申请页。再次保存 HTML 之后，旧 PDF 已经失效。
+- 简历生成、下载和上传的当前结论是「人工交接待验收」。真人点击下载并交还控制权的验收还没完成。脚本代替点击的结果不能写成这项已经通过。
+- 交付时保留两项验收：交还控制权后代理拿到的是用户这次下载的原始 PDF；保存或生成 PDF 后再改字，旧 PDF 失效，重新保存并导出后才能上传。
 - 只投用户明确选中的岗位。搜索结果、推荐结果和打开的页面都不构成投递授权。
 - 不启动独立 Chrome 或 Playwright。申请页只使用当前 `$ego-browser` TaskSpace/Page API。
 - 不因用户曾说“都投”或“继续”而跳过当前岗位确认。
@@ -167,13 +171,15 @@ python3 <skill-root>/scripts/fanhan_open_jobs.py
 3. 新答案只使用 `职业经历.md`、当前 JD 和候选人明确回答中的事实。新增事实先写回长期主档，再由候选人确认最终答案。
 4. 只有候选人明确确认的答案才运行 `candidate_memory.py add-answer --confirmed` 写入 `<workspace>/candidate-memory.json`。该文件不得进入外部投递日志、Git 或泛函内推载荷。
 
-## 轻量面试辅导
+## 岗位面试准备与交互练习
 
-1. 面试辅导不依赖泛函材料是否送达，也不阻塞找岗和投递。只有候选人主动要求面试辅导，或明确确认已经进入真实面试阶段时才读取 [轻量面试辅导](references/interview-coaching.md)。“继续”“测试后续”“已投递”或材料已经送达都不算启动授权。
-2. 从长期职业主档建立经候选人确认的 STAR 故事库。团队成果与个人贡献必须分开，缺失结果不补造。
-3. 模拟时根据当前 JD 一次只问一个问题，必要时最多追问两次。按内容证据、表达结构、岗位相关性、可信度和个人差异性评分，只给一个最优先改进动作。
-4. 真实面试后可以记录问题、实际回答、面试官追问和候选人自评。练习分数只用于观察表达变化，不解释为录取概率。
-5. 当前版本不做录音处理、复杂评分校准、薪资谈判或 Offer 对比。
+1. 只有候选人主动要求准备面试、开始练习，或明确确认已经进入真实面试阶段时，才读取 [岗位面试准备](references/interview-coaching.md)。“继续”“已投递”、投递结束或材料已经送达都不算启动。这一节不改变搜岗、简历 PDF 和投递确认。
+2. 先复用目标 JD、已投递简历、`职业经历.md`、已确认故事库和面试邀请。只询问其中仍然缺失的信息。轮次未知就写“待确认”，不编造一面、二面。
+3. 每个岗位只写一份 `<workspace>/interview/<job-key>/prep.md`，包含公司与岗位简报、JD 与经历对应表、重点问题及追问、练习与反馈、反问清单。对应表必须写本人的真实经历、个人贡献和证据缺口。问题必须关联当前 JD 或具体经历。公司事实和面经保留来源、日期和未确认项。
+4. 生成准备材料时，练习模块只能写“尚未开始练习”，不得写模拟反馈、分数或进步记录。在对话里先给出准备重点：对应表里最需要补的缺口、最值得先练的一题，以及一个反问。同时把完整的 `prep.md` 交给候选人。不要生成 HTML，也不要运行渲染脚本。
+5. 候选人明确说开始练习后，一次只问一题并等待回答，必要时最多追问两次。反馈必须引用这次回答里的具体问题，只给一个优先改进动作。缺数字就指出缺口，不补造指标。
+6. 练习后用 `candidate_memory.py record-practice` 记下本条记录，可选 `--job-key` 和 `--round`。只改 prep.md 的练习与反馈模块，不要重写另外四个模块。新提到但未确认的经历只记为待核实，不写进已确认事实或故事库。再把更新后的完整 Markdown 交给候选人。
+7. 真实面试后的复盘、故事库和单题评分仍按原流程。分数不解释为录取概率。不做录音处理、薪资谈判或 Offer 对比。
 
 ## 常用命令
 
@@ -186,17 +192,18 @@ python3 <skill-root>/scripts/watcha_jobs.py --query '<求职关键词>' --limit 
 python3 <skill-root>/scripts/confirmation_gate.py select --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --submission-mode auto --output <workspace>/selected-external-job.json --confirmed
 python3 <skill-root>/scripts/application_log.py duplicate --job-url '<岗位链接>' --application-url '<申请链接>'
 python3 <skill-root>/scripts/application_log.py append --source '<Bonjour|Watcha>' --company '<公司>' --job-title '<职位>' --job-url '<岗位链接>' --application-url '<申请链接>' --status user_declined --user-confirmed false --reason user_declined
+python3 <skill-root>/scripts/candidate_memory.py record-practice --company '<公司>' --job-title '<岗位>' --question '<问题>' --answer-summary '<回答摘要>' --substance 1 --structure 1 --relevance 1 --credibility 1 --differentiation 1 --what-worked '<最有效的一点>' --priority-move '<下一次只改这一点>' --job-key '<job-key>'
 python3 <skill-root>/scripts/source_feedback.py prepare --name '<网站名称>' --url '<网站 URL>' --intro '<一句话简介>'
 python3 <skill-root>/scripts/source_feedback.py send --state <workspace>/source-suggestion.json --confirmed
 ```
 
 档案可匹配后立刻运行 `external_jobs.py`。它会并行检索公开平台和公司招聘官网，再把命中的职位合成一份短清单。不要把来源清单、类型、访问门槛、推荐原因或风险发给用户。`source_catalog.py` 只在需要核对快照时使用，它的短输出不是搜索边界。
 
-`confirmation_gate.py build` 和 `verify` 必须使用同一组公司、职位、链接、档案、提案、简历、字段和最终按钮参数。简历路径指向 `<workspace>/outbox/` 里用户回传后的岗位专用 PDF。
+`confirmation_gate.py build` 和 `verify` 必须使用同一组公司、职位、链接、档案、提案、简历、字段和最终按钮参数。简历路径指向 `<workspace>/outbox/` 里这次下载接收后的岗位专用 PDF。
 
 ## 当前交付边界
 
-- 已覆盖：职业档案、档案可匹配后直接搜索并推荐岗位、用户选岗、JD 定制、可编辑简历预览、材料哈希门禁、EgoLite 自动/手动提交模式、投递查重、最小结果记录，以及候选人明确要求后的泛函材料送达。招聘渠道仍在内部使用，但不是用户要确认的步骤。
+- 已覆盖：职业档案、档案可匹配后直接搜索并推荐岗位、用户选岗、JD 定制、可编辑简历预览、材料哈希门禁、EgoLite 自动/手动提交模式、投递查重、最小结果记录、候选人明确要求后的泛函材料送达，以及候选人明确要求后的岗位面试准备和逐题练习。招聘渠道仍在内部使用，但不是用户要确认的步骤。
 - 泛函开放岗位只在候选人明确要求时尝试。当前公开契约缺失时，脚本返回不可用，不能改用旧工作台清单。
 - EgoLite 申请和外部网站适配仍受页面能力影响。没有明确成功证据前，不得宣称已经稳定支持所有招聘网站。
 - 下一步用一名明确同意的真实候选人和一个选中岗位做端到端验收。

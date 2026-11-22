@@ -10,7 +10,9 @@
     "sha256": "unknown"
   },
   "identity": {
-    "name": "unknown"
+    "name": "unknown",
+    "name_en": "unknown",
+    "current_title": "unknown"
   },
   "career_document": {
     "path": "职业经历.md"
@@ -20,7 +22,8 @@
   },
   "contact": {
     "email": "unknown",
-    "phone_or_wechat": "unknown"
+    "phone_or_wechat": "unknown",
+    "website": "unknown"
   },
   "intent": {
     "target_roles": [],
