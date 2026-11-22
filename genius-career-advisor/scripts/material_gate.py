@@ -17,6 +17,7 @@ from pathlib import Path
 import workspace
 
 
+HANDOFF_STATUS = "人工交接待验收"
 FACT_CHANGES = {"fact_addition", "fact_change"}
 CHANGE_TYPES = FACT_CHANGES | {"rewrite", "reorder"}
 ARTIFACT_STEM = re.compile(r"^.+-\d{8}-v[1-9]\d*$")
@@ -243,6 +244,39 @@ def _editor_page(page: str) -> None:
         raise ValueError("只能保存仍带版式和导出脚本的整页 HTML，不能用纯文字重新生成")
 
 
+def visible_snapshot(page: str) -> tuple:
+    fields = tuple(sorted(re.findall(r'data-field="([^"]+)"[^>]*>([^<]*)', page)))
+    slots = tuple(sorted(re.findall(r'data-slot="([^"]+)"[\s\S]*?<p>([^<]*)', page)))
+    return fields, slots
+
+
+def void_marker(html_path: Path) -> Path:
+    editable = html_path.expanduser().resolve()
+    return editable.with_name(editable.name + ".void")
+
+
+def retire_pdf(html_path: Path) -> bool:
+    pdf = html_path.expanduser().resolve().with_suffix(".pdf")
+    if not pdf.is_file():
+        return False
+    pdf.unlink()
+    return True
+
+
+def note_live_edit(html_path: Path, current_html: str) -> dict:
+    """A page edited after save or export makes the existing PDF unusable."""
+    editable = html_path.expanduser().resolve()
+    saved = editable.read_text(encoding="utf-8")
+    changed = visible_snapshot(saved) != visible_snapshot(current_html)
+    if changed:
+        void_marker(editable).write_text(sha256(editable), encoding="utf-8")
+    return {
+        "changed": changed,
+        "pdf_retired": retire_pdf(editable) if changed else False,
+        "handoff_status": HANDOFF_STATUS,
+    }
+
+
 def save_resume_page(html_path: Path, document_html: str) -> dict:
     """Write the current full page back and drop any PDF exported from an older page."""
     editable = html_path.expanduser().resolve()
@@ -260,16 +294,13 @@ def save_resume_page(html_path: Path, document_html: str) -> dict:
     temporary = editable.with_suffix(".html.tmp")
     temporary.write_text(document_html, encoding="utf-8")
     temporary.replace(editable)
-    pdf = editable.with_suffix(".pdf")
-    retired = pdf.is_file()
-    if retired:
-        pdf.unlink()
+    void_marker(editable).unlink(missing_ok=True)
     return {
         "status": "html_saved",
         "html_path": str(editable),
         "html_sha256": sha256(editable),
-        "pdf_retired": retired,
-        "handoff_status": "方案可实施，人工下载交接待验收",
+        "pdf_retired": retire_pdf(editable),
+        "handoff_status": HANDOFF_STATUS,
     }
 
 
@@ -304,7 +335,7 @@ def accept_exported_pdf(source_path: Path, html_path: Path) -> dict:
             or "html2pdf.bundle.min.js" not in page
             or "resume-editor.js" not in page):
         raise ValueError("HTML 不是内置简历编辑器生成的文件")
-    if source.stat().st_mtime_ns < editable.stat().st_mtime_ns:
+    if void_marker(editable).is_file() or source.stat().st_mtime_ns < editable.stat().st_mtime_ns:
         raise ValueError("PDF 早于当前 HTML，保存后的修改已使旧导出失效")
 
     output = editable.with_suffix(".pdf")
@@ -526,6 +557,32 @@ def self_test() -> None:
             raise AssertionError("再次保存后的旧 PDF 必须失效")
         except ValueError as error:
             assert "旧导出失效" in str(error)
+        fresh = root / "Downloads" / "fresh-export.pdf"
+        fresh.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nfresh export")
+        accepted = accept_exported_pdf(fresh, output)
+        assert Path(accepted["pdf_path"]).read_bytes() == fresh.read_bytes()
+        edited_again = output.read_text(encoding="utf-8").replace("保存后的新经历。", "生成后又改了字。")
+        noted = note_live_edit(output, edited_again)
+        assert noted["changed"] is True and noted["pdf_retired"] is True
+        assert not output.with_suffix(".pdf").exists()
+        try:
+            accept_exported_pdf(fresh, output)
+            raise AssertionError("生成 PDF 后再改字，旧文件不能上传")
+        except ValueError as error:
+            assert "旧导出失效" in str(error)
+        resaved = save_resume_page(output, edited_again)
+        assert resaved["status"] == "html_saved"
+        assert not void_marker(output).exists()
+        try:
+            accept_exported_pdf(fresh, output)
+            raise AssertionError("重新保存后，生成前的旧 PDF 仍不能上传")
+        except ValueError as error:
+            assert "旧导出失效" in str(error)
+        newest = root / "Downloads" / "newest-export.pdf"
+        newest.write_bytes(b"%PDF-1.4\n% jsPDF 4.0.0\nnewest export")
+        newest_accepted = accept_exported_pdf(newest, output)
+        assert Path(newest_accepted["pdf_path"]).read_bytes() == newest.read_bytes()
+        assert noted["handoff_status"] == "人工交接待验收"
     print("material_gate self-test: ok")
 
 
@@ -536,6 +593,7 @@ def main() -> None:
     parser.add_argument("output", nargs="?", help="工作区 outbox/ 下的 HTML 输出路径")
     parser.add_argument("--accept-exported-pdf", nargs=2, metavar=("EXPORTED_PDF", "HTML"))
     parser.add_argument("--save-page", nargs=2, metavar=("HTML", "DOCUMENT"))
+    parser.add_argument("--note-live-edit", nargs=2, metavar=("HTML", "DOCUMENT"))
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
     if args.self_test:
@@ -550,6 +608,10 @@ def main() -> None:
         document = Path(args.save_page[1]).expanduser().read_text(encoding="utf-8")
         print(json.dumps(save_resume_page(Path(args.save_page[0]), document), ensure_ascii=False, indent=2))
         return
+    if args.note_live_edit:
+        document = Path(args.note_live_edit[1]).expanduser().read_text(encoding="utf-8")
+        print(json.dumps(note_live_edit(Path(args.note_live_edit[0]), document), ensure_ascii=False, indent=2))
+        return
     if not args.profile or not args.proposal or not args.output:
         parser.error("请提供职业档案、定制提案和输出路径")
     output = Path(args.output).expanduser()
@@ -561,7 +623,7 @@ def main() -> None:
     print(json.dumps({
         "status": "html_ready",
         "html_path": str(output.resolve()),
-        "next_action": "用 EgoLite 在同一台机器打开这个 HTML。请用户检查或修改，并在改好后说明。用户说明前不得写回，也不得代点生成或下载。当前状态：方案可实施，人工下载交接待验收。",
+        "next_action": "用 EgoLite 在同一台机器打开这个 HTML。请用户检查或修改，并在改好后说明。用户说明前不得写回，也不得代点生成或下载。当前状态：人工交接待验收。",
         "pdf_ready": False,
     }, ensure_ascii=False, indent=2))
 
