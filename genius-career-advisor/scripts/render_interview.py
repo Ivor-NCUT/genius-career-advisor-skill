@@ -16,8 +16,21 @@ HEADING = re.compile(r"^##\s+(\d+)\.\s+(.+)$", re.M)
 
 
 def _inline(text: str) -> str:
-    escaped = html.escape(text)
-    return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", escaped)
+    pieces = []
+    pattern = re.compile(r"\[([^\]]+)\]\((https?://[^\s)]+)\)|(https?://[^\s<>）)；，。]+)")
+    last = 0
+    for match in pattern.finditer(text):
+        pieces.append(html.escape(text[last:match.start()]))
+        if match.group(1):
+            label = html.escape(match.group(1))
+            url = html.escape(match.group(2), quote=True)
+        else:
+            url = html.escape(match.group(3), quote=True)
+            label = url
+        pieces.append('<a href="' + url + '">' + label + '</a>')
+        last = match.end()
+    pieces.append(html.escape(text[last:]))
+    return re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", "".join(pieces))
 
 
 def _blocks(markdown: str) -> str:
@@ -34,9 +47,12 @@ def _blocks(markdown: str) -> str:
             rendered.append(f"<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>")
             continue
         if lines and all(re.match(r"^(\d+\.|-)\s+", line) for line in lines):
-            items = "".join(f"<li>{_inline(re.sub(r'^(\d+\.|-)\s+', '', line))}</li>" for line in lines)
+            items = []
+            for line in lines:
+                content = re.sub(r"^(\d+\.|-)\s+", "", line)
+                items.append("<li>" + _inline(content) + "</li>")
             tag = "ol" if lines[0][0].isdigit() else "ul"
-            rendered.append(f"<{tag}>{items}</{tag}>")
+            rendered.append("<" + tag + ">" + "".join(items) + "</" + tag + ">")
             continue
         rendered.append(f"<p>{_inline(chunk).replace(chr(10), '<br>')}</p>")
     return "\n".join(rendered)

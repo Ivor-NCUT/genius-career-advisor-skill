@@ -29,12 +29,16 @@ HEADING = re.compile(r"^##\s+(\d+\.\s+.+)$", re.M)
 
 
 def job_key(job_id: str = "", job_url: str = "", company: str = "", title: str = "") -> str:
-    if str(job_id or "").strip():
-        basis = f"id:{job_id.strip()}"
-    elif str(job_url or "").strip():
-        basis = f"url:{job_url.strip().rstrip('/').casefold()}"
+    url = str(job_url or "").strip().rstrip("/").casefold()
+    if url:
+        basis = "url:" + url
+    elif str(job_id or "").strip():
+        source = str(company or "").strip()
+        if not source:
+            raise ValueError("job_id_requires_source")
+        basis = "id:" + source + "|" + job_id.strip()
     elif str(company or "").strip() and str(title or "").strip():
-        basis = f"name:{company.strip()}|{title.strip()}"
+        basis = "name:" + company.strip() + "|" + title.strip()
     else:
         raise ValueError("job_key_basis_required")
     return hashlib.sha256(basis.encode()).hexdigest()[:16]
@@ -191,8 +195,12 @@ def update_feedback(markdown: str, practice: dict, allowed_text: str) -> str:
     replacement = feedback_block(practice, allowed_text)
     if "尚未开始练习" in replacement:
         raise ValueError("practice_feedback_required")
-    pattern = re.compile(rf"(## {re.escape(MODULES[3])}\n\n)([\s\S]*?)(\n## {re.escape(MODULES[4])})")
-    updated, count = pattern.subn(rf"\1{replacement}\3", markdown, count=1)
+    pattern = re.compile(r"(## " + re.escape(MODULES[3]) + r"\n\n)([\s\S]*?)(\n## " + re.escape(MODULES[4]) + r")")
+
+    def _replace(match):
+        return match.group(1) + replacement + match.group(3)
+
+    updated, count = pattern.subn(_replace, markdown, count=1)
     if count != 1:
         raise ValueError("feedback_module_missing")
     new_bodies = module_bodies(updated)
@@ -288,7 +296,22 @@ def self_test() -> None:
         html = Path(written_a["html"]).read_text(encoding="utf-8")
         assert render_interview.visible_text(html) == render_interview.visible_text_from_markdown(md_a)
         assert 'href="#module-1"' in html and "<details" in html
+        assert '<a href="https://example.com/product">' in html
+        linked = render_interview.render_html("占位\n\n## 1. 公司与岗位简报\n\n见[产品页](https://example.com/note)\n\n## 2. JD 与经历对应表\n\n表\n\n## 3. 重点问题及追问\n\n题\n\n## 4. 练习与反馈\n\n尚未开始练习\n\n## 5. 反问清单\n\n问")
+        assert '<a href="https://example.com/note">产品页</a>' in linked
         assert "<style>" not in md_a
+        company_a = job_key("123", "https://jobs.a.example/positions/1", "甲公司", "运营")
+        company_b = job_key("123", "https://jobs.b.example/positions/9", "乙公司", "算法")
+        assert company_a != company_b
+        assert job_key("123", "", "甲公司", "运营") != job_key("123", "", "乙公司", "算法")
+        escaped = update_feedback(md_a, {
+            "question": "怎么提取编号",
+            "answer_summary": r"我用正则 \d+ 提取编号",
+            "cited_problem": r"\d+",
+            "priority_move": "说明编号来自哪一列",
+            "reference": r"我用正则 \d+ 提取编号。",
+        }, "甲做过社区反馈周报")
+        assert r"我用正则 \d+ 提取编号" in module_bodies(escaped)["4. 练习与反馈"]
     print("interview_prep self-test: ok")
 
 

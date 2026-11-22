@@ -20,7 +20,7 @@
 <workspace>/interview/<job-key>/prep.html
 ```
 
-`job-key` 由岗位 ID 或规范化岗位链接稳定生成。同一候选人的不同岗位分目录保存。`prep.md` 是正文。运行下面的命令把它转成阅读页，不要再让模型写第二份正文：
+`job-key` 优先用规范化后的岗位详情链接。只有岗位编号时，必须带上公司或来源，避免不同招聘系统里相同编号写到同一份材料。`prep.md` 是正文。运行下面的命令把它转成阅读页，不要再让模型写第二份正文：
 
 ```bash
 python3 <skill-root>/scripts/render_interview.py \
