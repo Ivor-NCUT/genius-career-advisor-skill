@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_from": "泛函岗位来源多维表格",
-  "generated_at": "2026-08-20",
+  "generated_from": "2026-11-23 以现有快照为底，逐条打开官方招聘页或公开 ATS（飞书招聘、Moka、北森）核对在招情况；新公司只收录当周能在官网或官方 ATS 上看到开放岗位的来源。会员渠道保持原样。不连接需要密钥的内部表。",
+  "generated_at": "2026-11-23",
   "records": [
     {
       "name": "AI 公司找工地图",
@@ -216,7 +216,7 @@
       ],
       "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
       "direction": "大厂 AI、自动驾驶、搜索与工程",
-      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。 2026-11-23 未能从公开招聘页确认在招岗位，先保留来源、暂不作为已确认在招。"
     },
     {
       "name": "地平线 Horizon Robotics",
@@ -337,7 +337,7 @@
       ],
       "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
       "direction": "大厂 AI、内容、推荐与产品",
-      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。 2026-11-23 未能从公开招聘页确认在招岗位，先保留来源、暂不作为已确认在招。"
     },
     {
       "name": "零次方机器人",
@@ -460,9 +460,9 @@
     },
     {
       "name": "清程极智",
-      "url": "https://www.qc-ai.cn/",
+      "url": "https://chitu-ai.jobs.feishu.cn/index",
       "type": "公司招聘官网",
-      "intro": "国产算力软件与推理加速方向公司官网。",
+      "intro": "国产算力软件与推理加速公司的官方飞书招聘页。",
       "access": "免费公开",
       "quality": "中高",
       "tags": [
@@ -473,7 +473,7 @@
       ],
       "target_audience": "推理优化、编译器、算力调度、系统软件、平台工程和 AI Infra 人才",
       "direction": "国产算力软件、推理加速、MaaS",
-      "risk": "当前入口偏公司官网，需进一步确认具体在招岗位和投递方式。"
+      "risk": "2026-11-23 已从公司官网改为飞书招聘页，并看到后端、安全、科研和商业化等在招岗位。投递前以该页实时信息为准。"
     },
     {
       "name": "穹彻智能 Noematrix",
@@ -507,13 +507,13 @@
       ],
       "target_audience": "系统/C++、编译器、推理优化、分布式、云原生、数据库与平台工程岗位",
       "direction": "KTransformers、Mooncake、推理系统",
-      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。 2026-11-23 未能从公开招聘页确认在招岗位，先保留来源、暂不作为已确认在招。"
     },
     {
       "name": "生数科技 ShengShu",
-      "url": "https://www.genspi.com/zh/about/",
+      "url": "https://shengshu.jobs.feishu.cn/index/",
       "type": "公司招聘官网",
-      "intro": "多模态生成公司官网与团队入口",
+      "intro": "多模态生成公司的官方飞书招聘页。",
       "access": "免费公开",
       "quality": "中高",
       "tags": [
@@ -524,7 +524,7 @@
       ],
       "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
       "direction": "视频生成、多模态模型与应用",
-      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。2026-11-23 已改为飞书招聘页，并看到产品、销售与营销等在招岗位。投递前以该页实时信息为准。"
     },
     {
       "name": "腾讯",
@@ -661,7 +661,7 @@
       ],
       "target_audience": "感知/规划/控制、数据闭环、仿真、车端工程、平台后端与商业化岗位",
       "direction": "大厂 AI、终端、汽车与产品",
-      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。"
+      "risk": "长图为二手求职清单；岗位和业务线须在官网实时核对。 2026-11-23 未能从公开招聘页确认在招岗位，先保留来源、暂不作为已确认在招。"
     },
     {
       "name": "演语科技 LiblibAI",
@@ -747,7 +747,7 @@
       ],
       "target_audience": "LLM/多模态、Agent后端、RAG/评测、AI产品、数据与增长岗位",
       "direction": "基础模型、Agent 与产品",
-      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。"
+      "risk": "融资/估值/营收来自用户截图，未逐项完成独立审计。 2026-11-23 未能从公开招聘页确认在招岗位，先保留来源、暂不作为已确认在招。"
     },
     {
       "name": "智平方 AI² Robotics",
@@ -820,9 +820,9 @@
     },
     {
       "name": "DeepLang 深言科技",
-      "url": "https://www.deeplang.ai/",
+      "url": "https://deeplang.jobs.feishu.cn/index/position/list",
       "type": "公司招聘官网",
-      "intro": "大模型和自然语言方向公司官网。",
+      "intro": "大模型与自然语言公司的官方飞书招聘页。",
       "access": "免费公开",
       "quality": "中高",
       "tags": [
@@ -833,7 +833,7 @@
       ],
       "target_audience": "NLP、大模型训练与应用、智能产品和工程化人才",
       "direction": "大模型、自然语言、智能产品",
-      "risk": "当前来源偏官网，需进一步确认岗位是否仍开放及投递方式。"
+      "risk": "2026-11-23 已从公司官网改为飞书招聘页，并看到 AI Agent 工程师、AI 产品运营经理和 AI Agent 产品经理。投递前以该页实时信息为准。"
     },
     {
       "name": "DeepSeek 深度求索",
@@ -921,7 +921,7 @@
       ],
       "target_audience": "AI 产品、浏览器/客户端、全栈、增长和国际化人才",
       "direction": "AI 助手、浏览器产品、全球化 AI 应用",
-      "risk": "当前未定位到独立招聘页，需人工确认是否在招及投递入口。"
+      "risk": "当前未定位到独立招聘页，需人工确认是否在招及投递入口。 2026-11-23 未能从公开招聘页确认在招岗位，先保留来源、暂不作为已确认在招。"
     },
     {
       "name": "AIJobs.ai China",
@@ -1216,6 +1216,466 @@
       "target_audience": "关注该公司方向的技术、产品或运营候选人",
       "direction": "对话式 AI、语音语言大模型",
       "risk": "2026-11-21 打开 https://aispeech.zhiye.com/ 返回 200，标题为「思必驰科技股份有限公司」。官网加入我们页 https://aispeech.com/about/joinus 提供 hr@aispeech.com。南开大学等就业网转载 2027 届校园招聘，并给出 https://aispeech.zhiye.com/Campus。 岗位以官网实时信息为准。"
+    },
+    {
+      "name": "Eazo",
+      "url": "https://eazo.ai/zh-CN/careers",
+      "type": "公司招聘官网",
+      "intro": "Eazo 官方招聘页，当前列出 Agent 工程师、增长和设计工程师。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营",
+        "海外/出海"
+      ],
+      "target_audience": "想做 Agent 系统、增长或生成式界面的工程、设计和增长候选人",
+      "direction": "Agentic Web、Agent 系统与生成式界面",
+      "risk": "2026-11-19 曾按停招结论排除。2026-11-23 打开 https://eazo.ai/zh-CN/careers 与 https://eazo.ai/careers，页面为加入 Eazo / Careers at Eazo，并列出 Agent 工程师、增长、设计工程师。本周以官方招聘页重新开放为准。 2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "极佳视界 GigaAI",
+      "url": "https://gigaai0118.jobs.feishu.cn/index",
+      "type": "公司招聘官网",
+      "intro": "极佳视界官方飞书招聘页，可见世界模型、视频生成与具身算法等岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "具身智能/机器人",
+        "创业公司",
+        "技术岗位"
+      ],
+      "target_audience": "多模态、世界模型、具身算法、机器人和 AI 基础设施候选人",
+      "direction": "世界模型、视频生成与具身智能",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "曦望 Sunrise",
+      "url": "https://jobs.sunrise-ai.com/",
+      "type": "公司招聘官网",
+      "intro": "曦望官方招聘页，可见 GPU 验证、推理性能和大模型系统岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI基础设施",
+        "AI/大模型",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "GPU 架构、验证、推理优化、系统软件和 AI 基础设施候选人",
+      "direction": "推理 GPU、AI 芯片与算力基础设施",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "Rokid 灵伴科技",
+      "url": "https://rokid-jungle.jobs.feishu.cn/index",
+      "type": "公司招聘官网",
+      "intro": "Rokid 官方飞书招聘页，可见硬件、产品和市场岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI硬件",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营"
+      ],
+      "target_audience": "AR/AI 硬件、交互、产品和市场候选人",
+      "direction": "AR 眼镜、人机交互与 AI 硬件",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "Tapnow",
+      "url": "https://www.tapnow.ai/zh/careers/jobs",
+      "type": "公司招聘官网",
+      "intro": "TapNow 官方招聘页，写明有开放职位，并列出全栈、AI Agent 测试、SRE 和 AI 产品等岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "创业公司",
+        "技术岗位",
+        "产品/设计/运营"
+      ],
+      "target_audience": "想做 AI 创作工具的工程、设计和产品候选人",
+      "direction": "AI 创作系统与 Agent 产品",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "千寻智能 Spirit AI",
+      "url": "https://nwd4iy9rd2s.jobs.feishu.cn/campusofSpiritAI/",
+      "type": "公司招聘官网",
+      "intro": "千寻智能官方飞书校园招聘页，可见算法等在招岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位",
+        "校招/实习"
+      ],
+      "target_audience": "机器人算法、感知、控制和机器人产品岗位",
+      "direction": "具身智能 / 机器人",
+      "risk": "本次确认的是校园招聘门户。 2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "自变量机器人 X Square",
+      "url": "https://x2-robot.jobs.feishu.cn/index/position/list",
+      "type": "公司招聘官网",
+      "intro": "自变量机器人官方飞书招聘页。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "机器人算法、系统和产品岗位",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "它石智航 TARS",
+      "url": "https://tarsrobot.jobs.feishu.cn/index",
+      "type": "公司招聘官网",
+      "intro": "它石智航官方飞书社招页。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "机器人算法、交付、产品和行业岗位",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "星动纪元 Robot Era",
+      "url": "https://k0fqxcszc9.jobs.feishu.cn/",
+      "type": "公司招聘官网",
+      "intro": "星动纪元官方飞书招聘页，可见机器人强化学习与遥操作等岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "机器人学习、遥操作、云服务和机器人系统候选人",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "非夕科技 Flexiv",
+      "url": "https://flexivrobotics.jobs.feishu.cn/index/",
+      "type": "公司招聘官网",
+      "intro": "非夕科技官方飞书招聘页。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "机器人测试、软件、销售和工业应用候选人",
+      "direction": "自适应机器人与工业具身智能",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "苏度科技 Sudo Robotics",
+      "url": "https://wcn7iq2vq1am.jobs.feishu.cn/863711",
+      "type": "公司招聘官网",
+      "intro": "苏度科技官方飞书招聘页，可见世界模型与机器人学习岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "AI/大模型",
+        "技术岗位"
+      ],
+      "target_audience": "世界模型、机器人学习和 Real-to-Sim 研究员",
+      "direction": "具身智能 / 机器人开发平台",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "松延动力 Noetix",
+      "url": "https://noetixrobotics.jobs.feishu.cn/index",
+      "type": "公司招聘官网",
+      "intro": "松延动力官方飞书招聘页，可见具身模型部署和运控岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "机器人运控、模型部署和制造工艺候选人",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "众擎机器人 EngineAI",
+      "url": "https://dx3a2bminsq.jobs.feishu.cn/index",
+      "type": "公司招聘官网",
+      "intro": "众擎机器人官方飞书招聘页，可见机器人产品岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位",
+        "产品/设计/运营"
+      ],
+      "target_audience": "机器人整机、具身产品和系统候选人",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "加速进化 Booster Robotics",
+      "url": "https://booster.jobs.feishu.cn/index",
+      "type": "公司招聘官网",
+      "intro": "加速进化官方飞书招聘页，可见具身智能基础设施等岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "具身数据、基础设施和机器人设计候选人",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "日冕开物 RIMBOT",
+      "url": "https://rimbot.chuyihr.com/careers",
+      "type": "公司招聘官网",
+      "intro": "日冕开物官方招聘页，可见具身硬件、测试和产品岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "具身算法、硬件、测试和机器人产品候选人",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "北京人形机器人创新中心",
+      "url": "https://zitd5je6f7j.jobs.feishu.cn/index",
+      "type": "公司招聘官网",
+      "intro": "北京人形机器人创新中心官方飞书招聘页，可见运动控制、结构和仿真岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "运动控制、结构、仿真和人形机器人系统候选人",
+      "direction": "人形机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "出门问问 Mobvoi",
+      "url": "https://mobvoi.jobs.feishu.cn/index",
+      "type": "公司招聘官网",
+      "intro": "出门问问官方飞书招聘页，可见 AI Agent 与全栈岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位"
+      ],
+      "target_audience": "Agent、全栈和 AI 产品候选人",
+      "direction": "AIGC、语音与 AI 硬件",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "天谱乐 Tunee",
+      "url": "https://www.tianpuyue.cn/careers",
+      "type": "公司招聘官网",
+      "intro": "天谱乐官方招聘页，可见 AI 音乐算法与推理加速岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "创业公司",
+        "技术岗位"
+      ],
+      "target_audience": "音频算法、推理加速和 AI 音乐产品候选人",
+      "direction": "AI 音乐与音频生成",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "昆仑万维 Skywork",
+      "url": "https://jobs.kunlun.com/",
+      "type": "公司招聘官网",
+      "intro": "昆仑万维官方招聘页，可见视频数据、商业化产品和海外营销岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "AI应用/FDE",
+        "技术岗位",
+        "海外/出海"
+      ],
+      "target_audience": "大模型数据、AIGC 产品和海外增长候选人",
+      "direction": "大模型、AIGC 与海外商业化",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "壁仞科技",
+      "url": "https://app.mokahr.com/social-recruitment/biren/44726#/jobs",
+      "type": "公司招聘官网",
+      "intro": "壁仞科技官方社招页，可见 AI 编译器和芯片工程岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI基础设施",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "GPU 架构、编译器、SoC 和系统软件候选人",
+      "direction": "通用 GPU 与 AI 芯片",
+      "risk": "官网 /join/ 未列出职位；本次使用该页指向的 Moka 社招入口。 2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "星尘智能 Astribot",
+      "url": "https://app.mokahr.com/social-recruitment/astribot/144861#/jobs",
+      "type": "公司招聘官网",
+      "intro": "星尘智能官方社招页。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "机器人产品和传播、工程候选人",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "星海图 Galaxea",
+      "url": "https://www.galaxea-ai.com/zh/jobs.html",
+      "type": "公司招聘官网",
+      "intro": "星海图官方招聘页，页面写明找到数十个职位，含运控、导航和测试。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "机器人运控、导航、测试和灵巧手候选人",
+      "direction": "具身智能 / 机器人",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "智象未来 HiDream.ai",
+      "url": "https://hidreamai.com/home/careers",
+      "type": "公司招聘官网",
+      "intro": "智象未来官方招聘页，可见 AI 工程师、多模态算法和 Infra 岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "创业公司",
+        "技术岗位"
+      ],
+      "target_audience": "多模态算法、AI Infra 和全栈候选人",
+      "direction": "多模态生成与大模型",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "灵心巧手 Linkerbot",
+      "url": "https://linkerbot.cn/about/join/",
+      "type": "公司招聘官网",
+      "intro": "灵心巧手官方招聘页，可见具身智能算法、现场支持和工艺岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "创业公司",
+        "具身智能/机器人",
+        "技术岗位"
+      ],
+      "target_audience": "具身算法、现场交付和工艺候选人",
+      "direction": "灵巧手与具身智能",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "旷视 Megvii",
+      "url": "https://app.mokahr.com/social-recruitment/megviihr/38641#/jobs",
+      "type": "公司招聘官网",
+      "intro": "旷视官方社招页，可见视觉算法和研发岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "技术岗位"
+      ],
+      "target_audience": "视觉算法、后端和行业交付候选人",
+      "direction": "视觉 AI 与行业应用",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "卓驭科技",
+      "url": "https://we.zyt.com/social/jobs",
+      "type": "公司招聘官网",
+      "intro": "卓驭科技官方社招页，可见具身算法、测试和系统岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "具身智能/机器人",
+        "技术岗位",
+        "创业公司"
+      ],
+      "target_audience": "具身算法、机器人系统、测试和软件候选人",
+      "direction": "自动驾驶与具身智能",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "PPIO 派欧云",
+      "url": "https://ppio.com/about?index=1",
+      "type": "公司招聘官网",
+      "intro": "PPIO 官方加入我们页面，列出算法、容器云和 GPU 算力等热招岗位。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI基础设施",
+        "AI/大模型",
+        "技术岗位",
+        "海外/出海"
+      ],
+      "target_audience": "算法、云原生、GPU 算力和海外运营候选人",
+      "direction": "Agentic Cloud 与 GPU 算力",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
+    },
+    {
+      "name": "方寸跃迁 Fangcun Leap",
+      "url": "https://platform.fangcunleap.com/careers",
+      "type": "公司招聘官网",
+      "intro": "方寸跃迁官方招聘页，Open roles 中 AI Safety Engineer（LLM track）状态为 Hiring。",
+      "access": "免费公开",
+      "quality": "中高",
+      "tags": [
+        "AI/大模型",
+        "创业公司",
+        "技术岗位"
+      ],
+      "target_audience": "LLM 安全、红队和模型训练候选人",
+      "direction": "大模型安全",
+      "risk": "2026-11-23 已打开官方招聘页并看到在招岗位，投递前以该页实时信息为准。"
     }
   ]
 }
